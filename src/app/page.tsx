@@ -1,3 +1,5 @@
+import HeroSection from "@/components/home/HeroSection";
+
 import { defaultSEO } from "@/config/seo/seo.config";
 import { generateSEO } from "@/config/seo/seo.utils";
 
@@ -12,8 +14,8 @@ export const metadata = generateSEO({
 
 export default function Home() {
   return (
-    <>
-      <div>Devsloka UI</div>
-    </>
+    <div className="mt-12">
+      <HeroSection />
+    </div>
   );
 }
