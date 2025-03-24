@@ -1,6 +1,6 @@
 export default function BlobBackground() {
   return (
-    <div className="w-full h-full bg-gradient-to-br from-pink-900 via-purple-900 to-indigo-900 overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-br from-pink-900 via-purple-900 to-indigo-900 overflow-hidden">
       <div className="blobs">
         {Array.from({ length: 5 }).map((_, i) => {
           const hue = (i * 40) % 360;
