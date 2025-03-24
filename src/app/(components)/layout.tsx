@@ -8,9 +8,9 @@ export default function ComponentLayout({
 }>) {
   return (
     <>
-      <main className="flex gap-2 mt-12 max-w-7xl">
+      <main className="flex gap-2 mt-12 container">
         <CompSiidebar />
-        <div className="lg:ml-64 p-4">
+        <div className="lg:ml-64 p-4 w-full">
           <DynamicBreadcrumb />
           {children}
         </div>
