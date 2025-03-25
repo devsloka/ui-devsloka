@@ -1,13 +1,19 @@
+import fs from "fs";
+import path from "path";
+import React from "react";
 import BudgetSlider from "@/components/devsloka-components/BudgetSlider";
 import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
-import { componentsData } from "@/utilities/code-snippets";
-import React from "react";
 
 const BudgetSliderPage = () => {
+  const componentPath = path.resolve(
+    "src/components/devsloka-components/BudgetSlider.tsx"
+  );
+  const BudgetSliderCode = fs.readFileSync(componentPath, "utf-8");
+
   return (
     <div>
       <AdvancedCodeBlock
-        code={componentsData[0].code}
+        code={BudgetSliderCode}
         preview={<BudgetSlider />}
         language="tsx"
         showLineNumbers
