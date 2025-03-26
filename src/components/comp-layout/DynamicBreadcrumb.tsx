@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
@@ -32,7 +31,7 @@ const DynamicBreadcrumb = () => {
       <BreadcrumbList>
         {/* Home Link */}
         <BreadcrumbItem>
-          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          <Link href="/">Home</Link>
         </BreadcrumbItem>
 
         {pathnames.map((value, index) => {
@@ -71,9 +70,9 @@ const DynamicBreadcrumb = () => {
                     </DropdownMenu>
                   ) : (
                     <>
-                      <BreadcrumbLink className="ml-2" href={href}>
+                      <Link className="ml-2" href={href}>
                         {displayValue}
-                      </BreadcrumbLink>
+                      </Link>
                     </>
                   )}
                 </BreadcrumbItem>
