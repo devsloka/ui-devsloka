@@ -3,13 +3,12 @@ import path from "path";
 import React from "react";
 import BudgetSlider from "@/components/devsloka-components/BudgetSlider";
 import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
+import { getComponentCode } from "@/utilities/getComponentCode";
 
 const BudgetSliderPage = () => {
-  const componentPath = path.resolve(
+  const BudgetSliderCode = getComponentCode(
     "src/components/devsloka-components/BudgetSlider.tsx"
   );
-  const BudgetSliderCode = fs.readFileSync(componentPath, "utf-8");
-
   return (
     <div>
       <AdvancedCodeBlock
