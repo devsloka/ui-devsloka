@@ -22,6 +22,10 @@ export const sidebarItems = [
         title: "Moon Stars",
         href: "/components/backgrounds/moon-stars-background",
       },
+      {
+        title: "Floating Shapes",
+        href: "/components/backgrounds/floating-shapes",
+      },
     ],
   },
   {
