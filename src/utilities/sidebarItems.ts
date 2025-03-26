@@ -7,7 +7,7 @@ export const sidebarItems = [
         href: "/components/backgrounds/particles-background",
       },
       {
-        title: "Blob background",
+        title: "Blob Background",
         href: "/components/backgrounds/blob-background",
       },
       {
@@ -19,7 +19,7 @@ export const sidebarItems = [
         href: "/components/backgrounds/galaxy-background",
       },
       {
-        title: "Moon Stars",
+        title: "Moon & Stars",
         href: "/components/backgrounds/moon-stars-background",
       },
       {
