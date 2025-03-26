@@ -59,35 +59,27 @@ export const sidebarItems = [
         title: "Expendig Cards",
         href: "/components/expanding-cards",
       },
+      {
+        title: "Tour",
+        href: "/components/tour-component",
+      },
     ],
   },
-  // {
-  //   title: "Utilities",
-  //   children: [
-  //     {
-  //       title: "Spacing",
-  //       href: "/utilities/spacing",
-  //     },
-  //     {
-  //       title: "Typography",
-  //       href: "/utilities/typography",
-  //     },
-  //     {
-  //       title: "Flexbox",
-  //       href: "/utilities/flexbox",
-  //     },
-  //     {
-  //       title: "Spacing",
-  //       href: "/utilities/spacing",
-  //     },
-  //     {
-  //       title: "Typography",
-  //       href: "/utilities/typography",
-  //     },
-  //     {
-  //       title: "Flexbox",
-  //       href: "/utilities/flexbox",
-  //     },
-  //   ],
-  // },
+  {
+    title: "Utilities",
+    children: [
+      {
+        title: "Spacing",
+        href: "/utilities/spacing",
+      },
+      {
+        title: "Typography",
+        href: "/utilities/typography",
+      },
+      {
+        title: "Flexbox",
+        href: "/utilities/flexbox",
+      },
+    ],
+  },
 ];
