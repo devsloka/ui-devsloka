@@ -1,72 +1,22 @@
-"use client";
-
-import React from "react";
-
 import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
-import ParticleBackground from "@/components/backgrounds/particles-background";
+import BackgroundPreview from "@/components/backgrounds/preview/BackgroundPreview";
+import BlobBackground from "@/components/backgrounds/blob-background";
+import { getComponentCode } from "@/utilities/getComponentCode";
 
 const BlobBackgroundPage = () => {
+  const BlobBackgroundCode = getComponentCode(
+    "src/components/backgrounds/blob-background.tsx"
+  );
   return (
     <div>
       <AdvancedCodeBlock
-        code={`"use client";
-
-import React from "react";
-import { Button } from "../ui/button";
-import { motion } from "motion/react";
-
-const HeroSection = () => {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2">
-      <motion.div className="min-h-[400px] flex flex-col items-center justify-center space-y-4 relative">
-        <motion.div
-          initial={{ filter: "blur(10px)", opacity: 0, y: 12 }}
-          animate={{ filter: "blur(0)", opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex flex-col items-center justify-center space-y-4 z-10 h-[400px]"
-        >
-          <h1 className="text-4xl font-bold text-center">
-            Create Eye-Catching Experiences <br /> With{" "}
-            <span className="text-[#0A6EFF] font-bold">Devsloka UI</span>
-          </h1>
-          <p className="text-lg text-center text-zinc-400">
-            Learn to build unique, stunning interfaces that set you apart from
-            the
-            <span className="text-[#0A6EFF] font-bold">
-              {" "}
-              copy-paste
-            </span> <br /> crowd. you &apos;ll master the art of crafting user
-            experiences that attract more users and <br /> leave a lasting
-            impression.
-          </p>
-          <Button className="rounded-full bg-[#0A6EFF] hover:bg-[#0459d4]">
-            Explore Components
-          </Button>
-        </motion.div>
-      </motion.div>
-      <div className="flex flex-col items-center justify-center">
-        Components
-      </div>
-    </div>
-  );
-};
-
-export default HeroSection;
-`}
+        code={BlobBackgroundCode}
         preview={
-          <div className="relative w-full h-screen overflow-hidden">
-            <ParticleBackground />
-            <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-              <div className="text-center max-w-3xl px-4">
-                <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-md mb-4">
-                  Particle Background
-                </h1>
-                <p className="text-xl text-white/90 drop-shadow-md">
-                  Beautiful animated backgrounds for your website hero sections
-                </p>
-              </div>
-            </div>
-          </div>
+          <BackgroundPreview
+            backgroundComponent={<BlobBackground />}
+            title="Blob Background"
+            description="Beautiful animated backgrounds for your website hero sections"
+          />
         }
       />
     </div>

@@ -3,7 +3,11 @@ export const sidebarItems = [
     title: "Background",
     children: [
       {
-        title: "blob-background",
+        title: "Sky Particles Background",
+        href: "/components/backgrounds/particles-background",
+      },
+      {
+        title: "Blob background",
         href: "/components/backgrounds/blob-background",
       },
     ],
