@@ -109,7 +109,7 @@ export function ExpandingCards() {
     cardElement?.scrollIntoView({
       behavior: "smooth",
       block: "nearest",
-      inline: "center",
+      inline: "nearest",
     });
   }, [activeIndex]);
 
@@ -117,7 +117,7 @@ export function ExpandingCards() {
     <div className="relative group w-full">
       <div
         ref={containerRef}
-        className="flex gap-2 md:gap-4 h-[300px] md:h-[350px] lg:h-[400px] overflow-x-auto w-full thin-scrollbar"
+        className="flex gap-2 md:gap-4 h-[300px] md:h-[350px] lg:h-[400px] overflow-x-auto w-full"
       >
         {cards.map((card, index) => (
           <motion.div
@@ -129,7 +129,7 @@ export function ExpandingCards() {
             animate={{
               width: activeIndex === index ? activeWidth : inactiveWidth,
             }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.3 }}
             onClick={() => handleCardClick(index)}
           >
             <img
