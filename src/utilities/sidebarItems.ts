@@ -26,6 +26,10 @@ export const sidebarItems = [
         title: "Floating Shapes",
         href: "/components/backgrounds/floating-shapes",
       },
+      {
+        title: "Spotlight Background",
+        href: "/components/backgrounds/spotlight-background",
+      },
     ],
   },
   {
