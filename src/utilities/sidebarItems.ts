@@ -30,6 +30,14 @@ export const sidebarItems = [
         title: "Spotlight Background",
         href: "/components/backgrounds/spotlight-background",
       },
+      {
+        title: "Confetti Background",
+        href: "/components/backgrounds/confetti-background",
+      },
+      {
+        title: "Noise Background",
+        href: "/components/backgrounds/noise-background",
+      },
     ],
   },
   {
