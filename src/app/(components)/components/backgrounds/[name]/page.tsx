@@ -34,31 +34,39 @@ const backgrounds: Record<string, React.FC> = {
   "spotlight-background": SpotlightBackground,
   "ripple-background": RippleBackground,
 };
-// export function generateMetadata({
-//   params,
-// }: {
-//   params: { name: string };
-// }): Metadata {
-//   const formattedName = params.name.replace(/-/g, " ");
-//   return {
-//     title: `${formattedName} - Animated Background`,
-//     description: `Explore the ${formattedName} animation, a beautiful background effect for web projects.`,
-//     keywords: [
-//       formattedName,
-//       "animated background",
-//       "CSS background",
-//       "React background effects",
-//       "Next.js animated UI",
-//     ],
-//     openGraph: {
-//       title: `${formattedName} - Animated Background`,
-//       description: `Explore the ${formattedName} animation, a beautiful background effect for web projects.`,
-//       url: `https://yourwebsite.com/components/backgrounds/${params.name}`,
-//       type: "website",
-//       images: [`https://yourwebsite.com/images/${params.name}.png`], // Adjust image paths accordingly
-//     },
-//   };
-// }
+
+const backgroundsData = Object.keys(backgrounds).map((id) => ({ id }));
+
+export function generateStaticParams() {
+  return backgroundsData;
+}
+
+export function generateMetadata({
+  params,
+}: {
+  params: { name: string };
+}): Metadata {
+  const formattedName = params.name.replace(/-/g, " ");
+  return {
+    title: `${formattedName} - Animated Background`,
+    description: `Explore the ${formattedName} animation, a beautiful background effect for web projects.`,
+    keywords: [
+      formattedName,
+      "animated background",
+      "CSS background",
+      "React background effects",
+      "Next.js animated UI",
+    ],
+    openGraph: {
+      title: `${formattedName} - Animated Background`,
+      description: `Explore the ${formattedName} animation, a beautiful background effect for web projects.`,
+      url: `https://yourwebsite.com/components/backgrounds/${params.name}`,
+      type: "website",
+      images: [`https://yourwebsite.com/images/${params.name}.png`],
+    },
+  };
+}
+
 export default function BackgroundPage({
   params,
 }: {
