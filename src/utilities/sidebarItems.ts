@@ -10,6 +10,10 @@ export const sidebarItems = [
         title: "Blob background",
         href: "/components/backgrounds/blob-background",
       },
+      {
+        title: "Pulsing Circles",
+        href: "/components/backgrounds/pulsing-circles-background",
+      },
     ],
   },
   {
