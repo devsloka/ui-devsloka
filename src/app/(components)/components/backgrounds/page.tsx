@@ -18,6 +18,7 @@ import ParticleBackground from "@/components/backgrounds/particles-background";
 import GridMeshBackground from "@/components/backgrounds/grid-mesh-background";
 import BlobBackground from "@/components/backgrounds/blob-background";
 import NightSkyCanvas from "@/components/backgrounds/moon-stars-background";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export default function AnimatedBackgroundsShowcase() {
   const [currentBackground, setCurrentBackground] = useState(0);
@@ -68,8 +69,10 @@ export default function AnimatedBackgroundsShowcase() {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
-      {backgrounds[currentBackground].component}
+    <div className="relative w-full  overflow-hidden">
+      <AspectRatio ratio={16 / 9}>
+        {backgrounds[currentBackground].component}
+      </AspectRatio>
 
       <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-4 z-10">
         <Button
