@@ -18,6 +18,10 @@ export const sidebarItems = [
         title: "Galaxy & Milky Way",
         href: "/components/backgrounds/galaxy-background",
       },
+      {
+        title: "Moon Stars",
+        href: "/components/backgrounds/moon-stars-background",
+      },
     ],
   },
   {
