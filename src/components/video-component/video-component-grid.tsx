@@ -10,7 +10,7 @@ import { VideoComponentCard } from "./video-component-card";
 
 export function VideoComponentGrid() {
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 py-3">
       {[
         { name: "Button", icon: Package },
         { name: "Card", icon: LayoutDashboard },

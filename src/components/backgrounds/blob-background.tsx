@@ -1,3 +1,4 @@
+"use client";
 export default function BlobBackground() {
   return (
     <div className="absolute inset-0 bg-gradient-to-br from-pink-900 via-purple-900 to-indigo-900 overflow-hidden">
