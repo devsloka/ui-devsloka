@@ -38,6 +38,10 @@ export const sidebarItems = [
         title: "Noise Background",
         href: "/components/backgrounds/noise-background",
       },
+      {
+        title: "Gradient Wave Background",
+        href: "/components/backgrounds/gradient-wave",
+      },
     ],
   },
   {
