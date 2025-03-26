@@ -8,7 +8,6 @@ import NoiseBackground from "@/components/backgrounds/noise-background";
 import CirclesBackground from "@/components/backgrounds/circles-background";
 import GradientMeshBackground from "@/components/backgrounds/gradient-mesh-background";
 import SpotlightBackground from "@/components/backgrounds/spotlight-background";
-import BubblesBackground from "@/components/backgrounds/bubbles-background";
 import RippleBackground from "@/components/backgrounds/ripple-background";
 import GalaxyBackground from "@/components/backgrounds/galaxy-background";
 import FirefliesBackground from "@/components/backgrounds/fireflies-background";
@@ -53,8 +52,6 @@ export default function AnimatedBackgroundsShowcase() {
       name: "Gradient Mesh",
     },
     { component: <SpotlightBackground key="spotlight" />, name: "Spotlight" },
-    { component: <BubblesBackground key="bubbles" />, name: "Bubbles" },
-
     { component: <RippleBackground key="ripple" />, name: "Ripple Effect" },
   ];
 
