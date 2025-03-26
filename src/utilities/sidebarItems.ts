@@ -12,7 +12,7 @@ export const sidebarItems = [
       },
       {
         title: "Pulsing Circles",
-        href: "/components/backgrounds/pulsing-circles-background",
+        href: "/components/backgrounds/circles-background",
       },
       {
         title: "Galaxy & Milky Way",
