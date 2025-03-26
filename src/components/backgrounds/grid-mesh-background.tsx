@@ -1,3 +1,4 @@
+"use client";
 export default function GridMeshBackground() {
   return (
     <div className="absolute inset-0 bg-gradient-to-br from-emerald-900 to-teal-900 overflow-hidden">
