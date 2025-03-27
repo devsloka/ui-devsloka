@@ -12,11 +12,11 @@ const CompSidebar = () => {
 
   return (
     <motion.aside className="hidden lg:flex fixed top-16 bottom-0 w-64 overflow-y-auto border-x border-dashed p-4 bg-background">
-      <motion.nav className="w-full space-y-6">
+      <motion.nav className="w-full">
         {sidebarItems.map((section, index) => (
           <motion.div
             key={section.title}
-            className="space-y-1"
+            className="space-y-1 pb-5"
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.1 + index * 0.05, duration: 0.3 }}

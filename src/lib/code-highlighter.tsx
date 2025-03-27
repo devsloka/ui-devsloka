@@ -30,7 +30,7 @@ export const CodeHighlighter = ({
       }) => (
         <pre
           className={cn(
-            "overflow-x-auto py-4 text-sm leading-6 rounded-sm",
+            "overflow-x-auto py-4 text-sm leading-6 rounded-sm max-h-96",
             highlightClassName,
             className
           )}

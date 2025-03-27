@@ -3,56 +3,7 @@ import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { getComponentCode } from "@/utilities/getComponentCode";
 import { Metadata } from "next";
 
-import BudgetSlider from "@/components/devsloka-components/budget-slider";
-import { ExpandingCards } from "@/components/devsloka-components/expanding-cards";
-import ShowcaseSlider from "@/components/devsloka-components/showcase-slider";
-
-type ComponentMeta = {
-  component: React.FC;
-  codeMetadata: {
-    title: string;
-    description: string;
-    keywords: string[];
-    language: string;
-    dependencies?: string;
-  };
-};
-
-const components: Record<string, ComponentMeta> = {
-  "budget-slider": {
-    component: BudgetSlider,
-    codeMetadata: {
-      title: "Budget Slider Component",
-      description:
-        "Interactive slider for budget range selection with dynamic visual feedback",
-      keywords: ["React", "Slider", "Input", "Budget Control"],
-      language: "tsx",
-      dependencies: "npm i motion clsx tailwind-merge @tabler/icons-react cobe",
-    },
-  },
-  "expanding-cards": {
-    component: ExpandingCards,
-    codeMetadata: {
-      title: "Expanding Cards Component",
-      description:
-        "Interactive cards that expand on hover with smooth animations",
-      keywords: ["React", "Animation", "UI Cards", "Hover Effects"],
-      language: "tsx",
-      dependencies: "npm i motion clsx tailwind-merge @tabler/icons-react cobe",
-    },
-  },
-  "showcase-slider": {
-    component: ShowcaseSlider,
-    codeMetadata: {
-      title: "Showcase Slider Component",
-      description:
-        "Responsive image slider with touch support and transition effects",
-      keywords: ["React", "Carousel", "Slider", "Image Gallery"],
-      language: "tsx",
-      dependencies: "npm i motion clsx tailwind-merge @tabler/icons-react cobe",
-    },
-  },
-};
+import { components } from "@/utilities/components.utils";
 
 export function generateStaticParams() {
   return Object.keys(components).map((id) => ({ name: id }));
@@ -105,6 +56,10 @@ export default function ComponentPage({
         description={codeMetadata.description}
         keywords={codeMetadata.keywords}
         dependencies={codeMetadata.dependencies}
+        secondaryCode={componentInfo.codeMetadata.secondaryCode}
+        secondaryTitle={componentInfo.codeMetadata.secondaryTitle}
+        secondaryLanguage={componentInfo.codeMetadata.secondaryLanguage}
+        secondaryDescription={componentInfo.codeMetadata.secondaryDescription}
       />
     </div>
   );

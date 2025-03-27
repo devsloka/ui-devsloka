@@ -20,6 +20,10 @@ interface AdvancedCodeBlockProps {
   description?: string;
   keywords?: string[];
   dependencies?: string;
+  secondaryCode?: string;
+  secondaryTitle?: string;
+  secondaryLanguage?: string;
+  secondaryDescription?: string;
 }
 
 export function AdvancedCodeBlock({
@@ -32,8 +36,13 @@ export function AdvancedCodeBlock({
   description,
   keywords,
   dependencies = "",
+  secondaryCode,
+  secondaryTitle,
+  secondaryLanguage,
+  secondaryDescription,
 }: AdvancedCodeBlockProps) {
   const [activeTab, setActiveTab] = useState<string>("preview");
+  console.log(secondaryCode);
 
   return (
     <div className="space-y-10 my-8">
@@ -61,7 +70,6 @@ export function AdvancedCodeBlock({
           </div>
         </div>
       )}
-
       {/* Main Code/Preview Block */}
       <div className={cn("rounded-lg border shadow-sm", className)}>
         <Tabs
@@ -108,7 +116,6 @@ export function AdvancedCodeBlock({
           </TabsContent>
         </Tabs>
       </div>
-
       {/* Dependencies Section */}
       {dependencies && (
         <div>
@@ -122,10 +129,32 @@ export function AdvancedCodeBlock({
           <CodeHighlighter
             code={dependencies}
             language="bash"
-            showLineNumbers={false}
+            showLineNumbers={true}
           />
         </div>
       )}
+      {secondaryCode && (
+        <div>
+          <div className="flex items-center justify-between">
+            <div className="mb-4 space-y-1">
+              <h2 className="text-xl font-bold">{secondaryTitle}</h2>
+              <p className="text-sm text-muted-foreground">
+                {secondaryDescription}
+              </p>
+            </div>
+            <CopyButton
+              textToCopy={formatCode(secondaryCode)}
+              className="mb-4"
+            />
+          </div>
+          <CodeHighlighter
+            code={secondaryCode}
+            language={secondaryLanguage}
+            showLineNumbers={true}
+          />
+        </div>
+      )}
+      {/* Secondry code section */}
     </div>
   );
 }

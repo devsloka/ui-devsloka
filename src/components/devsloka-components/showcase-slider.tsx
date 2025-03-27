@@ -83,8 +83,8 @@ export default function ShowcaseSlider() {
         </div>
 
         {/* Controls */}
-        <div className="bg-background/80 backdrop-blur-md  rounded-full p-2 border border-primary/10 flex items-center gap-2">
-          <div className="flex items-center gap-2" id="showcase">
+        <div className="bg-background/80 backdrop-blur-md rounded-full p-2 border border-primary/10 flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <Button
               variant="outline"
               size="icon"
@@ -101,7 +101,7 @@ export default function ShowcaseSlider() {
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select background" />
               </SelectTrigger>
-              <SelectContent className="h-64">
+              <SelectContent className="max-h-64">
                 {backgrounds.map((bg) => (
                   <SelectItem key={bg.name} value={bg.name}>
                     {bg.name}
