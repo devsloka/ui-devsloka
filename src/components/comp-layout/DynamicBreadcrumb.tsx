@@ -17,8 +17,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { EllipsisVertical } from "lucide-react";
 
-const capitalize = (str: string): string =>
-  str.charAt(0).toUpperCase() + str.slice(1);
+const formatBreadcrumbText = (str: string): string =>
+  str
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 
 const DynamicBreadcrumb = () => {
   const pathname = usePathname();
@@ -37,7 +40,7 @@ const DynamicBreadcrumb = () => {
         {pathnames.map((value, index) => {
           const href = `/${pathnames.slice(0, index + 1).join("/")}`;
           const isLast = index === pathnames.length - 1;
-          const displayValue = capitalize(decodeURIComponent(value));
+          const displayValue = formatBreadcrumbText(decodeURIComponent(value));
 
           return (
             <div key={href} className="flex items-center">
@@ -62,7 +65,7 @@ const DynamicBreadcrumb = () => {
                             <Link
                               href={`/${pathnames.slice(0, i + 2).join("/")}`}
                             >
-                              {capitalize(decodeURIComponent(item))}
+                              {formatBreadcrumbText(decodeURIComponent(item))}
                             </Link>
                           </DropdownMenuItem>
                         ))}

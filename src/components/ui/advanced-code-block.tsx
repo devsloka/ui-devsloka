@@ -2,11 +2,13 @@
 
 import * as React from "react";
 import { useState } from "react";
-import { Check, Copy, Code, Eye } from "lucide-react";
-import { Highlight, themes } from "prism-react-renderer";
+import { Code, Eye } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { CodeHighlighter } from "@/lib/code-highlighter";
+import { cn } from "@/lib/utils";
+import { formatCode } from "@/utilities/code";
+import { CopyButton } from "../../lib/copy-button";
 
 interface AdvancedCodeBlockProps {
   code: string;
@@ -15,6 +17,13 @@ interface AdvancedCodeBlockProps {
   preview: React.ReactNode;
   showLineNumbers?: boolean;
   title?: string;
+  description?: string;
+  keywords?: string[];
+  dependencies?: string;
+  secondaryCode?: string;
+  secondaryTitle?: string;
+  secondaryLanguage?: string;
+  secondaryDescription?: string;
 }
 
 export function AdvancedCodeBlock({
@@ -24,120 +33,128 @@ export function AdvancedCodeBlock({
   preview,
   showLineNumbers = true,
   title,
+  description,
+  keywords,
+  dependencies = "",
+  secondaryCode,
+  secondaryTitle,
+  secondaryLanguage,
+  secondaryDescription,
 }: AdvancedCodeBlockProps) {
-  const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState<string>("preview");
-
-  const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  // Clean up any extra indentation in the code
-  const formattedCode = React.useMemo(() => {
-    const lines = code.split("\n");
-    const padLength = lines[0]?.match(/^\s*/)?.[0].length || 0;
-    return lines
-      .map((line) => line.slice(padLength))
-      .join("\n")
-      .trim();
-  }, [code]);
+  console.log(secondaryCode);
 
   return (
-    <div className={cn("rounded-lg border shadow-sm", className)}>
-      <Tabs
-        defaultValue="preview"
-        value={activeTab}
-        onValueChange={setActiveTab}
-        className="w-full"
-      >
-        <div className="flex items-center justify-between px-4 border-b bg-muted/40">
-          <div className="flex items-center">
-            <TabsList className="h-12 bg-transparent p-2">
-              <TabsTrigger value="preview">
-                <Eye className="h-4 w-4" />
-                Preview
-              </TabsTrigger>
-              <TabsTrigger value="code">
-                <Code className="h-4 w-4" />
-                Code
-              </TabsTrigger>
-            </TabsList>
-            {title && (
-              <div className="hidden md:flex items-center gap-2 ml-4 text-sm text-muted-foreground">
-                <span>{title}</span>
-              </div>
-            )}
-          </div>
-          <div className="flex items-center gap-2">
-            {activeTab === "code" && (
-              <Badge variant="outline" className="text-xs font-mono">
-                {language}
-              </Badge>
-            )}
-            <button
-              onClick={copyToClipboard}
-              className="h-8 w-8 flex items-center justify-center rounded-md transition-colors hover:bg-muted"
-              aria-label="Copy code"
-            >
-              {copied ? (
-                <Check className="h-4 w-4 text-green-500" />
-              ) : (
-                <Copy className="h-4 w-4" />
+    <div className="space-y-10 my-8">
+      {/* Title & Metadata Section */}
+      {(title || description) && (
+        <div className="space-y-4">
+          <div className="flex items-start justify-between gap-4">
+            <div className="space-y-2">
+              {title && (
+                <h1 className="text-3xl font-bold text-foreground">{title}</h1>
               )}
-            </button>
+              {description && (
+                <p className="text-base text-muted-foreground">{description}</p>
+              )}
+              {keywords && (
+                <div className="flex flex-wrap gap-2">
+                  {keywords.map((keyword) => (
+                    <Badge key={keyword} variant="secondary">
+                      {keyword}
+                    </Badge>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-        <TabsContent value="preview" className="p-6 border-none">
-          <div className="flex min-h-[200px] w-full items-center justify-center rounded-md border p-8 bg-background">
-            {preview}
-          </div>
-        </TabsContent>
-        <TabsContent value="code" className="border-none p-0">
-          <div className="relative overflow-hidden rounded-b-lg">
-            <Highlight
-              theme={themes.vsDark}
-              code={formattedCode}
-              language={language as string}
-            >
-              {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre
-                  className={cn(
-                    "overflow-x-auto py-4 text-sm leading-6",
-                    className
-                  )}
-                  style={{
-                    ...style,
-                    backgroundColor: "rgb(30, 30, 30)",
-                    marginTop: 0,
-                    marginBottom: 0,
-                  }}
-                >
-                  {tokens.map((line, i) => (
-                    <div
-                      key={i}
-                      {...getLineProps({ line })}
-                      className="px-4 flex"
-                    >
-                      {showLineNumbers && (
-                        <span className="mr-4 inline-block w-5 text-right text-gray-500 select-none">
-                          {i + 1}
-                        </span>
-                      )}
-                      <span>
-                        {line.map((token, key) => (
-                          <span key={key} {...getTokenProps({ token })} />
-                        ))}
-                      </span>
-                    </div>
-                  ))}
-                </pre>
+      )}
+      {/* Main Code/Preview Block */}
+      <div className={cn("rounded-lg border shadow-sm", className)}>
+        <Tabs
+          defaultValue="preview"
+          value={activeTab}
+          onValueChange={setActiveTab}
+          className="w-full"
+        >
+          <div className="flex items-center justify-between px-4 border-b bg-muted/40">
+            <div className="flex items-center">
+              <TabsList className="h-12 bg-transparent p-2">
+                <TabsTrigger value="preview">
+                  <Eye className="h-4 w-4 mr-2" />
+                  Preview
+                </TabsTrigger>
+                <TabsTrigger value="code">
+                  <Code className="h-4 w-4 mr-2" />
+                  Code
+                </TabsTrigger>
+              </TabsList>
+            </div>
+            <div className="flex items-center gap-2">
+              {activeTab === "code" && (
+                <Badge variant="outline" className="text-xs font-mono">
+                  {language}
+                </Badge>
               )}
-            </Highlight>
+              <CopyButton textToCopy={formatCode(code)} />
+            </div>
           </div>
-        </TabsContent>
-      </Tabs>
+          <TabsContent value="preview" className="p-6 border-none">
+            <div className="flex min-h-[200px] w-full items-center justify-center bg-background">
+              {preview}
+            </div>
+          </TabsContent>
+          <TabsContent value="code" className="border-none p-0">
+            <div className="relative overflow-hidden rounded-b-lg">
+              <CodeHighlighter
+                code={code}
+                language={language}
+                showLineNumbers={showLineNumbers}
+              />
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
+      {/* Dependencies Section */}
+      {dependencies && (
+        <div>
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold mb-4">Install Dependencies</h2>
+            <CopyButton
+              textToCopy={formatCode(dependencies)}
+              className="mb-4"
+            />
+          </div>
+          <CodeHighlighter
+            code={dependencies}
+            language="bash"
+            showLineNumbers={true}
+          />
+        </div>
+      )}
+      {secondaryCode && (
+        <div>
+          <div className="flex items-center justify-between">
+            <div className="mb-4 space-y-1">
+              <h2 className="text-xl font-bold">{secondaryTitle}</h2>
+              <p className="text-sm text-muted-foreground">
+                {secondaryDescription}
+              </p>
+            </div>
+            <CopyButton
+              textToCopy={formatCode(secondaryCode)}
+              className="mb-4"
+            />
+          </div>
+          <CodeHighlighter
+            code={secondaryCode}
+            language={secondaryLanguage}
+            showLineNumbers={true}
+          />
+        </div>
+      )}
+      {/* Secondry code section */}
     </div>
   );
 }

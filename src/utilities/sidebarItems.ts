@@ -45,6 +45,15 @@ export const sidebarItems = [
     ],
   },
   {
+    title: "Cards",
+    children: [
+      {
+        title: "Explore Animated Card",
+        href: "/components/cards/explore-animated-card",
+      },
+    ],
+  },
+  {
     title: "Components",
     children: [
       {
@@ -61,24 +70,76 @@ export const sidebarItems = [
       },
       {
         title: "Tour",
-        href: "/components/tour-component",
+        href: "/components/tour",
       },
     ],
   },
   {
     title: "Utilities",
     children: [
+      // {
+      //   title: "useLocalStorage",
+      //   href: "/utilities/use-local-storage",
+      // },
       {
-        title: "Spacing",
-        href: "/utilities/spacing",
+        title: "useFetch",
+        href: "/utilities/use-fetch",
       },
       {
-        title: "Typography",
-        href: "/utilities/typography",
+        title: "useDebounce",
+        href: "/utilities/use-debounce",
+      },
+      // {
+      //   title: "useOnClickOutside",
+      //   href: "/utilities/use-on-click-outside",
+      // },
+      {
+        title: "useClipboard",
+        href: "/utilities/use-clipboard",
+      },
+      // {
+      //   title: "useOnlineStatus",
+      //   href: "/utilities/use-online-status",
+      // },
+      // {
+      //   title: "useDarkMode",
+      //   href: "/utilities/use-dark-mode",
+      // },
+      {
+        title: "useDeviceDetection",
+        href: "/utilities/use-device-detection",
+      },
+      // {
+      //   title: "useHover",
+      //   href: "/utilities/use-hover",
+      // },
+      // {
+      //   title: "useWindowSize",
+      //   href: "/utilities/use-window-size",
+      // },
+      {
+        title: "useForm",
+        href: "/utilities/use-form",
       },
       {
-        title: "Flexbox",
-        href: "/utilities/flexbox",
+        title: "useKeyPress",
+        href: "/utilities/use-key-press",
+      },
+      // {
+      //   title: "useScrollPosition",
+      //   href: "/utilities/use-scroll-position",
+      // },
+      // {
+      //   title: "useAnimation",
+      //   href: "/utilities/use-animation",
+      // },
+      // {
+      //   title: "usePrevious",
+      //   href: "/utilities/use-previous",
+      // },
+      {
+        title: "useDateFormatter",
+        href: "/utilities/use-date-formatter",
       },
     ],
   },

@@ -60,16 +60,11 @@ export default function ShowcaseSlider() {
 
   return (
     <div className="relative overflow-hidden">
-      {/* Background Animation */}
-      {/* <div className="absolute inset-0 z-0">
-        <CurrentBackground />
-      </div> */}
-
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4">
         <div className="mb-8 text-center">
           <motion.h1
-            className="text-4xl font-bold text-black drop-shadow-md sm:text-5xl md:text-6xl"
+            className="text-4xl font-bold text-primary drop-shadow-md sm:text-5xl md:text-6xl"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -88,8 +83,8 @@ export default function ShowcaseSlider() {
         </div>
 
         {/* Controls */}
-        <div className="bg-background/80 backdrop-blur-md fixed bottom-6 left-1/2 -translate-x-1/2 rounded-full p-2 shadow-lg border border-gray-200">
-          <div className="flex items-center gap-2" id="showcase">
+        <div className="bg-background/80 backdrop-blur-md rounded-full p-2 border border-primary/10 flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <Button
               variant="outline"
               size="icon"
@@ -106,7 +101,7 @@ export default function ShowcaseSlider() {
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select background" />
               </SelectTrigger>
-              <SelectContent className="h-64">
+              <SelectContent className="max-h-64">
                 {backgrounds.map((bg) => (
                   <SelectItem key={bg.name} value={bg.name}>
                     {bg.name}
