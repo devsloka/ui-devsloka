@@ -117,7 +117,7 @@ export function AdvancedCodeBlock({
                   {tokens.map((line, i) => (
                     <div
                       key={i}
-                      {...getLineProps({ line, key: i })}
+                      {...getLineProps({ line })}
                       className="px-4 flex"
                     >
                       {showLineNumbers && (
@@ -127,7 +127,7 @@ export function AdvancedCodeBlock({
                       )}
                       <span>
                         {line.map((token, key) => (
-                          <span key={key} {...getTokenProps({ token, key })} />
+                          <span key={key} {...getTokenProps({ token })} />
                         ))}
                       </span>
                     </div>

@@ -1,3 +1,4 @@
+"use client";
 export default function FloatingShapesBackground() {
   return (
     <div className="absolute inset-0 bg-gradient-to-r from-cyan-900 to-blue-900 overflow-hidden">

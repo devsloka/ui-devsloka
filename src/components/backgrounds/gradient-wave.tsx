@@ -1,3 +1,4 @@
+"use client";
 export default function GradientWaveBackground() {
   return (
     <div className="absolute inset-0 bg-gradient-to-br from-purple-700 via-violet-600 to-indigo-800 overflow-hidden">
