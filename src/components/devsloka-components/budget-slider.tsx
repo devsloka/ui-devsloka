@@ -38,18 +38,14 @@ const BudgetSlider: React.FC = () => {
 
   return (
     <Card
-      className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg"
+      className="p-8 rounded-lg shadow-lg w-full max-w-lg"
       id="feature-section"
     >
       <h2 className="text-2xl font-bold mb-4">Budget</h2>
 
       <div className="flex justify-between mb-2">
-        <span className="text-blue-600 text-xl">
-          {formatCurrency(minValue)}
-        </span>
-        <span className="text-blue-600 text-xl">
-          {formatCurrency(maxValue)}
-        </span>
+        <span className="text-primary text-xl">{formatCurrency(minValue)}</span>
+        <span className="text-primary text-xl">{formatCurrency(maxValue)}</span>
       </div>
 
       {/* Histogram */}
@@ -99,7 +95,7 @@ const BudgetSlider: React.FC = () => {
             setMinValue(values[0]);
             setMaxValue(values[1]);
           }}
-          className="bg-blue-500 text-white"
+          className=""
         />
         <div className="flex justify-between mt-2">
           <span className="text-gray-400">Minimum</span>
