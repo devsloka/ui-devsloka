@@ -1,24 +1,61 @@
 import { notFound } from "next/navigation";
 import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { getComponentCode } from "@/utilities/getComponentCode";
-
 import { Metadata } from "next";
+
 import BudgetSlider from "@/components/devsloka-components/budget-slider";
 import { ExpandingCards } from "@/components/devsloka-components/expanding-cards";
 import ShowcaseSlider from "@/components/devsloka-components/showcase-slider";
-// import { Tour } from "@/components/devsloka-components/tour";
 
-const components: Record<string, React.FC> = {
-  "budget-slider": BudgetSlider,
-  "expanding-cards": ExpandingCards,
-  // "tour-component": Tour,
-  "showcase-slider": ShowcaseSlider,
+type ComponentMeta = {
+  component: React.FC;
+  codeMetadata: {
+    title: string;
+    description: string;
+    keywords: string[];
+    language: string;
+    dependencies?: string;
+  };
 };
 
-const componentsData = Object.keys(components).map((id) => ({ id }));
+const components: Record<string, ComponentMeta> = {
+  "budget-slider": {
+    component: BudgetSlider,
+    codeMetadata: {
+      title: "Budget Slider Component",
+      description:
+        "Interactive slider for budget range selection with dynamic visual feedback",
+      keywords: ["React", "Slider", "Input", "Budget Control"],
+      language: "tsx",
+      dependencies: "npm i motion clsx tailwind-merge @tabler/icons-react cobe",
+    },
+  },
+  "expanding-cards": {
+    component: ExpandingCards,
+    codeMetadata: {
+      title: "Expanding Cards Component",
+      description:
+        "Interactive cards that expand on hover with smooth animations",
+      keywords: ["React", "Animation", "UI Cards", "Hover Effects"],
+      language: "tsx",
+      dependencies: "npm i motion clsx tailwind-merge @tabler/icons-react cobe",
+    },
+  },
+  "showcase-slider": {
+    component: ShowcaseSlider,
+    codeMetadata: {
+      title: "Showcase Slider Component",
+      description:
+        "Responsive image slider with touch support and transition effects",
+      keywords: ["React", "Carousel", "Slider", "Image Gallery"],
+      language: "tsx",
+      dependencies: "npm i motion clsx tailwind-merge @tabler/icons-react cobe",
+    },
+  },
+};
 
 export function generateStaticParams() {
-  return componentsData;
+  return Object.keys(components).map((id) => ({ name: id }));
 }
 
 export function generateMetadata({
@@ -26,23 +63,18 @@ export function generateMetadata({
 }: {
   params: { name: string };
 }): Metadata {
+  const component = components[params.name];
+  if (!component) return {};
+
   const formattedName = params.name.replace(/-/g, " ");
   return {
-    title: `${formattedName} - Animated Background`,
-    description: `Explore the ${formattedName} animation, a beautiful background effect for web projects.`,
-    keywords: [
-      formattedName,
-      "animated background",
-      "CSS background",
-      "React background effects",
-      "Next.js animated UI",
-    ],
+    title: `${formattedName} - Devsloka Components`,
+    description: component.codeMetadata.description,
+    keywords: [...component.codeMetadata.keywords, "Devsloka", "UI Components"],
     openGraph: {
-      title: `${formattedName} - Animated Background`,
-      description: `Explore the ${formattedName} animation, a beautiful background effect for web projects.`,
-      url: `https://yourwebsite.com/components/backgrounds/${params.name}`,
-      type: "website",
-      images: [`https://yourwebsite.com/images/${params.name}.png`],
+      title: `${formattedName} - Devsloka Components`,
+      description: component.codeMetadata.description,
+      images: [`https://yourwebsite.com/og-images/${params.name}.jpg`],
     },
   };
 }
@@ -52,12 +84,13 @@ export default function ComponentPage({
 }: {
   params: { name: string };
 }) {
-  const ActiveComponent = components[params.name];
+  const componentInfo = components[params.name];
 
-  if (!ActiveComponent) {
+  if (!componentInfo) {
     return notFound();
   }
 
+  const { component: ActiveComponent, codeMetadata } = componentInfo;
   const componentPath = `src/components/devsloka-components/${params.name}.tsx`;
   const componentCode = getComponentCode(componentPath);
 
@@ -66,9 +99,12 @@ export default function ComponentPage({
       <AdvancedCodeBlock
         code={componentCode}
         preview={<ActiveComponent />}
-        language="tsx"
+        language={codeMetadata.language}
         showLineNumbers
-        title="Showcase Slider"
+        title={codeMetadata.title}
+        description={codeMetadata.description}
+        keywords={codeMetadata.keywords}
+        dependencies={codeMetadata.dependencies}
       />
     </div>
   );
