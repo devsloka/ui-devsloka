@@ -62,8 +62,8 @@ const Navbar = () => {
                   href={link.href}
                   className={`${
                     pathname === link.href
-                      ? "text-primary font-bold"
-                      : "text-zinc-500"
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-foreground/80"
                   }`}
                 >
                   {link.name}
