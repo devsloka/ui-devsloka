@@ -73,7 +73,7 @@ export default function CardPage({ params }: { params: { name: string } }) {
       <AdvancedCodeBlock
         code={componentCode}
         preview={
-          <div className="w-full bg-background mx-auto">
+          <div className="w-lg bg-background mx-auto">
             <CardComponent />
           </div>
         }
