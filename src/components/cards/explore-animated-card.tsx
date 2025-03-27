@@ -57,7 +57,7 @@ export default function ExploreAnimatedCard() {
         }}
       >
         <img
-          src="https://images.unsplash.com/photo-1518764539891-5c60409badb0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGRhcmslMjBmb3Jlc3R8ZW58MHx8MHx8fDA%3D"
+          src="/images/mountain.jpg"
           alt="Mountain landscape"
           className="absolute inset-0 w-full h-full object-cover transition-all duration-500"
           style={{
