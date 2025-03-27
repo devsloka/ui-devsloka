@@ -45,6 +45,15 @@ export const sidebarItems = [
     ],
   },
   {
+    title: "Cards",
+    children: [
+      {
+        title: "Explore Animated Card",
+        href: "/components/cards/explore-animated-card",
+      },
+    ],
+  },
+  {
     title: "Components",
     children: [
       {
