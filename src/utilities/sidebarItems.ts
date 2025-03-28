@@ -51,6 +51,38 @@ export const sidebarItems = [
         title: "Explore Animated Card",
         href: "/components/cards/explore-animated-card",
       },
+      {
+        title: "Glass Card",
+        href: "/components/cards/glass-card",
+      },
+      {
+        title: "Floating Card",
+        href: "/components/cards/floating-card",
+      },
+      {
+        title: "Parallax Card",
+        href: "/components/cards/parallax-card",
+      },
+      {
+        title: "Glitch Card",
+        href: "/components/cards/glitch-card",
+      },
+      {
+        title: "Water Card",
+        href: "/components/cards/water-card",
+      },
+      {
+        title: "Product Card",
+        href: "/components/cards/product-card",
+      },
+      {
+        title: "Foliage Card",
+        href: "/components/cards/foliage-card",
+      },
+      {
+        title: "Neon Card",
+        href: "/components/cards/neon-card",
+      },
     ],
   },
   {

@@ -3,9 +3,25 @@ import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { getComponentCode } from "@/utilities/getComponentCode";
 import { Metadata } from "next";
 import ExploreAnimatedCard from "@/components/cards/explore-animated-card";
+import { GlassCard } from "@/components/cards/glass-card";
+import { FloatingCard } from "@/components/cards/floating-card";
+import { ParallaxCard } from "@/components/cards/parallax-card";
+import { GlitchCard } from "@/components/cards/glitch-card";
+import { WaterCard } from "@/components/cards/water-card";
+import { ProductCard } from "@/components/cards/product-card";
+import { FoliageCard } from "@/components/cards/foliage-card";
+import { NeonCard } from "@/components/cards/neon-card";
 
 const cards: Record<string, React.FC> = {
   "explore-animated-card": ExploreAnimatedCard,
+  "glass-card": GlassCard,
+  "floating-card": FloatingCard,
+  "parallax-card": ParallaxCard,
+  "glitch-card": GlitchCard,
+  "water-card": WaterCard,
+  "product-card": ProductCard,
+  "foliage-card": FoliageCard,
+  "neon-card": NeonCard,
 };
 
 const cardsData = Object.keys(cards).map((id) => ({ id }));
@@ -55,7 +71,7 @@ export default function CardPage({ params }: { params: { name: string } }) {
       <AdvancedCodeBlock
         code={componentCode}
         preview={
-          <div className="w-full bg-background mx-auto">
+          <div className="w-lg bg-background mx-auto">
             <CardComponent />
           </div>
         }

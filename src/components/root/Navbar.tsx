@@ -11,6 +11,7 @@ import { Menu } from "lucide-react";
 import { BsTwitterX } from "react-icons/bs";
 import SearchCommand from "../ui/SearchCommand";
 import { useId } from "react";
+import { sidebarItems } from "../../utilities/sidebarItems";
 
 const navLinks = [
   {
@@ -38,6 +39,31 @@ const navLinks = [
 const Navbar = () => {
   const pathname = usePathname();
   const sheetId = useId();
+
+  const renderSidebarItems = (items: typeof sidebarItems) => {
+    return items.map((item) => (
+      <li key={sheetId + item.title}>
+        <span className="font-bold text-muted-foreground">{item.title}</span>
+        <ul className="pl-4">
+          {item.children.map((child) => (
+            <li key={sheetId + child.href}>
+              <Link
+                href={child.href}
+                className={`${
+                  pathname === child.href
+                    ? "text-[#0A6EFF] font-bold"
+                    : "text-zinc-500"
+                }`}
+              >
+                {child.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </li>
+    ));
+  };
+
   return (
     <nav className="fixed top-0 z-40 w-full border-b bg-background/80 backdrop-blur-lg h-16">
       <div className="h-full max-w-[88rem] mx-auto px-6 flex justify-between items-center">
@@ -87,7 +113,7 @@ const Navbar = () => {
               <Menu className="w-6 h-6" />
             </Button>
           </SheetTrigger>
-          <SheetContent>
+          <SheetContent className="overflow-y-auto max-h-screen">
             <SheetHeader>
               <span className="text-2xl font-bold text-[#0A6EFF]">
                 Devsloka UI
@@ -108,6 +134,9 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
+            </ul>
+            <ul className="flex flex-col gap-4 px-4">
+              {renderSidebarItems(sidebarItems)}
             </ul>
           </SheetContent>
         </Sheet>

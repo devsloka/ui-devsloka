@@ -81,11 +81,11 @@ export function AdvancedCodeBlock({
           <div className="flex items-center justify-between px-4 border-b bg-muted/40">
             <div className="flex items-center">
               <TabsList className="h-12 bg-transparent p-2">
-                <TabsTrigger value="preview">
+                <TabsTrigger className="cursor-pointer" value="preview">
                   <Eye className="h-4 w-4 mr-2" />
                   Preview
                 </TabsTrigger>
-                <TabsTrigger value="code">
+                <TabsTrigger className="cursor-pointer" value="code">
                   <Code className="h-4 w-4 mr-2" />
                   Code
                 </TabsTrigger>
