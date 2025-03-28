@@ -113,7 +113,7 @@ const Navbar = () => {
               <Menu className="w-6 h-6" />
             </Button>
           </SheetTrigger>
-          <SheetContent>
+          <SheetContent className="overflow-y-auto max-h-screen">
             <SheetHeader>
               <span className="text-2xl font-bold text-[#0A6EFF]">
                 Devsloka UI
