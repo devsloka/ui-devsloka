@@ -68,10 +68,6 @@ export const sidebarItems = [
         href: "/components/cards/glitch-card",
       },
       {
-        title: "Portal Card",
-        href: "/components/cards/portal-card",
-      },
-      {
         title: "Water Card",
         href: "/components/cards/water-card",
       },

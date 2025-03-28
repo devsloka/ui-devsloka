@@ -4,7 +4,6 @@ import { GlassCard } from "@/components/cards/glass-card";
 import { FloatingCard } from "@/components/cards/floating-card";
 import { ParallaxCard } from "@/components/cards/parallax-card";
 import { GlitchCard } from "@/components/cards/glitch-card";
-import { PortalCard } from "@/components/cards/portal-card";
 import { WaterCard } from "@/components/cards/water-card";
 import { ProductCard } from "@/components/cards/product-card";
 import { FoliageCard } from "@/components/cards/foliage-card";
@@ -23,7 +22,6 @@ export default function AnimatedCardsCollection() {
         <FloatingCard />
         <ParallaxCard />
         <GlitchCard />
-        <PortalCard />
         <WaterCard />
         <ProductCard />
         <FoliageCard />

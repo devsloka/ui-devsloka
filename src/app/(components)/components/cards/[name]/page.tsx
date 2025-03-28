@@ -7,7 +7,6 @@ import { GlassCard } from "@/components/cards/glass-card";
 import { FloatingCard } from "@/components/cards/floating-card";
 import { ParallaxCard } from "@/components/cards/parallax-card";
 import { GlitchCard } from "@/components/cards/glitch-card";
-import { PortalCard } from "@/components/cards/portal-card";
 import { WaterCard } from "@/components/cards/water-card";
 import { ProductCard } from "@/components/cards/product-card";
 import { FoliageCard } from "@/components/cards/foliage-card";
@@ -19,7 +18,6 @@ const cards: Record<string, React.FC> = {
   "floating-card": FloatingCard,
   "parallax-card": ParallaxCard,
   "glitch-card": GlitchCard,
-  "portal-card": PortalCard,
   "water-card": WaterCard,
   "product-card": ProductCard,
   "foliage-card": FoliageCard,
