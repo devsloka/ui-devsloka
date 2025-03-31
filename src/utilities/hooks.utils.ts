@@ -46,6 +46,8 @@ export const utilities: Record<string, UtilityMeta> = {
       keywords: ["React", "API", "Data Fetching"],
       language: "tsx",
       dependencies: "npm i axios", // If using axios
+      secondaryTitle: "useFetch Hook",
+      secondaryLanguage: "tsx",
     },
   },
   "use-debounce": {
@@ -55,6 +57,8 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Debounce values for performance optimization",
       keywords: ["React", "Debounce", "Performance"],
       language: "tsx",
+      secondaryTitle: "useDebounce Hook",
+      secondaryLanguage: "tsx",
     },
   },
   // "use-on-click-outside": {
@@ -74,6 +78,8 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Copy text to clipboard with feedback state",
       keywords: ["React", "Clipboard", "Browser API"],
       language: "tsx",
+      secondaryTitle: "useClipboard Hook",
+      secondaryLanguage: "tsx",
     },
   },
   "use-online-status": {
@@ -83,6 +89,8 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Detect browser connectivity status",
       keywords: ["React", "Network", "Browser API"],
       language: "tsx",
+      secondaryTitle: "useOnlineStatus Hook",
+      secondaryLanguage: "tsx",
     },
   },
   // "use-dark-mode": {
@@ -101,6 +109,8 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Detect mobile/desktop devices using user agent",
       keywords: ["React", "Device", "Responsive"],
       language: "tsx",
+      secondaryTitle: "useDeviceDetection Hook",
+      secondaryLanguage: "tsx",
     },
   },
   // "use-hover": {
@@ -128,6 +138,8 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Manage form state with validation",
       keywords: ["React", "Forms", "Validation"],
       language: "tsx",
+      secondaryTitle: "useForm Hook",
+      secondaryLanguage: "tsx",
     },
   },
   "use-key-press": {
@@ -137,6 +149,7 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Detect keyboard key presses",
       keywords: ["React", "Keyboard", "Interaction"],
       language: "tsx",
+      secondaryTitle: "useKeyPress Hook",
     },
   },
   "use-scroll-position": {
@@ -146,6 +159,7 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Track scroll position in viewport",
       keywords: ["React", "Scroll", "Position"],
       language: "tsx",
+      secondaryTitle: "useScrollPosition Hook",
     },
   },
   // "use-animation": {
@@ -174,7 +188,7 @@ export const utilities: Record<string, UtilityMeta> = {
       keywords: ["React", "Dates", "Localization"],
       language: "tsx",
       secondaryCode: getComponentCode("src/utilities/use-date-formatter.ts"),
-      secondaryTitle: "Date Formatter Implementation",
+      secondaryTitle: "useDateFormatter Hook",
       secondaryLanguage: "tsx",
     },
   },
