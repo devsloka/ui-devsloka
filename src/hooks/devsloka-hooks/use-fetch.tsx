@@ -31,7 +31,7 @@ export const useFetch = <T,>(url: string) => {
     };
 
     fetchData();
-  }, [url, refreshCount]); // Add refreshCount to dependencies
+  }, [url, refreshCount]);
 
   return { data, loading, error, refetch };
 };
