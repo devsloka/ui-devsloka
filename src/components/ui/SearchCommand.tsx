@@ -1,9 +1,8 @@
 import { Input } from "@/components/ui/input";
 import { useEffect, useId, useState } from "react";
-import { Dialog, DialogContent, DialogTitle } from "./dialog";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import {
   Command,
+  CommandDialog,
   CommandEmpty,
   CommandGroup,
   CommandInput,
@@ -33,8 +32,7 @@ export default function SearchCommand() {
   }, []);
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      {/* Search input trigger */}
+    <>
       <div className="relative">
         <Input
           id={id}
@@ -49,12 +47,7 @@ export default function SearchCommand() {
           </kbd>
         </div>
       </div>
-
-      {/* Dialog content */}
-      <DialogContent className="p-0 data-[state=open]:animate-contentShow">
-        <VisuallyHidden>
-          <DialogTitle>Search Components</DialogTitle>
-        </VisuallyHidden>
+      <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
         <Command className="rounded-lg border shadow-2xs md:min-w-[450px]">
           <CommandInput placeholder="Type a component or search..." />
           <CommandList>
@@ -86,7 +79,7 @@ export default function SearchCommand() {
             </CommandGroup>
           </CommandList>
         </Command>
-      </DialogContent>
-    </Dialog>
+      </CommandDialog>
+    </>
   );
 }
