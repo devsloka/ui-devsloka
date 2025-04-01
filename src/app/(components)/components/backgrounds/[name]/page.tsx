@@ -17,6 +17,7 @@ import BlobBackground from "@/components/backgrounds/blob-background";
 import NightSkyCanvas from "@/components/backgrounds/moon-stars-background";
 import BackgroundPreview from "@/components/backgrounds/preview/BackgroundPreview";
 import { Metadata } from "next";
+import { GlobeHero } from "@/components/backgrounds/3d-background";
 
 const backgrounds: Record<string, React.FC> = {
   "particles-background": ParticleBackground,
@@ -33,6 +34,7 @@ const backgrounds: Record<string, React.FC> = {
   "gradient-mesh-background": GradientMeshBackground,
   "spotlight-background": SpotlightBackground,
   "ripple-background": RippleBackground,
+  "3d-background": GlobeHero,
 };
 
 const backgroundsData = Object.keys(backgrounds).map((id) => ({ id }));
