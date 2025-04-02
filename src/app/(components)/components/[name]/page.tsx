@@ -44,6 +44,9 @@ export default function ComponentPage({
   const { component: ActiveComponent, codeMetadata } = componentInfo;
   const componentPath = `src/components/devsloka-components/${params.name}.tsx`;
   const componentCode = getComponentCode(componentPath);
+  const secondaryCode = getComponentCode(
+    `src/components/devsloka-components/${params.name}.tsx`
+  );
 
   return (
     <div className="w-full">
@@ -56,7 +59,7 @@ export default function ComponentPage({
         description={codeMetadata.description}
         keywords={codeMetadata.keywords}
         dependencies={codeMetadata.dependencies}
-        secondaryCode={componentInfo.codeMetadata.secondaryCode}
+        secondaryCode={secondaryCode}
         secondaryTitle={componentInfo.codeMetadata.secondaryTitle}
         secondaryLanguage={componentInfo.codeMetadata.secondaryLanguage}
         secondaryDescription={componentInfo.codeMetadata.secondaryDescription}

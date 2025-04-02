@@ -2,7 +2,6 @@ import BudgetSlider from "@/components/devsloka-components/budget-slider";
 import { ExpandingCards } from "@/components/devsloka-components/expanding-cards";
 import ShowcaseSlider from "@/components/devsloka-components/showcase-slider";
 import TourDemo from "@/components/devsloka-components/tour-demo";
-import { getComponentCode } from "./getComponentCode";
 import FloatingDotsDemo from "@/components/devsloka-components/floating-dots-demo";
 import AirbnbListingCardExample from "@/components/devsloka-components/airbnb-card-demo";
 
@@ -64,9 +63,7 @@ export const components: Record<string, ComponentMeta> = {
       keywords: ["React", "Tour", "Guide", "User Experience"],
       language: "tsx",
       dependencies: "npm i motion",
-      secondaryCode: getComponentCode(
-        "src/components/devsloka-components/tour.tsx"
-      ),
+
       secondaryTitle: "Tour Component",
       secondaryLanguage: "tsx",
       secondaryDescription: "The tour component itself",
