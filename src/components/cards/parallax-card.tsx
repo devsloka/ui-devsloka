@@ -1,28 +1,33 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useRef } from "react"
-import { motion } from "framer-motion"
+import { useState, useRef } from "react";
+import { motion } from "framer-motion";
 
 export function ParallaxCard() {
-  const [isHovering, setIsHovering] = useState(false)
-  const cardRef = useRef<HTMLDivElement>(null)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [isHovering, setIsHovering] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return
+    if (!cardRef.current) return;
 
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-    setMousePosition({ x, y })
-  }
+    setMousePosition({ x, y });
+  };
 
-  // Calculate rotation based on mouse position
-  const rotateX = isHovering ? (mousePosition.y / cardRef.current?.offsetHeight! - 0.5) * 15 : 0
-  const rotateY = isHovering ? -(mousePosition.x / cardRef.current?.offsetWidth! - 0.5) * 15 : 0
+  const rotateX =
+    isHovering && cardRef.current
+      ? (mousePosition.y / cardRef.current.offsetHeight - 0.5) * 15
+      : 0;
+  const rotateY =
+    isHovering && cardRef.current?.offsetWidth
+      ? -(mousePosition.x / cardRef.current.offsetWidth - 0.5) * 15
+      : 0;
 
   return (
     <motion.div
@@ -105,7 +110,11 @@ export function ParallaxCard() {
           transform: "translateZ(20px)",
         }}
       >
-        <svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+        <svg
+          viewBox="0 0 900 300"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-full"
+        >
           <path
             d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C912,256,960,224,1008,213.3C1056,203,1104,213,1152,229.3C1200,245,1248,267,1296,261.3C1344,256,1392,224,1416,208L1440,192L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"
             fill="#4c1d95"
@@ -118,7 +127,9 @@ export function ParallaxCard() {
         className="absolute top-[15%] right-[20%] w-16 h-16 rounded-full bg-yellow-100"
         animate={{
           y: isHovering ? -5 : 0,
-          boxShadow: isHovering ? "0 0 30px 5px rgba(255, 249, 219, 0.7)" : "0 0 20px 2px rgba(255, 249, 219, 0.5)",
+          boxShadow: isHovering
+            ? "0 0 30px 5px rgba(255, 249, 219, 0.7)"
+            : "0 0 20px 2px rgba(255, 249, 219, 0.5)",
         }}
         transition={{ duration: 0.5 }}
         style={{
@@ -137,7 +148,9 @@ export function ParallaxCard() {
               left: `${Math.random() * 80 + 10}%`,
               top: `${Math.random() * 40 + 5}%`,
               transformStyle: "preserve-3d",
-              transform: `translateZ(${40 + i * 5}px) rotate(${-30 - Math.random() * 30}deg)`,
+              transform: `translateZ(${40 + i * 5}px) rotate(${
+                -30 - Math.random() * 30
+              }deg)`,
             }}
             animate={{
               width: [0.5, 100, 0.5],
@@ -190,6 +203,5 @@ export function ParallaxCard() {
         </motion.button>
       </div>
     </motion.div>
-  )
+  );
 }
-

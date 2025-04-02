@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 
 export default function CirclesBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -12,7 +12,7 @@ export default function CirclesBackground() {
 
     let animationFrameId: number;
     const circles: Circle[] = [];
-    let mousePos = { x: -100, y: -100 };
+    const mousePos = { x: -100, y: -100 };
 
     class Circle {
       x: number;
@@ -25,8 +25,8 @@ export default function CirclesBackground() {
       color: string;
 
       constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+        this.x = Math.random() * (canvas?.width || 0);
+        this.y = Math.random() * (canvas?.height || 0);
         this.baseSize = 3 + Math.random() * 7;
         this.size = this.baseSize;
         this.speed = 0.1 + Math.random() * 0.1;
@@ -56,10 +56,10 @@ export default function CirclesBackground() {
       }
 
       draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
+        ctx!.beginPath();
+        ctx!.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx!.fillStyle = this.color;
+        ctx!.fill();
       }
     }
 

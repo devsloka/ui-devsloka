@@ -1,29 +1,34 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useRef } from "react"
-import { motion } from "framer-motion"
-import { Waves } from "lucide-react"
+import { useState, useRef } from "react";
+import { motion } from "framer-motion";
+import { Waves } from "lucide-react";
 
 export function WaterCard() {
-  const [isHovering, setIsHovering] = useState(false)
-  const cardRef = useRef<HTMLDivElement>(null)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [isHovering, setIsHovering] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return
+    if (!cardRef.current) return;
 
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-    setMousePosition({ x, y })
-  }
+    setMousePosition({ x, y });
+  };
 
-  // Calculate rotation based on mouse position
-  const rotateX = isHovering ? (mousePosition.y / cardRef.current?.offsetHeight! - 0.5) * 15 : 0
-  const rotateY = isHovering ? -(mousePosition.x / cardRef.current?.offsetWidth! - 0.5) * 15 : 0
+  const rotateX =
+    isHovering && cardRef.current
+      ? (mousePosition.y / cardRef.current.offsetHeight - 0.5) * 15
+      : 0;
+  const rotateY =
+    isHovering && cardRef.current?.offsetWidth
+      ? -(mousePosition.x / cardRef.current.offsetWidth - 0.5) * 15
+      : 0;
 
   return (
     <motion.div
@@ -58,7 +63,9 @@ export function WaterCard() {
           alt="Ocean view"
           className="absolute inset-0 w-full h-full object-cover transition-all duration-500"
           style={{
-            filter: isHovering ? "brightness(0.8) saturate(1.2)" : "brightness(0.9)",
+            filter: isHovering
+              ? "brightness(0.8) saturate(1.2)"
+              : "brightness(0.9)",
           }}
         />
 
@@ -86,7 +93,9 @@ export function WaterCard() {
               transformStyle: "preserve-3d",
             }}
             animate={{
-              x: isHovering ? [i % 2 === 0 ? -20 : 20, i % 2 === 0 ? 20 : -20] : 0,
+              x: isHovering
+                ? [i % 2 === 0 ? -20 : 20, i % 2 === 0 ? 20 : -20]
+                : 0,
             }}
             transition={{
               duration: 3 + i * 0.5,
@@ -95,7 +104,11 @@ export function WaterCard() {
               ease: "easeInOut",
             }}
           >
-            <svg className="w-full h-full" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <svg
+              className="w-full h-full"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
               <path
                 d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
                 fill="#0ea5e9"
@@ -162,7 +175,8 @@ export function WaterCard() {
           animate={{ y: isHovering ? -5 : 0, opacity: isHovering ? 1 : 0.8 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Dive into the mesmerizing beauty of the ocean and discover its hidden wonders.
+          Dive into the mesmerizing beauty of the ocean and discover its hidden
+          wonders.
         </motion.p>
 
         <motion.button
@@ -204,6 +218,5 @@ export function WaterCard() {
           />
         ))}
     </motion.div>
-  )
+  );
 }
-
