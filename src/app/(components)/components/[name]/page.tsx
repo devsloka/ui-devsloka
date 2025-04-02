@@ -4,21 +4,21 @@ import { getComponentCode } from "@/utilities/getComponentCode";
 import { Metadata } from "next";
 import { components } from "@/utilities/components.utils";
 
-interface ComponentPageProps {
-  params: {
-    name: string;
-  };
+export async function generateStaticParams() {
+  const componentKeys = await Promise.resolve(Object.keys(components));
+  return componentKeys.map((id) => ({ name: id }));
 }
 
-export function generateStaticParams() {
-  return Object.keys(components).map((id) => ({ name: id }));
-}
-
-export function generateMetadata({ params }: ComponentPageProps): Metadata {
-  const component = components[params.name];
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ name: string }>;
+}): Promise<Metadata> {
+  const { name } = await params;
+  const component = components[name];
   if (!component) return {};
 
-  const formattedName = params.name.replace(/-/g, " ");
+  const formattedName = name.replace(/-/g, " ");
   return {
     title: `${formattedName} - Devsloka Components`,
     description: component.codeMetadata.description,
@@ -26,23 +26,28 @@ export function generateMetadata({ params }: ComponentPageProps): Metadata {
     openGraph: {
       title: `${formattedName} - Devsloka Components`,
       description: component.codeMetadata.description,
-      images: [`https://yourwebsite.com/og-images/${params.name}.jpg`],
+      images: [`https://yourwebsite.com/og-images/${name}.jpg`],
     },
   };
 }
 
-export default function ComponentPage({ params }: ComponentPageProps) {
-  const componentInfo = components[params.name];
+export default async function ComponentPage({
+  params,
+}: {
+  params: Promise<{ name: string }>;
+}) {
+  const { name } = await params;
+  const componentInfo = components[name];
 
   if (!componentInfo) {
     return notFound();
   }
 
   const { component: ActiveComponent, codeMetadata } = componentInfo;
-  const componentPath = `src/components/devsloka-components/${params.name}.tsx`;
+  const componentPath = `src/components/devsloka-components/${name}.tsx`;
   const componentCode = getComponentCode(componentPath);
   const secondaryCode = getComponentCode(
-    `src/components/devsloka-components/${params.name}.tsx`
+    `src/components/devsloka-components/${name}.tsx`
   );
 
   return (
