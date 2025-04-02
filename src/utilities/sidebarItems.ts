@@ -117,8 +117,8 @@ export const sidebarItems = [
         href: "/components/floating-dots",
       },
       {
-        title: "Airbnb Listing Card",
-        href: "/components/airbnb-listing-card",
+        title: "Airbnb Card",
+        href: "/components/airbnb-card",
       },
     ],
   },
