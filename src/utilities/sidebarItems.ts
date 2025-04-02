@@ -42,6 +42,10 @@ export const sidebarItems = [
         title: "Gradient Wave Background",
         href: "/components/backgrounds/gradient-wave",
       },
+      {
+        title: "3d globe Background",
+        href: "/components/backgrounds/3d-background",
+      },
     ],
   },
   {
@@ -103,6 +107,14 @@ export const sidebarItems = [
       {
         title: "Tour",
         href: "/components/tour",
+      },
+      {
+        title: "Floating Dots",
+        href: "/components/floating-dots",
+      },
+      {
+        title: "Airbnb Card",
+        href: "/components/airbnb-card",
       },
     ],
   },

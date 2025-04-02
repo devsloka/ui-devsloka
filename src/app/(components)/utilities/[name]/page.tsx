@@ -44,6 +44,10 @@ const UtilPage = ({ params }: { params: { name: string } }) => {
   const formate = formatToDemo(params.name);
   const componentPath = `src/hooks/devsloka-hooks/demo/${formate}.tsx`;
   const componentCode = getComponentCode(componentPath);
+  const secondaryCode = getComponentCode(
+    `src/hooks/devsloka-hooks/${params.name}.tsx`
+  );
+  console.log("componentCode", `src/hooks/devsloka-hooks/${params.name}.tsx`);
 
   return (
     <>
@@ -57,7 +61,7 @@ const UtilPage = ({ params }: { params: { name: string } }) => {
           description={codeMetadata.description}
           keywords={codeMetadata.keywords}
           dependencies={codeMetadata.dependencies}
-          secondaryCode={componentInfo.codeMetadata.secondaryCode}
+          secondaryCode={secondaryCode}
           secondaryTitle={componentInfo.codeMetadata.secondaryTitle}
           secondaryLanguage={componentInfo.codeMetadata.secondaryLanguage}
           secondaryDescription={componentInfo.codeMetadata.secondaryDescription}

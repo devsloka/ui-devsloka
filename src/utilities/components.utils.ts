@@ -3,6 +3,8 @@ import { ExpandingCards } from "@/components/devsloka-components/expanding-cards
 import ShowcaseSlider from "@/components/devsloka-components/showcase-slider";
 import TourDemo from "@/components/devsloka-components/tour-demo";
 import { getComponentCode } from "./getComponentCode";
+import FloatingDotsDemo from "@/components/devsloka-components/floating-dots-demo";
+import AirbnbListingCardExample from "@/components/devsloka-components/airbnb-card-demo";
 
 export type ComponentMeta = {
   component: React.FC;
@@ -68,6 +70,28 @@ export const components: Record<string, ComponentMeta> = {
       secondaryTitle: "Tour Component",
       secondaryLanguage: "tsx",
       secondaryDescription: "The tour component itself",
+    },
+  },
+  "floating-dots": {
+    component: FloatingDotsDemo,
+    codeMetadata: {
+      title: "Floating Dots",
+      description:
+        "Interactive tour component to guide users through your application",
+      keywords: ["React", "Tour", "Guide", "User Experience"],
+      language: "tsx",
+      dependencies: "npm i motion",
+    },
+  },
+  "airbnb-card": {
+    component: AirbnbListingCardExample,
+    codeMetadata: {
+      title: "Airbnb Card",
+      description:
+        "Interactive tour component to guide users through your application",
+      keywords: ["React", "Tour", "Guide", "User Experience"],
+      language: "tsx",
+      dependencies: "npm i motion",
     },
   },
 };
