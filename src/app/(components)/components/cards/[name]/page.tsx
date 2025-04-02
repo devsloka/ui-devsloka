@@ -23,18 +23,18 @@ const cards: Record<string, React.FC> = {
   "foliage-card": FoliageCard,
   "neon-card": NeonCard,
 };
-
+interface ComponentPageProps {
+  params: {
+    name: string;
+  };
+}
 const cardsData = Object.keys(cards).map((id) => ({ id }));
 
 export function generateStaticParams() {
   return cardsData;
 }
 
-export function generateMetadata({
-  params,
-}: {
-  params: { name: string };
-}): Metadata {
+export function generateMetadata({ params }: ComponentPageProps): Metadata {
   const formattedName = params.name.replace(/-/g, " ");
   return {
     title: `${formattedName} - Animated Cards`,
@@ -56,7 +56,7 @@ export function generateMetadata({
   };
 }
 
-export default function CardPage({ params }: { params: { name: string } }) {
+export default function CardPage({ params }: ComponentPageProps) {
   const CardComponent = cards[params.name];
 
   if (!CardComponent) {

@@ -37,17 +37,19 @@ const backgrounds: Record<string, React.FC> = {
   "3d-background": GlobeHero,
 };
 
+interface ComponentPageProps {
+  params: {
+    name: string;
+  };
+}
+
 const backgroundsData = Object.keys(backgrounds).map((id) => ({ id }));
 
 export function generateStaticParams() {
   return backgroundsData;
 }
 
-export function generateMetadata({
-  params,
-}: {
-  params: { name: string };
-}): Metadata {
+export function generateMetadata({ params }: ComponentPageProps): Metadata {
   const formattedName = params.name.replace(/-/g, " ");
   return {
     title: `${formattedName} - Animated Background`,
@@ -69,11 +71,7 @@ export function generateMetadata({
   };
 }
 
-export default function BackgroundPage({
-  params,
-}: {
-  params: { name: string };
-}) {
+export default function BackgroundPage({ params }: ComponentPageProps) {
   const BackgroundComponent = backgrounds[params.name];
 
   if (!BackgroundComponent) {

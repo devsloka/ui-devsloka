@@ -2,19 +2,21 @@ import React from "react";
 import { notFound } from "next/navigation";
 import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { getComponentCode } from "@/utilities/getComponentCode";
-
 import { utilities } from "@/utilities/hooks.utils";
 import { Metadata } from "next";
 import { formatToDemo } from "@/utilities/format-to-demo";
+
+interface ComponentPageProps {
+  params: {
+    name: string;
+  };
+}
+
 export function generateStaticParams() {
   return Object.keys(utilities).map((id) => ({ name: id }));
 }
 
-export function generateMetadata({
-  params,
-}: {
-  params: { name: string };
-}): Metadata {
+export function generateMetadata({ params }: ComponentPageProps): Metadata {
   const component = utilities[params.name];
   if (!component) return {};
 
@@ -31,7 +33,7 @@ export function generateMetadata({
   };
 }
 
-const UtilPage = ({ params }: { params: { name: string } }) => {
+const UtilPage = ({ params }: ComponentPageProps) => {
   const componentInfo = utilities[params.name];
 
   if (!componentInfo) {
@@ -39,16 +41,12 @@ const UtilPage = ({ params }: { params: { name: string } }) => {
   }
 
   const { component: ActiveComponent, codeMetadata } = componentInfo;
-
-  // const componentPath = `src/hooks/devsloka-hooks/demo/${params.name}.tsx`;
   const formate = formatToDemo(params.name);
   const componentPath = `src/hooks/devsloka-hooks/demo/${formate}.tsx`;
   const componentCode = getComponentCode(componentPath);
   const secondaryCode = getComponentCode(
     `src/hooks/devsloka-hooks/${params.name}.tsx`
   );
-  console.log("componentCode", `src/hooks/devsloka-hooks/${params.name}.tsx`);
-
   return (
     <>
       <div className="w-full">

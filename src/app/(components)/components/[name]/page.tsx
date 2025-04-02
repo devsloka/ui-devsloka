@@ -2,18 +2,19 @@ import { notFound } from "next/navigation";
 import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { getComponentCode } from "@/utilities/getComponentCode";
 import { Metadata } from "next";
-
 import { components } from "@/utilities/components.utils";
+
+interface ComponentPageProps {
+  params: {
+    name: string;
+  };
+}
 
 export function generateStaticParams() {
   return Object.keys(components).map((id) => ({ name: id }));
 }
 
-export function generateMetadata({
-  params,
-}: {
-  params: { name: string };
-}): Metadata {
+export function generateMetadata({ params }: ComponentPageProps): Metadata {
   const component = components[params.name];
   if (!component) return {};
 
@@ -30,11 +31,7 @@ export function generateMetadata({
   };
 }
 
-export default function ComponentPage({
-  params,
-}: {
-  params: { name: string };
-}) {
+export default function ComponentPage({ params }: ComponentPageProps) {
   const componentInfo = components[params.name];
 
   if (!componentInfo) {
