@@ -116,6 +116,22 @@ export const sidebarItems = [
         title: "Airbnb Card",
         href: "/components/airbnb-card",
       },
+      {
+        title: "Morphing Nav",
+        href: "/components/morphing-nav",
+      },
+      {
+        title: "Morphing Modal",
+        href: "/components/morphing-modal",
+      },
+      {
+        title: "Morphing Cards",
+        href: "/components/morphing-card",
+      },
+      {
+        title: "SuccessResult",
+        href: "/components/success-result",
+      },
     ],
   },
   {
