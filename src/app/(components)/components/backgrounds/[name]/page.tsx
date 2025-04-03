@@ -37,20 +37,18 @@ const backgrounds: Record<string, React.FC> = {
   "3d-background": GlobeHero,
 };
 
-interface ComponentPageProps {
-  params: {
-    name: string;
-  };
+export async function generateStaticParams() {
+  const backgroundsKeys = await Promise.resolve(Object.keys(backgrounds));
+  return backgroundsKeys.map((id) => ({ name: id }));
 }
 
-const backgroundsData = Object.keys(backgrounds).map((id) => ({ id }));
-
-export function generateStaticParams() {
-  return backgroundsData;
-}
-
-export function generateMetadata({ params }: ComponentPageProps): Metadata {
-  const formattedName = params.name.replace(/-/g, " ");
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ name: string }>;
+}): Promise<Metadata> {
+  const { name } = await params;
+  const formattedName = name.replace(/-/g, " ");
   return {
     title: `${formattedName} - Animated Background`,
     description: `Explore the ${formattedName} animation, a beautiful background effect for web projects.`,
@@ -64,21 +62,26 @@ export function generateMetadata({ params }: ComponentPageProps): Metadata {
     openGraph: {
       title: `${formattedName} - Animated Background`,
       description: `Explore the ${formattedName} animation, a beautiful background effect for web projects.`,
-      url: `https://yourwebsite.com/components/backgrounds/${params.name}`,
+      url: `https://yourwebsite.com/components/backgrounds/${name}`,
       type: "website",
-      images: [`https://yourwebsite.com/images/${params.name}.png`],
+      images: [`https://yourwebsite.com/images/${name}.png`],
     },
   };
 }
 
-export default function BackgroundPage({ params }: ComponentPageProps) {
-  const BackgroundComponent = backgrounds[params.name];
+export default async function BackgroundPage({
+  params,
+}: {
+  params: Promise<{ name: string }>;
+}) {
+  const { name } = await params;
+  const BackgroundComponent = backgrounds[name];
 
   if (!BackgroundComponent) {
     return notFound();
   }
 
-  const componentPath = `src/components/backgrounds/${params.name}.tsx`;
+  const componentPath = `src/components/backgrounds/${name}.tsx`;
   const componentCode = getComponentCode(componentPath);
 
   return (
@@ -88,13 +91,13 @@ export default function BackgroundPage({ params }: ComponentPageProps) {
         preview={
           <BackgroundPreview
             backgroundComponent={<BackgroundComponent />}
-            title={params.name.replace(/-/g, " ")}
+            title={name.replace(/-/g, " ")}
             description="Beautiful animated backgrounds for your website hero sections"
           />
         }
         language="tsx"
         showLineNumbers
-        title={params.name.replace(/-/g, " ")}
+        title={name.replace(/-/g, " ")}
       />
     </div>
   );

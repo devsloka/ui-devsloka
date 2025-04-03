@@ -6,21 +6,21 @@ import { utilities } from "@/utilities/hooks.utils";
 import { Metadata } from "next";
 import { formatToDemo } from "@/utilities/format-to-demo";
 
-interface ComponentPageProps {
-  params: {
-    name: string;
-  };
+export async function generateStaticParams() {
+  const utilitiesKeys = await Promise.resolve(Object.keys(utilities));
+  return utilitiesKeys.map((id) => ({ name: id }));
 }
 
-export function generateStaticParams() {
-  return Object.keys(utilities).map((id) => ({ name: id }));
-}
-
-export function generateMetadata({ params }: ComponentPageProps): Metadata {
-  const component = utilities[params.name];
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ name: string }>;
+}): Promise<Metadata> {
+  const { name } = await params;
+  const component = utilities[name];
   if (!component) return {};
 
-  const formattedName = params.name.replace(/-/g, " ");
+  const formattedName = name.replace(/-/g, " ");
   return {
     title: `${formattedName} - Devsloka Components`,
     description: component.codeMetadata.description,
@@ -28,24 +28,25 @@ export function generateMetadata({ params }: ComponentPageProps): Metadata {
     openGraph: {
       title: `${formattedName} - Devsloka Components`,
       description: component.codeMetadata.description,
-      images: [`https://yourwebsite.com/og-images/${params.name}.jpg`],
+      images: [`https://yourwebsite.com/og-images/${name}.jpg`],
     },
   };
 }
 
-const UtilPage = ({ params }: ComponentPageProps) => {
-  const componentInfo = utilities[params.name];
+const UtilPage = async ({ params }: { params: Promise<{ name: string }> }) => {
+  const { name } = await params;
+  const componentInfo = utilities[name];
 
   if (!componentInfo) {
     return notFound();
   }
 
   const { component: ActiveComponent, codeMetadata } = componentInfo;
-  const formate = formatToDemo(params.name);
+  const formate = formatToDemo(name);
   const componentPath = `src/hooks/devsloka-hooks/demo/${formate}.tsx`;
   const componentCode = getComponentCode(componentPath);
   const secondaryCode = getComponentCode(
-    `src/hooks/devsloka-hooks/${params.name}.tsx`
+    `src/hooks/devsloka-hooks/${name}.tsx`
   );
   return (
     <>
