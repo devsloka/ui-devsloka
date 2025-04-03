@@ -13,7 +13,7 @@ export function VideoComponentCard({
   index,
 }: {
   name: string;
-  icon: React.ElementType;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   index: number;
 }) {
   return (
