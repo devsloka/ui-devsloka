@@ -129,8 +129,16 @@ export const sidebarItems = [
         href: "/components/morphing-card",
       },
       {
-        title: "SuccessResult",
+        title: "Success Result",
         href: "/components/success-result",
+      },
+      {
+        title: "Error Result",
+        href: "/components/error-result",
+      },
+      {
+        title: "Empty Result",
+        href: "/components/empty-result",
       },
     ],
   },
