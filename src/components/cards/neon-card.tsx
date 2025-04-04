@@ -1,29 +1,35 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useRef } from "react"
-import { motion } from "framer-motion"
-import { Music } from "lucide-react"
+import { useState, useRef } from "react";
+import { motion } from "framer-motion";
+import { Music } from "lucide-react";
 
 export function NeonCard() {
-  const [isHovering, setIsHovering] = useState(false)
-  const cardRef = useRef<HTMLDivElement>(null)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [isHovering, setIsHovering] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return
+    if (!cardRef.current) return;
 
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-    setMousePosition({ x, y })
-  }
+    setMousePosition({ x, y });
+  };
 
   // Calculate rotation based on mouse position
-  const rotateX = isHovering ? (mousePosition.y / cardRef.current?.offsetHeight! - 0.5) * 15 : 0
-  const rotateY = isHovering ? -(mousePosition.x / cardRef.current?.offsetWidth! - 0.5) * 15 : 0
+  const rotateX =
+    isHovering && cardRef.current
+      ? (mousePosition.y / cardRef.current.offsetHeight - 0.5) * 15
+      : 0;
+  const rotateY =
+    isHovering && cardRef.current?.offsetWidth
+      ? -(mousePosition.x / cardRef.current.offsetWidth - 0.5) * 15
+      : 0;
 
   return (
     <motion.div
@@ -58,7 +64,9 @@ export function NeonCard() {
           alt="Neon city"
           className="absolute inset-0 w-full h-full object-cover transition-all duration-500"
           style={{
-            filter: isHovering ? "brightness(1.2) contrast(1.1)" : "brightness(0.9)",
+            filter: isHovering
+              ? "brightness(1.2) contrast(1.1)"
+              : "brightness(0.9)",
           }}
         />
 
@@ -84,8 +92,12 @@ export function NeonCard() {
             className="absolute h-[2px] left-[10%] right-[10%]"
             style={{
               top: `${30 + i * 20}%`,
-              background: `linear-gradient(90deg, transparent 0%, ${i === 0 ? "#f0abfc" : i === 1 ? "#818cf8" : "#22d3ee"} 50%, transparent 100%)`,
-              boxShadow: `0 0 10px ${i === 0 ? "#f0abfc" : i === 1 ? "#818cf8" : "#22d3ee"}`,
+              background: `linear-gradient(90deg, transparent 0%, ${
+                i === 0 ? "#f0abfc" : i === 1 ? "#818cf8" : "#22d3ee"
+              } 50%, transparent 100%)`,
+              boxShadow: `0 0 10px ${
+                i === 0 ? "#f0abfc" : i === 1 ? "#818cf8" : "#22d3ee"
+              }`,
               transformStyle: "preserve-3d",
             }}
             animate={{
@@ -119,7 +131,9 @@ export function NeonCard() {
               transformStyle: "preserve-3d",
             }}
             animate={{
-              height: isHovering ? `${20 + Math.sin(i / 2) * 60 + Math.random() * 20}%` : "20%",
+              height: isHovering
+                ? `${20 + Math.sin(i / 2) * 60 + Math.random() * 20}%`
+                : "20%",
               opacity: isHovering ? 1 : 0.5,
             }}
             transition={{
@@ -168,7 +182,9 @@ export function NeonCard() {
         <motion.div
           className="absolute top-6 right-6 bg-fuchsia-500/30 backdrop-blur-sm p-3 rounded-full"
           animate={{
-            boxShadow: isHovering ? ["0 0 0px #f0abfc", "0 0 20px #f0abfc", "0 0 5px #f0abfc"] : "0 0 0px #f0abfc",
+            boxShadow: isHovering
+              ? ["0 0 0px #f0abfc", "0 0 20px #f0abfc", "0 0 5px #f0abfc"]
+              : "0 0 0px #f0abfc",
           }}
           transition={{
             duration: 2,
@@ -192,7 +208,8 @@ export function NeonCard() {
           animate={{ y: isHovering ? -5 : 0, opacity: isHovering ? 1 : 0.8 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Experience the electric atmosphere of the city after dark with pulsing beats and vibrant lights.
+          Experience the electric atmosphere of the city after dark with pulsing
+          beats and vibrant lights.
         </motion.p>
 
         <motion.button
@@ -200,7 +217,9 @@ export function NeonCard() {
           animate={{
             y: isHovering ? -5 : 0,
             opacity: isHovering ? 1 : 0.7,
-            boxShadow: isHovering ? "0 0 15px rgba(232, 121, 249, 0.5)" : "0 0 0px rgba(232, 121, 249, 0)",
+            boxShadow: isHovering
+              ? "0 0 15px rgba(232, 121, 249, 0.5)"
+              : "0 0 0px rgba(232, 121, 249, 0)",
           }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
@@ -208,6 +227,5 @@ export function NeonCard() {
         </motion.button>
       </div>
     </motion.div>
-  )
+  );
 }
-

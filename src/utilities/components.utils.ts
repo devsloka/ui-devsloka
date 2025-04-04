@@ -1,9 +1,15 @@
 import BudgetSlider from "@/components/devsloka-components/budget-slider";
 import { ExpandingCards } from "@/components/devsloka-components/expanding-cards";
 import ShowcaseSlider from "@/components/devsloka-components/showcase-slider";
-import TourDemo from "@/components/devsloka-components/tour-demo";
+import TourDemo from "@/components/devsloka-components/demo/tour-demo";
 import FloatingDotsDemo from "@/components/devsloka-components/floating-dots-demo";
-import AirbnbListingCardExample from "@/components/devsloka-components/airbnb-card-demo";
+import AirbnbListingCardExample from "@/components/devsloka-components/demo/airbnb-card-demo";
+import MorphingNav from "@/components/devsloka-components/morphing-nav";
+import MorphingModal from "@/components/devsloka-components/morphing-modal";
+import ExpandableCard from "@/components/devsloka-components/morphing-card";
+import SuccessResult from "@/components/devsloka-components/success-result";
+import ErrorResult from "@/components/devsloka-components/error-result";
+import EmptyResult from "@/components/devsloka-components/empty-result";
 
 export type ComponentMeta = {
   component: React.FC;
@@ -84,6 +90,72 @@ export const components: Record<string, ComponentMeta> = {
     component: AirbnbListingCardExample,
     codeMetadata: {
       title: "Airbnb Card",
+      description:
+        "Interactive tour component to guide users through your application",
+      keywords: ["React", "Tour", "Guide", "User Experience"],
+      language: "tsx",
+      dependencies: "npm i motion",
+    },
+  },
+  "morphing-nav": {
+    component: MorphingNav,
+    codeMetadata: {
+      title: "Morphing Nav",
+      description:
+        "Interactive tour component to guide users through your application",
+      keywords: ["React", "Tour", "Guide", "User Experience"],
+      language: "tsx",
+      dependencies: "npm i motion",
+    },
+  },
+  "morphing-modal": {
+    component: MorphingModal,
+    codeMetadata: {
+      title: "Morphing Modal",
+      description:
+        "Interactive tour component to guide users through your application",
+      keywords: ["React", "Tour", "Guide", "User Experience"],
+      language: "tsx",
+      dependencies: "npm i motion",
+    },
+  },
+  "morphing-card": {
+    component: ExpandableCard,
+    codeMetadata: {
+      title: "Expandable Card",
+      description:
+        "Interactive tour component to guide users through your application",
+      keywords: ["React", "Tour", "Guide", "User Experience"],
+      language: "tsx",
+      dependencies: "npm i motion",
+    },
+  },
+  "success-result": {
+    component: SuccessResult,
+    codeMetadata: {
+      title: "Success Result",
+      description:
+        "Interactive tour component to guide users through your application",
+      keywords: ["React", "Tour", "Guide", "User Experience"],
+      language: "tsx",
+      dependencies: "npm i motion",
+    },
+  },
+  "error-result": {
+    component: ErrorResult,
+    codeMetadata: {
+      title: "Error Result",
+      description:
+        "Interactive tour component to guide users through your application",
+      keywords: ["React", "Tour", "Guide", "User Experience"],
+      language: "tsx",
+      dependencies: "npm i motion",
+    },
+  },
+  "empty-result": {
+    component: EmptyResult,
+    codeMetadata: {
+      title: "Empty Result",
       description:
         "Interactive tour component to guide users through your application",
       keywords: ["React", "Tour", "Guide", "User Experience"],

@@ -40,6 +40,9 @@ export default function NightSkyCanvas() {
       color: string;
 
       constructor() {
+        if (!canvas) {
+          throw new Error("Canvas is not initialized");
+        }
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height * 0.8; // Keep stars in upper 80% of sky
         this.size = 0.5 + Math.random() * 2;
@@ -107,6 +110,9 @@ export default function NightSkyCanvas() {
 
       constructor() {
         // Start position - anywhere in the upper half of the screen
+        if (!canvas) {
+          throw new Error("Canvas is not initialized");
+        }
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height * 0.5;
 
@@ -121,6 +127,9 @@ export default function NightSkyCanvas() {
       }
 
       update() {
+        const canvas = canvasRef.current;
+        if (!canvas) return true; // Exit early if canvas is null
+
         // Move shooting star
         this.x += Math.cos(this.angle) * this.speed;
         this.y += Math.sin(this.angle) * this.speed;
@@ -261,7 +270,7 @@ export default function NightSkyCanvas() {
       ctx.fill();
 
       // Draw craters
-      drawMoonCraters(ctx, moonX, moonY, moonRadius, time);
+      drawMoonCraters(ctx, moonX, moonY, moonRadius);
 
       // Subtle shine animation
       const shine = Math.sin(time * 0.2) * 0.5 + 0.5;
@@ -289,8 +298,7 @@ export default function NightSkyCanvas() {
       ctx: CanvasRenderingContext2D,
       moonX: number,
       moonY: number,
-      moonRadius: number,
-      time: number
+      moonRadius: number
     ) => {
       // Define crater positions (fixed to avoid flickering)
       const craters = [

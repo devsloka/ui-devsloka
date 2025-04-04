@@ -21,12 +21,14 @@ export default function ExploreAnimatedCard() {
   };
 
   // Calculate rotation based on mouse position
-  const rotateX = isHovering
-    ? (mousePosition.y / cardRef.current?.offsetHeight! - 0.5) * 20
-    : 0;
-  const rotateY = isHovering
-    ? -(mousePosition.x / cardRef.current?.offsetWidth! - 0.5) * 20
-    : 0;
+  const rotateX =
+    isHovering && cardRef.current
+      ? (mousePosition.y / cardRef.current.offsetHeight - 0.5) * 20
+      : 0;
+  const rotateY =
+    isHovering && cardRef.current
+      ? -(mousePosition.x / cardRef.current.offsetWidth - 0.5) * 20
+      : 0;
 
   return (
     <motion.div
@@ -96,7 +98,7 @@ export default function ExploreAnimatedCard() {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           Discover the serenity of mountain landscapes and reconnect with
-          nature's beauty.
+          nature&apos;s beauty.
         </motion.p>
 
         <motion.button
