@@ -24,18 +24,18 @@ const cards: Record<string, React.FC> = {
   "neon-card": NeonCard,
 };
 
-const cardsData = Object.keys(cards).map((id) => ({ id }));
-
-export function generateStaticParams() {
-  return cardsData;
+export async function generateStaticParams() {
+  const cardsKeys = await Promise.resolve(Object.keys(cards));
+  return cardsKeys.map((id) => ({ name: id }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { name: string };
-}): Metadata {
-  const formattedName = params.name.replace(/-/g, " ");
+  params: Promise<{ name: string }>;
+}): Promise<Metadata> {
+  const { name } = await params;
+  const formattedName = name.replace(/-/g, " ");
   return {
     title: `${formattedName} - Animated Cards`,
     description: `Explore the ${formattedName} animation, a beautiful cards effect for web projects.`,
@@ -49,21 +49,26 @@ export function generateMetadata({
     openGraph: {
       title: `${formattedName} - Animated cards`,
       description: `Explore the ${formattedName} animation, a beautiful cards effect for web projects.`,
-      url: `https://yourwebsite.com/components/cards/${params.name}`,
+      url: `https://yourwebsite.com/components/cards/${name}`,
       type: "website",
-      images: [`https://yourwebsite.com/images/${params.name}.png`],
+      images: [`https://yourwebsite.com/images/${name}.png`],
     },
   };
 }
 
-export default function CardPage({ params }: { params: { name: string } }) {
-  const CardComponent = cards[params.name];
+export default async function CardPage({
+  params,
+}: {
+  params: Promise<{ name: string }>;
+}) {
+  const { name } = await params;
+  const CardComponent = cards[name];
 
   if (!CardComponent) {
     return notFound();
   }
 
-  const componentPath = `src/components/cards/${params.name}.tsx`;
+  const componentPath = `src/components/cards/${name}.tsx`;
   const componentCode = getComponentCode(componentPath);
 
   return (
@@ -77,7 +82,7 @@ export default function CardPage({ params }: { params: { name: string } }) {
         }
         language="tsx"
         showLineNumbers
-        title={params.name.replace(/-/g, " ")}
+        title={name.replace(/-/g, " ")}
       />
     </div>
   );

@@ -42,6 +42,10 @@ export const sidebarItems = [
         title: "Gradient Wave Background",
         href: "/components/backgrounds/gradient-wave",
       },
+      {
+        title: "3d globe Background",
+        href: "/components/backgrounds/3d-background",
+      },
     ],
   },
   {
@@ -103,6 +107,38 @@ export const sidebarItems = [
       {
         title: "Tour",
         href: "/components/tour",
+      },
+      {
+        title: "Floating Dots",
+        href: "/components/floating-dots",
+      },
+      {
+        title: "Airbnb Card",
+        href: "/components/airbnb-card",
+      },
+      {
+        title: "Morphing Nav",
+        href: "/components/morphing-nav",
+      },
+      {
+        title: "Morphing Modal",
+        href: "/components/morphing-modal",
+      },
+      {
+        title: "Morphing Cards",
+        href: "/components/morphing-card",
+      },
+      {
+        title: "Success Result",
+        href: "/components/success-result",
+      },
+      {
+        title: "Error Result",
+        href: "/components/error-result",
+      },
+      {
+        title: "Empty Result",
+        href: "/components/empty-result",
       },
     ],
   },
