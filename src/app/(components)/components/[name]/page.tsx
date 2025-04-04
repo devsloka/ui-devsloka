@@ -47,7 +47,7 @@ export default async function ComponentPage({
   const componentPath = `src/components/devsloka-components/${name}.tsx`;
   const componentCode = getComponentCode(componentPath);
   const secondaryCode = getComponentCode(
-    `src/components/devsloka-components/${name}.tsx`
+    `src/components/devsloka-components/demo/${name}.tsx`
   );
 
   return (
