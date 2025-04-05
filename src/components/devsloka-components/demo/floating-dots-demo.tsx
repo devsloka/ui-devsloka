@@ -1,5 +1,5 @@
 import React from "react";
-import { FloatingDots } from "./floating-dots";
+import { FloatingDots } from "../floating-dots";
 
 const FloatingDotsDemo = () => {
   return (
