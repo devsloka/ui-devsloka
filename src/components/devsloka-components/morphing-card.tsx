@@ -19,7 +19,7 @@ export default function ExpandableCard() {
         "Experience tranquility like never before at our mountain retreat. Wake up to the sound of birds chirping and the fresh mountain air. Enjoy hiking trails, wildlife spotting, and stargazing at night. Our fully equipped cabins provide all the comfort you need while staying connected with nature.",
       image:
         "https://images.unsplash.com/photo-1741851374430-d242e0dcd70c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      color: "bg-emerald-50 dark:bg-emerald-950/30",
+      color: "bg-background",
     },
     {
       id: "card2",
@@ -30,7 +30,7 @@ export default function ExpandableCard() {
         "Dive into luxury at our ocean paradise. Our beachfront villas offer unparalleled views of the horizon where the sky meets the sea. Fall asleep to the gentle sound of waves and wake up to spectacular sunrises. Enjoy water sports, beach yoga, and fresh seafood prepared by our world-class chefs.",
       image:
         "https://plus.unsplash.com/premium_photo-1674406763863-b64be22c78a9?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      color: "bg-sky-50 dark:bg-sky-950/30",
+      color: "bg-background",
     },
     {
       id: "card3",
@@ -41,7 +41,7 @@ export default function ExpandableCard() {
         "Stay in the pulse of the city with our centrally located urban escapes. These modern apartments combine comfort with convenience, putting you minutes away from the best restaurants, shopping, and entertainment. Enjoy high-speed internet, smart home features, and 24/7 concierge service.",
       image:
         "https://images.unsplash.com/photo-1741620979760-bccef3bb5b17?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      color: "bg-violet-50 dark:bg-violet-950/30",
+      color: "bg-background",
     },
   ];
 
@@ -52,7 +52,7 @@ export default function ExpandableCard() {
           <motion.div
             layoutId={`card-container-${card.id}`}
             className={cn(
-              "rounded-xl",
+              "rounded-xl border",
               card.color,
               expandedId === card.id
                 ? "fixed z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-3xl h-[80vh] overflow-auto shadow-xl"

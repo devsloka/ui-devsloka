@@ -38,29 +38,75 @@ export function AirbnbListingCard({
 }: ListingProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchEndX, setTouchEndX] = useState(0);
 
+  // Handle next image navigation
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
   };
 
+  // Handle previous image navigation
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  // Touch event handlers for mobile swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+    setTouchEndX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEndX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX || !touchEndX) return;
+
+    const distance = touchStartX - touchEndX;
+    const swipeThreshold = 50; // Minimum swipe distance in pixels
+
+    if (Math.abs(distance) < swipeThreshold) return;
+
+    if (distance > 0) {
+      nextImage(); // Swipe left
+    } else {
+      prevImage(); // Swipe right
+    }
+  };
+
   return (
     <div className="group w-[200px] sm:w-[300px] md:w-[400px] lg:w-[400px] xl:w-[400px]">
-      <div className="relative aspect-square rounded-xl overflow-hidden mb-2">
-        <div className="absolute inset-0">
-          <Image
-            src={images[currentImageIndex] || "/placeholder.svg"}
-            alt={title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+      <div
+        className="relative aspect-square rounded-xl overflow-hidden mb-2"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Image carousel container with sliding animation */}
+        <div
+          className="absolute inset-0 flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+        >
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className="min-w-full h-full relative flex-shrink-0"
+            >
+              <Image
+                src={image || "/placeholder.svg"}
+                alt={`${title} - Image ${index + 1}`}
+                fill
+                className="object-cover"
+              />
+            </div>
+          ))}
         </div>
 
         {images.length > 1 && (
           <>
+            {/* Navigation buttons */}
             <button
               onClick={prevImage}
               className="absolute left-2 top-1/2 -translate-y-1/2 bg-white rounded-full p-1 shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
@@ -72,6 +118,7 @@ export function AirbnbListingCard({
                 viewBox="0 0 16 16"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                className="text-black"
               >
                 <path
                   d="M10 12L6 8L10 4"
@@ -93,6 +140,7 @@ export function AirbnbListingCard({
                 viewBox="0 0 16 16"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                className="text-black"
               >
                 <path
                   d="M6 12L10 8L6 4"
@@ -104,6 +152,7 @@ export function AirbnbListingCard({
               </svg>
             </button>
 
+            {/* Image position indicators */}
             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
               {images.map((_, index) => (
                 <div
@@ -120,6 +169,7 @@ export function AirbnbListingCard({
           </>
         )}
 
+        {/* Favorite button */}
         <button
           onClick={() => setIsFavorite(!isFavorite)}
           className="absolute top-3 right-3 text-white hover:scale-110 transition-transform"
@@ -133,6 +183,7 @@ export function AirbnbListingCard({
           />
         </button>
 
+        {/* Badges for superhost/new listing */}
         {(isSuperhost || isNew) && (
           <div className="absolute top-3 left-3">
             {isSuperhost && (
@@ -149,6 +200,7 @@ export function AirbnbListingCard({
         )}
       </div>
 
+      {/* Listing details */}
       <div className="space-y-1">
         <div className="flex justify-between">
           <h3 className="font-medium text-gray-900 dark:text-white">

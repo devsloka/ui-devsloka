@@ -129,8 +129,8 @@ export default function MorphingModal() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 min-h-[500px] bg-gray-50 dark:bg-gray-900 rounded-xl">
-      <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+    <div className="flex flex-col items-center justify-center p-6 min-h-[500px] border rounded-xl">
+      <div className="w-full max-w-md  rounded-xl shadow-md p-6">
         <h2 className="text-xl font-bold mb-4">Create New Content</h2>
 
         <div className="grid grid-cols-4 gap-2 mb-6">
@@ -207,7 +207,7 @@ export default function MorphingModal() {
                   : 0,
               }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-xl z-50"
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-background border rounded-xl shadow-xl z-50"
             >
               <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
                 <h2 className="text-xl font-bold">

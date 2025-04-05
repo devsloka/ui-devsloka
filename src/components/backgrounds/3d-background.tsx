@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Sphere, Line } from "@react-three/drei";
 import * as THREE from "three";
+import { FloatingDots } from "../devsloka-components/floating-dots";
 
 interface CountryFeature {
   type: "Feature";
@@ -122,6 +123,12 @@ function Globe() {
 export function GlobeHero() {
   return (
     <div className="relative w-full h-screen bg-gradient-to-b from-black to-blue-950">
+      <FloatingDots
+        className="w-full"
+        maxRadius={0.5}
+        maxSpeed={0.8}
+        minSpeed={0.1}
+      />
       <div className="absolute inset-0">
         <Canvas
           camera={{
@@ -133,7 +140,7 @@ export function GlobeHero() {
           <directionalLight position={[3, 3, 3]} intensity={1.5} />
           <Globe />
           <OrbitControls
-            // enableZoom={true}
+            enableZoom={false}
             enablePan={false}
             rotateSpeed={0.3}
             autoRotate
