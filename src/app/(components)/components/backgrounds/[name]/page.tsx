@@ -18,6 +18,7 @@ import NightSkyCanvas from "@/components/backgrounds/moon-stars-background";
 import BackgroundPreview from "@/components/backgrounds/preview/BackgroundPreview";
 import { Metadata } from "next";
 import { GlobeHero } from "@/components/backgrounds/3d-background";
+import GradientBg from "@/components/backgrounds/gradient-bg";
 
 const backgrounds: Record<string, React.FC> = {
   "particles-background": ParticleBackground,
@@ -35,6 +36,7 @@ const backgrounds: Record<string, React.FC> = {
   "spotlight-background": SpotlightBackground,
   "ripple-background": RippleBackground,
   "3d-background": GlobeHero,
+  "gradient-bg": GradientBg,
 };
 
 export async function generateStaticParams() {

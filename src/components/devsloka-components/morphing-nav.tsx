@@ -18,7 +18,7 @@ export default function MorphingNav() {
 
   return (
     <>
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 mb-8 overflow-x-auto">
+      <div className=" border rounded-xl shadow-md p-4 mb-8 overflow-x-auto">
         <div className="flex space-x-2">
           {navItems.map((comp) => (
             <button
@@ -27,8 +27,8 @@ export default function MorphingNav() {
               className={cn(
                 "relative px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors",
                 activeItem === comp.id
-                  ? "text-white"
-                  : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  ? "text-white dark:text-black bg-primary"
+                  : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-primary/20"
               )}
             >
               {activeItem === comp.id && (
