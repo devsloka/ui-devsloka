@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/root/Navbar";
 import { ThemeProvider } from "@/contexts/theme-provider";
+import Footer from "@/components/root/Footer";
 
 // Configure Poppins (variable font)
 const poppins = Poppins({
@@ -35,6 +36,7 @@ export default function RootLayout({
           <main className="mx-auto w-full max-w-[88rem] items-start px-4">
             {children}
           </main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
