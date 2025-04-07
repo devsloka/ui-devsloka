@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Home, Settings, User, Bell, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export default function MorphingNav() {
   const [activeItem, setActiveItem] = useState("home");
@@ -18,10 +19,11 @@ export default function MorphingNav() {
 
   return (
     <>
-      <div className=" border rounded-xl shadow-md p-4 mb-8 overflow-x-auto">
+      <div className="border rounded-xl shadow-md p-4 overflow-x-auto">
         <div className="flex space-x-2">
           {navItems.map((comp) => (
-            <button
+            <Link
+              href={`#${comp.id}`}
               key={comp.id}
               onClick={() => setActiveItem(comp.id)}
               className={cn(
@@ -39,7 +41,7 @@ export default function MorphingNav() {
                 />
               )}
               <span className="relative z-10">{comp.label}</span>
-            </button>
+            </Link>
           ))}
         </div>
       </div>
