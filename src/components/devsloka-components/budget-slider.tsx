@@ -57,7 +57,7 @@ const BudgetSlider: React.FC = () => {
               currentPrice >= minValue && currentPrice <= maxValue;
             const isInView = currentPrice >= viewMin && currentPrice <= viewMax;
             const barColor =
-              isInRange || isInView ? "bg-orange-500" : "bg-gray-300";
+              isInRange || isInView ? "bg-[#0A6EFF]" : "bg-gray-300";
 
             return (
               <TooltipProvider key={index}>
