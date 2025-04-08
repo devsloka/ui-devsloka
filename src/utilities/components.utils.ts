@@ -10,6 +10,7 @@ import ExpandableCard from "@/components/devsloka-components/morphing-card";
 import SuccessResult from "@/components/devsloka-components/success-result";
 import ErrorResult from "@/components/devsloka-components/error-result";
 import EmptyResult from "@/components/devsloka-components/empty-result";
+import { ExpandingCardsDemo } from "@/components/devsloka-components/demo/expanding-cards-demo";
 
 export type ComponentMeta = {
   component: React.FC;
@@ -48,7 +49,7 @@ export const components: Record<string, ComponentMeta> = {
     },
   },
   "expanding-cards": {
-    component: ExpandingCards,
+    component: ExpandingCardsDemo,
     codeMetadata: {
       title: "Animated Content Cards",
       description:
