@@ -38,6 +38,13 @@ const HeroSection = () => {
       placement: "bottom" as const,
       offset: { y: -10 }, // Move slightly closer to the features
     },
+    {
+      target: "#components-showcase",
+      title: "Components Showcase",
+      description: "",
+      placement: "left" as const,
+      offset: { y: -10 }, // Move slightly closer to the features
+    },
   ];
   return (
     <motion.div
@@ -77,10 +84,13 @@ const HeroSection = () => {
           </Button>
         </div>
       </div>
-      <div className="hidden lg:flex flex-col items-center justify-center space-y-2 relative">
+      <div
+        className="hidden lg:flex flex-col items-center justify-center space-y-2 relative"
+        id="components-showcase"
+      >
         <div className="flex items-center justify-center w-full space-x-1">
           <div className="flex items-center justify-center space-x-4  border border-dashed rounded-lg w-full h-full p-1">
-            <Button>Start Tour</Button>
+            <Button onClick={() => setIsTourOpen(true)}>Start Tour</Button>
           </div>
           <div className="relative w-full h-20 bg-black rounded-lg overflow-hidden border border-dashed p-1 flex items-center justify-center">
             <p className="text-white">Floating Dots</p>
