@@ -20,7 +20,7 @@ import {
 export interface CarouselItem {
   name: string;
   description: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface ContentCarouselProps {
