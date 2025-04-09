@@ -47,13 +47,13 @@ export default async function ComponentPage({
   const componentPath = `src/components/devsloka-components/${name}.tsx`;
   const componentCode = getComponentCode(componentPath);
   const secondaryCode = getComponentCode(
-    `src/components/devsloka-components/demo/${name}.tsx`
+    `src/components/devsloka-components/demo/${name + "-demo"}.tsx`
   );
 
   return (
     <div className="w-full">
       <AdvancedCodeBlock
-        code={componentCode}
+        code={secondaryCode}
         preview={<ActiveComponent />}
         language={codeMetadata.language}
         showLineNumbers
@@ -61,7 +61,7 @@ export default async function ComponentPage({
         description={codeMetadata.description}
         keywords={codeMetadata.keywords}
         dependencies={codeMetadata.dependencies}
-        secondaryCode={secondaryCode}
+        secondaryCode={componentCode}
         secondaryTitle={componentInfo.codeMetadata.secondaryTitle}
         secondaryLanguage={componentInfo.codeMetadata.secondaryLanguage}
         secondaryDescription={componentInfo.codeMetadata.secondaryDescription}
