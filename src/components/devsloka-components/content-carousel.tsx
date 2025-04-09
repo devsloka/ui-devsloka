@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Info } from "lucide-react";
 import { motion } from "framer-motion";
-
 import {
   Select,
   SelectContent,
@@ -15,52 +14,49 @@ import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-const backgrounds = [
-  {
-    name: "Aurora",
-    component: "AuroraBackground",
-    description: "Smooth, flowing aurora-like effects",
-  },
-  {
-    name: "Beam",
-    component: "BeamBackground",
-    description: "Light beams scanning across the screen",
-  },
-  {
-    name: "Stars",
-    component: "StarsBackground",
-    description: "Twinkling stars in a night sky",
-  },
-];
+export interface CarouselItem {
+  name: string;
+  description: string;
+  [key: string]: unknown;
+}
 
-export default function ShowcaseSlider() {
+interface ContentCarouselProps {
+  items: CarouselItem[];
+  className?: string;
+  onItemChange?: (item: CarouselItem, index: number) => void;
+}
+
+export const ContentCarousel = ({
+  items,
+  className = "",
+  onItemChange,
+}: ContentCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  //   const CurrentBackground = backgrounds[currentIndex].component;
 
-  const nextBackground = () => {
-    setCurrentIndex((prev) => (prev + 1) % backgrounds.length);
-  };
+  useEffect(() => {
+    if (items.length === 0) return;
+    const clampedIndex = Math.min(Math.max(currentIndex, 0), items.length - 1);
+    if (clampedIndex !== currentIndex) setCurrentIndex(clampedIndex);
+  }, [items.length]);
 
-  const prevBackground = () => {
-    setCurrentIndex(
-      (prev) => (prev - 1 + backgrounds.length) % backgrounds.length
-    );
+  const handleIndexChange = (newIndex: number) => {
+    const validIndex = Math.min(Math.max(newIndex, 0), items.length - 1);
+    setCurrentIndex(validIndex);
+    onItemChange?.(items[validIndex], validIndex);
   };
 
   const handleSelectChange = (value: string) => {
-    const index = backgrounds.findIndex((bg) => bg.name === value);
-    if (index !== -1) {
-      setCurrentIndex(index);
-    }
+    const index = items.findIndex((item) => item.name === value);
+    if (index !== -1) handleIndexChange(index);
   };
 
+  if (items.length === 0) return null;
+
   return (
-    <div className="relative overflow-hidden">
-      {/* Content */}
+    <div className={`relative overflow-hidden ${className}`}>
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4">
         <div className="mb-8 text-center">
           <motion.h1
@@ -69,7 +65,7 @@ export default function ShowcaseSlider() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            {backgrounds[currentIndex].name}
+            {items[currentIndex].name}
           </motion.h1>
 
           <motion.p
@@ -78,56 +74,55 @@ export default function ShowcaseSlider() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            {backgrounds[currentIndex].description}
+            {items[currentIndex].description}
           </motion.p>
         </div>
 
-        {/* Controls */}
         <div className="bg-background/80 backdrop-blur-md rounded-full p-2 border border-primary/10 flex items-center gap-2">
           <div className="flex items-center gap-2">
             <Button
               variant="outline"
               size="icon"
-              onClick={prevBackground}
+              onClick={() => handleIndexChange(currentIndex - 1)}
               className="rounded-full"
+              disabled={currentIndex === 0}
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
 
             <Select
-              value={backgrounds[currentIndex].name}
+              value={items[currentIndex].name}
               onValueChange={handleSelectChange}
             >
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select background" />
+                <SelectValue />
               </SelectTrigger>
-              <SelectContent className="max-h-64">
-                {backgrounds.map((bg) => (
-                  <SelectItem key={bg.name} value={bg.name}>
-                    {bg.name}
+              <SelectContent>
+                {items.map((item) => (
+                  <SelectItem key={item.name} value={item.name}>
+                    {item.name}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
 
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon" className="rounded-full">
-                    <Info className="h-4 w-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent side="top">
-                  <p>{backgrounds[currentIndex].description}</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <Info className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="top">
+                <p>{items[currentIndex].description}</p>
+              </TooltipContent>
+            </Tooltip>
 
             <Button
               variant="outline"
               size="icon"
-              onClick={nextBackground}
+              onClick={() => handleIndexChange(currentIndex + 1)}
               className="rounded-full"
+              disabled={currentIndex === items.length - 1}
             >
               <ChevronRight className="h-4 w-4" />
             </Button>
@@ -136,4 +131,4 @@ export default function ShowcaseSlider() {
       </div>
     </div>
   );
-}
+};

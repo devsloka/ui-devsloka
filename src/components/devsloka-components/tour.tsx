@@ -40,7 +40,6 @@ export function Tour({
   onClose,
   onFinish,
   className,
-  maskClassName,
   placement: defaultPlacement = "bottom",
 }: TourProps) {
   const [currentStep, setCurrentStep] = React.useState(0);
@@ -139,7 +138,6 @@ export function Tour({
       target.style.position = "relative";
       target.style.zIndex = "60";
 
-      // New scrolling functionality
       target.scrollIntoView({
         behavior: "smooth",
         block: "center",
@@ -202,34 +200,43 @@ export function Tour({
             className="fixed inset-0 z-50"
           >
             {/* Dark overlay sections */}
-            <div
-              className="absolute inset-0 bg-black/50"
-              style={{
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{
+                opacity: 1,
+                scale: 1,
                 clipPath: targetElement
                   ? `
-                polygon(
-                  0% 0%,
+              polygon(
+                0% 0%,
                   0% 100%,
-                  ${targetElement.getBoundingClientRect().left}px 100%,
-                  ${targetElement.getBoundingClientRect().left}px ${
-                      targetElement.getBoundingClientRect().top
+                  ${targetElement.getBoundingClientRect().left - 8}px 100%,
+                  ${targetElement.getBoundingClientRect().left - 8}px ${
+                      targetElement.getBoundingClientRect().top - 8
                     }px,
-                  ${targetElement.getBoundingClientRect().right}px ${
-                      targetElement.getBoundingClientRect().top
+                  ${targetElement.getBoundingClientRect().right + 8}px ${
+                      targetElement.getBoundingClientRect().top - 8
                     }px,
-                  ${targetElement.getBoundingClientRect().right}px ${
-                      targetElement.getBoundingClientRect().bottom
+                  ${targetElement.getBoundingClientRect().right + 8}px ${
+                      targetElement.getBoundingClientRect().bottom + 8
                     }px,
-                  ${targetElement.getBoundingClientRect().left}px ${
-                      targetElement.getBoundingClientRect().bottom
+                  ${targetElement.getBoundingClientRect().left - 8}px ${
+                      targetElement.getBoundingClientRect().bottom + 8
                     }px,
-                  ${targetElement.getBoundingClientRect().left}px 100%,
+                  ${targetElement.getBoundingClientRect().left - 8}px 100%,
                   100% 100%,
                   100% 0%
-                )
-              `
+                )`
                   : "",
               }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{
+                type: "spring",
+                damping: 20,
+                stiffness: 300,
+                clipPath: { type: "spring", damping: 25, stiffness: 400 },
+              }}
+              className="absolute inset-0 bg-black/50 dark:bg-white/50"
             />
           </motion.div>
 
@@ -312,33 +319,6 @@ export function Tour({
               </CardFooter>
             </Card>
           </motion.div>
-
-          {/* Target element highlight */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              top: targetElement?.getBoundingClientRect().top ?? 0,
-              left: targetElement?.getBoundingClientRect().left ?? 0,
-              width: targetElement?.getBoundingClientRect().width ?? 0,
-              height: targetElement?.getBoundingClientRect().height ?? 0,
-            }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{
-              type: "spring",
-              damping: 20,
-              stiffness: 300,
-              top: { type: "spring", damping: 20, stiffness: 300 },
-              left: { type: "spring", damping: 20, stiffness: 300 },
-              width: { type: "spring", damping: 20, stiffness: 300 },
-              height: { type: "spring", damping: 20, stiffness: 300 },
-            }}
-            className={cn(
-              // "absolute z-[65] bg-primary/10 rounded-md pointer-events-none",
-              maskClassName
-            )}
-          />
         </>
       )}
     </AnimatePresence>,
