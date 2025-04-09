@@ -8,7 +8,7 @@ import { useTheme } from "next-themes";
 import { Tour } from "../devsloka-components/tour";
 import SuccessResult from "../devsloka-components/success-result";
 import MorphingNav from "../devsloka-components/morphing-nav";
-import BudgetSlider from "../devsloka-components/budget-slider";
+import RangeSliderWithHistogram from "../devsloka-components/range-slider-with-histogram";
 
 const HeroSection = () => {
   const { theme } = useTheme();
@@ -101,7 +101,7 @@ const HeroSection = () => {
           <MorphingNav />
         </div>
         <div className="w-full flex items-center justify-center rounded-lg p-1 space-x-1">
-          <BudgetSlider />
+          <RangeSliderWithHistogram />
           <div className="w-full h-full">
             <SuccessResult />
           </div>
