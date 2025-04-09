@@ -1,4 +1,14 @@
-export const sidebarItems = [
+export type SidebarItemChild = {
+  title: string;
+  href: string;
+};
+
+export type SidebarItem = {
+  title: string;
+  children: SidebarItemChild[];
+};
+
+export const sidebarItems: SidebarItem[] = [
   {
     title: "Background",
     children: [
@@ -118,7 +128,6 @@ export const sidebarItems = [
         title: "useClipboard",
         href: "/utilities/use-clipboard",
       },
-      ,
       // {
       //   title: "useOnlineStatus",
       //   href: "/utilities/use-online-status",
