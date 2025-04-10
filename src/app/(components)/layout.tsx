@@ -7,13 +7,18 @@ export default function ComponentLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="flex gap-2 mt-16 max-w-[88rem] mx-auto border-r border-dashed">
-      <CompSidebar />
-      <div className="lg:ml-64 lg:px-10 pt-4 min-h-dvh w-full max-w-[calc(88rem-18rem)] overflow-Y-auto">
-        {/* Adjusted max width to ensure content fits within 88rem, considering sidebar */}
-        <DynamicBreadcrumb />
-        {children}
+    <div className="container-wrapper">
+      <div className="container flex-1 items-start md:grid md:grid-cols-[0px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-10">
+        <aside className="hidden lg:flex top-14 z-30 h-[calc(100vh-3.5rem)] w-full border-r md:sticky md:block">
+          <div className="no-scrollbar h-full overflow-y-auto overflow-x-hidden">
+            <CompSidebar />
+          </div>
+        </aside>
+        <div className="mt-20">
+          <DynamicBreadcrumb />
+          {children}
+        </div>
       </div>
-    </main>
+    </div>
   );
 }
