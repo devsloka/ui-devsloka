@@ -11,7 +11,7 @@ const CompSidebar = () => {
   const pathname = usePathname();
 
   return (
-    <motion.aside className="hidden lg:flex fixed top-16 bottom-0 w-64 overflow-y-auto border-x border-dashed p-4 bg-background">
+    <motion.aside className="w-64 overflow-y-auto border-x border-dashed p-4 bg-background">
       <motion.nav className="w-full">
         {sidebarItems.map((section, index) => (
           <motion.div

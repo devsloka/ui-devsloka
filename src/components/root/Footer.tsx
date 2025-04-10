@@ -49,7 +49,7 @@ const Footer = () => {
         minSpeed={0.1}
         maxSpeed={0.5}
       />
-      <div className="p-4 md:p-6 lg:p-8 xl:p-10 max-w-[88rem]">
+      <div className="p-4 md:p-6 lg:p-8 xl:p-10 mx-auto">
         <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           {footerLink.map((section) => (
             <div key={section.title} className="mb-4 md:mb-0">
