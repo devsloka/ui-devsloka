@@ -4,109 +4,112 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect, useMemo } from "react";
 
-const cards = [
+export interface CardType {
+  title: string;
+  description: string;
+  image: string;
+}
+
+export interface Breakpoint {
+  maxWidth: number;
+  activeWidth: number;
+  inactiveWidth: number;
+  titleActive: string;
+  titleInactive: string;
+}
+
+export interface ExpandingCardsProps {
+  cards: CardType[];
+  breakpoints?: Breakpoint[];
+  gap?: string;
+  height?: string;
+  prevIcon?: React.ReactNode;
+  nextIcon?: React.ReactNode;
+  classNames?: {
+    container?: string;
+    card?: string;
+    image?: string;
+    overlay?: string;
+    title?: string;
+    description?: string;
+    button?: string;
+    buttonIcon?: string;
+  };
+  transitionDuration?: number;
+}
+
+const DEFAULT_BREAKPOINTS: Breakpoint[] = [
   {
-    title: "Design Process",
-    description: "Explore our creative journey",
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5",
-    color: "bg-purple-500",
+    maxWidth: 640,
+    activeWidth: 200,
+    inactiveWidth: 100,
+    titleActive: "20px",
+    titleInactive: "16px",
   },
   {
-    title: "Development",
-    description: "Building the future",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-    color: "bg-blue-500",
-  },
-  {
-    title: "Strategy",
-    description: "Planning for success",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
-    color: "bg-green-500",
-  },
-  {
-    title: "Launch",
-    description: "Taking off to new heights",
-    image: "https://images.unsplash.com/photo-1518364538800-6bae3c2ea0f2",
-    color: "bg-red-500",
-  },
-  {
-    title: "Strategy",
-    description: "Planning for success",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
-    color: "bg-green-500",
-  },
-  {
-    title: "Launch",
-    description: "Taking off to new heights",
-    image: "https://images.unsplash.com/photo-1518364538800-6bae3c2ea0f2",
-    color: "bg-red-500",
-  },
-  {
-    title: "Strategy",
-    description: "Planning for success",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
-    color: "bg-green-500",
-  },
-  {
-    title: "Launch",
-    description: "Taking off to new heights",
-    image: "https://images.unsplash.com/photo-1518364538800-6bae3c2ea0f2",
-    color: "bg-red-500",
+    maxWidth: 768,
+    activeWidth: 300,
+    inactiveWidth: 150,
+    titleActive: "22px",
+    titleInactive: "17px",
   },
 ];
 
-export function ExpandingCards() {
+export function ExpandingCards({
+  cards,
+  breakpoints = DEFAULT_BREAKPOINTS,
+  gap = "gap-2 md:gap-4",
+  height = "h-[300px] md:h-[350px] lg:h-[400px]",
+  prevIcon,
+  nextIcon,
+  classNames,
+  transitionDuration = 0.3,
+}: ExpandingCardsProps) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [windowWidth, setWindowWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    handleResize(); // Set initial width
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const { activeWidth, inactiveWidth, titleActive, titleInactive } =
     useMemo(() => {
-      let activeWidth = 400;
-      let inactiveWidth = 200;
-      let titleActive = "24px";
-      let titleInactive = "18px";
+      const sortedBreakpoints = [...breakpoints].sort(
+        (a, b) => a.maxWidth - b.maxWidth
+      );
+      let settings = {
+        activeWidth: 400,
+        inactiveWidth: 200,
+        titleActive: "24px",
+        titleInactive: "18px",
+      };
 
-      if (windowWidth <= 640) {
-        activeWidth = 200;
-        inactiveWidth = 100;
-        titleActive = "20px";
-        titleInactive = "16px";
-      } else if (windowWidth <= 768) {
-        activeWidth = 300;
-        inactiveWidth = 150;
-        titleActive = "22px";
-        titleInactive = "17px";
+      for (const bp of sortedBreakpoints) {
+        if (windowWidth <= bp.maxWidth) {
+          settings = {
+            activeWidth: bp.activeWidth,
+            inactiveWidth: bp.inactiveWidth,
+            titleActive: bp.titleActive,
+            titleInactive: bp.titleInactive,
+          };
+        }
       }
 
-      return { activeWidth, inactiveWidth, titleActive, titleInactive };
-    }, [windowWidth]);
+      return settings;
+    }, [windowWidth, breakpoints]);
 
-  const handleCardClick = (index: number) => {
-    setActiveIndex(index);
-  };
-  const handlePrev = () => {
-    setActiveIndex((prev) => Math.max(0, prev - 1));
-  };
-
-  const handleNext = () => {
+  const handleCardClick = (index: number) => setActiveIndex(index);
+  const handlePrev = () => setActiveIndex((prev) => Math.max(0, prev - 1));
+  const handleNext = () =>
     setActiveIndex((prev) => Math.min(cards.length - 1, prev + 1));
-  };
 
   useEffect(() => {
-    const cardElement = cardRefs.current[activeIndex];
-    cardElement?.scrollIntoView({
+    cardRefs.current[activeIndex]?.scrollIntoView({
       behavior: "smooth",
       block: "nearest",
       inline: "nearest",
@@ -117,7 +120,9 @@ export function ExpandingCards() {
     <div className="relative group w-full">
       <div
         ref={containerRef}
-        className="flex gap-2 md:gap-4 h-[300px] md:h-[350px] lg:h-[400px] overflow-x-auto w-full"
+        className={`flex overflow-x-auto w-full ${gap} ${height} ${
+          classNames?.container || ""
+        }`}
       >
         {cards.map((card, index) => (
           <motion.div
@@ -125,28 +130,35 @@ export function ExpandingCards() {
             ref={(el) => {
               cardRefs.current[index] = el;
             }}
-            className="relative rounded-2xl overflow-hidden cursor-pointer flex-shrink-0 snap-start"
+            className={`relative rounded-2xl overflow-hidden cursor-pointer flex-shrink-0 snap-start ${
+              classNames?.card || ""
+            }`}
             animate={{
               width: activeIndex === index ? activeWidth : inactiveWidth,
             }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: transitionDuration }}
             onClick={() => handleCardClick(index)}
           >
             <img
               src={card.image}
               alt={card.title}
-              className="absolute inset-0 w-full h-full object-cover"
+              className={`absolute inset-0 w-full h-full object-cover ${
+                classNames?.image || ""
+              }`}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
+            <div
+              className={`absolute inset-0 bg-gradient-to-b from-transparent to-black/60 ${
+                classNames?.overlay || ""
+              }`}
+            />
 
             <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white">
               <motion.h3
-                initial={false}
                 animate={{
                   fontSize: activeIndex === index ? titleActive : titleInactive,
                   opacity: activeIndex === index ? 1 : 0.7,
                 }}
-                className="font-bold mb-1 md:mb-2"
+                className={`font-bold mb-1 md:mb-2 ${classNames?.title || ""}`}
               >
                 {card.title}
               </motion.h3>
@@ -156,7 +168,9 @@ export function ExpandingCards() {
                   opacity: activeIndex === index ? 1 : 0,
                   y: activeIndex === index ? 0 : 20,
                 }}
-                className="text-xs md:text-sm"
+                className={`text-xs md:text-sm ${
+                  classNames?.description || ""
+                }`}
               >
                 {card.description}
               </motion.p>
@@ -164,16 +178,22 @@ export function ExpandingCards() {
           </motion.div>
         ))}
       </div>
-      {/* Navigation buttons */}
+
       <div className="absolute inset-0 pointer-events-none">
         <button
           onClick={handlePrev}
           disabled={activeIndex === 0}
           className={`absolute left-2 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 rounded-full p-2 transition-all pointer-events-auto ${
             activeIndex === 0 ? "opacity-0 cursor-default" : "opacity-100"
-          }`}
+          } ${classNames?.button || ""}`}
         >
-          <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-gray-800" />
+          {prevIcon || (
+            <ChevronLeft
+              className={`w-5 h-5 md:w-6 md:h-6 text-gray-800 ${
+                classNames?.buttonIcon || ""
+              }`}
+            />
+          )}
         </button>
 
         <button
@@ -183,9 +203,15 @@ export function ExpandingCards() {
             activeIndex === cards.length - 1
               ? "opacity-0 cursor-default"
               : "opacity-100"
-          }`}
+          } ${classNames?.button || ""}`}
         >
-          <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-gray-800" />
+          {nextIcon || (
+            <ChevronRight
+              className={`w-5 h-5 md:w-6 md:h-6 text-gray-800 ${
+                classNames?.buttonIcon || ""
+              }`}
+            />
+          )}
         </button>
       </div>
     </div>
