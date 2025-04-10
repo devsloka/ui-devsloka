@@ -4,11 +4,12 @@ import { ExpandingCardsDemo } from "@/components/devsloka-components/demo/expand
 import FloatingDotsDemo from "@/components/devsloka-components/demo/floating-dots-demo";
 import { MorphingCardDemo } from "@/components/devsloka-components/demo/morphing-card-demo";
 import { MorphingModalDemo } from "@/components/devsloka-components/demo/morphing-modal-demo";
+import MorphingNavDemo from "@/components/devsloka-components/demo/morphing-nav-demo";
 import RangeSliderWithHistogramDemo from "@/components/devsloka-components/demo/range-slider-with-histogram-demo";
+import { TextEffectDemo } from "@/components/devsloka-components/demo/text-effect-demo";
 import TourDemo from "@/components/devsloka-components/demo/tour-demo";
 import EmptyResult from "@/components/devsloka-components/empty-result";
 import ErrorResult from "@/components/devsloka-components/error-result";
-import MorphingNav from "@/components/devsloka-components/morphing-nav";
 import SuccessResult from "@/components/devsloka-components/success-result";
 
 export type ComponentMeta = {
@@ -220,7 +221,7 @@ export const components: Record<string, ComponentMeta> = {
     },
   },
   "morphing-nav": {
-    component: MorphingNav,
+    component: MorphingNavDemo,
     codeMetadata: {
       title: "Animated Navigation Bar",
       description:
@@ -298,6 +299,29 @@ export const components: Record<string, ComponentMeta> = {
       title: "Interactive Product Tour",
       description:
         "Step-by-step user onboarding system with spotlight effects and tooltip positioning. Supports async step transitions and event hooks.",
+      keywords: [
+        "React",
+        "User Onboarding",
+        "Guided Tour",
+        "Accessibility",
+        "Focus Management",
+        "Keyboard Nav",
+        "ARIA-compliant",
+      ],
+      language: "tsx",
+      dependencies: "npm i motion @floating-ui/react",
+      secondaryCode: "tour-steps.ts",
+      secondaryTitle: "Tour Step Configuration",
+      secondaryLanguage: "typescript",
+      secondaryDescription:
+        "Data structure and validation for tour step definitions",
+    },
+  },
+  "text-effect": {
+    component: TextEffectDemo,
+    codeMetadata: {
+      title: "Text Effect",
+      description: "Text animation with custom shapes and color palettes.",
       keywords: [
         "React",
         "User Onboarding",
