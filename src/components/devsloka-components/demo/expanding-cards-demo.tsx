@@ -44,9 +44,9 @@ export function ExpandingCardsDemo() {
         gap="gap-3 md:gap-5"
         height="h-[350px] md:h-[450px]"
         classNames={{
-          container: "shadow-xl rounded-xl",
+          container: "rounded-xl",
           card: "rounded-xl",
-          title: "font-extrabold tracking-wide",
+          title: "font-extrabold tracking-wide truncate",
           description: "font-medium text-gray-200",
           button: "bg-black/40 hover:bg-black/60",
           buttonIcon: "text-white",
