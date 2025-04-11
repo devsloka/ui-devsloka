@@ -53,6 +53,10 @@ export const sidebarItems: SidebarItem[] = [
         title: "Floating Card",
         href: "/components/cards/floating-card",
       },
+      {
+        title: "Pricing Card",
+        href: "/components/cards/pricing-card",
+      },
     ],
   },
   {
