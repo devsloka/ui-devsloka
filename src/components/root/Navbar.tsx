@@ -15,10 +15,6 @@ import { sidebarItems } from "../../utilities/sidebarItems";
 
 const navLinks = [
   {
-    name: "Home",
-    href: "/",
-  },
-  {
     name: "Components",
     href: "/components",
   },
@@ -68,19 +64,21 @@ const Navbar = () => {
     <nav className="fixed top-0 z-40 w-full border-b border-dashed bg-background/80 backdrop-blur-lg h-16">
       <div className="h-full max-w-[88rem] mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center gap-24">
-          <div className="flex items-center gap-2">
-            {" "}
-            <Image
-              src={"/favicon.ico"}
-              alt="logo"
-              width={32}
-              height={32}
-              className="object-contain"
-            />
-            <span className="text-2xl font-bold text-[#0A6EFF]">
-              Devsloka UI
-            </span>
-          </div>
+          <Link href="/">
+            <div className="flex items-center gap-2">
+              {" "}
+              <Image
+                src={"/favicon.ico"}
+                alt="logo"
+                width={32}
+                height={32}
+                className="object-contain"
+              />
+              <span className="text-2xl font-bold text-[#0A6EFF]">
+                Devsloka UI
+              </span>
+            </div>
+          </Link>
           <ul className="hidden lg:flex items-center gap-5">
             {navLinks.map((link) => (
               <li key={sheetId + link.name}>
