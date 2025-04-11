@@ -28,7 +28,12 @@ const BlocksPage = () => {
   const componentPath = `src/components/blocks/${"pricing-page"}.tsx`;
   const componentCode = getComponentCode(componentPath);
   return (
-    <div>
+    <div className="w-full py-14">
+      <h1 className="text-4xl font-bold my-3">Blocks</h1>
+      <p className="text-muted-foreground mb-8">
+        Explore our collection of beautiful and customizable blocks for your web
+        projects.
+      </p>
       <AdvancedCodeBlock
         code={componentCode}
         preview={<PricingBlock />}
