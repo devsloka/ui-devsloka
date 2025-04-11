@@ -94,6 +94,10 @@ export const sidebarItems: SidebarItem[] = [
         title: "Morphing Cards",
         href: "/components/morphing-card",
       },
+      {
+        title: "Text Effect",
+        href: "/components/text-effect",
+      },
     ],
   },
   {
