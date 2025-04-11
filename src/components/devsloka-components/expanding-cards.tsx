@@ -111,8 +111,8 @@ export function ExpandingCards({
   useEffect(() => {
     cardRefs.current[activeIndex]?.scrollIntoView({
       behavior: "smooth",
-      block: "nearest",
-      inline: "nearest",
+      block: "center",
+      inline: "center",
     });
   }, [activeIndex]);
 

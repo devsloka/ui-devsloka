@@ -1,14 +1,18 @@
+"use client";
 import React from "react";
 import { FloatingDots } from "../devsloka-components/floating-dots";
+import { useTheme } from "next-themes";
 
 const GradientBg = () => {
+  const { theme } = useTheme();
   return (
-    <div className="relative w-full h-screen isolate overflow-hidden">
+    <div className="relative w-full h-full bg-background isolate overflow-hidden">
       <FloatingDots
         className="w-full"
         maxRadius={0.5}
         maxSpeed={0.8}
         minSpeed={0.1}
+        color={theme === "dark" ? "white" : "black"}
       />
       <div
         className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"

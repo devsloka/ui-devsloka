@@ -7,8 +7,10 @@ import { FloatingDots } from "../devsloka-components/floating-dots";
 import { useTheme } from "next-themes";
 import { Tour } from "../devsloka-components/tour";
 import SuccessResult from "../devsloka-components/success-result";
-import MorphingNav from "../devsloka-components/morphing-nav";
 import RangeSliderWithHistogram from "../devsloka-components/range-slider-with-histogram";
+import MorphingNavDemo from "../devsloka-components/demo/morphing-nav-demo";
+import Link from "next/link";
+import { TextEffect } from "../devsloka-components/text-effect";
 
 const HeroSection = () => {
   const { theme } = useTheme();
@@ -16,11 +18,11 @@ const HeroSection = () => {
   const steps = [
     {
       target: "#head-title",
-      placement: "top" as const,
+      placement: "bottom" as const,
       title: "Welcome to Devsloka UI",
       description:
         "Welcome to Devsloka UI, your gateway to stunning interfaces.",
-      offset: { y: -30 }, // Add some extra space below the title
+      offset: { y: 0 }, // Add some extra space below the title
     },
     {
       target: "#description",
@@ -41,7 +43,7 @@ const HeroSection = () => {
     {
       target: "#components-showcase",
       title: "Components Showcase",
-      description: "",
+      description: "This is the Components Showcase section.",
       placement: "left" as const,
       offset: { y: -10 }, // Move slightly closer to the features
     },
@@ -60,28 +62,35 @@ const HeroSection = () => {
         maxSpeed={0.8}
         minSpeed={0.1}
       />
-      <div className="min-h-[400px] flex flex-col items-center justify-center space-y-4 relative">
-        <div className="flex flex-col items-center justify-center space-y-4 z-10 h-[400px]">
-          <h1 className="text-4xl font-bold text-center" id="head-title">
-            Create Eye-Catching Experiences <br /> With{" "}
+      <div className="min-h-[400px] flex flex-col items-start justify-center space-y-4 relative">
+        <div className="flex flex-col items-center lg:items-start justify-center space-y-4 z-10 ">
+          <h1 className="text-5xl lg:text-6xl font-bold" id="head-title">
+            Create{" "}
+            <TextEffect
+              words={["Intractive", "Awesome", "Better"]}
+              duration={3000}
+              effect="blur"
+              className="-mb-[15px] -ml-5 text-[#0A6EFF] font-bold"
+            />
+            <br />
+            Websites With <br />
             <span className="text-[#0A6EFF] font-bold">Devsloka UI</span>
           </h1>
-          <p className="text-lg text-center text-zinc-400" id="description">
+          <p className="text-lg text-zinc-400" id="description">
             Learn to build unique, stunning interfaces that set you apart from
             the
-            <span className="text-[#0A6EFF] font-bold">
-              {" "}
-              copy-paste
-            </span> <br /> crowd. you &apos;ll master the art of crafting user
-            experiences that attract more users and <br /> leave a lasting
-            impression.
+            <span className="text-[#0A6EFF] font-bold"> copy-paste</span> crowd.
+            you &apos;ll master the art of crafting user experiences that
+            attract more users and leave a lasting impression.
           </p>
-          <Button
-            className="rounded-full bg-[#0A6EFF] hover:bg-[#0459d4] text-white"
-            id="explore-button"
-          >
-            Explore Components
-          </Button>
+          <Link href={"/components"}>
+            <Button
+              className="rounded-full bg-[#0A6EFF] hover:bg-[#0459d4] text-white cursor-pointer"
+              id="explore-button"
+            >
+              Explore Components
+            </Button>
+          </Link>
         </div>
       </div>
       <div
@@ -98,7 +107,7 @@ const HeroSection = () => {
           </div>
         </div>
         <div className="relative w-full flex items-center justify-center border border-dashed rounded-lg p-1">
-          <MorphingNav />
+          <MorphingNavDemo />
         </div>
         <div className="w-full flex items-center justify-center rounded-lg p-1 space-x-1">
           <RangeSliderWithHistogram />
