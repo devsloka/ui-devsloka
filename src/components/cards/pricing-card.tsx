@@ -20,9 +20,8 @@ function PricingCard({
 }) {
   return (
     <div
-      className={`relative bg-black/20 backdrop-blur-2xl rounded-3xl p-8 flex flex-col h-full border border-white/5 shadow-2xl ${
-        isPopular ? "border-2 border-white/20" : ""
-      }`}
+      className={`relative bg-card/20 backdrop-blur-2xl rounded-3xl p-8 flex flex-col h-full border shadow-2xl
+        ${isPopular ? "border-primary/20" : "border-border/5"}`}
     >
       <div className="mb-8">
         <p className="text-muted-foreground mb-2">{plan}</p>
@@ -37,7 +36,7 @@ function PricingCard({
       <div className="flex-grow">
         {features.map((feature, index) => (
           <div key={index} className="flex items-center gap-3 mb-4">
-            <div className="bg-white/10 rounded-full p-1">
+            <div className="bg-primary/10 rounded-full p-1">
               <Check size={16} className="text-foreground" />
             </div>
             <span className="text-muted-foreground text-sm">{feature}</span>
