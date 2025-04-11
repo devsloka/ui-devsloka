@@ -27,8 +27,8 @@ const navLinks = [
     href: "/docs",
   },
   {
-    name: "About",
-    href: "/about",
+    name: "Blocks",
+    href: "/blocks",
   },
 ];
 
