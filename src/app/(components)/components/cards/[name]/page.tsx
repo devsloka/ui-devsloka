@@ -13,7 +13,7 @@ import { FoliageCard } from "@/components/cards/foliage-card";
 import { NeonCard } from "@/components/cards/neon-card";
 import PricingCard from "@/components/cards/pricing-card";
 
-const cards: Record<string, React.FC> = {
+const cards: Record<string, React.ComponentType<any>> = {
   "explore-animated-card": ExploreAnimatedCard,
   "glass-card": GlassCard,
   "floating-card": FloatingCard,
