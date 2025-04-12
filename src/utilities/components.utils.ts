@@ -1,7 +1,9 @@
 import AirbnbListingCardExample from "@/components/devsloka-components/demo/airbnb-card-demo";
+import BorderGradientIconDemo from "@/components/devsloka-components/demo/border-gradient-icon-demo";
 import { ContentCarouselDemo } from "@/components/devsloka-components/demo/content-carousel-demo";
 import { ExpandingCardsDemo } from "@/components/devsloka-components/demo/expanding-cards-demo";
 import FloatingDotsDemo from "@/components/devsloka-components/demo/floating-dots-demo";
+import GradientTextDemo from "@/components/devsloka-components/demo/gradient-text-demo";
 import { MorphingCardDemo } from "@/components/devsloka-components/demo/morphing-card-demo";
 import { MorphingModalDemo } from "@/components/devsloka-components/demo/morphing-modal-demo";
 import MorphingNavDemo from "@/components/devsloka-components/demo/morphing-nav-demo";
@@ -321,6 +323,52 @@ export const components: Record<string, ComponentMeta> = {
     component: TextEffectDemo,
     codeMetadata: {
       title: "Text Effect",
+      description: "Text animation with custom shapes and color palettes.",
+      keywords: [
+        "React",
+        "User Onboarding",
+        "Guided Tour",
+        "Accessibility",
+        "Focus Management",
+        "Keyboard Nav",
+        "ARIA-compliant",
+      ],
+      language: "tsx",
+      dependencies: "npm i motion @floating-ui/react",
+      secondaryCode: "tour-steps.ts",
+      secondaryTitle: "Tour Step Configuration",
+      secondaryLanguage: "typescript",
+      secondaryDescription:
+        "Data structure and validation for tour step definitions",
+    },
+  },
+  "border-gradient-icon": {
+    component: BorderGradientIconDemo,
+    codeMetadata: {
+      title: "Border Gradient Icon",
+      description: "Text animation with custom shapes and color palettes.",
+      keywords: [
+        "React",
+        "User Onboarding",
+        "Guided Tour",
+        "Accessibility",
+        "Focus Management",
+        "Keyboard Nav",
+        "ARIA-compliant",
+      ],
+      language: "tsx",
+      dependencies: "npm i motion @floating-ui/react",
+      secondaryCode: "tour-steps.ts",
+      secondaryTitle: "Tour Step Configuration",
+      secondaryLanguage: "typescript",
+      secondaryDescription:
+        "Data structure and validation for tour step definitions",
+    },
+  },
+  "gradient-text": {
+    component: GradientTextDemo,
+    codeMetadata: {
+      title: "Gradient Text Demo",
       description: "Text animation with custom shapes and color palettes.",
       keywords: [
         "React",
