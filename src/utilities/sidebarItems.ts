@@ -103,6 +103,14 @@ export const sidebarItems: SidebarItem[] = [
         title: "Text Effect",
         href: "/components/text-effect",
       },
+      {
+        title: "Border Gradient Icon",
+        href: "/components/border-gradient-icon",
+      },
+      {
+        title: "Gradient Text",
+        href: "/components/gradient-text",
+      },
     ],
   },
   {
