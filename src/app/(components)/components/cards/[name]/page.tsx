@@ -11,9 +11,9 @@ import { WaterCard } from "@/components/cards/water-card";
 import { ProductCard } from "@/components/cards/product-card";
 import { FoliageCard } from "@/components/cards/foliage-card";
 import { NeonCard } from "@/components/cards/neon-card";
-import PricingCard from "@/components/cards/pricing-card";
+import PricingCardDemo from "@/components/cards/demo/pricing-card";
 
-const cards: Record<string, React.ComponentType<any>> = {
+const cards: Record<string, React.FC> = {
   "explore-animated-card": ExploreAnimatedCard,
   "glass-card": GlassCard,
   "floating-card": FloatingCard,
@@ -23,7 +23,7 @@ const cards: Record<string, React.ComponentType<any>> = {
   "product-card": ProductCard,
   "foliage-card": FoliageCard,
   "neon-card": NeonCard,
-  "pricing-card": PricingCard,
+  "pricing-card": PricingCardDemo,
 };
 
 export async function generateStaticParams() {
