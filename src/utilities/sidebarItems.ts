@@ -53,6 +53,11 @@ export const sidebarItems: SidebarItem[] = [
         title: "Floating Card",
         href: "/components/cards/floating-card",
       },
+      {
+        title: "Pricing Card",
+        href: "/components/cards/pricing-card",
+      },
+      { title: "Product Card", href: "/components/cards/product-card" },
     ],
   },
   {
@@ -97,6 +102,14 @@ export const sidebarItems: SidebarItem[] = [
       {
         title: "Text Effect",
         href: "/components/text-effect",
+      },
+      {
+        title: "Border Gradient Icon",
+        href: "/components/border-gradient-icon",
+      },
+      {
+        title: "Gradient Text",
+        href: "/components/gradient-text",
       },
     ],
   },
