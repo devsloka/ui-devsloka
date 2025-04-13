@@ -12,7 +12,6 @@ import {
   Mail,
   MapPin,
   Phone,
-  ArrowRight,
 } from "lucide-react";
 
 const Footer = () => {
