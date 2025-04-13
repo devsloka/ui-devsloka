@@ -47,7 +47,7 @@ export default function ProductCard({
       transition={{ duration: 0.5 }}
       className="h-full"
     >
-      <Card className="group py-0 relative overflow-hidden bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+      <Card className="group py-0 relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col">
         {/* Badges */}
         <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
           {isNew && (
@@ -75,7 +75,7 @@ export default function ProductCard({
         >
           <Heart
             className={`h-5 w-5 transition-colors ${
-              isWishlisted ? "text-red-500 fill-red-500" : "text-gray-500"
+              isWishlisted ? "text-red-500 fill-red-500" : "text-muted-foreground"
             }`}
           />
         </motion.button>
@@ -153,7 +153,7 @@ export default function ProductCard({
 
           {/* Color options */}
           <div className="mb-4">
-            <div className="text-sm text-gray-500 mb-2">Colors</div>
+            <div className="text-sm text-muted-foreground mb-2">Colors</div>
             <div className="flex gap-2">
               {colors.map((color) => (
                 <button
@@ -177,20 +177,20 @@ export default function ProductCard({
           <div className="flex items-center justify-between mt-3">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-gray-900">
+                <span className="text-2xl font-bold text-primary/90">
                   ${price.toFixed(2)}
                 </span>
                 {originalPrice && (
-                  <span className="text-sm text-gray-500 line-through">
+                  <span className="text-sm text-muted-foreground line-through">
                     ${originalPrice.toFixed(2)}
                   </span>
                 )}
               </div>
-              <div className="text-sm text-gray-500">Free shipping</div>
+              <div className="text-sm text-muted-foreground">Free shipping</div>
             </div>
 
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button className="bg-primary text-white hover:bg-primary/90 rounded-full">
+              <Button className="bg-primary hover:bg-primary/90 rounded-full">
                 <ShoppingBag className="mr-2 h-4 w-4" />
                 Add to Cart
               </Button>
