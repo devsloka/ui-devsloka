@@ -42,8 +42,6 @@ export function AdvancedCodeBlock({
   secondaryDescription,
 }: AdvancedCodeBlockProps) {
   const [activeTab, setActiveTab] = useState<string>("preview");
-  console.log(secondaryCode);
-
   return (
     <div className="space-y-10 my-8">
       {/* Title & Metadata Section */}
