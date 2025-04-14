@@ -1,4 +1,4 @@
-import PricingBlock from "@/components/blocks/pricing-page";
+import PricingBlock from "@/components/blocks/pricing-block";
 import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { getComponentCode } from "@/utilities/getComponentCode";
 import React from "react";
