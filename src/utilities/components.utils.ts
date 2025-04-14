@@ -405,7 +405,7 @@ export const components: Record<string, ComponentMeta> = {
         "ARIA-compliant",
       ],
       language: "tsx",
-      dependencies: "npm i motion @floating-ui/react",
+      dependencies: "npm i motion",
       secondaryCode: "tour-steps.ts",
       secondaryTitle: "Tour Step Configuration",
       secondaryLanguage: "typescript",
