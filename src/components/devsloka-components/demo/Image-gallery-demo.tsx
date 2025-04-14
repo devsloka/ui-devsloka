@@ -1,21 +1,34 @@
+"use client";
 import React from "react";
 import { Image, ImageGallery } from "../Image-gallery";
+import { motion } from "motion/react";
 
 const ImageGalleryDemo = () => {
   return (
     <div>
       {/* Header */}
-      <div className="relative overflow-hidden py-24 sm:py-32">
+      <div className="relative overflow-hidden py-24 sm:py-30">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
-              Dynamic Image Gallery
-            </h1>
-            <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              A responsive gallery with smooth scroll animations and
-              accessibility features. Scroll down to see the animations in
-              action.
-            </p>
+            <motion.div
+              initial={{ opacity: 0.0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.3,
+                duration: 0.8,
+                ease: "easeInOut",
+              }}
+              className="relative flex flex-col gap-4 items-center justify-center px-4"
+            >
+              <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
+                Dynamic Image Gallery
+              </h1>
+              <p className="text-lg leading-8 text-muted-foreground">
+                A responsive gallery with smooth scroll animations and
+                accessibility features. Scroll down to see the animations in
+                action.
+              </p>
+            </motion.div>
           </div>
         </div>
       </div>
