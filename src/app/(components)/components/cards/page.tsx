@@ -5,9 +5,9 @@ import { FloatingCard } from "@/components/cards/floating-card";
 import { ParallaxCard } from "@/components/cards/parallax-card";
 import { GlitchCard } from "@/components/cards/glitch-card";
 import { WaterCard } from "@/components/cards/water-card";
-import { ProductCard } from "@/components/cards/product-card";
 import { FoliageCard } from "@/components/cards/foliage-card";
 import { NeonCard } from "@/components/cards/neon-card";
+import { ProductCardDemo } from "@/components/cards/demo/product-card";
 
 export default function AnimatedCardsCollection() {
   return (
@@ -23,7 +23,7 @@ export default function AnimatedCardsCollection() {
         <ParallaxCard />
         <GlitchCard />
         <WaterCard />
-        <ProductCard />
+        <ProductCardDemo />
         <FoliageCard />
         <NeonCard />
       </div>

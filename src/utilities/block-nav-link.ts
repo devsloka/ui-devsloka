@@ -60,9 +60,4 @@ export const blockNavLinks: BlockNavLinkType[] = [
     title: "Sidebar",
     href: "/blocks/sidebar-block",
   },
-  {
-    id: "sidebar-block",
-    title: "Sidebar",
-    href: "/blocks/sidebar-block",
-  },
 ];
