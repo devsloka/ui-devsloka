@@ -4,6 +4,7 @@ import { ContentCarouselDemo } from "@/components/devsloka-components/demo/conte
 import { ExpandingCardsDemo } from "@/components/devsloka-components/demo/expanding-cards-demo";
 import FloatingDotsDemo from "@/components/devsloka-components/demo/floating-dots-demo";
 import GradientTextDemo from "@/components/devsloka-components/demo/gradient-text-demo";
+import ImageGalleryDemo from "@/components/devsloka-components/demo/Image-gallery-demo";
 import { MorphingCardDemo } from "@/components/devsloka-components/demo/morphing-card-demo";
 import { MorphingModalDemo } from "@/components/devsloka-components/demo/morphing-modal-demo";
 import MorphingNavDemo from "@/components/devsloka-components/demo/morphing-nav-demo";
@@ -374,6 +375,30 @@ export const components: Record<string, ComponentMeta> = {
         "React",
         "User Onboarding",
         "Guided Tour",
+        "Accessibility",
+        "Focus Management",
+        "Keyboard Nav",
+        "ARIA-compliant",
+      ],
+      language: "tsx",
+      dependencies: "npm i motion @floating-ui/react",
+      secondaryCode: "tour-steps.ts",
+      secondaryTitle: "Tour Step Configuration",
+      secondaryLanguage: "typescript",
+      secondaryDescription:
+        "Data structure and validation for tour step definitions",
+    },
+  },
+  "image-gallery": {
+    component: ImageGalleryDemo,
+    codeMetadata: {
+      title: "Scroll Effect Image Gallery",
+      description:
+        "Dynamic image gallery with smooth scroll animations and accessibility features. Scroll down to see the animations in action.",
+      keywords: [
+        "React",
+        "Image Gallery",
+        "Smooth Scroll",
         "Accessibility",
         "Focus Management",
         "Keyboard Nav",
