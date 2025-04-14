@@ -64,6 +64,10 @@ export const sidebarItems: SidebarItem[] = [
     title: "Components",
     children: [
       {
+        title: "Image Gallery",
+        href: "/components/image-gallery",
+      },
+      {
         title: "Content Carousel",
         href: "/components/content-carousel",
       },
