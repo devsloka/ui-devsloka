@@ -1,7 +1,9 @@
-// Import other block demos as needed
-
+import ContactBlock from "@/components/blocks/contact-block";
+import FAQsBlock from "@/components/blocks/faqs-block";
+import FeaturesBlock from "@/components/blocks/features-block";
 import FooterBlock from "@/components/blocks/footer-block";
 import HeroSectionBlock from "@/components/blocks/hero-section";
+import { NewsletterBlock } from "@/components/blocks/newsletter-block";
 import PricingBlock from "@/components/blocks/pricing-block";
 import TestimonialsBlock from "@/components/blocks/testimonials-block";
 
@@ -97,19 +99,76 @@ export const blocks: Record<string, BlockMeta> = {
       secondaryDescription: "Type definitions for pricing plans data",
     },
   },
-  // Additional blocks would follow the same structure:
-  /*
-  "feature-block": {
-    block: FeatureBlockDemo,
-    name: "feature-block",
-    title: "Feature Block",
-    description: "Showcase product features in a grid layout.",
-    imageUrl: "https://yourwebsite.com/images/feature-block.jpg",
+  "faq-block": {
+    block: FAQsBlock,
+    name: "Hero Section",
+    title: "Pricing Block",
+    description: "A customizable pricing component for your application.",
+    imageUrl: "https://yourwebsite.com/images/pricing-block.jpg",
     codeMetadata: {
-      description: "Responsive feature grid with icons.",
-      keywords: ["features", "grid", "product"],
-      language: "tsx"
-    }
-  }
-  */
+      title: "Pricing Block",
+      description: "A block to display various pricing plans.",
+      keywords: ["pricing", "plans", "subscriptions"],
+      language: "tsx",
+      dependencies: "npm i @radix-ui/react-toggle",
+      secondaryCode: "pricing-data.ts",
+      secondaryTitle: "Pricing Data Structure",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "Type definitions for pricing plans data",
+    },
+  },
+  "contact-block": {
+    block: ContactBlock,
+    name: "Hero Section",
+    title: "Pricing Block",
+    description: "A customizable pricing component for your application.",
+    imageUrl: "https://yourwebsite.com/images/pricing-block.jpg",
+    codeMetadata: {
+      title: "Pricing Block",
+      description: "A block to display various pricing plans.",
+      keywords: ["pricing", "plans", "subscriptions"],
+      language: "tsx",
+      dependencies: "npm i @radix-ui/react-toggle",
+      secondaryCode: "pricing-data.ts",
+      secondaryTitle: "Pricing Data Structure",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "Type definitions for pricing plans data",
+    },
+  },
+  "features-block": {
+    block: FeaturesBlock,
+    name: "Hero Section",
+    title: "Pricing Block",
+    description: "A customizable pricing component for your application.",
+    imageUrl: "https://yourwebsite.com/images/pricing-block.jpg",
+    codeMetadata: {
+      title: "Pricing Block",
+      description: "A block to display various pricing plans.",
+      keywords: ["pricing", "plans", "subscriptions"],
+      language: "tsx",
+      dependencies: "npm i @radix-ui/react-toggle",
+      secondaryCode: "pricing-data.ts",
+      secondaryTitle: "Pricing Data Structure",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "Type definitions for pricing plans data",
+    },
+  },
+  "newsletter-block": {
+    block: NewsletterBlock,
+    name: "Hero Section",
+    title: "Pricing Block",
+    description: "A customizable pricing component for your application.",
+    imageUrl: "https://yourwebsite.com/images/pricing-block.jpg",
+    codeMetadata: {
+      title: "Pricing Block",
+      description: "A block to display various pricing plans.",
+      keywords: ["pricing", "plans", "subscriptions"],
+      language: "tsx",
+      dependencies: "npm i @radix-ui/react-toggle",
+      secondaryCode: "pricing-data.ts",
+      secondaryTitle: "Pricing Data Structure",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "Type definitions for pricing plans data",
+    },
+  },
 };
