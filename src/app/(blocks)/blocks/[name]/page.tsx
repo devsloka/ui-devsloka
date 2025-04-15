@@ -21,11 +21,11 @@ export async function generateMetadata({
   const formattedName = name.replace(/-/g, " ");
   return {
     title: `${formattedName} - Devsloka Blocks`,
-    description: block.codeMetadata.description,
+    description: block.description,
     keywords: [...block.codeMetadata.keywords, "Devsloka", "UI Blocks"],
     openGraph: {
       title: `${formattedName} - Devsloka Blocks`,
-      description: block.codeMetadata.description,
+      description: block.description,
       images: [`https://yourwebsite.com/og-images/${name}.jpg`],
     },
   };
@@ -34,28 +34,37 @@ export async function generateMetadata({
 export default async function BlockPage({
   params,
 }: {
-  params: Promise<{ name: string }>;
+  params: { name: string };
 }) {
-  const { name } = await params;
+  const { name } = params;
   const blockInfo = blocks[name];
 
-  if (!blockInfo) {
-    return notFound();
-  }
+  if (!blockInfo) return notFound();
 
-  const { block: ActiveBlock, codeMetadata } = blockInfo;
-  const blockPath = `src/components/blocks/${name}.tsx`;
-  const blockCode = getComponentCode(blockPath);
+  const { block: MainComponent, codeMetadata } = blockInfo;
+  const { mainFile, relatedFiles = [] } = codeMetadata;
+
+  const codeFiles = await Promise.all(
+    [mainFile, ...relatedFiles].map(async (file) => ({
+      ...file,
+      content: await getComponentCode(`src/components/blocks/${file.codePath}`),
+    }))
+  );
 
   return (
-    <div className="w-full">
-      <AdvancedCodeBlock
-        code={blockCode}
-        preview={<ActiveBlock />}
-        language={codeMetadata.language}
-        showLineNumbers
-        title={codeMetadata.title}
-      />
+    <div className="w-full space-y-12">
+      {codeFiles.map((file, index) => (
+        <AdvancedCodeBlock
+          key={file.codePath}
+          code={file.content}
+          preview={file.block ? <file.block /> : <MainComponent />}
+          language={file.language}
+          title={file.title}
+          description={file.description}
+          showLineNumbers
+          className={index === 0 ? "md:mt-6" : ""}
+        />
+      ))}
     </div>
   );
 }
