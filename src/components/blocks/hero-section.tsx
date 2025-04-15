@@ -2,16 +2,21 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const HeroSectionBlock = () => {
   return (
     <div className="min-h-screen w-full bg-background relative overflow-hidden">
+      <Spotlight
+        className="-top-40 left-0 md:-top-20 md:left-60"
+        fill="white"
+      />
       {/* Grid Background */}
       <div className="absolute inset-0 grid grid-cols-12 gap-4 opacity-20">
         {[...Array(144)].map((_, i) => (
           <div
             key={i}
-            className="border-[0.5px] border-gray-600 dark:border-gray-600"
+            className="border-[0.5px] w- border-gray-300 dark:border-gray-600"
           ></div>
         ))}
       </div>
@@ -26,7 +31,7 @@ const HeroSectionBlock = () => {
         >
           <div className="w-8 h-8 bg-black dark:bg-white rounded-lg"></div>
           <span className="text-black dark:text-white text-xl font-semibold">
-            Pagedone
+            Devsloka
           </span>
         </motion.div>
 
@@ -64,7 +69,7 @@ const HeroSectionBlock = () => {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <span className="px-6 py-2 rounded-full border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-black dark:text-white text-sm">
+          <span className="px-6 py-2 rounded-full border bg-gradient-to-r from-white via-gray-100 to-gray-200 dark:from-zinc-700 dark:via-zinc-900 dark:to-black text-black dark:text-white text-xs lg:text-sm shadow-md dark:shadow-xl transition-colors duration-300">
             All in one Saas Dashboard, Get 50% Off Now
           </span>
         </motion.div>
@@ -124,3 +129,57 @@ const HeroSectionBlock = () => {
 };
 
 export default HeroSectionBlock;
+
+type SpotlightProps = {
+  className?: string;
+  fill?: string;
+};
+
+const Spotlight = ({ className, fill }: SpotlightProps) => {
+  return (
+    <svg
+      className={cn(
+        "animate-spotlight pointer-events-none absolute z-[1]  h-[169%] w-[138%] lg:w-[84%] opacity-0",
+        className
+      )}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 3787 2842"
+      fill="none"
+    >
+      <g filter="url(#filter)">
+        <ellipse
+          cx="1924.71"
+          cy="273.501"
+          rx="1924.71"
+          ry="273.501"
+          transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)"
+          fill={fill || "white"}
+          fillOpacity="0.21"
+        ></ellipse>
+      </g>
+      <defs>
+        <filter
+          id="filter"
+          x="0.860352"
+          y="0.838989"
+          width="3785.16"
+          height="2840.26"
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
+        >
+          <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="BackgroundImageFix"
+            result="shape"
+          ></feBlend>
+          <feGaussianBlur
+            stdDeviation="151"
+            result="effect1_foregroundBlur_1065_8"
+          ></feGaussianBlur>
+        </filter>
+      </defs>
+    </svg>
+  );
+};
