@@ -230,24 +230,33 @@ export default function TestimonialsBlock() {
               </div>
 
               <div className="flex space-x-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      if (isAnimating) return;
-                      setIsAnimating(true);
-                      setActiveIndex(index);
-                      setTimeout(() => setIsAnimating(false), 500);
-                    }}
-                    className={cn(
-                      "flex-1 h-2 rounded-full transition-all duration-300",
-                      index === activeIndex
-                        ? `bg-${activeTestimonial.accent}-500 dark:bg-${activeTestimonial.accent}-400`
-                        : "bg-gray-200 dark:bg-gray-700"
-                    )}
-                    aria-label={`Go to testimonial ${index + 1}`}
-                  />
-                ))}
+                {testimonials.map((testimonial, index) => {
+                  const isActive = index === activeIndex;
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        if (isAnimating) return;
+                        setIsAnimating(true);
+                        setActiveIndex(index);
+                        setTimeout(() => setIsAnimating(false), 500);
+                      }}
+                      className={cn(
+                        "flex-1 h-2 rounded-full transition-all duration-300",
+                        isActive
+                          ? [
+                              testimonial.accent === "blue" && "bg-blue-500",
+                              testimonial.accent === "purple" &&
+                                "bg-purple-500 ",
+                              testimonial.accent === "green" && "bg-green-500",
+                              testimonial.accent === "amber" && "bg-amber-500",
+                            ]
+                          : "bg-gray-200 dark:bg-gray-700"
+                      )}
+                      aria-label={`Go to testimonial ${index + 1}`}
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>
