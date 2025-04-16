@@ -4,6 +4,11 @@ import { getComponentCode } from "@/utilities/getComponentCode";
 import { Metadata } from "next";
 import { blocks } from "@/utilities/blocks.utils";
 
+// Add proper PageProps type
+type PageProps = {
+  params: { name: string };
+};
+
 export async function generateStaticParams() {
   const blockKeys = await Promise.resolve(Object.keys(blocks));
   return blockKeys.map((id) => ({ name: id }));
@@ -11,10 +16,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: {
-  params: { name: string }; // Fixed: Remove Promise wrapper
-}): Promise<Metadata> {
-  const { name } = params; // Remove await since params is not a Promise
+}: PageProps): Promise<Metadata> {
+  const { name } = params;
   const block = blocks[name];
   if (!block) return {};
 
@@ -31,11 +34,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlockPage({
-  params,
-}: {
-  params: { name: string };
-}) {
+export default async function BlockPage({ params }: PageProps) {
   const { name } = params;
   const blockInfo = blocks[name];
 
