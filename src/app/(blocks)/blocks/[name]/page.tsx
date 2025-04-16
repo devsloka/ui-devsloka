@@ -1,15 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import { notFound } from "next/navigation";
 import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { getComponentCode } from "@/utilities/getComponentCode";
 import { Metadata } from "next";
 import { blocks } from "@/utilities/blocks.utils";
-
-// Add proper PageProps type
-type PageProps = {
-  params: { name: string };
-};
 
 export async function generateStaticParams() {
   const blockKeys = await Promise.resolve(Object.keys(blocks));
@@ -18,8 +11,10 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: PageProps): Promise<Metadata> {
-  const { name } = params;
+}: {
+  params: Promise<{ name: string }>;
+}): Promise<Metadata> {
+  const { name } = await params;
   const block = blocks[name];
   if (!block) return {};
 
@@ -36,8 +31,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlockPage({ params }: PageProps) {
-  const { name } = params;
+export default async function BlockPage({
+  params,
+}: {
+  params: Promise<{ name: string }>;
+}) {
+  const { name } = await params;
   const blockInfo = blocks[name];
 
   if (!blockInfo) return notFound();
