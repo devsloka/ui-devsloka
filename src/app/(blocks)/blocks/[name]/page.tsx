@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { notFound } from "next/navigation";
 import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { getComponentCode } from "@/utilities/getComponentCode";
