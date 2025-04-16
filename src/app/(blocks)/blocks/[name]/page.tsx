@@ -12,9 +12,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ name: string }>;
+  params: { name: string }; // Fixed: Remove Promise wrapper
 }): Promise<Metadata> {
-  const { name } = await params;
+  const { name } = params; // Remove await since params is not a Promise
   const block = blocks[name];
   if (!block) return {};
 
