@@ -25,7 +25,7 @@ import React from "react";
 // }
 
 const BlocksPage = () => {
-  const componentPath = `src/components/blocks/${"pricing-page"}.tsx`;
+  const componentPath = `src/components/blocks/${"pricing-block"}.tsx`;
   const componentCode = getComponentCode(componentPath);
   return (
     <div className="w-full">

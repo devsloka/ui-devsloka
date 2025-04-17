@@ -187,7 +187,7 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Localized date formatting with Intl API",
       keywords: ["React", "Dates", "Localization"],
       language: "tsx",
-      secondaryCode: getComponentCode("src/utilities/use-date-formatter.ts"),
+      secondaryCode: getComponentCode("src/utilities/use-date-formatter.tsx"),
       secondaryTitle: "useDateFormatter Hook",
       secondaryLanguage: "tsx",
     },
