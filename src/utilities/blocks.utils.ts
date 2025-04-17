@@ -1,6 +1,7 @@
 import ContactBlock from "@/components/blocks/contact-block";
 import FAQsBlock from "@/components/blocks/faqs-block";
 import FeaturesBlock from "@/components/blocks/features-block";
+import { FloatingFeatureShowcase } from "@/components/blocks/feature-floating-showcase";
 import { FloatingFooter } from "@/components/blocks/floating-footer";
 import FooterBlock from "@/components/blocks/footer-block";
 import { GridFooter } from "@/components/blocks/grid-footer";
@@ -12,6 +13,9 @@ import { NewsletterBlock } from "@/components/blocks/newsletter-block";
 import PricingBlock from "@/components/blocks/pricing-block";
 import TestimonialsBlock from "@/components/blocks/testimonials-block";
 import { WaveFooter } from "@/components/blocks/wave-footer";
+import { FeatureInteractiveCards } from "@/components/blocks/feature-interactive-cards";
+import { FAQBlockTwo } from "@/components/blocks/faq-block-two";
+import FeaturesBlockFour from "@/components/blocks/features-block-four";
 
 export type CodeFile = {
   codePath: string;
@@ -157,6 +161,14 @@ export const blocks: Record<string, BlockMeta> = {
         language: "tsx",
         hasPreview: true,
       },
+      relatedFiles: [
+        {
+          codePath: "faq-block-two.tsx",
+          title: "FAQ Item",
+          language: "typescript",
+          block: FAQBlockTwo,
+        },
+      ],
       keywords: ["faq", "questions", "accordion"],
       dependencies: "npm i @radix-ui/react-accordion",
     },
@@ -198,6 +210,26 @@ export const blocks: Record<string, BlockMeta> = {
         language: "tsx",
         hasPreview: true,
       },
+      relatedFiles: [
+        {
+          codePath: "floating-feature-showcase.tsx",
+          title: "Floating Feature Showcase",
+          language: "typescript",
+          block: FloatingFeatureShowcase,
+        },
+        {
+          codePath: "feature-interactive-cards.tsx",
+          title: "Floating Feature Showcase",
+          language: "typescript",
+          block: FeatureInteractiveCards,
+        },
+        {
+          codePath: "features-block-four.tsx",
+          title: "Floating Feature Showcase",
+          language: "typescript",
+          block: FeaturesBlockFour,
+        },
+      ],
       keywords: ["features", "grid", "icons"],
     },
   },
