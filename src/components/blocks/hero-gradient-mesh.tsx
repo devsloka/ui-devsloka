@@ -16,34 +16,28 @@ export default function HeroGradientMesh() {
     setMounted(true);
 
     const handleMouseMove = (e: MouseEvent) => {
-      // Update the mouse position values
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
-  // Create smooth spring animations for the gradient movement
   const springConfig = { damping: 50, stiffness: 100 };
   const smoothMouseX = useSpring(mouseX, springConfig);
   const smoothMouseY = useSpring(mouseY, springConfig);
 
-  // Transform the mouse position to gradient position
-  const gradientX = useTransform(
-    smoothMouseX,
-    [0, window.innerWidth],
-    ["0%", "100%"]
-  );
-  const gradientY = useTransform(
-    smoothMouseY,
-    [0, window.innerHeight],
-    ["0%", "100%"]
-  );
+  // Fixed: Use transform functions to safely access window dimensions
+  const gradientX = useTransform(smoothMouseX, (x) => {
+    if (typeof window === "undefined") return "0%";
+    return `${(x / window.innerWidth) * 100}%`;
+  });
+
+  const gradientY = useTransform(smoothMouseY, (y) => {
+    if (typeof window === "undefined") return "0%";
+    return `${(y / window.innerHeight) * 100}%`;
+  });
 
   if (!mounted) return null;
 

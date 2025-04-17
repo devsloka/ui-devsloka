@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const HeroSectionBlock = () => {
   return (
@@ -117,10 +118,12 @@ const HeroSectionBlock = () => {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-16 w-full max-w-5xl mx-auto"
         >
-          <img
-            src="https://www.creativefabrica.com/wp-content/uploads/2021/11/02/Orange-Candy-Modern-Admin-Dashboard-Graphics-19563103-1.png"
+          <Image
+            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Dashboard Preview"
             className="w-full rounded-lg shadow-2xl"
+            width={1920}
+            height={1080}
           />
         </motion.div>
       </main>

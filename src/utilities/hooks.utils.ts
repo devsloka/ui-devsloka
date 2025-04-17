@@ -1,6 +1,5 @@
 import { useOnlineStatus } from "@/hooks/devsloka-hooks/use-online-status";
 import { useScrollPosition } from "@/hooks/devsloka-hooks/use-scroll-position";
-import { getComponentCode } from "./getComponentCode";
 import UseFetchDemo from "@/hooks/devsloka-hooks/demo/useFetchDemo";
 import UseClipboardDemo from "@/hooks/devsloka-hooks/demo/useClipboardDemo";
 import UseDeviceDetectionDemo from "@/hooks/devsloka-hooks/demo/useDeviceDetectionDemo";
@@ -187,7 +186,6 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Localized date formatting with Intl API",
       keywords: ["React", "Dates", "Localization"],
       language: "tsx",
-      secondaryCode: getComponentCode("src/utilities/use-date-formatter.tsx"),
       secondaryTitle: "useDateFormatter Hook",
       secondaryLanguage: "tsx",
     },
