@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export interface ComponentCardProps {
   title: string;
@@ -8,7 +9,7 @@ export interface ComponentCardProps {
 }
 export function ComponentCard(component: ComponentCardProps) {
   return (
-    <a
+    <Link
       href={component.href}
       className="group relative block h-[400px] overflow-hidden rounded-2xl bg-white transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_80px_-20px_rgba(0,0,0,0.3)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
     >
@@ -34,6 +35,6 @@ export function ComponentCard(component: ComponentCardProps) {
           </div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
