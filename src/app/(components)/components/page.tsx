@@ -55,7 +55,7 @@ const Components: React.FC = () => {
           </p>
         </div> */}
 
-        <div className="mt-16 grid gap-8 grid-cols-1 md:grid-cols-2">
+        <div className="my-16 grid gap-8 grid-cols-1 md:grid-cols-2">
           {components.map((component) => (
             <ComponentCard key={component.href} {...component} />
           ))}
