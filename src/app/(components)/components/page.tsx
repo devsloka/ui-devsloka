@@ -12,24 +12,22 @@ const components: ComponentCardProps[] = [
     image: "/images/image-gallery.png",
   },
   {
-    title: "Content Carousel",
-    href: "/components/content-carousel",
-    description: "Smooth sliding carousel for content display",
-    image:
-      "https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?w=800&auto=format&fit=crop&q=60",
+    title: "Expanding Cards",
+    href: "/components/expanding-cards",
+    description: "Elegant expanding card animations",
+    image: "/images/expanding-cards.png",
   },
   {
     title: "Budget Slider",
     href: "/components/range-slider-with-histogram",
     description: "Interactive range slider with histogram visualization",
-    image:
-      "https://images.unsplash.com/photo-1518183214770-9cffbec72538?w=800&auto=format&fit=crop&q=60",
+    image: "/images/range-slider-with-histogram.png",
   },
   {
-    title: "Expanding Cards",
-    href: "/components/expanding-cards",
-    description: "Elegant expanding card animations",
-    image: "/images/expanding-cards.png",
+    title: "Content Carousel",
+    href: "/components/content-carousel",
+    description: "Smooth sliding carousel for content display",
+    image: "/images/content-carousel.png",
   },
   {
     title: "Tour",
