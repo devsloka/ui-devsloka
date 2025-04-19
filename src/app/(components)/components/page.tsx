@@ -9,8 +9,7 @@ const components: ComponentCardProps[] = [
     title: "Image Gallery",
     href: "/components/image-gallery",
     description: "A responsive image gallery with masonry layout",
-    image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&auto=format&fit=crop&q=60",
+    image: "/images/image-gallery.png",
   },
   {
     title: "Content Carousel",
