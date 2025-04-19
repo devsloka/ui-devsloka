@@ -33,8 +33,7 @@ const components: ComponentCardProps[] = [
     title: "Tour",
     href: "/components/tour",
     description: "Guided tour interface for feature introduction",
-    image:
-      "https://images.unsplash.com/photo-1516383740770-fbcc5ccbece0?w=800&auto=format&fit=crop&q=60",
+    image: "/images/tour.png",
   },
 ];
 
