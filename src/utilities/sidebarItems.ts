@@ -64,6 +64,22 @@ export const sidebarItems: SidebarItem[] = [
         title: "Gradient Text",
         href: "/components/gradient-text",
       },
+      {
+        title: "Tabs Switcher",
+        href: "/components/tabs-switcher",
+      },
+      {
+        title: "Card Radio",
+        href: "/components/card-radio",
+      },
+      {
+        title: "Icon Radio",
+        href: "/components/icon-radio",
+      },
+      {
+        title: "Card Decorator",
+        href: "/components/card-decorator",
+      },
     ],
   },
   {

@@ -1,14 +1,18 @@
 import AirbnbListingCardExample from "@/components/devsloka-components/demo/airbnb-card-demo";
 import BorderGradientIconDemo from "@/components/devsloka-components/demo/border-gradient-icon-demo";
+import CardDecoratorDemo from "@/components/devsloka-components/demo/card-decorator-demo";
+import CardRadioDemo from "@/components/devsloka-components/demo/card-radio-demo";
 import { ContentCarouselDemo } from "@/components/devsloka-components/demo/content-carousel-demo";
 import { ExpandingCardsDemo } from "@/components/devsloka-components/demo/expanding-cards-demo";
 import FloatingDotsDemo from "@/components/devsloka-components/demo/floating-dots-demo";
 import GradientTextDemo from "@/components/devsloka-components/demo/gradient-text-demo";
+import IconRadioDemo from "@/components/devsloka-components/demo/icon-radio-demo";
 import ImageGalleryDemo from "@/components/devsloka-components/demo/Image-gallery-demo";
 import { MorphingCardDemo } from "@/components/devsloka-components/demo/morphing-card-demo";
 import { MorphingModalDemo } from "@/components/devsloka-components/demo/morphing-modal-demo";
 import MorphingNavDemo from "@/components/devsloka-components/demo/morphing-nav-demo";
 import RangeSliderWithHistogramDemo from "@/components/devsloka-components/demo/range-slider-with-histogram-demo";
+import TabsSwitcherDemo from "@/components/devsloka-components/demo/tabs-switcher-demo";
 import { TextEffectDemo } from "@/components/devsloka-components/demo/text-effect-demo";
 import TourDemo from "@/components/devsloka-components/demo/tour-demo";
 import EmptyResult from "@/components/devsloka-components/empty-result";
@@ -407,6 +411,98 @@ export const components: Record<string, ComponentMeta> = {
       language: "tsx",
       dependencies: "npm i motion",
       secondaryCode: "tour-steps.ts",
+      secondaryTitle: "Tour Step Configuration",
+      secondaryLanguage: "typescript",
+      secondaryDescription:
+        "Data structure and validation for tour step definitions",
+    },
+  },
+  "tabs-switcher": {
+    component: TabsSwitcherDemo,
+    codeMetadata: {
+      title: "Tabs Switcher",
+      description:
+        "Tabs switcher shows active tab effect and acording to selected tab it shows content",
+      keywords: [
+        "React",
+        "Image Gallery",
+        "Smooth Scroll",
+        "Accessibility",
+        "Focus Management",
+        "Keyboard Nav",
+        "ARIA-compliant",
+      ],
+      language: "tsx",
+      dependencies: "npm i motion",
+      secondaryCode: "tour-steps.ts",
+      secondaryTitle: "Tour Step Configuration",
+      secondaryLanguage: "typescript",
+      secondaryDescription:
+        "Data structure and validation for tour step definitions",
+    },
+  },
+  "card-radio": {
+    component: CardRadioDemo,
+    codeMetadata: {
+      title: "Card Radio",
+      description:
+        "Card radio shows active card effect and acording to selected card it shows content",
+      keywords: [
+        "React",
+        "Image Gallery",
+        "Smooth Scroll",
+        "Accessibility",
+        "Focus Management",
+        "Keyboard Nav",
+        "ARIA-compliant",
+      ],
+      language: "tsx",
+      dependencies: "npm i motion",
+      secondaryTitle: "Tour Step Configuration",
+      secondaryLanguage: "typescript",
+      secondaryDescription:
+        "Data structure and validation for tour step definitions",
+    },
+  },
+  "icon-radio": {
+    component: IconRadioDemo,
+    codeMetadata: {
+      title: "Icon Radio",
+      description:
+        "Icon radio shows active card effect and acording to selected icon it shows content",
+      keywords: [
+        "React",
+        "Image Gallery",
+        "Smooth Scroll",
+        "Accessibility",
+        "Focus Management",
+        "Keyboard Nav",
+        "ARIA-compliant",
+      ],
+      language: "tsx",
+      dependencies: "npm i motion",
+      secondaryTitle: "Tour Step Configuration",
+      secondaryLanguage: "typescript",
+      secondaryDescription:
+        "Data structure and validation for tour step definitions",
+    },
+  },
+  "card-decorator": {
+    component: CardDecoratorDemo,
+    codeMetadata: {
+      title: "Card Decorator",
+      description: "Card decorator ",
+      keywords: [
+        "React",
+        "Image Gallery",
+        "Smooth Scroll",
+        "Accessibility",
+        "Focus Management",
+        "Keyboard Nav",
+        "ARIA-compliant",
+      ],
+      language: "tsx",
+      dependencies: "npm i motion",
       secondaryTitle: "Tour Step Configuration",
       secondaryLanguage: "typescript",
       secondaryDescription:
