@@ -186,13 +186,7 @@ export const blocks: Record<string, BlockMeta> = {
         language: "tsx",
         hasPreview: true,
       },
-      relatedFiles: [
-        {
-          codePath: "contact-schema.ts",
-          title: "Validation Schema",
-          language: "typescript",
-        },
-      ],
+      relatedFiles: [],
       keywords: ["contact", "form", "validation"],
       dependencies: "npm i react-hook-form zod",
     },
@@ -212,7 +206,7 @@ export const blocks: Record<string, BlockMeta> = {
       },
       relatedFiles: [
         {
-          codePath: "floating-feature-showcase.tsx",
+          codePath: "feature-floating-showcase.tsx",
           title: "Floating Feature Showcase",
           language: "typescript",
           block: FloatingFeatureShowcase,
