@@ -42,24 +42,6 @@ const components: ComponentCardProps[] = [
     image: "/images/content-carousel.png",
   },
   {
-    title: "Morphing Card",
-    href: "/components/morphing-card",
-    description: "Animated morphing card effect",
-    image: "/images/morphing-card.png",
-  },
-  {
-    title: "Morphing Modal",
-    href: "/components/morphing-modal",
-    description: "Animated morphing modal effect",
-    image: "/images/morphing-modal.png",
-  },
-  {
-    title: "Morphing Nav",
-    href: "/components/morphing-nav",
-    description: "Animated morphing navigation effect",
-    image: "/images/morphing-nav.png",
-  },
-  {
     title: "Floating Dots",
     href: "/components/floating-dots",
     description: "Animated floating dots effect",
@@ -76,6 +58,24 @@ const components: ComponentCardProps[] = [
     href: "/components/border-gradient-icon",
     description: "Animated border gradient icon effect",
     image: "/images/border-gradient-icon.png",
+  },
+  {
+    title: "Morphing Card",
+    href: "/components/morphing-card",
+    description: "Animated morphing card effect",
+    image: "/images/morphing-card.png",
+  },
+  {
+    title: "Morphing Modal",
+    href: "/components/morphing-modal",
+    description: "Animated morphing modal effect",
+    image: "/images/morphing-modal.png",
+  },
+  {
+    title: "Morphing Nav",
+    href: "/components/morphing-nav",
+    description: "Animated morphing navigation effect",
+    image: "/images/morphing-nav.png",
   },
   {
     title: "Text Effect",
