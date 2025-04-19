@@ -11,13 +11,13 @@ export function ComponentCard(component: ComponentCardProps) {
   return (
     <Link
       href={component.href}
-      className="group relative block h-[400px] overflow-hidden rounded-2xl bg-white transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_80px_-20px_rgba(0,0,0,0.3)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      className="group relative block h-[400px] overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_80px_-20px_rgba(0,0,0,0.3)] border border-dashed"
     >
       <div className="absolute inset-0 z-0 bg-background">
         <img
           src={component.image}
           alt={component.title}
-          className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-110"
+          className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-110 bg-black"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20 opacity-0 transition-all duration-500 group-hover:opacity-100" />
       </div>
