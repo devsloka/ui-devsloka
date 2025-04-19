@@ -25,7 +25,7 @@ export const sidebarItems: SidebarItem[] = [
         href: "/components/range-slider-with-histogram",
       },
       {
-        title: "Expendig Cards",
+        title: "Expanding Cards",
         href: "/components/expanding-cards",
       },
       {
