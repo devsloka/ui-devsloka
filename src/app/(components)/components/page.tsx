@@ -6,16 +6,16 @@ import {
 
 const components: ComponentCardProps[] = [
   {
-    title: "Image Gallery",
-    href: "/components/image-gallery",
-    description: "A responsive image gallery with masonry layout",
-    image: "/images/image-gallery.png",
-  },
-  {
     title: "Expanding Cards",
     href: "/components/expanding-cards",
     description: "Elegant expanding card animations",
     image: "/images/expanding-cards.png",
+  },
+  {
+    title: "Image Gallery",
+    href: "/components/image-gallery",
+    description: "A responsive image gallery with masonry layout",
+    image: "/images/image-gallery.png",
   },
   {
     title: "Budget Slider",
@@ -24,16 +24,16 @@ const components: ComponentCardProps[] = [
     image: "/images/range-slider-with-histogram.png",
   },
   {
-    title: "Content Carousel",
-    href: "/components/content-carousel",
-    description: "Smooth sliding carousel for content display",
-    image: "/images/content-carousel.png",
-  },
-  {
     title: "Tour",
     href: "/components/tour",
     description: "Guided tour interface for feature introduction",
     image: "/images/tour.png",
+  },
+  {
+    title: "Content Carousel",
+    href: "/components/content-carousel",
+    description: "Smooth sliding carousel for content display",
+    image: "/images/content-carousel.png",
   },
 ];
 
