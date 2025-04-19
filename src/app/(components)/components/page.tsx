@@ -30,6 +30,12 @@ const components: ComponentCardProps[] = [
     image: "/images/tour.png",
   },
   {
+    title: "Airbnb Card",
+    href: "/components/airbnb-card",
+    description: "Animated Airbnb card effect",
+    image: "/images/airbnb-card.png",
+  },
+  {
     title: "Content Carousel",
     href: "/components/content-carousel",
     description: "Smooth sliding carousel for content display",
@@ -76,12 +82,6 @@ const components: ComponentCardProps[] = [
     href: "/components/text-effect",
     description: "Animated text effect",
     image: "/images/text-effect.png",
-  },
-  {
-    title: "Airbnb Card",
-    href: "/components/airbnb-card",
-    description: "Animated Airbnb card effect",
-    image: "/images/airbnb-card.png",
   },
 ];
 
