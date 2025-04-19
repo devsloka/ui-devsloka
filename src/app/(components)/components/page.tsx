@@ -48,12 +48,6 @@ const components: ComponentCardProps[] = [
     image: "/images/floating-dots.png",
   },
   {
-    title: "Gradient Text",
-    href: "/components/gradient-text",
-    description: "Animated gradient text effect",
-    image: "/images/gradient-text.png",
-  },
-  {
     title: "Border Gradient Icon",
     href: "/components/border-gradient-icon",
     description: "Animated border gradient icon effect",
@@ -64,12 +58,6 @@ const components: ComponentCardProps[] = [
     href: "/components/morphing-card",
     description: "Animated morphing card effect",
     image: "/images/morphing-card.png",
-  },
-  {
-    title: "Morphing Modal",
-    href: "/components/morphing-modal",
-    description: "Animated morphing modal effect",
-    image: "/images/morphing-modal.png",
   },
   {
     title: "Morphing Nav",
@@ -83,6 +71,18 @@ const components: ComponentCardProps[] = [
     description: "Animated text effect",
     image: "/images/text-effect.png",
   },
+  // {
+  //   title: "Morphing Modal",
+  //   href: "/components/morphing-modal",
+  //   description: "Animated morphing modal effect",
+  //   image: "/images/morphing-modal.png",
+  // },
+  // {
+  //   title: "Gradient Text",
+  //   href: "/components/gradient-text",
+  //   description: "Animated gradient text effect",
+  //   image: "/images/gradient-text.png",
+  // },
 ];
 
 const Components: React.FC = () => {
