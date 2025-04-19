@@ -30,8 +30,7 @@ const components: ComponentCardProps[] = [
     title: "Expanding Cards",
     href: "/components/expanding-cards",
     description: "Elegant expanding card animations",
-    image:
-      "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&auto=format&fit=crop&q=60",
+    image: "/images/expanding-cards.png",
   },
   {
     title: "Tour",
