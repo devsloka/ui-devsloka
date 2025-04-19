@@ -50,14 +50,14 @@ export const blockNavLinks: BlockNavLinkType[] = [
     title: "Footer",
     href: "/blocks/footer-block",
   },
-  {
-    id: "header-block",
-    title: "Header",
-    href: "/blocks/header-block",
-  },
-  {
-    id: "sidebar-block",
-    title: "Sidebar",
-    href: "/blocks/sidebar-block",
-  },
+  // {
+  //   id: "header-block",
+  //   title: "Header",
+  //   href: "/blocks/header-block",
+  // },
+  // {
+  //   id: "sidebar-block",
+  //   title: "Sidebar",
+  //   href: "/blocks/sidebar-block",
+  // },
 ];
