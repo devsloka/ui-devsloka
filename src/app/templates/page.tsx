@@ -1,8 +1,6 @@
-// import { ThemeToggle } from "@/components/theme-toggle";
-// import { TemplateFilters } from "@/components/template-filters";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { TemplateCard } from "@/components/templates/template-card";
 import { templates } from "@/lib/templates";
 import Spotlight from "@/components/templates/spotlight-background";
@@ -18,8 +16,7 @@ export default function Home() {
         <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
           <div className="flex gap-6 md:gap-10">
             <Link href="/" className="flex items-center space-x-2">
-              <Sparkles className="h-6 w-6" />
-              <span className="inline-block font-bold">Premium UI</span>
+              <span className="inline-block font-bold">Devsloka UI</span>
             </Link>
             <nav className="hidden gap-6 md:flex">
               <Link
@@ -50,7 +47,6 @@ export default function Home() {
           </div>
           <div className="flex flex-1 items-center justify-end space-x-4">
             <nav className="flex items-center space-x-2">
-              <ThemeToggle />
               <Button size="sm" className="h-8 gap-1">
                 Get Pro <ArrowRight className="h-3.5 w-3.5" />
               </Button>
@@ -85,8 +81,6 @@ export default function Home() {
         </section>
 
         <section className="container py-12 px-4 md:px-6">
-          {/* <TemplateFilters /> */}
-
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-8">
             {templates.map((template) => (
               <TemplateCard key={template.id} template={template} />
@@ -121,7 +115,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="w-full border-t py-6 md:py-0">
+      {/* <footer className="w-full border-t py-6 md:py-0">
         <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Premium UI. All rights reserved.
@@ -138,7 +132,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 }
