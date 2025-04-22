@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import type { Template } from "@/lib/templates";
-import { ArrowRight, Eye, Heart } from "lucide-react";
+import { ArrowRight, Eye } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -65,17 +65,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
         </div>
 
         <CardContent className="p-4">
-          <div className="flex items-center justify-between">
-            <h3 className="font-semibold">{template.title}</h3>
-            <div className="flex items-center gap-1 text-muted-foreground">
-              <Heart
-                className={`h-4 w-4 ${
-                  template.isLiked ? "fill-red-500 text-red-500" : ""
-                }`}
-              />
-              <span className="text-xs">{template.likes}</span>
-            </div>
-          </div>
+          <h3 className="font-semibold">{template.title}</h3>
           <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
             {template.description}
           </p>

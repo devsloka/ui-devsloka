@@ -6,8 +6,6 @@ export interface Template {
   tags: string[];
   category: string;
   isPro: boolean;
-  likes: number;
-  isLiked?: boolean;
 }
 
 export const templates: Template[] = [
@@ -21,8 +19,6 @@ export const templates: Template[] = [
     tags: ["Dashboard", "Analytics", "Admin"],
     category: "dashboard",
     isPro: true,
-    likes: 342,
-    isLiked: true,
   },
   {
     id: "template-2",
@@ -34,7 +30,6 @@ export const templates: Template[] = [
     tags: ["E-commerce", "Store", "Shopping"],
     category: "ecommerce",
     isPro: true,
-    likes: 287,
   },
   {
     id: "template-3",
@@ -45,7 +40,6 @@ export const templates: Template[] = [
     tags: ["Portfolio", "Creative", "Personal"],
     category: "portfolio",
     isPro: false,
-    likes: 156,
   },
   {
     id: "template-4",
@@ -57,8 +51,6 @@ export const templates: Template[] = [
     tags: ["Landing", "SaaS", "Marketing"],
     category: "landing",
     isPro: true,
-    likes: 423,
-    isLiked: true,
   },
   {
     id: "template-5",
@@ -70,7 +62,6 @@ export const templates: Template[] = [
     tags: ["Blog", "Content", "Publishing"],
     category: "blog",
     isPro: false,
-    likes: 198,
   },
   {
     id: "template-6",
@@ -82,7 +73,6 @@ export const templates: Template[] = [
     tags: ["Auth", "Login", "User"],
     category: "auth",
     isPro: true,
-    likes: 276,
   },
   {
     id: "template-7",
@@ -94,7 +84,6 @@ export const templates: Template[] = [
     tags: ["Marketing", "Landing", "Conversion"],
     category: "marketing",
     isPro: true,
-    likes: 312,
   },
   {
     id: "template-8",
@@ -106,6 +95,5 @@ export const templates: Template[] = [
     tags: ["Forms", "Input", "Validation"],
     category: "forms",
     isPro: false,
-    likes: 187,
   },
 ];
