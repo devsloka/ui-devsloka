@@ -16,6 +16,7 @@ import { WaveFooter } from "@/components/blocks/wave-footer";
 import { FeatureInteractiveCards } from "@/components/blocks/feature-interactive-cards";
 import { FAQBlockTwo } from "@/components/blocks/faq-block-two";
 import FeaturesBlockFour from "@/components/blocks/features-block-four";
+import { NewsletterBlockTwo } from "@/components/blocks/newsletter/newsletter-block-two";
 
 export type CodeFile = {
   codePath: string;
@@ -242,6 +243,14 @@ export const blocks: Record<string, BlockMeta> = {
       },
       keywords: ["newsletter", "email", "subscription"],
       dependencies: "npm i react-email",
+      relatedFiles: [
+        {
+          codePath: "newsletter-block-two.tsx",
+          title: "Newsletter Component",
+          language: "typescript",
+          block: NewsletterBlockTwo,
+        },
+      ],
     },
   },
 };
