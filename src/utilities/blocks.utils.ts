@@ -9,7 +9,7 @@ import HeroFloatingElements from "@/components/blocks/hero-floating-elements";
 import HeroGradientMesh from "@/components/blocks/hero-gradient-mesh";
 import HeroSectionBlock from "@/components/blocks/hero-section";
 import HeroSplitReveal from "@/components/blocks/hero-split-reveal";
-import { NewsletterBlock } from "@/components/blocks/newsletter-block";
+import { NewsletterBlock } from "@/components/blocks/newsletter/newsletter-block";
 import PricingBlock from "@/components/blocks/pricing-block";
 import TestimonialsBlock from "@/components/blocks/testimonials-block";
 import { WaveFooter } from "@/components/blocks/wave-footer";
