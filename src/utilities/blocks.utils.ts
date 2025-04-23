@@ -11,7 +11,7 @@ import HeroSectionBlock from "@/components/blocks/hero-section";
 import HeroSplitReveal from "@/components/blocks/hero-split-reveal";
 import { NewsletterBlock } from "@/components/blocks/newsletter/newsletter-block";
 import PricingBlock from "@/components/blocks/pricing-block";
-import TestimonialsBlock from "@/components/blocks/testimonials-block";
+import TestimonialsBlock from "@/components/blocks/testimonials/testimonials-block";
 import { WaveFooter } from "@/components/blocks/wave-footer";
 import { FeatureInteractiveCards } from "@/components/blocks/feature-interactive-cards";
 import { FAQBlockTwo } from "@/components/blocks/faq-block-two";
