@@ -20,7 +20,7 @@ const navLinks = [
   },
   {
     name: "Template",
-    href: "/template",
+    href: "/templates",
   },
   {
     name: "Docs",
