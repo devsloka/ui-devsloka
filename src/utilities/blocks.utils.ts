@@ -11,12 +11,13 @@ import HeroSectionBlock from "@/components/blocks/hero-section";
 import HeroSplitReveal from "@/components/blocks/hero-split-reveal";
 import { NewsletterBlock } from "@/components/blocks/newsletter/newsletter-block";
 import PricingBlock from "@/components/blocks/pricing-block";
-import TestimonialsBlock from "@/components/blocks/testimonials/testimonials-block";
 import { WaveFooter } from "@/components/blocks/wave-footer";
 import { FeatureInteractiveCards } from "@/components/blocks/feature-interactive-cards";
 import { FAQBlockTwo } from "@/components/blocks/faq-block-two";
 import FeaturesBlockFour from "@/components/blocks/features-block-four";
 import { NewsletterBlockTwo } from "@/components/blocks/newsletter/newsletter-block-two";
+import TestimonialsBlock from "@/components/blocks/testimonials/testimonials-block";
+import { TestimonialsBlockTwo } from "@/components/blocks/testimonials/testimonials-block-2";
 
 export type CodeFile = {
   codePath: string;
@@ -111,6 +112,14 @@ export const blocks: Record<string, BlockMeta> = {
       },
       keywords: ["reviews", "testimonials", "feedback"],
       dependencies: "npm i lucide-react",
+      relatedFiles: [
+        {
+          codePath: "testimonials-block-two.tsx",
+          title: "Testimonials Component",
+          language: "tsx",
+          block: TestimonialsBlockTwo,
+        },
+      ],
     },
   },
   "footer-block": {
