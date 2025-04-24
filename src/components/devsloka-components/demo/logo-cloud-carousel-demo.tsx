@@ -6,12 +6,7 @@ const LogoCloudCarouselDemo = () => {
     <div className="w-full">
       {/* Component 1: Floating Logo Cloud */}
       <section className="border-t border-b border-border/30">
-        <LogoCloudCarousel
-          logos={logos}
-          title="Custom Title"
-          subtitle="Custom Subtitle"
-          cta={{ text: "Learn More", href: "#" }}
-        />
+        <LogoCloudCarousel logos={logos} />
       </section>
     </div>
   );
