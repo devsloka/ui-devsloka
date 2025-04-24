@@ -77,12 +77,12 @@ export const sidebarItems: SidebarItem[] = [
         href: "/components/icon-radio",
       },
       {
-        title: "Card Decorator",
-        href: "/components/card-decorator",
-      },
-      {
         title: "Logo Cloud Carousel",
         href: "/components/logo-cloud-carousel",
+      },
+      {
+        title: "Card Decorator",
+        href: "/components/card-decorator",
       },
     ],
   },
