@@ -18,6 +18,7 @@ import FeaturesBlockFour from "@/components/blocks/features-block-four";
 import { NewsletterBlockTwo } from "@/components/blocks/newsletter/newsletter-block-two";
 import TestimonialsBlock from "@/components/blocks/testimonials/testimonials-block";
 import { TestimonialsBlockTwo } from "@/components/blocks/testimonials/testimonials-block-2";
+import LogoCloudBlock from "@/components/blocks/logo-cloud-1";
 
 export type CodeFile = {
   codePath: string;
@@ -260,6 +261,23 @@ export const blocks: Record<string, BlockMeta> = {
           block: NewsletterBlockTwo,
         },
       ],
+    },
+  },
+  "logo-cloud": {
+    block: LogoCloudBlock,
+    name: "logo-cloud",
+    title: "Logo Cloud",
+    description: "Email newsletter subscription form",
+    imageUrl: "https://yourwebsite.com/images/newsletter-block.jpg",
+    codeMetadata: {
+      mainFile: {
+        codePath: "logo-cloud-1.tsx",
+        title: "Logo Cloud",
+        language: "tsx",
+        hasPreview: true,
+      },
+      keywords: ["newsletter", "email", "subscription"],
+      dependencies: "npm i react-email",
     },
   },
 };

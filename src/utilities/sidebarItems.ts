@@ -80,6 +80,10 @@ export const sidebarItems: SidebarItem[] = [
         title: "Card Decorator",
         href: "/components/card-decorator",
       },
+      {
+        title: "Logo Cloud Carousel",
+        href: "/components/logo-cloud-carousel",
+      },
     ],
   },
   {

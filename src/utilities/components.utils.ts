@@ -8,6 +8,7 @@ import FloatingDotsDemo from "@/components/devsloka-components/demo/floating-dot
 import GradientTextDemo from "@/components/devsloka-components/demo/gradient-text-demo";
 import IconRadioDemo from "@/components/devsloka-components/demo/icon-radio-demo";
 import ImageGalleryDemo from "@/components/devsloka-components/demo/Image-gallery-demo";
+import LogoCloudCarouselDemo from "@/components/devsloka-components/demo/logo-cloud-carousel-demo";
 import { MorphingCardDemo } from "@/components/devsloka-components/demo/morphing-card-demo";
 import { MorphingModalDemo } from "@/components/devsloka-components/demo/morphing-modal-demo";
 import MorphingNavDemo from "@/components/devsloka-components/demo/morphing-nav-demo";
@@ -489,6 +490,28 @@ export const components: Record<string, ComponentMeta> = {
   },
   "card-decorator": {
     component: CardDecoratorDemo,
+    codeMetadata: {
+      title: "Card Decorator",
+      description: "Card decorator ",
+      keywords: [
+        "React",
+        "Image Gallery",
+        "Smooth Scroll",
+        "Accessibility",
+        "Focus Management",
+        "Keyboard Nav",
+        "ARIA-compliant",
+      ],
+      language: "tsx",
+      dependencies: "npm i motion",
+      secondaryTitle: "Tour Step Configuration",
+      secondaryLanguage: "typescript",
+      secondaryDescription:
+        "Data structure and validation for tour step definitions",
+    },
+  },
+  "logo-cloud-carousel": {
+    component: LogoCloudCarouselDemo,
     codeMetadata: {
       title: "Card Decorator",
       description: "Card decorator ",
