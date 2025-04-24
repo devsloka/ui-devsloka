@@ -1,46 +1,37 @@
-import PricingBlock from "@/components/blocks/pricing-block";
-import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
-import { getComponentCode } from "@/utilities/getComponentCode";
 import React from "react";
+import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
+import { blocks } from "@/utilities/blocks.utils";
+import { getComponentCode } from "@/utilities/getComponentCode";
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: Promise<{ name: string }>;
-// }): Promise<Metadata> {
-//   const { name } = await params;
-//   const block = blocks[name];
-//   if (!block) return {};
-
-//   return {
-//     title: `${name.replace(/-/g, " ")} - Devsloka Blocks`,
-//     description: block.codeMetadata.description,
-//     keywords: [...block.codeMetadata.keywords, "Devsloka", "Blocks"],
-//     openGraph: {
-//       title: `${name.replace(/-/g, " ")} - Devsloka Blocks`,
-//       description: block.codeMetadata.description,
-//       images: [`https://yourwebsite.com/og-images/${name}.jpg`],
-//     },
-//   };
-// }
-
-const BlocksPage = () => {
-  const componentPath = `src/components/blocks/${"pricing-block"}.tsx`;
-  const componentCode = getComponentCode(componentPath);
+const BlocksPage: React.FC = () => {
   return (
     <div className="w-full">
-      <h1 className="text-4xl font-bold my-3">Blocks</h1>
-      <p className="text-muted-foreground mb-8">
+      <h1 className="text-5xl font-bold my-3 text-center">Blocks</h1>
+      <p className="text-muted-foreground mb-12 text-center">
         Explore our collection of beautiful and customizable blocks for your web
         projects.
       </p>
-      <AdvancedCodeBlock
-        code={componentCode}
-        preview={<PricingBlock />}
-        language="tsx"
-        showLineNumbers
-        title={"Pricing Page"}
-      />
+      <div className="space-y-12">
+        {Object.values(blocks).map((block) => {
+          const componentPath = `src/components/blocks/${block.codeMetadata.mainFile.codePath}`;
+          const componentCode = getComponentCode(componentPath);
+          const BlockComponent = block.block;
+
+          return (
+            <section key={block.name} className="border-b pb-12">
+              <AdvancedCodeBlock
+                code={componentCode}
+                preview={<BlockComponent />}
+                language={block.codeMetadata.mainFile.language || "tsx"}
+                description={block.description}
+                showLineNumbers
+                title={`${block.title} Component`}
+                className="rounded-lg border"
+              />
+            </section>
+          );
+        })}
+      </div>
     </div>
   );
 };
