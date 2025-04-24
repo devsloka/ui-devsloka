@@ -50,6 +50,11 @@ export const blockNavLinks: BlockNavLinkType[] = [
     title: "Footer",
     href: "/blocks/footer-block",
   },
+  {
+    id: "logo-cloud",
+    title: "Logo Cloud",
+    href: "/blocks/logo-cloud",
+  },
   // {
   //   id: "header-block",
   //   title: "Header",
