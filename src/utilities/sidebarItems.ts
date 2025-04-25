@@ -13,6 +13,10 @@ export const sidebarItems: SidebarItem[] = [
     title: "Components",
     children: [
       {
+        title: "Animated Laptop",
+        href: "/components/laptop-closes-on-scroll",
+      },
+      {
         title: "Image Gallery",
         href: "/components/image-gallery",
       },

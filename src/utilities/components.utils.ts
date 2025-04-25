@@ -1,4 +1,5 @@
 import AirbnbListingCardExample from "@/components/devsloka-components/demo/airbnb-card-demo";
+import AnimatedLaptopDemo from "@/components/devsloka-components/demo/laptop-closes-on-scroll-demo";
 import BorderGradientIconDemo from "@/components/devsloka-components/demo/border-gradient-icon-demo";
 import CardDecoratorDemo from "@/components/devsloka-components/demo/card-decorator-demo";
 import CardRadioDemo from "@/components/devsloka-components/demo/card-radio-demo";
@@ -523,6 +524,28 @@ export const components: Record<string, ComponentMeta> = {
         "Focus Management",
         "Keyboard Nav",
         "ARIA-compliant",
+      ],
+      language: "tsx",
+      dependencies: "npm i motion",
+      secondaryTitle: "Tour Step Configuration",
+      secondaryLanguage: "typescript",
+      secondaryDescription:
+        "Data structure and validation for tour step definitions",
+    },
+  },
+  "laptop-closes-on-scroll": {
+    component: AnimatedLaptopDemo,
+    codeMetadata: {
+      title: "Laptop Closes on Scroll",
+      description: "Animated laptop that closes on scroll",
+      keywords: [
+        "React",
+        "Smooth Scroll",
+        "Accessibility",
+        "Focus Management",
+        "Keyboard Nav",
+        "ARIA-compliant",
+        "Animated Laptop",
       ],
       language: "tsx",
       dependencies: "npm i motion",
