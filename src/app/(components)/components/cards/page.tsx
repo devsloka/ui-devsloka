@@ -5,8 +5,8 @@ import PricingCardDemo from "@/components/cards/demo/pricing-card";
 
 export default function AnimatedCardsCollection() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 py-16 px-4">
-      <h1 className="text-3xl font-bold text-center text-white mb-12">
+    <div className="min-h-screen py-16 px-4">
+      <h1 className="text-3xl font-bold text-center mb-12">
         3D Animated Cards Collection
       </h1>
 
