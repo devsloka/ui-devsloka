@@ -127,10 +127,6 @@ export const sidebarItems: SidebarItem[] = [
         href: "/components/cards/explore-animated-card",
       },
       {
-        title: "Floating Card",
-        href: "/components/cards/floating-card",
-      },
-      {
         title: "Pricing Card",
         href: "/components/cards/pricing-card",
       },
