@@ -3,13 +3,7 @@ import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { getComponentCode } from "@/utilities/getComponentCode";
 import { Metadata } from "next";
 import ExploreAnimatedCard from "@/components/cards/explore-animated-card";
-import { GlassCard } from "@/components/cards/glass-card";
-import { FloatingCard } from "@/components/cards/floating-card";
-import { ParallaxCard } from "@/components/cards/parallax-card";
 import { GlitchCard } from "@/components/cards/glitch-card";
-import { WaterCard } from "@/components/cards/water-card";
-import { FoliageCard } from "@/components/cards/foliage-card";
-import { NeonCard } from "@/components/cards/neon-card";
 import PricingCardDemo from "@/components/cards/demo/pricing-card";
 import { ProductCardDemo } from "@/components/cards/demo/product-card";
 
@@ -17,13 +11,7 @@ const cards: Record<string, React.FC> = {
   "explore-animated-card": ExploreAnimatedCard,
   "product-card": ProductCardDemo,
   "pricing-card": PricingCardDemo,
-  "floating-card": FloatingCard,
-  "glass-card": GlassCard,
-  "parallax-card": ParallaxCard,
   "glitch-card": GlitchCard,
-  "water-card": WaterCard,
-  "foliage-card": FoliageCard,
-  "neon-card": NeonCard,
 };
 
 export async function generateStaticParams() {
