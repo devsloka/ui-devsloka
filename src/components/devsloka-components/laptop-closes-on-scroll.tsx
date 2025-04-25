@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface AnimatedMacBookProps {
-  /** URL for the screen content image */
   screenContent?: string;
   /** Color of the MacBook (silver, space-gray, gold) */
   color?: "silver" | "space-gray" | "gold";
