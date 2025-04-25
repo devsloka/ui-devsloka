@@ -67,6 +67,12 @@ const components: ComponentCardProps[] = [
     description: "Animated text effect",
     image: "/images/text-effect.png",
   },
+  {
+    title: "Logo Cloud Crousel",
+    href: "/components/logo-cloud-carousel",
+    description: "Logo cloud carousel with hover effect",
+    image: "/images/logo-cloud-carousel.png",
+  },
   // {
   //   title: "Morphing Modal",
   //   href: "/components/morphing-modal",
