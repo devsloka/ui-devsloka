@@ -20,7 +20,7 @@ export default function AnimatedMultiSelectDemo() {
   const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <main className="flex flex-col items-center justify-center p-24">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
           <h1 className="text-2xl font-bold">Animated Multi-Select Demo</h1>
