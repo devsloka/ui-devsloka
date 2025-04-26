@@ -20,6 +20,7 @@ import TourDemo from "@/components/devsloka-components/demo/tour-demo";
 import EmptyResult from "@/components/devsloka-components/empty-result";
 import ErrorResult from "@/components/devsloka-components/error-result";
 import SuccessResult from "@/components/devsloka-components/success-result";
+import AnimatedMultiSelectDemo from "@/components/devsloka-components/demo/animated-multi-select-demo";
 
 export type ComponentMeta = {
   component: React.FC;
@@ -553,6 +554,28 @@ export const components: Record<string, ComponentMeta> = {
       secondaryLanguage: "typescript",
       secondaryDescription:
         "Data structure and validation for tour step definitions",
+    },
+  },
+  "animated-multi-select": {
+    component: AnimatedMultiSelectDemo,
+    codeMetadata: {
+      title: "Animated Multi-Select",
+      description:
+        "Search and select multiple options with animations. Features keyboard navigation and accessibility support.",
+      keywords: [
+        "React",
+        "Multi-Select",
+        "Animated",
+        "Accessibility",
+        "Keyboard Nav",
+        "ARIA-compliant",
+      ],
+      language: "tsx",
+      dependencies: "npm i motion",
+      secondaryTitle: "Animated Multi-Select Configuration",
+      secondaryLanguage: "typescript",
+      secondaryDescription:
+        "Data structure and validation for Animated Multi-Select",
     },
   },
 };

@@ -13,6 +13,14 @@ export const sidebarItems: SidebarItem[] = [
     title: "Components",
     children: [
       {
+        title: "Animated Multi Select",
+        href: "/components/animated-multi-select",
+      },
+      {
+        title: "Tour",
+        href: "/components/tour",
+      },
+      {
         title: "Animated Laptop",
         href: "/components/laptop-closes-on-scroll",
       },
@@ -31,10 +39,6 @@ export const sidebarItems: SidebarItem[] = [
       {
         title: "Expanding Cards",
         href: "/components/expanding-cards",
-      },
-      {
-        title: "Tour",
-        href: "/components/tour",
       },
       {
         title: "Floating Dots",
