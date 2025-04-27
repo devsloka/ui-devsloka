@@ -240,14 +240,14 @@ export const blocks: Record<string, BlockMeta> = {
     },
   },
   "newsletter-block": {
-    block: NewsletterBlock,
+    block: NewsletterBlockTwo,
     name: "newsletter-block",
     title: "Newsletter Signup",
     description: "Email newsletter subscription form",
     imageUrl: "https://yourwebsite.com/images/newsletter-block.jpg",
     codeMetadata: {
       mainFile: {
-        codePath: "newsletter-block.tsx",
+        codePath: "newsletter/newsletter-block-two.tsx",
         title: "Newsletter Component",
         language: "tsx",
         hasPreview: true,
@@ -256,10 +256,10 @@ export const blocks: Record<string, BlockMeta> = {
       dependencies: "npm i react-email",
       relatedFiles: [
         {
-          codePath: "newsletter-block-two.tsx",
+          codePath: "newsletter/newsletter-block.tsx",
           title: "Newsletter Component",
           language: "typescript",
-          block: NewsletterBlockTwo,
+          block: NewsletterBlock,
         },
       ],
     },
