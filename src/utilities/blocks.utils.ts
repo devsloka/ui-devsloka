@@ -204,24 +204,24 @@ export const blocks: Record<string, BlockMeta> = {
     },
   },
   "features-block": {
-    block: FeaturesBlock,
+    block: FloatingFeatureShowcase,
     name: "features-block",
     title: "Features Grid",
     description: "Feature showcase with icon grid layout",
     imageUrl: "https://yourwebsite.com/images/features-block.jpg",
     codeMetadata: {
       mainFile: {
-        codePath: "features-block.tsx",
+        codePath: "feature-floating-showcase.tsx",
         title: "Features Component",
         language: "tsx",
         hasPreview: true,
       },
       relatedFiles: [
         {
-          codePath: "feature-floating-showcase.tsx",
+          codePath: "features-block.tsx",
           title: "Floating Feature Showcase",
           language: "typescript",
-          block: FloatingFeatureShowcase,
+          block: FeaturesBlock,
         },
         {
           codePath: "feature-interactive-cards.tsx",
