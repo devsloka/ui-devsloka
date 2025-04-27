@@ -396,7 +396,7 @@ export const components: Record<string, ComponentMeta> = {
         "Data structure and validation for tour step definitions",
     },
   },
-  "image-gallery": {
+  "animated-image-gallery": {
     component: ImageGalleryDemo,
     codeMetadata: {
       title: "Scroll Effect Image Gallery",

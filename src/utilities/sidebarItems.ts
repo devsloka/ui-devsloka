@@ -26,7 +26,7 @@ export const sidebarItems: SidebarItem[] = [
       },
       {
         title: "Image Gallery",
-        href: "/components/image-gallery",
+        href: "/components/animated-image-gallery",
       },
       {
         title: "Content Carousel",
