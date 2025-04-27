@@ -1,5 +1,6 @@
 import CopyPasteSection from "@/components/home/CopyPasteSection";
 import HeroSection from "@/components/home/HeroSection";
+import TestimonialSection from "@/components/home/TestimonialSection";
 
 import { defaultSEO } from "@/config/seo/seo.config";
 import { generateSEO } from "@/config/seo/seo.utils";
@@ -18,6 +19,7 @@ export default function Home() {
     <div className="mt-12">
       <HeroSection />
       <CopyPasteSection />
+      <TestimonialSection />
     </div>
   );
 }
