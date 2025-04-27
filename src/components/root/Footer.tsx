@@ -36,7 +36,7 @@ const Footer = () => {
     },
   };
   return (
-    <footer className="relative w-full border-t border-dashed h-[500px] overflow-hidden mx-auto">
+    <footer className="relative w-full border-t border-dashed h-auto overflow-hidden mx-auto">
       <FloatingDots
         color={theme === "dark" ? "white" : "#0A6EFF"}
         minRadius={0.1}
@@ -46,7 +46,7 @@ const Footer = () => {
       />
 
       {/* Main Footer Content */}
-      <div className="container mx-auto px-6 py-12">
+      <div className="container mx-auto px-6 py-12 mb-10 sm:mb-36">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Company Info */}
           <div>
