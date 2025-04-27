@@ -95,9 +95,9 @@ export function TeamBlock() {
           transition={{ duration: 0.8 }}
           className="mx-auto max-w-2xl text-center mb-16"
         >
-          <h2 className="text-base font-semibold leading-7 text-primary">
+          <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
             Our Team
-          </h2>
+          </div>
           <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
             Meet the innovators
           </p>
