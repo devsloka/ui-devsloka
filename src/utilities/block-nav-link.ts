@@ -55,14 +55,9 @@ export const blockNavLinks: BlockNavLinkType[] = [
     title: "Logo Cloud",
     href: "/blocks/logo-cloud",
   },
-  // {
-  //   id: "header-block",
-  //   title: "Header",
-  //   href: "/blocks/header-block",
-  // },
-  // {
-  //   id: "sidebar-block",
-  //   title: "Sidebar",
-  //   href: "/blocks/sidebar-block",
-  // },
+  {
+    id: "team",
+    title: "Team",
+    href: "/blocks/team-block",
+  },
 ];

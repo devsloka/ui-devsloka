@@ -19,6 +19,7 @@ import { NewsletterBlockTwo } from "@/components/blocks/newsletter/newsletter-bl
 import TestimonialsBlock from "@/components/blocks/testimonials/testimonials-block";
 import { TestimonialsBlockTwo } from "@/components/blocks/testimonials/testimonials-block-2";
 import LogoCloudBlock from "@/components/blocks/logo-cloud-1";
+import { TeamBlock } from "@/components/blocks/teams/team-block";
 
 export type CodeFile = {
   codePath: string;
@@ -278,6 +279,31 @@ export const blocks: Record<string, BlockMeta> = {
       },
       keywords: ["newsletter", "email", "subscription"],
       dependencies: "npm i react-email",
+    },
+  },
+  "team-block": {
+    block: TeamBlock,
+    name: "team",
+    title: "Team Section",
+    description: "Responsive team section with call-to-action",
+    imageUrl: "https://yourwebsite.com/images/team.jpg",
+    codeMetadata: {
+      mainFile: {
+        codePath: "teams/team-block.tsx",
+        title: "Team Component",
+        language: "tsx",
+        hasPreview: true,
+      },
+      // relatedFiles: [
+      //   {
+      //     codePath: "team.tsx",
+      //     title: "Team Component",
+      //     language: "typescript",
+      //     block: Team,
+      //   },
+      // ],
+      keywords: ["team", "members", "profiles"],
+      dependencies: "npm i @radix-ui/react-dialog",
     },
   },
 };
