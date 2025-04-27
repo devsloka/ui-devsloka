@@ -197,14 +197,14 @@ const TestimonialSection: React.FC = () => {
               Loved by thousands of people
             </motion.h2>
             <motion.p
-              className="text-xl text-gray-600"
+              className="text-xl text-gray-600 dark:text-gray-400"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
               Here&apos;s what some of our users have to say about{" "}
-              <span className="font-bold">Devsloka UI</span>.
+              <span className="font-bold text-primary">Devsloka UI</span>.
             </motion.p>
           </div>
         </div>
