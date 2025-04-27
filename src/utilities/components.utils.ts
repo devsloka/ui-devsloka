@@ -8,7 +8,6 @@ import { ExpandingCardsDemo } from "@/components/devsloka-components/demo/expand
 import FloatingDotsDemo from "@/components/devsloka-components/demo/floating-dots-demo";
 import GradientTextDemo from "@/components/devsloka-components/demo/gradient-text-demo";
 import IconRadioDemo from "@/components/devsloka-components/demo/icon-radio-demo";
-import ImageGalleryDemo from "@/components/devsloka-components/demo/Image-gallery-demo";
 import LogoCloudCarouselDemo from "@/components/devsloka-components/demo/logo-cloud-carousel-demo";
 import { MorphingCardDemo } from "@/components/devsloka-components/demo/morphing-card-demo";
 import { MorphingModalDemo } from "@/components/devsloka-components/demo/morphing-modal-demo";
@@ -21,6 +20,7 @@ import EmptyResult from "@/components/devsloka-components/empty-result";
 import ErrorResult from "@/components/devsloka-components/error-result";
 import SuccessResult from "@/components/devsloka-components/success-result";
 import AnimatedMultiSelectDemo from "@/components/devsloka-components/demo/animated-multi-select-demo";
+import ImageGalleryDemo from "@/components/devsloka-components/demo/animated-image-gallery-demo";
 
 export type ComponentMeta = {
   component: React.FC;
