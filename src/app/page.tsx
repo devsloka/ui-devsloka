@@ -1,4 +1,5 @@
 import CopyPasteSection from "@/components/home/CopyPasteSection";
+import CTASection from "@/components/home/CTASection";
 import HeroSection from "@/components/home/HeroSection";
 import TestimonialSection from "@/components/home/TestimonialSection";
 
@@ -20,6 +21,7 @@ export default function Home() {
       <HeroSection />
       <CopyPasteSection />
       <TestimonialSection />
+      <CTASection />
     </div>
   );
 }
