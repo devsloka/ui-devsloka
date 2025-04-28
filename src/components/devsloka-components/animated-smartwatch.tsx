@@ -1,8 +1,7 @@
 "use client";
-
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 interface AnimatedSmartwatchProps {
   /** Content to display on the watch screen (URL or component) */
@@ -15,6 +14,8 @@ interface AnimatedSmartwatchProps {
   scale?: number;
   /** Custom class name for the container */
   className?: string;
+  /** Whether to fix position at center point (default: false) */
+  fixPositionAtCenter?: boolean;
 }
 
 export default function AnimatedSmartwatch({
@@ -23,6 +24,7 @@ export default function AnimatedSmartwatch({
   bandColor = "black",
   scale = 1,
   className,
+  fixPositionAtCenter = false,
 }: AnimatedSmartwatchProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -58,26 +60,56 @@ export default function AnimatedSmartwatch({
   });
 
   // Create scroll-based animations
-  const rotateZ = useTransform(scrollYProgress, [0, 0.5, 1], [-45, 0, 45]);
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [10, 0, 10]);
-  const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [-10, 0, 10]);
-  const scale3d = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  // If fixPositionAtCenter is true, maintain the center position (0.5) values after reaching the midpoint
+  const rotateZ = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    fixPositionAtCenter ? [-45, 0, 0] : [-45, 0, 45]
+  );
 
-  // Lighting effects
-  const brightness = useTransform(scrollYProgress, [0, 0.5, 1], [0.7, 1, 0.7]);
+  const rotateX = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    fixPositionAtCenter ? [10, 0, 0] : [10, 0, 10]
+  );
+
+  const rotateY = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    fixPositionAtCenter ? [-10, 0, 0] : [-10, 0, 10]
+  );
+
+  const scale3d = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    fixPositionAtCenter ? [0.8, 1, 1] : [0.8, 1, 0.8]
+  );
+
+  // Lighting effects - also fixed at optimal values if fixPositionAtCenter is true
+  const brightness = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    fixPositionAtCenter ? [0.7, 1, 1] : [0.7, 1, 0.7]
+  );
+
   const reflectionOpacity = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [0.1, 0.4, 0.1]
+    fixPositionAtCenter ? [0.1, 0.4, 0.4] : [0.1, 0.4, 0.1]
   );
 
-  // Shadow effects
+  // Shadow effects - also fixed at optimal values if fixPositionAtCenter is true
   const shadowOpacity = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [0.2, 0.5, 0.2]
+    fixPositionAtCenter ? [0.2, 0.5, 0.5] : [0.2, 0.5, 0.2]
   );
-  const shadowBlur = useTransform(scrollYProgress, [0, 0.5, 1], [10, 25, 10]);
+
+  const shadowBlur = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    fixPositionAtCenter ? [10, 25, 25] : [10, 25, 10]
+  );
 
   // Color styles with enhanced metallic effects
   const caseColors = {

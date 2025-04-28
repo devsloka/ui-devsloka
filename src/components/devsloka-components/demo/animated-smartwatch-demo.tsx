@@ -14,7 +14,11 @@ export default function AnimatedSmartwatchDemo() {
           </p>
         </div>
 
-        <AnimatedSmartwatch color="black" bandColor="black" />
+        <AnimatedSmartwatch
+          fixPositionAtCenter={true}
+          color="black"
+          bandColor="black"
+        />
 
         <div className="py-20 text-center">
           <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-500">
