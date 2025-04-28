@@ -593,7 +593,7 @@ export const components: Record<string, ComponentMeta> = {
       ],
       language: "tsx",
       dependencies: "npm i framer-motion lucide-react",
-      secondaryTitle: "Animated Multi-Select Configuration",
+      secondaryTitle: "Copy the source code",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/animated-multi-select.tsx",
     },
