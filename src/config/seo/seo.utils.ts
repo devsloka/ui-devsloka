@@ -6,6 +6,7 @@ type SEOProps = {
   description?: string;
   path?: string;
   image?: string;
+  keywords?: string[];
 };
 
 export const generateSEO = ({
@@ -13,6 +14,7 @@ export const generateSEO = ({
   description,
   path,
   image,
+  keywords,
 }: SEOProps = {}): Metadata => {
   const url = path
     ? `${defaultSEO.metadataBase}${path}`
@@ -22,6 +24,8 @@ export const generateSEO = ({
     ...defaultSEO,
     title: title || defaultSEO.title,
     description: description || defaultSEO.description,
+    keywords: keywords || defaultSEO.keywords,
+
     alternates: {
       canonical: url,
     },
