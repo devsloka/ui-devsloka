@@ -19,6 +19,7 @@ import BackgroundPreview from "@/components/backgrounds/preview/BackgroundPrevie
 import { Metadata } from "next";
 import { GlobeHero } from "@/components/backgrounds/3d-background";
 import GradientBg from "@/components/backgrounds/gradient-bg";
+import { generateSEO } from "@/config/seo/seo.utils";
 
 const backgrounds: Record<string, React.FC> = {
   "particles-background": ParticleBackground,
@@ -39,21 +40,25 @@ const backgrounds: Record<string, React.FC> = {
   "gradient-bg": GradientBg,
 };
 
-export async function generateStaticParams() {
-  const backgroundsKeys = await Promise.resolve(Object.keys(backgrounds));
-  return backgroundsKeys.map((id) => ({ name: id }));
-}
-
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ name: string }>;
 }): Promise<Metadata> {
   const { name } = await params;
-  const formattedName = name.replace(/-/g, " ");
-  return {
+
+  // Format name with capitalized words
+  const formattedName = name
+    .replace(/-/g, " ")
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  return generateSEO({
     title: `${formattedName} - Animated Background`,
     description: `Explore the ${formattedName} animation, a beautiful background effect for web projects.`,
+    path: `components/backgrounds/${name}`,
+    image: `images/${name}.png`,
     keywords: [
       formattedName,
       "animated background",
@@ -61,14 +66,7 @@ export async function generateMetadata({
       "React background effects",
       "Next.js animated UI",
     ],
-    openGraph: {
-      title: `${formattedName} - Animated Background`,
-      description: `Explore the ${formattedName} animation, a beautiful background effect for web projects.`,
-      url: `https://yourwebsite.com/components/backgrounds/${name}`,
-      type: "website",
-      images: [`https://yourwebsite.com/images/${name}.png`],
-    },
-  };
+  });
 }
 
 export default async function BackgroundPage({

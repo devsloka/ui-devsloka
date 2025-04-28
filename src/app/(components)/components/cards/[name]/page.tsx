@@ -6,6 +6,7 @@ import ExploreAnimatedCard from "@/components/cards/explore-animated-card";
 import { GlitchCard } from "@/components/cards/glitch-card";
 import PricingCardDemo from "@/components/cards/demo/pricing-card";
 import { ProductCardDemo } from "@/components/cards/demo/product-card";
+import { generateSEO } from "@/config/seo/seo.utils";
 
 const cards: Record<string, React.FC> = {
   "explore-animated-card": ExploreAnimatedCard,
@@ -25,27 +26,28 @@ export async function generateMetadata({
   params: Promise<{ name: string }>;
 }): Promise<Metadata> {
   const { name } = await params;
-  const formattedName = name.replace(/-/g, " ");
-  return {
+
+  // Capitalize first letter of each word
+  const formattedName = name
+    .replace(/-/g, " ")
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  return generateSEO({
     title: `${formattedName} - Animated Cards`,
-    description: `Explore the ${formattedName} animation, a beautiful cards effect for web projects.`,
+    description: `Explore the ${formattedName} animation, a beautiful card effect for web projects.`,
+    path: `components/cards/${name}`,
+    image: `images/${name}.png`,
     keywords: [
       formattedName,
       "animated cards",
       "CSS cards",
-      "React cards effects",
+      "React card effects",
       "Next.js animated UI",
     ],
-    openGraph: {
-      title: `${formattedName} - Animated cards`,
-      description: `Explore the ${formattedName} animation, a beautiful cards effect for web projects.`,
-      url: `https://yourwebsite.com/components/cards/${name}`,
-      type: "website",
-      images: [`https://yourwebsite.com/images/${name}.png`],
-    },
-  };
+  });
 }
-
 export default async function CardPage({
   params,
 }: {
