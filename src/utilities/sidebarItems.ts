@@ -25,6 +25,10 @@ export const sidebarItems: SidebarItem[] = [
         href: "/components/laptop-closes-on-scroll",
       },
       {
+        title: "Animated Smartwatch",
+        href: "/components/animated-smartwatch",
+      },
+      {
         title: "Image Gallery",
         href: "/components/animated-image-gallery",
       },

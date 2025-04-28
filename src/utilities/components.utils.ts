@@ -21,6 +21,7 @@ import ErrorResult from "@/components/devsloka-components/error-result";
 import SuccessResult from "@/components/devsloka-components/success-result";
 import AnimatedMultiSelectDemo from "@/components/devsloka-components/demo/animated-multi-select-demo";
 import ImageGalleryDemo from "@/components/devsloka-components/demo/animated-image-gallery-demo";
+import AnimatedSmartwatchDemo from "@/components/devsloka-components/demo/animated-smartwatch-demo";
 
 export type ComponentMeta = {
   component: React.FC;
@@ -554,6 +555,28 @@ export const components: Record<string, ComponentMeta> = {
       secondaryLanguage: "typescript",
       secondaryDescription:
         "Data structure and validation for tour step definitions",
+    },
+  },
+  "animated-smartwatch": {
+    component: AnimatedSmartwatchDemo,
+    codeMetadata: {
+      title: "Animated Smartwatch",
+      description: "Animated smartwatch that closes on scroll",
+      keywords: [
+        "React",
+        "Smooth Scroll",
+        "Accessibility",
+        "Focus Management",
+        "Keyboard Nav",
+        "ARIA-compliant",
+        "Animated Smartwatch",
+      ],
+      language: "tsx",
+      dependencies: "npm i framer-motion",
+      secondaryTitle: "Animated Smart watch Configuration",
+      secondaryLanguage: "typescript",
+      secondaryDescription:
+        "Data structure and validation for Animated Smartwatch",
     },
   },
   "animated-multi-select": {
