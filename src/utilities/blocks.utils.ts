@@ -206,20 +206,20 @@ export const blocks: Record<string, BlockMeta> = {
   "features-block": {
     block: FloatingFeatureShowcase,
     name: "features-block",
-    title: "Features Grid",
+    title: "Floating Feature Showcase",
     description: "Feature showcase with icon grid layout",
     imageUrl: "https://yourwebsite.com/images/features-block.jpg",
     codeMetadata: {
       mainFile: {
         codePath: "feature-floating-showcase.tsx",
-        title: "Features Component",
+        title: "Floating Feature Showcase",
         language: "tsx",
         hasPreview: true,
       },
       relatedFiles: [
         {
           codePath: "features-block.tsx",
-          title: "Floating Feature Showcase",
+          title: "Features Component",
           language: "typescript",
           block: FeaturesBlock,
         },
