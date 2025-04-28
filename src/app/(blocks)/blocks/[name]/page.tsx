@@ -13,9 +13,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { name: string };
+  params: Promise<{ name: string }>;
 }): Promise<Metadata> {
-  const { name } = params;
+  const { name } = await params;
   const block = blocks[name];
   if (!block) return {};
 
