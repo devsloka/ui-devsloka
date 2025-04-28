@@ -21,12 +21,12 @@ export const sidebarItems: SidebarItem[] = [
         href: "/components/tour",
       },
       {
-        title: "Animated Laptop",
-        href: "/components/laptop-closes-on-scroll",
-      },
-      {
         title: "Animated Smartwatch",
         href: "/components/animated-smartwatch",
+      },
+      {
+        title: "Animated Laptop",
+        href: "/components/laptop-closes-on-scroll",
       },
       {
         title: "Image Gallery",

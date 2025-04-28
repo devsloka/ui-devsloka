@@ -1,8 +1,7 @@
 "use client";
-
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 interface AnimatedSmartwatchProps {
   /** Content to display on the watch screen (URL or component) */
@@ -15,6 +14,8 @@ interface AnimatedSmartwatchProps {
   scale?: number;
   /** Custom class name for the container */
   className?: string;
+  /** Whether to fix position at center point (default: false) */
+  fixPositionAtCenter?: boolean;
 }
 
 export default function AnimatedSmartwatch({
@@ -23,6 +24,7 @@ export default function AnimatedSmartwatch({
   bandColor = "black",
   scale = 1,
   className,
+  fixPositionAtCenter = false,
 }: AnimatedSmartwatchProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -47,10 +49,6 @@ export default function AnimatedSmartwatch({
   ];
   const date = currentTime.getDate();
 
-  // Heart rate simulation
-  const heartRate =
-    72 + Math.floor(Math.sin(currentTime.getSeconds() * 0.1) * 5);
-
   // Track scroll progress within the container
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -58,26 +56,56 @@ export default function AnimatedSmartwatch({
   });
 
   // Create scroll-based animations
-  const rotateZ = useTransform(scrollYProgress, [0, 0.5, 1], [-45, 0, 45]);
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [10, 0, 10]);
-  const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [-10, 0, 10]);
-  const scale3d = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  // If fixPositionAtCenter is true, maintain the center position (0.5) values after reaching the midpoint
+  const rotateZ = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    fixPositionAtCenter ? [-45, 0, 0] : [-45, 0, 45]
+  );
 
-  // Lighting effects
-  const brightness = useTransform(scrollYProgress, [0, 0.5, 1], [0.7, 1, 0.7]);
+  const rotateX = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    fixPositionAtCenter ? [10, 0, 0] : [10, 0, 10]
+  );
+
+  const rotateY = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    fixPositionAtCenter ? [-10, 0, 0] : [-10, 0, 10]
+  );
+
+  const scale3d = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    fixPositionAtCenter ? [0.8, 1, 1] : [0.8, 1, 0.8]
+  );
+
+  // Lighting effects - also fixed at optimal values if fixPositionAtCenter is true
+  const brightness = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    fixPositionAtCenter ? [0.7, 1, 1] : [0.7, 1, 0.7]
+  );
+
   const reflectionOpacity = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [0.1, 0.4, 0.1]
+    fixPositionAtCenter ? [0.1, 0.4, 0.4] : [0.1, 0.4, 0.1]
   );
 
-  // Shadow effects
+  // Shadow effects - also fixed at optimal values if fixPositionAtCenter is true
   const shadowOpacity = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [0.2, 0.5, 0.2]
+    fixPositionAtCenter ? [0.2, 0.5, 0.5] : [0.2, 0.5, 0.2]
   );
-  const shadowBlur = useTransform(scrollYProgress, [0, 0.5, 1], [10, 25, 10]);
+
+  const shadowBlur = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    fixPositionAtCenter ? [10, 25, 25] : [10, 25, 10]
+  );
 
   // Color styles with enhanced metallic effects
   const caseColors = {
@@ -285,53 +313,6 @@ export default function AnimatedSmartwatch({
                     </div>
                     <div className="text-sm mt-1 opacity-80 font-medium tracking-wide">
                       {day} {date}
-                    </div>
-
-                    {/* Watch complications with enhanced design */}
-                    <div className="absolute bottom-[15%] left-0 right-0 flex justify-around text-xs">
-                      {/* Heart rate */}
-                      <div className="flex flex-col items-center">
-                        <div className="w-6 h-6 rounded-full border border-red-500/50 mb-1 flex items-center justify-center">
-                          <div className="text-red-500 animate-pulse">♥</div>
-                        </div>
-                        <span className="text-red-400">{heartRate}</span>
-                      </div>
-
-                      {/* Steps */}
-                      <div className="flex flex-col items-center">
-                        <div className="w-6 h-6 rounded-full border border-green-500/50 mb-1 flex items-center justify-center">
-                          <div className="w-3 h-3">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              className="text-green-500"
-                            >
-                              <path d="M19 15l-7-7-7 7" />
-                            </svg>
-                          </div>
-                        </div>
-                        <span className="text-green-400">8.2k</span>
-                      </div>
-
-                      {/* Weather */}
-                      <div className="flex flex-col items-center">
-                        <div className="w-6 h-6 rounded-full border border-blue-500/50 mb-1 flex items-center justify-center">
-                          <div className="w-3 h-3">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              className="text-blue-500"
-                            >
-                              <path d="M12 2v2m0 16v2M4 12H2m20 0h-2m-8 8a8 8 0 100-16 8 8 0 000 16z" />
-                            </svg>
-                          </div>
-                        </div>
-                        <span className="text-blue-400">18°</span>
-                      </div>
                     </div>
                   </div>
 
