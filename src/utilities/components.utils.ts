@@ -413,12 +413,11 @@ export const components: Record<string, ComponentMeta> = {
         "ARIA-compliant",
       ],
       language: "tsx",
-      dependencies: "npm i motion",
+      dependencies: "npx shadcn@latest init",
       secondaryCode: "tour-steps.ts",
-      secondaryTitle: "Tour Step Configuration",
+      secondaryTitle: "Copy the source code",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Data structure and validation for tour step definitions",
+      secondaryDescription: "components/ui/animated-image-gallery.tsx",
     },
   },
   "tabs-switcher": {
