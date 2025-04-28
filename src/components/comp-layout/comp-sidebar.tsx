@@ -41,7 +41,7 @@ const CompSidebar = () => {
         <ul className="w-full space-y-4">
           {sidebarItems.map((section) => (
             <li key={section.title} className="space-y-1 pb-5">
-              <h3 className="px-4 text-sm font-bold">{section.title}</h3>
+              <h3 className="px-4 text-sm font-bold mb-2">{section.title}</h3>
               <ul className="flex flex-col space-y-1">
                 {section.children.map((item) => {
                   const isActive = pathname === item.href;

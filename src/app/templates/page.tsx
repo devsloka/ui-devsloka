@@ -1,59 +1,35 @@
 import { Button } from "@/components/ui/button";
-// import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { TemplateCard } from "@/components/templates/template-card";
 import { templates } from "@/lib/templates";
 import Spotlight from "@/components/templates/spotlight-background";
+import { Metadata } from "next";
+import { generateSEO } from "@/config/seo/seo.utils";
 
-export default function Home() {
+export function generateMetadata(): Metadata {
+  return generateSEO({
+    title: "Premium UI Templates - DevsLoka",
+    description:
+      "Professionally designed templates to accelerate your workflow. Ready to use in your projects.",
+    path: "templates",
+    image: "images/templates-og.jpg",
+    keywords: [
+      "UI templates",
+      "Next.js templates",
+      "React templates",
+      "website templates",
+      "starter kits",
+    ],
+  });
+}
+
+export default function Template() {
   return (
     <div className="flex min-h-screen flex-col">
       <Spotlight
         className="-top-40 left-0 md:-top-10 md:left-60"
         fill="white"
       />
-      {/* <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
-          <div className="flex gap-6 md:gap-10">
-            <Link href="/" className="flex items-center space-x-2">
-              <span className="inline-block font-bold">Devsloka UI</span>
-            </Link>
-            <nav className="hidden gap-6 md:flex">
-              <Link
-                href="#"
-                className="flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm"
-              >
-                Templates
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center text-lg font-medium text-foreground/60 transition-colors hover:text-foreground/80 sm:text-sm"
-              >
-                Components
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center text-lg font-medium text-foreground/60 transition-colors hover:text-foreground/80 sm:text-sm"
-              >
-                Documentation
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center text-lg font-medium text-foreground/60 transition-colors hover:text-foreground/80 sm:text-sm"
-              >
-                Pricing
-              </Link>
-            </nav>
-          </div>
-          <div className="flex flex-1 items-center justify-end space-x-4">
-            <nav className="flex items-center space-x-2">
-              <Button size="sm" className="h-8 gap-1">
-                Get Pro <ArrowRight className="h-3.5 w-3.5" />
-              </Button>
-            </nav>
-          </div>
-        </div>
-      </header> */}
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
@@ -115,24 +91,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-      {/* <footer className="w-full border-t py-6 md:py-0">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Premium UI. All rights reserved.
-          </p>
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <Link href="#" className="hover:underline underline-offset-4">
-              Terms
-            </Link>
-            <Link href="#" className="hover:underline underline-offset-4">
-              Privacy
-            </Link>
-            <Link href="#" className="hover:underline underline-offset-4">
-              Contact
-            </Link>
-          </div>
-        </div>
-      </footer> */}
     </div>
   );
 }

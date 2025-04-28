@@ -3,7 +3,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "../ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTrigger,
+} from "../ui/sheet";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "../ui/ModeToggle";
@@ -43,16 +49,18 @@ const Navbar = () => {
         <ul className="pl-4">
           {item.children.map((child) => (
             <li key={sheetId + child.href}>
-              <Link
-                href={child.href}
-                className={`${
-                  pathname === child.href
-                    ? "text-[#0A6EFF] font-bold"
-                    : "text-zinc-500"
-                }`}
-              >
-                {child.title}
-              </Link>
+              <SheetClose asChild key={sheetId + child.href}>
+                <Link
+                  href={child.href}
+                  className={`${
+                    pathname === child.href
+                      ? "text-[#0A6EFF] font-bold"
+                      : "text-zinc-500"
+                  }`}
+                >
+                  {child.title}
+                </Link>
+              </SheetClose>
             </li>
           ))}
         </ul>

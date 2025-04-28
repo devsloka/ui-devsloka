@@ -2,6 +2,23 @@ import React from "react";
 import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { blocks } from "@/utilities/blocks.utils";
 import { getComponentCode } from "@/utilities/getComponentCode";
+import { Metadata } from "next";
+import { generateSEO } from "@/config/seo/seo.utils";
+export function generateMetadata(): Metadata {
+  return generateSEO({
+    title: "UI Blocks Collection - DevsLoka",
+    description:
+      "Explore our collection of beautiful and customizable blocks for your web projects",
+    path: "blocks",
+    image: "images/blocks-og.jpg",
+    keywords: [
+      "UI blocks",
+      "website sections",
+      "prebuilt components",
+      "Next.js blocks",
+    ],
+  });
+}
 
 const BlocksPage: React.FC = () => {
   return (

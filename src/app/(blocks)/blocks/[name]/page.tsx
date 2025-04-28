@@ -3,10 +3,11 @@ import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { getComponentCode } from "@/utilities/getComponentCode";
 import { Metadata } from "next";
 import { blocks } from "@/utilities/blocks.utils";
+import { generateSEO } from "@/config/seo/seo.utils";
 
 export async function generateStaticParams() {
   const blockKeys = await Promise.resolve(Object.keys(blocks));
-  return blockKeys.map((id) => ({ name: id }));
+  return blockKeys.map((id) => ({ id }));
 }
 
 export async function generateMetadata({
@@ -18,17 +19,26 @@ export async function generateMetadata({
   const block = blocks[name];
   if (!block) return {};
 
-  const formattedName = name.replace(/-/g, " ");
-  return {
+  // Format name with capitalized words
+  const formattedName = name
+    .replace(/-/g, " ")
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  return generateSEO({
     title: `${formattedName} - Devsloka Blocks`,
     description: block.description,
-    keywords: [...block.codeMetadata.keywords, "Devsloka", "UI Blocks"],
-    openGraph: {
-      title: `${formattedName} - Devsloka Blocks`,
-      description: block.description,
-      images: [`https://yourwebsite.com/og-images/${name}.jpg`],
-    },
-  };
+    path: `blocks/${name}`,
+    image: `og-images/${name}.jpg`,
+    keywords: [
+      ...block.codeMetadata.keywords,
+      "Devsloka",
+      "UI Blocks",
+      "Website Sections",
+      "Page Components",
+    ],
+  });
 }
 
 export default async function BlockPage({
