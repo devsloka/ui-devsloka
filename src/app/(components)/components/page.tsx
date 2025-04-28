@@ -9,8 +9,8 @@ export function generateMetadata(): Metadata {
     title: "All Components - DevsLoka UI Collection",
     description:
       "Explore our collection of premium React components for Next.js, Remix, and modern web applications",
-    path: "/components",
-    image: "/images/components-og.jpg",
+    path: "components",
+    image: "images/components-og.jpg",
     keywords: [
       "React components",
       "Next.js UI kit",

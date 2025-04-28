@@ -1,8 +1,27 @@
-"use client";
 import ExploreAnimatedCard from "@/components/cards/explore-animated-card";
 import { GlitchCard } from "@/components/cards/glitch-card";
 import PricingCardDemo from "@/components/cards/demo/pricing-card";
+import { Metadata } from "next";
+import { generateSEO } from "@/config/seo/seo.utils";
 
+export function generateMetadata(): Metadata {
+  return generateSEO({
+    title: "3D Animated Cards Collection - DevsLoka UI",
+    description:
+      "Explore our premium collection of animated UI cards with modern effects and interactions",
+    path: "components/cards",
+    image: "images/cards-collection-og.jpg",
+    keywords: [
+      "animated cards",
+      "3D UI components",
+      "React card effects",
+      "Next.js animations",
+      "glitch effect",
+      "pricing cards",
+      "interactive UI",
+    ],
+  });
+}
 export default function AnimatedCardsCollection() {
   return (
     <div className="min-h-screen py-16 px-4">
