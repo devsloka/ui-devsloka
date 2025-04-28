@@ -3,6 +3,7 @@ import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { getComponentCode } from "@/utilities/getComponentCode";
 import { Metadata } from "next";
 import { components } from "@/utilities/components.utils";
+import { generateSEO } from "@/config/seo/seo.utils";
 
 export async function generateStaticParams() {
   const componentKeys = await Promise.resolve(Object.keys(components));
@@ -18,17 +19,20 @@ export async function generateMetadata({
   const component = components[name];
   if (!component) return {};
 
-  const formattedName = name.replace(/-/g, " ");
-  return {
+  const formattedName = name
+    .replace(/-/g, " ")
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+  const imagePath = `/og-images/${name}.jpg`;
+
+  return generateSEO({
     title: `${formattedName} - Devsloka Components`,
     description: component.codeMetadata.description,
+    path: `components/${name}`,
+    image: imagePath,
     keywords: [...component.codeMetadata.keywords, "Devsloka", "UI Components"],
-    openGraph: {
-      title: `${formattedName} - Devsloka Components`,
-      description: component.codeMetadata.description,
-      images: [`https://yourwebsite.com/og-images/${name}.jpg`],
-    },
-  };
+  });
 }
 
 export default async function ComponentPage({
