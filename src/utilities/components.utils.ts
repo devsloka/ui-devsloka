@@ -414,7 +414,7 @@ export const components: Record<string, ComponentMeta> = {
       ],
       language: "tsx",
       dependencies: "npx shadcn@latest init",
-      secondaryTitle: "Copy the source code",
+      secondaryTitle: "Copy the source code and add lib/utils file",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/animated-image-gallery.tsx",
     },
