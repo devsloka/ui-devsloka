@@ -32,7 +32,7 @@ export const defaultSEO: Metadata = {
     siteName: "DevsLoka",
     images: [
       {
-        url: `${baseURL}/og-default.jpg`,
+        url: `${baseURL}/og-default.png`,
         width: 1200,
         height: 630,
       },
