@@ -12,7 +12,7 @@ export const metadata = generateSEO({
   description:
     defaultSEO.description ??
     "Premium Components , Blocks and Templates For React.js , Next.js , Remix.js and React-Router-Dom v7.0.0",
-  image: "/og-home.jpg",
+  image: "/og-home.png",
 });
 
 export default function Home() {
