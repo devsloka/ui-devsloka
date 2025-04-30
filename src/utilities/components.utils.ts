@@ -42,7 +42,7 @@ export const components: Record<string, ComponentMeta> = {
   "airbnb-card": {
     component: AirbnbListingCardExample,
     codeMetadata: {
-      title: "Property Listing Card",
+      title: "Airbnb Card",
       description:
         "Adaptive rental listing component with image gallery, rating system, and price formatting. Implements favoriting logic and hover states.",
       keywords: [
@@ -55,12 +55,13 @@ export const components: Record<string, ComponentMeta> = {
         "Responsive",
       ],
       language: "tsx",
-      dependencies: "npm i motion @tabler/icons-react",
+      dependencies:
+        "npm i lucide-react clsx tailwind-merge shadcn@latest add badge",
       secondaryCode: "property-data.ts",
-      secondaryTitle: "Property Data Structure",
+      secondaryTitle: "Airbnb Card",
       secondaryLanguage: "typescript",
       secondaryDescription:
-        "Type definitions and sample data for property listings",
+        "Create a file named airbnb-card.tsx  under the ui folder and use it in your project",
     },
   },
   "content-carousel": {
@@ -138,9 +139,8 @@ export const components: Record<string, ComponentMeta> = {
   "expanding-cards": {
     component: ExpandingCardsDemo,
     codeMetadata: {
-      title: "Animated Content Cards",
-      description:
-        "Collapsible card stack with spring physics animations. Implements smooth height transitions and click-activated content expansion.",
+      title: "Expandable Cards",
+      description: "Expandable card component with smooth transitions effects.",
       keywords: [
         "React",
         "Spring Animation",
@@ -151,7 +151,7 @@ export const components: Record<string, ComponentMeta> = {
         "Responsive",
       ],
       language: "tsx",
-      dependencies: "npm i motion tailwind-merge",
+      dependencies: "npm i motion tailwind-merge lucide-react",
       secondaryCode: "card-content.ts",
       secondaryTitle: "Card Content Data",
       secondaryLanguage: "typescript",
@@ -162,66 +162,42 @@ export const components: Record<string, ComponentMeta> = {
   "floating-dots": {
     component: FloatingDotsDemo,
     codeMetadata: {
-      title: "Animated Particle Background",
+      title: "Floating Dots Background",
       description:
-        "Procedural floating dots animation with mouse interaction. Features velocity controls and canvas-based rendering.",
-      keywords: [
-        "React",
-        "Canvas",
-        "Particles",
-        "Background Effect",
-        "Physics Animation",
-        "60 FPS",
-        "GPU-optimized",
-      ],
+        "Interactive background animation with where floating dots are moving bottom to top.",
+      keywords: ["React", "Canvas", "Particles", "Background Effect"],
       language: "tsx",
-      dependencies: "npm i motion",
+      // dependencies: "npm i motion",
       secondaryCode: "particle-config.ts",
-      secondaryTitle: "Particle Configuration",
+      secondaryTitle: "Floating Dots ",
       secondaryLanguage: "typescript",
       secondaryDescription:
-        "Parameters and physics settings for the particle animation system",
+        "Create a file named floating-dots.tsx under the ui folder and use it in your project . also follow the demo file.",
     },
   },
   "morphing-card": {
     component: MorphingCardDemo,
     codeMetadata: {
-      title: "Expandable Content Card",
-      description:
-        "Toggleable card component with smooth layout transitions. Implements compound component pattern and ARIA expansion controls.",
-      keywords: [
-        "React",
-        "Accordion",
-        "Content Toggle",
-        "Layout Animation",
-        "Accessibility",
-        "WCAG 2.1",
-        "Compound Components",
-      ],
+      title: "Morphing Card",
+      description: "Toggleable card component with smooth layout transitions.",
+      keywords: ["React", "Content Toggle", "Layout Animation"],
       language: "tsx",
-      dependencies: "npm i motion",
+      dependencies:
+        "npm i motion lucide-react clsx tailwind-merge shadcn@latest add button",
       secondaryCode: "morphing-transitions.ts",
-      secondaryTitle: "Transition Utilities",
+      secondaryTitle: "Morphing Card",
       secondaryLanguage: "typescript",
       secondaryDescription:
-        "Shared animation utilities for morphing card transitions",
+        "Create a file named morphing-card.tsx under the ui folder and use it in your project . also follow the demo file.",
     },
   },
   "morphing-modal": {
     component: MorphingModalDemo,
     codeMetadata: {
-      title: "Transformative Dialog",
+      title: "Morphing Modal",
       description:
         "Context-aware modal that morphs from trigger elements. Features shared element transitions and adaptive positioning.",
-      keywords: [
-        "React",
-        "Modal",
-        "Transition Animation",
-        "Floating UI",
-        "Overlay",
-        "Portals",
-        "Focus Trap",
-      ],
+      keywords: ["React", "Modal", "Transition Animation", "Overlay"],
       language: "tsx",
       dependencies: "npm i motion @floating-ui/react",
       secondaryCode: "modal-context.ts",
@@ -234,7 +210,7 @@ export const components: Record<string, ComponentMeta> = {
   "morphing-nav": {
     component: MorphingNavDemo,
     codeMetadata: {
-      title: "Animated Navigation Bar",
+      title: "Morphing Nav",
       description:
         "Shape-shifting menu with seamless icon transitions. Implements path morphing animations and adaptive mobile layout.",
       keywords: [
@@ -243,16 +219,14 @@ export const components: Record<string, ComponentMeta> = {
         "Responsive Nav",
         "Menu Animation",
         "UI/UX",
-        "SVG Animations",
-        "Mobile-first",
       ],
       language: "tsx",
-      dependencies: "npm i motion",
+      dependencies: "npm i motion clsx tailwind-merge lucide-react",
       secondaryCode: "nav-items.ts",
-      secondaryTitle: "Navigation Items Config",
+      secondaryTitle: "Morphing Nav",
       secondaryLanguage: "typescript",
       secondaryDescription:
-        "Configuration for navigation items and their associated icons",
+        "Create a file named morphing-nav.tsx under the ui folder and use it in your project . also follow the demo file.",
     },
   },
   "range-slider-with-histogram": {
@@ -268,16 +242,16 @@ export const components: Record<string, ComponentMeta> = {
         "Financial Input",
         "TSX",
         "Interactive",
-        "Accessible",
         "TypeScript",
       ],
       language: "tsx",
-      dependencies: "npm i motion clsx tailwind-merge",
+      dependencies:
+        "npm i motion clsx tailwind-merge lucide-react shadcn@latest add slider shadcn@latest add card shadcn@latest add tooltip",
       secondaryCode: "histogram-data.ts",
-      secondaryTitle: "Histogram Data Processor",
+      secondaryTitle: "Budget Range Slider",
       secondaryLanguage: "typescript",
       secondaryDescription:
-        "Utility functions for processing and normalizing histogram data",
+        "Create a file named budget-range-slider.tsx under the ui folder and use it in your project . also follow the demo file.",
     },
   },
   "success-result": {
@@ -316,16 +290,14 @@ export const components: Record<string, ComponentMeta> = {
         "Guided Tour",
         "Accessibility",
         "Focus Management",
-        "Keyboard Nav",
-        "ARIA-compliant",
       ],
       language: "tsx",
-      dependencies: "npm i motion @floating-ui/react",
-      secondaryCode: "tour-steps.ts",
-      secondaryTitle: "Tour Step Configuration",
+      dependencies:
+        "npm i motion clsx tailwind-merge lucide-react shadcn@latest add card shadcn@latest add button",
+      secondaryTitle: "Tour",
       secondaryLanguage: "typescript",
       secondaryDescription:
-        "Data structure and validation for tour step definitions",
+        "Create a file named tour.tsx under the ui folder and use it in your project . also follow the demo file.",
     },
   },
   "text-effect": {
@@ -335,43 +307,32 @@ export const components: Record<string, ComponentMeta> = {
       description: "Text animation with custom shapes and color palettes.",
       keywords: [
         "React",
-        "User Onboarding",
-        "Guided Tour",
-        "Accessibility",
-        "Focus Management",
-        "Keyboard Nav",
-        "ARIA-compliant",
+        "Text Animation",
+        "SVG Morphing",
+        "UI/UX",
+        "Interactive",
+        "Motion",
       ],
       language: "tsx",
-      dependencies: "npm i motion @floating-ui/react",
-      secondaryCode: "tour-steps.ts",
-      secondaryTitle: "Tour Step Configuration",
+      dependencies: "npm i motion clsx tailwind-merge",
+      secondaryTitle: "Text Effect",
       secondaryLanguage: "typescript",
       secondaryDescription:
-        "Data structure and validation for tour step definitions",
+        "Create a file named text-effect.tsx under the ui folder and use it in your project . also follow the demo file.",
     },
   },
   "border-gradient-icon": {
     component: BorderGradientIconDemo,
     codeMetadata: {
       title: "Border Gradient Icon",
-      description: "Text animation with custom shapes and color palettes.",
-      keywords: [
-        "React",
-        "User Onboarding",
-        "Guided Tour",
-        "Accessibility",
-        "Focus Management",
-        "Keyboard Nav",
-        "ARIA-compliant",
-      ],
+      description: "Border gradient icon with hover effects.",
+      keywords: ["React", "Border Gradient", "Icon Animation"],
       language: "tsx",
-      dependencies: "npm i motion @floating-ui/react",
-      secondaryCode: "tour-steps.ts",
-      secondaryTitle: "Tour Step Configuration",
+      dependencies: "npm i lucide-react",
+      secondaryTitle: "Border Gradient Icon",
       secondaryLanguage: "typescript",
       secondaryDescription:
-        "Data structure and validation for tour step definitions",
+        "Create a file named border-gradient-icon.tsx under the ui folder and use it in your project . also follow the demo file.",
     },
   },
   "gradient-text": {
@@ -379,22 +340,13 @@ export const components: Record<string, ComponentMeta> = {
     codeMetadata: {
       title: "Gradient Text Demo",
       description: "Text animation with custom shapes and color palettes.",
-      keywords: [
-        "React",
-        "User Onboarding",
-        "Guided Tour",
-        "Accessibility",
-        "Focus Management",
-        "Keyboard Nav",
-        "ARIA-compliant",
-      ],
+      keywords: ["React", "Text Animation", "Gradient Text Animation"],
       language: "tsx",
-      dependencies: "npm i motion @floating-ui/react",
-      secondaryCode: "tour-steps.ts",
-      secondaryTitle: "Tour Step Configuration",
+      dependencies: "npm i motion",
+      secondaryTitle: "Gradient Text",
       secondaryLanguage: "typescript",
       secondaryDescription:
-        "Data structure and validation for tour step definitions",
+        "Create a file named gradient-text.tsx under the ui folder and use it in your project . also follow the demo file.",
     },
   },
   "animated-image-gallery": {
@@ -425,22 +377,14 @@ export const components: Record<string, ComponentMeta> = {
       title: "Tabs Switcher",
       description:
         "Tabs switcher shows active tab effect and acording to selected tab it shows content",
-      keywords: [
-        "React",
-        "Image Gallery",
-        "Smooth Scroll",
-        "Accessibility",
-        "Focus Management",
-        "Keyboard Nav",
-        "ARIA-compliant",
-      ],
+      keywords: ["React", "Tabs", "Tab Switcher"],
       language: "tsx",
-      dependencies: "npm i motion",
+      dependencies: "npm i motion clsx tailwind-merge",
       secondaryCode: "tour-steps.ts",
-      secondaryTitle: "Tour Step Configuration",
+      secondaryTitle: "Tab Switcher",
       secondaryLanguage: "typescript",
       secondaryDescription:
-        "Data structure and validation for tour step definitions",
+        "Create a file named tabs-switcher.tsx under the ui folder and use it in your project . also follow the demo file.",
     },
   },
   "card-radio": {
@@ -449,21 +393,13 @@ export const components: Record<string, ComponentMeta> = {
       title: "Card Radio",
       description:
         "Card radio shows active card effect and acording to selected card it shows content",
-      keywords: [
-        "React",
-        "Image Gallery",
-        "Smooth Scroll",
-        "Accessibility",
-        "Focus Management",
-        "Keyboard Nav",
-        "ARIA-compliant",
-      ],
+      keywords: ["React", "Card Radio"],
       language: "tsx",
-      dependencies: "npm i motion",
-      secondaryTitle: "Tour Step Configuration",
+      dependencies: "npm i motion lucide-react ",
+      secondaryTitle: "Card Radio",
       secondaryLanguage: "typescript",
       secondaryDescription:
-        "Data structure and validation for tour step definitions",
+        "Create a file named card-radio.tsx under the ui folder and use it in your project . also follow the demo file.",
     },
   },
   "icon-radio": {
@@ -472,65 +408,41 @@ export const components: Record<string, ComponentMeta> = {
       title: "Icon Radio",
       description:
         "Icon radio shows active card effect and acording to selected icon it shows content",
-      keywords: [
-        "React",
-        "Image Gallery",
-        "Smooth Scroll",
-        "Accessibility",
-        "Focus Management",
-        "Keyboard Nav",
-        "ARIA-compliant",
-      ],
+      keywords: ["React", "Icon", "Icon Radio"],
       language: "tsx",
-      dependencies: "npm i motion",
-      secondaryTitle: "Tour Step Configuration",
+      dependencies: "npm i motion lucide-react ",
+      secondaryTitle: "Icon Radio",
       secondaryLanguage: "typescript",
       secondaryDescription:
-        "Data structure and validation for tour step definitions",
+        "Create a file named icon-radio.tsx under the ui folder and use it in your project . also follow the demo file.",
     },
   },
   "card-decorator": {
     component: CardDecoratorDemo,
     codeMetadata: {
       title: "Card Decorator",
-      description: "Card decorator ",
-      keywords: [
-        "React",
-        "Image Gallery",
-        "Smooth Scroll",
-        "Accessibility",
-        "Focus Management",
-        "Keyboard Nav",
-        "ARIA-compliant",
-      ],
+      description: "Card decorator Add add a decorative element to your card.",
+      keywords: ["React", "Card", "Decorator"],
       language: "tsx",
-      dependencies: "npm i motion",
-      secondaryTitle: "Tour Step Configuration",
+      dependencies: "npm i motion clsx tailwind-merge class-variance-authority",
+      secondaryTitle: "Card Decorator",
       secondaryLanguage: "typescript",
       secondaryDescription:
-        "Data structure and validation for tour step definitions",
+        "Create a file named card-decorator.tsx under the ui folder and use it in your project . also follow the demo file.",
     },
   },
   "logo-cloud-carousel": {
     component: LogoCloudCarouselDemo,
     codeMetadata: {
-      title: "Card Decorator",
-      description: "Card decorator ",
-      keywords: [
-        "React",
-        "Image Gallery",
-        "Smooth Scroll",
-        "Accessibility",
-        "Focus Management",
-        "Keyboard Nav",
-        "ARIA-compliant",
-      ],
+      title: "Logo Cloud Carousel",
+      description: "Logo Cloud Carousel",
+      keywords: ["React", "Logo Cloud", "Infinite Scroll"],
       language: "tsx",
-      dependencies: "npm i motion",
-      secondaryTitle: "Tour Step Configuration",
+      dependencies: "npm i motion next-themes",
+      secondaryTitle: "Logo Cloud Carousel",
       secondaryLanguage: "typescript",
       secondaryDescription:
-        "Data structure and validation for tour step definitions",
+        "Create a file named logo-cloud-carousel.tsx under the ui folder and use it in your project . also follow the demo file.",
     },
   },
   "laptop-closes-on-scroll": {
