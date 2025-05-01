@@ -167,7 +167,6 @@ export const components: Record<string, ComponentMeta> = {
         "Interactive background animation with where floating dots are moving bottom to top.",
       keywords: ["React", "Canvas", "Particles", "Background Effect"],
       language: "tsx",
-      // dependencies: "npm i motion",
       secondaryCode: "particle-config.ts",
       secondaryTitle: "Floating Dots ",
       secondaryLanguage: "typescript",
