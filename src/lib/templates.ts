@@ -10,17 +10,6 @@ export interface Template {
 
 export const templates: Template[] = [
   {
-    id: "template-1",
-    title: "Modern Dashboard",
-    description:
-      "A sleek dashboard template with analytics, charts, and user management.",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-    tags: ["Dashboard", "Analytics", "Admin"],
-    category: "dashboard",
-    isPro: true,
-  },
-  {
     id: "template-2",
     title: "E-commerce Store",
     description:
@@ -29,6 +18,17 @@ export const templates: Template[] = [
       "https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=2070&auto=format&fit=crop",
     tags: ["E-commerce", "Store", "Shopping"],
     category: "ecommerce",
+    isPro: false,
+  },
+  {
+    id: "template-1",
+    title: "Modern Dashboard",
+    description:
+      "A sleek dashboard template with analytics, charts, and user management.",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+    tags: ["Dashboard", "Analytics", "Admin"],
+    category: "dashboard",
     isPro: true,
   },
   {
