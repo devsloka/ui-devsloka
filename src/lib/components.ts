@@ -79,6 +79,18 @@ const components: ComponentCardProps[] = [
     description: "Logo cloud carousel with hover effect",
     image: "/images/logo-cloud-carousel.png",
   },
+  {
+    title: "Moon Star Sky Background",
+    href: "/components/backgrounds/moon-stars-background",
+    description: "Animated moon star sky background effect",
+    image: "/images/moon-stars-background.png",
+  },
+  {
+    title: "Galaxy Background",
+    href: "/components/backgrounds/galaxy-background",
+    description: "Animated galaxy background effect",
+    image: "/images/galaxy-background.png",
+  },
   // {
   //   title: "Morphing Modal",
   //   href: "/components/morphing-modal",
