@@ -42,9 +42,13 @@ export function TemplateCard({ template }: TemplateCardProps) {
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
-          {template.isPro && (
+          {template.isPro ? (
             <Badge className="absolute right-3 top-3 bg-primary text-primary-foreground">
               PRO
+            </Badge>
+          ) : (
+            <Badge className="absolute right-3 top-3 bg-primary text-primary-foreground">
+              FREE
             </Badge>
           )}
 
