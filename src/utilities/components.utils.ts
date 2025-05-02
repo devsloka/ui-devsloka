@@ -245,7 +245,7 @@ export const components: Record<string, ComponentMeta> = {
       ],
       language: "tsx",
       dependencies:
-        "npm i motion clsx tailwind-merge lucide-react shadcn@latest add slider shadcn@latest add card shadcn@latest add tooltip",
+        "npm i motion clsx tailwind-merge lucide-react shadcn@latest add slider card tooltip",
       secondaryCode: "histogram-data.ts",
       secondaryTitle: "Budget Range Slider",
       secondaryLanguage: "typescript",
@@ -292,7 +292,7 @@ export const components: Record<string, ComponentMeta> = {
       ],
       language: "tsx",
       dependencies:
-        "npm i motion clsx tailwind-merge lucide-react shadcn@latest add card shadcn@latest add button",
+        "npm i motion clsx tailwind-merge lucide-react shadcn@latest add card button",
       secondaryTitle: "Tour",
       secondaryLanguage: "typescript",
       secondaryDescription:
