@@ -8,10 +8,16 @@ const components: ComponentCardProps[] = [
     image: "/images/expanding-cards.png",
   },
   {
-    title: "Image Gallery",
-    href: "/components/image-gallery",
-    description: "A responsive image gallery with masonry layout",
-    image: "/images/image-gallery.png",
+    title: "Animated Smartwatch",
+    href: "/components/animated-smartwatch",
+    description: "Animated smartwatch UI",
+    image: "/images/animated-smartwatch.png",
+  },
+  {
+    title: "Tour",
+    href: "/components/tour",
+    description: "Guided tour interface for feature introduction",
+    image: "/images/tour.png",
   },
   {
     title: "Budget Slider",
@@ -20,10 +26,10 @@ const components: ComponentCardProps[] = [
     image: "/images/range-slider-with-histogram.png",
   },
   {
-    title: "Tour",
-    href: "/components/tour",
-    description: "Guided tour interface for feature introduction",
-    image: "/images/tour.png",
+    title: "Image Gallery",
+    href: "/components/image-gallery",
+    description: "A responsive image gallery with masonry layout",
+    image: "/images/image-gallery.png",
   },
   {
     title: "Airbnb Card",
