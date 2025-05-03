@@ -30,7 +30,7 @@ export async function generateMetadata({
     title: `${formattedName} - Devsloka Blocks`,
     description: block.description,
     path: `blocks/${name}`,
-    image: `og-images/${name}.jpg`,
+    image: `images/${name}.png`,
     keywords: [
       ...block.codeMetadata.keywords,
       "Devsloka",

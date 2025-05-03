@@ -12,7 +12,7 @@ export function generateMetadata(): Metadata {
     description:
       "Professionally designed templates to accelerate your workflow. Ready to use in your projects.",
     path: "templates",
-    image: "images/templates-og.jpg",
+    image: "images/templates-og.png",
     keywords: [
       "UI templates",
       "Next.js templates",

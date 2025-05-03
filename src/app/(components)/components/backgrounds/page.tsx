@@ -8,7 +8,7 @@ export function generateMetadata(): Metadata {
     description:
       "Interactive demo of all DevsLoka's animated background components",
     path: "backgrounds",
-    image: "images/backgrounds-og.jpg",
+    image: "images/backgrounds-og.png",
     keywords: [
       "animated backgrounds",
       "UI showcase",

@@ -10,7 +10,7 @@ export function generateMetadata(): Metadata {
     description:
       "Explore our premium collection of animated UI cards with modern effects and interactions",
     path: "components/cards",
-    image: "images/cards-collection-og.jpg",
+    image: "images/cards-collection-og.png",
     keywords: [
       "animated cards",
       "3D UI components",

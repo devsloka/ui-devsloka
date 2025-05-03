@@ -10,7 +10,7 @@ export function generateMetadata(): Metadata {
     description:
       "Explore our collection of beautiful and customizable blocks for your web projects",
     path: "blocks",
-    image: "images/blocks-og.jpg",
+    image: "images/blocks-og.png",
     keywords: [
       "UI blocks",
       "website sections",
