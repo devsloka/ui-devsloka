@@ -50,7 +50,7 @@ export const blocks: Record<string, BlockMeta> = {
     name: "pricing-block",
     title: "Pricing Section",
     description: "Interactive pricing component with multiple plans",
-    imageUrl: "https://yourwebsite.com/images/pricing-block.jpg",
+    imageUrl: "https://yourwebsite.com/images/pricing-block.png",
     codeMetadata: {
       mainFile: {
         codePath: "pricing-block.tsx",
@@ -67,7 +67,7 @@ export const blocks: Record<string, BlockMeta> = {
     name: "hero-section",
     title: "Hero Section",
     description: "Responsive hero section with call-to-action",
-    imageUrl: "https://yourwebsite.com/images/hero-section.jpg",
+    imageUrl: "https://yourwebsite.com/images/hero-section.png",
     codeMetadata: {
       mainFile: {
         codePath: "hero-section.tsx",
@@ -104,7 +104,7 @@ export const blocks: Record<string, BlockMeta> = {
     name: "testimonials-block",
     title: "Testimonials Section",
     description: "Customer review and testimonial showcase",
-    imageUrl: "https://yourwebsite.com/images/testimonials-block.jpg",
+    imageUrl: "https://yourwebsite.com/images/testimonials-block.png",
     codeMetadata: {
       mainFile: {
         codePath: "testimonials-block.tsx",
@@ -129,7 +129,7 @@ export const blocks: Record<string, BlockMeta> = {
     name: "footer-block",
     title: "Website Footer",
     description: "Complete website footer with navigation links",
-    imageUrl: "https://yourwebsite.com/images/footer-block.jpg",
+    imageUrl: "https://yourwebsite.com/images/footer-block.png",
     codeMetadata: {
       mainFile: {
         codePath: "footer-block.tsx",
@@ -165,7 +165,7 @@ export const blocks: Record<string, BlockMeta> = {
     name: "faq-block",
     title: "FAQ Section",
     description: "Expandable frequently asked questions section",
-    imageUrl: "https://yourwebsite.com/images/faq-block.jpg",
+    imageUrl: "https://yourwebsite.com/images/faq-block.png",
     codeMetadata: {
       mainFile: {
         codePath: "faqs-block.tsx",
@@ -190,7 +190,7 @@ export const blocks: Record<string, BlockMeta> = {
     name: "contact-block",
     title: "Contact Form",
     description: "Interactive contact form with validation",
-    imageUrl: "https://yourwebsite.com/images/contact-block.jpg",
+    imageUrl: "https://yourwebsite.com/images/contact-block.png",
     codeMetadata: {
       mainFile: {
         codePath: "contact-block.tsx",
@@ -208,7 +208,7 @@ export const blocks: Record<string, BlockMeta> = {
     name: "features-block",
     title: "Floating Feature Showcase",
     description: "Feature showcase with icon grid layout",
-    imageUrl: "https://yourwebsite.com/images/features-block.jpg",
+    imageUrl: "https://yourwebsite.com/images/features-block.png",
     codeMetadata: {
       mainFile: {
         codePath: "feature-floating-showcase.tsx",
@@ -244,7 +244,7 @@ export const blocks: Record<string, BlockMeta> = {
     name: "newsletter-block",
     title: "Newsletter Signup",
     description: "Email newsletter subscription form",
-    imageUrl: "https://yourwebsite.com/images/newsletter-block.jpg",
+    imageUrl: "https://yourwebsite.com/images/newsletter-block.png",
     codeMetadata: {
       mainFile: {
         codePath: "newsletter/newsletter-block-two.tsx",
@@ -269,7 +269,7 @@ export const blocks: Record<string, BlockMeta> = {
     name: "logo-cloud",
     title: "Logo Cloud",
     description: "Email newsletter subscription form",
-    imageUrl: "https://yourwebsite.com/images/newsletter-block.jpg",
+    imageUrl: "https://yourwebsite.com/images/newsletter-block.png",
     codeMetadata: {
       mainFile: {
         codePath: "logo-cloud-1.tsx",
@@ -286,7 +286,7 @@ export const blocks: Record<string, BlockMeta> = {
     name: "team",
     title: "Team Section",
     description: "Responsive team section with call-to-action",
-    imageUrl: "https://yourwebsite.com/images/team.jpg",
+    imageUrl: "https://yourwebsite.com/images/team.png",
     codeMetadata: {
       mainFile: {
         codePath: "teams/team-block.tsx",

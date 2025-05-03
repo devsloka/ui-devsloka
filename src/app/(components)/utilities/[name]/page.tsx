@@ -28,7 +28,7 @@ export async function generateMetadata({
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 
-  const imagePath = `/og-images/${name}.jpg`;
+  const imagePath = `/images/${name}.png`;
 
   return generateSEO({
     title: `${formattedName} - Devsloka Components`,
