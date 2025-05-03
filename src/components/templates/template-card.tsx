@@ -8,6 +8,7 @@ import { ArrowRight, Eye } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Link from "next/link";
 
 interface TemplateCardProps {
   template: Template;
@@ -58,10 +59,19 @@ export function TemplateCard({ template }: TemplateCardProps) {
             transition={{ duration: 0.2 }}
             className="absolute bottom-3 left-3 right-3 flex justify-between"
           >
-            <Button variant="secondary" size="sm" className="h-8 gap-1">
-              <Eye className="h-3.5 w-3.5" />
-              Preview
-            </Button>
+            {template.href ? (
+              <Link href={template.href}>
+                <Button variant="secondary" size="sm" className="h-8 gap-1 cursor-pointer">
+                  <Eye className="h-3.5 w-3.5" />
+                  Preview
+                </Button>
+              </Link>
+            ) : (
+              <Button variant="secondary" size="sm" className="h-8 gap-1">
+                <Eye className="h-3.5 w-3.5" />
+                Preview
+              </Button>
+            )}
             <Button size="sm" className="h-8 gap-1">
               Use <ArrowRight className="h-3.5 w-3.5" />
             </Button>
