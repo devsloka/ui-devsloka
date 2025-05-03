@@ -67,7 +67,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
                 </Button>
               </Link>
             ) : (
-              <Button variant="secondary" size="sm" className="h-8 gap-1">
+              <Button variant="secondary" size="sm" className="h-8 gap-1 cursor-not-allowed">
                 <Eye className="h-3.5 w-3.5" />
                 Preview
               </Button>

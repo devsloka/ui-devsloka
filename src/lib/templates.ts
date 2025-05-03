@@ -41,7 +41,7 @@ export const templates: Template[] = [
       "https://images.unsplash.com/photo-1545239351-ef35f43d514b?q=80&w=1974&auto=format&fit=crop",
     tags: ["Portfolio", "Creative", "Personal"],
     category: "portfolio",
-    isPro: false,
+    isPro: true,
   },
   {
     id: "template-4",
@@ -63,7 +63,7 @@ export const templates: Template[] = [
       "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2070&auto=format&fit=crop",
     tags: ["Blog", "Content", "Publishing"],
     category: "blog",
-    isPro: false,
+    isPro: true,
   },
   {
     id: "template-6",
@@ -96,6 +96,6 @@ export const templates: Template[] = [
       "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2070&auto=format&fit=crop",
     tags: ["Forms", "Input", "Validation"],
     category: "forms",
-    isPro: false,
+    isPro: true,
   },
 ];
