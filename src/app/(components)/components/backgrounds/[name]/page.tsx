@@ -82,6 +82,7 @@ export default async function BackgroundPage({
   }
 
   const componentPath = `src/components/backgrounds/${name}.tsx`;
+  console.log("componentPath ===========>", componentPath);
   const componentCode = getComponentCode(componentPath);
 
   return (
