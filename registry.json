@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "acme",
+  "homepage": "https://ui.devsloka.in/",
+  "items": [
+    {
+      "name": "pricing-block",
+      "type": "registry:block",
+      "title": "Pricing Block",
+      "description": "A Pricing Block component for displaying pricing plans.",
+      "files": [
+        {
+          "path": "src/registry/blocks/pricing-block.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react"]
+    }
+  ]
+}
