@@ -74,13 +74,19 @@ const Navbar = () => {
         <div className="flex items-center gap-24">
           <Link href="/">
             <div className="flex items-center gap-2">
-              {" "}
               <Image
-                src={"/favicon.ico"}
+                src={"/favicon-dark.png"}
                 alt="logo"
                 width={32}
                 height={32}
-                className="object-contain"
+                className="object-contain dark:block hidden"
+              />
+              <Image
+                src={"/favicon-light.png"}
+                alt="logo"
+                width={32}
+                height={32}
+                className="object-contain dark:hidden"
               />
               <span className="text-2xl font-bold text-[#0A6EFF]">
                 Devsloka UI
@@ -120,7 +126,21 @@ const Navbar = () => {
             </Button>
           </SheetTrigger>
           <SheetContent className="overflow-y-auto max-h-screen">
-            <SheetHeader>
+            <SheetHeader className="flex flex-row items-center gap-2">
+              <Image
+                src={"/favicon-dark.png"}
+                alt="logo"
+                width={32}
+                height={32}
+                className="object-contain dark:block hidden"
+              />
+              <Image
+                src={"/favicon-light.png"}
+                alt="logo"
+                width={32}
+                height={32}
+                className="object-contain dark:hidden"
+              />
               <span className="text-2xl font-bold text-[#0A6EFF]">
                 Devsloka UI
               </span>
