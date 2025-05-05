@@ -29,23 +29,21 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 2,
-    name: "Michael Chen",
-    role: "Lead Developer",
-    company: "StartupX",
+    name: "Yash Raj",
+    role: "Founder & Developer",
+    company: "Excellogics",
     quote:
-      "The best UI library I've used. Clean, modern, and highly customizable.",
-    avatar:
-      "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
-    position: { x: -160, y: -280, rotate: 10 },
+      "Built with love and care. The components are intuitive and easy to use.",
+    avatar: "https://avatars.githubusercontent.com/u/112754137?v=4",
+    position: { x: -160, y: -280, rotate: 1 },
   },
   {
     id: 3,
-    name: "Emily Davis",
-    role: "UI/UX Designer",
-    company: "DesignLab",
-    quote: "Perfect blend of aesthetics and functionality. A designer's dream!",
-    avatar:
-      "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg",
+    name: "Priyanshu Gupta",
+    role: "Founder & Developer",
+    company: "Bapa Technologies",
+    quote: "The design is modern and fresh.",
+    avatar: "https://avatars.githubusercontent.com/u/112753528?v=4",
     position: { x: 160, y: -280, rotate: -5 },
   },
   {
