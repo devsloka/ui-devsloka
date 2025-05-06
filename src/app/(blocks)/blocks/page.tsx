@@ -43,7 +43,7 @@ const BlocksPage: React.FC = () => {
                 description={block.description}
                 showLineNumbers
                 title={`${block.title} Component`}
-                className="rounded-lg border"
+                className="rounded-lg"
               />
             </section>
           );
