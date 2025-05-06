@@ -54,7 +54,13 @@ export function AdvancedCodeBlock({
   dependencies,
 }: AdvancedCodeBlockProps) {
   const [viewTab, setViewTab] = useState<string>("preview");
-  const [modeTab, setModeTab] = useState<string>("manual");
+  const hasCLI = !!cliCommands;
+  const hasManual = manualSteps.length > 0 || !!secondaryCode || !!dependencies;
+  const [modeTab, setModeTab] = useState<string>(() => {
+    if (hasCLI) return "cli";
+    if (hasManual) return "manual";
+    return "";
+  });
 
   return (
     <div className={cn("space-y-10 my-8", className)}>
@@ -118,14 +124,14 @@ export function AdvancedCodeBlock({
       </div>
 
       {/* CLI vs Manual Mode Tabs */}
-      {
+      {(hasCLI || hasManual) && (
         <Tabs value={modeTab} onValueChange={setModeTab} className="w-full">
           <TabsList className="bg-muted/40 p-2 rounded-lg">
-            {cliCommands && <TabsTrigger value="cli">CLI</TabsTrigger>}
-            <TabsTrigger value="manual">Manual</TabsTrigger>
+            {hasCLI && <TabsTrigger value="cli">CLI</TabsTrigger>}
+            {hasManual && <TabsTrigger value="manual">Manual</TabsTrigger>}
           </TabsList>
 
-          {cliCommands && (
+          {hasCLI && (
             <TabsContent
               value="cli"
               className="p-4 border rounded-b-lg space-y-4"
@@ -148,81 +154,82 @@ export function AdvancedCodeBlock({
               </div>
             </TabsContent>
           )}
-
-          <TabsContent
-            value="manual"
-            className="space-y-4 border p-4 rounded-sm"
-          >
-            {manualSteps && (
-              <div className="">
-                {/* Dependencies Section */}
-                {manualSteps.length > 0 && (
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-semibold">
-                      Manual Setup Steps
-                    </h3>
-                    <div className="space-y-4">
-                      {manualSteps.map((step, i) => (
-                        <div key={i} className="flex items-start">
-                          <div className="flex flex-col items-center">
-                            <div className="w-6 h-6 flex items-center justify-center rounded-full text-white-foreground text-xs border">
-                              {i + 1}
+          {hasManual && (
+            <TabsContent
+              value="manual"
+              className="space-y-4 border p-4 rounded-sm"
+            >
+              {manualSteps && (
+                <div className="">
+                  {/* Dependencies Section */}
+                  {manualSteps.length > 0 && (
+                    <div className="space-y-2">
+                      <h3 className="text-lg font-semibold">
+                        Manual Setup Steps
+                      </h3>
+                      <div className="space-y-4">
+                        {manualSteps.map((step, i) => (
+                          <div key={i} className="flex items-start">
+                            <div className="flex flex-col items-center">
+                              <div className="w-6 h-6 flex items-center justify-center rounded-full text-white-foreground text-xs border">
+                                {i + 1}
+                              </div>
+                              {i < manualSteps.length - 1 && (
+                                <ChevronDown className="mt-2 h-4 w-4 text-primary " />
+                              )}
                             </div>
-                            {i < manualSteps.length - 1 && (
-                              <ChevronDown className="mt-2 h-4 w-4 text-primary " />
-                            )}
+                            <p className="ml-4 text-md text-primary">{step}</p>
                           </div>
-                          <p className="ml-4 text-md text-primary">{step}</p>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            )}
+                  )}
+                </div>
+              )}
 
-            {dependencies && (
-              <div>
-                <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-bold mb-4">
-                    Install Dependencies
-                  </h2>
-                  <CopyButton
-                    textToCopy={formatCode(dependencies)}
-                    className="mb-4"
+              {dependencies && (
+                <div>
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-xl font-bold mb-4">
+                      Install Dependencies
+                    </h2>
+                    <CopyButton
+                      textToCopy={formatCode(dependencies)}
+                      className="mb-4"
+                    />
+                  </div>
+                  <CodeHighlighter
+                    code={dependencies}
+                    language="bash"
+                    showLineNumbers={true}
                   />
                 </div>
-                <CodeHighlighter
-                  code={dependencies}
-                  language="bash"
-                  showLineNumbers={true}
-                />
-              </div>
-            )}
+              )}
 
-            {secondaryCode && (
-              <div className="space-y-2 relative">
-                {secondaryTitle && (
-                  <h3 className="text-lg font-semibold">{secondaryTitle}</h3>
-                )}
-                {secondaryDescription && (
-                  <p className="text-sm text-muted-foreground">
-                    {secondaryDescription}
-                  </p>
-                )}
-                <CodeHighlighter
-                  code={secondaryCode}
-                  language={secondaryLanguage}
-                  showLineNumbers
-                />
-                <div className="absolute top-2 right-2">
-                  <CopyButton textToCopy={formatCode(secondaryCode)} />
+              {secondaryCode && (
+                <div className="space-y-2 relative">
+                  {secondaryTitle && (
+                    <h3 className="text-lg font-semibold">{secondaryTitle}</h3>
+                  )}
+                  {secondaryDescription && (
+                    <p className="text-sm text-muted-foreground">
+                      {secondaryDescription}
+                    </p>
+                  )}
+                  <CodeHighlighter
+                    code={secondaryCode}
+                    language={secondaryLanguage}
+                    showLineNumbers
+                  />
+                  <div className="absolute top-2 right-2">
+                    <CopyButton textToCopy={formatCode(secondaryCode)} />
+                  </div>
                 </div>
-              </div>
-            )}
-          </TabsContent>
+              )}
+            </TabsContent>
+          )}
         </Tabs>
-      }
+      )}
     </div>
   );
 }
