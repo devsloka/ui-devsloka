@@ -4,6 +4,21 @@
   "homepage": "https://ui.devsloka.in/",
   "items": [
     {
+      "name": "tour",
+      "type": "registry:component",
+      "title": "Tour",
+      "description": "A Tour component for displaying a tour section.",
+      "files": [
+        {
+          "path": "src/registry/ui/tour.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["lucide-react", "motion/react"],
+      "registryDependencies": ["button", "card"]
+    },
+
+    {
       "name": "pricing-block",
       "type": "registry:block",
       "title": "Pricing Block",
