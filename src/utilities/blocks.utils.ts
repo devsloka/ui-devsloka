@@ -9,7 +9,7 @@ import HeroFloatingElements from "@/components/blocks/hero-floating-elements";
 import HeroGradientMesh from "@/components/blocks/hero-gradient-mesh";
 import HeroSectionBlock from "@/components/blocks/hero-section";
 import HeroSplitReveal from "@/components/blocks/hero-split-reveal";
-import { NewsletterBlock } from "@/components/blocks/newsletter/newsletter-block";
+// import { NewsletterBlock } from "@/components/blocks/newsletter/newsletter-block";
 import PricingBlock from "@/components/blocks/pricing-block";
 import { WaveFooter } from "@/components/blocks/wave-footer";
 import { FeatureInteractiveCards } from "@/components/blocks/feature-interactive-cards";
@@ -107,7 +107,7 @@ export const blocks: Record<string, BlockMeta> = {
     imageUrl: "https://yourwebsite.com/images/testimonials-block.png",
     codeMetadata: {
       mainFile: {
-        codePath: "testimonials-block.tsx",
+        codePath: "/testimonials/testimonials-block.tsx",
         title: "Testimonials Component",
         language: "tsx",
         hasPreview: true,
@@ -116,8 +116,8 @@ export const blocks: Record<string, BlockMeta> = {
       dependencies: "npm i lucide-react",
       relatedFiles: [
         {
-          codePath: "testimonials-block-two.tsx",
-          title: "Testimonials Component",
+          codePath: "testimonials/testimonials-block-2.tsx",
+          title: "Testimonials Component 2",
           language: "tsx",
           block: TestimonialsBlockTwo,
         },
@@ -254,14 +254,14 @@ export const blocks: Record<string, BlockMeta> = {
       },
       keywords: ["newsletter", "email", "subscription"],
       dependencies: "npm i react-email",
-      relatedFiles: [
-        {
-          codePath: "newsletter/newsletter-block.tsx",
-          title: "Newsletter Component",
-          language: "typescript",
-          block: NewsletterBlock,
-        },
-      ],
+      // relatedFiles: [
+      //   {
+      //     codePath: "newsletter/newsletter-block.tsx",
+      //     title: "Newsletter Component",
+      //     language: "typescript",
+      //     block: NewsletterBlock,
+      //   },
+      // ],
     },
   },
   "logo-cloud": {

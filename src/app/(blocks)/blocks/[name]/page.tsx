@@ -19,7 +19,6 @@ export async function generateMetadata({
   const block = blocks[name];
   if (!block) return {};
 
-  // Format name with capitalized words
   const formattedName = name
     .replace(/-/g, " ")
     .split(" ")
@@ -49,17 +48,24 @@ export default async function BlockPage({
   const { name } = await params;
   const blockInfo = blocks[name];
 
+  console.log("blockInfo", blockInfo);
+
   if (!blockInfo) return notFound();
 
   const { block: MainComponent, codeMetadata } = blockInfo;
   const { mainFile, relatedFiles = [] } = codeMetadata;
 
-  const codeFiles = await Promise.all(
-    [mainFile, ...relatedFiles].map(async (file) => ({
+  const codeFiles = [];
+
+  for (const file of [mainFile, ...relatedFiles]) {
+    const content = getComponentCode(`src/components/blocks/${file.codePath}`);
+    codeFiles.push({
       ...file,
-      content: await getComponentCode(`src/components/blocks/${file.codePath}`),
-    }))
-  );
+      content,
+    });
+
+    console.log("content", content);
+  }
 
   return (
     <div className="w-full space-y-12">
