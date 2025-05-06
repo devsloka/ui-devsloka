@@ -1,12 +1,12 @@
 import { useOnlineStatus } from "@/hooks/devsloka-hooks/use-online-status";
 import { useScrollPosition } from "@/hooks/devsloka-hooks/use-scroll-position";
 import UseFetchDemo from "@/hooks/devsloka-hooks/demo/use-fetch-demo";
-import UseClipboardDemo from "@/hooks/devsloka-hooks/demo/useClipboardDemo";
-import UseDeviceDetectionDemo from "@/hooks/devsloka-hooks/demo/useDeviceDetectionDemo";
-import UseFormDemo from "@/hooks/devsloka-hooks/demo/useFormDemo";
-import UseKeyPressDemo from "@/hooks/devsloka-hooks/demo/UseKeyPressDemo";
-import UseDateFormatterDemo from "@/hooks/devsloka-hooks/demo/useDateFormatterDemo";
-import UseDebounceDemo from "@/hooks/devsloka-hooks/demo/useDebounceDemo";
+import UseClipboardDemo from "@/hooks/devsloka-hooks/demo/use-clipboard-demo";
+import UseDeviceDetectionDemo from "@/hooks/devsloka-hooks/demo/use-device-detection-demo";
+import UseFormDemo from "@/hooks/devsloka-hooks/demo/use-form-demo";
+import UseKeyPressDemo from "@/hooks/devsloka-hooks/demo/use-key-press-demo";
+import UseDateFormatterDemo from "@/hooks/devsloka-hooks/demo/use-date-formatter-demo";
+import UseDebounceDemo from "@/hooks/devsloka-hooks/demo/use-debounce-demo";
 
 export type UtilityMeta = {
   component: React.FC;
@@ -69,7 +69,6 @@ export const utilities: Record<string, UtilityMeta> = {
   //     language: "tsx",
   //   },
   // },
-  // Add remaining utilities following the same pattern
   "use-clipboard": {
     component: UseClipboardDemo,
     codeMetadata: {
@@ -92,15 +91,6 @@ export const utilities: Record<string, UtilityMeta> = {
       secondaryLanguage: "tsx",
     },
   },
-  // "use-dark-mode": {
-  //   component: useDarkMode,
-  //   codeMetadata: {
-  //     title: "useDarkMode Hook",
-  //     description: "Manage dark/light theme with CSS class synchronization",
-  //     keywords: ["React", "Theming", "UI"],
-  //     language: "tsx",
-  //   },
-  // },
   "use-device-detection": {
     component: UseDeviceDetectionDemo,
     codeMetadata: {
@@ -161,24 +151,6 @@ export const utilities: Record<string, UtilityMeta> = {
       secondaryTitle: "useScrollPosition Hook",
     },
   },
-  // "use-animation": {
-  //   component: useAnimation,
-  //   codeMetadata: {
-  //     title: "useAnimation Hook",
-  //     description: "Control CSS animations timing",
-  //     keywords: ["React", "Animation", "CSS"],
-  //     language: "tsx",
-  //   },
-  // },
-  // "use-previous": {
-  //   component: usePrevious,
-  //   codeMetadata: {
-  //     title: "usePrevious Hook",
-  //     description: "Track previous state/props values",
-  //     keywords: ["React", "State", "Comparison"],
-  //     language: "tsx",
-  //   },
-  // },
   "use-date-formatter": {
     component: UseDateFormatterDemo,
     codeMetadata: {
