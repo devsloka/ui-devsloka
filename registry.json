@@ -125,6 +125,63 @@
       ],
       "dependencies": ["lucide-react", "framer-motion"],
       "registryDependencies": ["button"]
+    },
+    {
+      "name": "footer-block",
+      "type": "registry:block",
+      "title": "Footer Block",
+      "description": "A Footer Block component for displaying a footer section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/footer-block.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "input"]
+    },
+    {
+      "name": "floating-footer-block",
+      "type": "registry:block",
+      "title": "Floating Footer Block",
+      "description": "A Floating Footer Block component for displaying a floating footer section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/floating-footer.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["button", "input"]
+    },
+    {
+      "name": "grid-footer-block",
+      "type": "registry:block",
+      "title": "Grid Footer Block",
+      "description": "A Grid Footer Block component for displaying a grid footer section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/grid-footer.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["button", "input"]
+    },
+    {
+      "name": "wave-footer-block",
+      "type": "registry:block",
+      "title": "Wave Footer Block",
+      "description": "A Wave Footer Block component for displaying a wave footer section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/wave-footer.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["button", "input"]
     }
+
   ]
 }
