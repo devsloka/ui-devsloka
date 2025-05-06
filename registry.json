@@ -125,6 +125,117 @@
       ],
       "dependencies": ["lucide-react", "framer-motion"],
       "registryDependencies": ["button"]
+    },
+    {
+      "name": "footer-block",
+      "type": "registry:block",
+      "title": "Footer Block",
+      "description": "A Footer Block component for displaying a footer section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/footer-block.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "input"]
+    },
+    {
+      "name": "floating-footer-block",
+      "type": "registry:block",
+      "title": "Floating Footer Block",
+      "description": "A Floating Footer Block component for displaying a floating footer section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/floating-footer.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["button", "input"]
+    },
+    {
+      "name": "grid-footer-block",
+      "type": "registry:block",
+      "title": "Grid Footer Block",
+      "description": "A Grid Footer Block component for displaying a grid footer section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/grid-footer.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["button", "input"]
+    },
+    {
+      "name": "wave-footer-block",
+      "type": "registry:block",
+      "title": "Wave Footer Block",
+      "description": "A Wave Footer Block component for displaying a wave footer section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/wave-footer.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["button", "input"]
+    },
+    {
+      "name": "features-block",
+      "type": "registry:block",
+      "title": "Features Block",
+      "description": "A Features Block component for displaying features.",
+      "files": [
+        {
+          "path": "src/registry/blocks/features-block.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"]
+    },
+    {
+      "name": "features-block-four",
+      "type": "registry:block",
+      "title": "Features Block Four",
+      "description": "A Features Block Four component for displaying features.",
+      "files": [
+        {
+          "path": "src/registry/blocks/features-block-four.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["button", "badge", "card"]
+    },
+    {
+      "name": "feature-interactive-cards-block",
+      "type": "registry:block",
+      "title": "Feature Interactive Cards Block",
+      "description": "A Feature Interactive Cards Block component for displaying features.",
+      "files": [
+        {
+          "path": "src/registry/blocks/feature-interactive-cards.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["button", "badge", "card"]
+    },
+    {
+      "name": "feature-floating-showcase-block",
+      "type": "registry:block",
+      "title": "Feature Floating Showcase Block",
+      "description": "A Feature Floating Showcase Block component for displaying features.",
+      "files": [
+        {
+          "path": "src/registry/blocks/feature-floating-showcase.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["button", "badge"]
     }
   ]
 }
