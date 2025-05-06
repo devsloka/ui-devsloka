@@ -48,24 +48,15 @@ export default async function BlockPage({
   const { name } = await params;
   const blockInfo = blocks[name];
 
-  console.log("blockInfo", blockInfo);
-
   if (!blockInfo) return notFound();
 
   const { block: MainComponent, codeMetadata } = blockInfo;
   const { mainFile, relatedFiles = [] } = codeMetadata;
 
-  const codeFiles = [];
-
-  for (const file of [mainFile, ...relatedFiles]) {
-    const content = getComponentCode(`src/components/blocks/${file.codePath}`);
-    codeFiles.push({
-      ...file,
-      content,
-    });
-
-    console.log("content", content);
-  }
+  const codeFiles = [mainFile, ...relatedFiles].map((file) => ({
+    ...file,
+    content: getComponentCode(`src/components/blocks/${file.codePath}`),
+  }));
 
   return (
     <div className="w-full space-y-12">
