@@ -15,6 +15,47 @@
         }
       ],
       "dependencies": ["lucide-react"]
+    },
+    {
+      "name": "contact-block",
+      "type": "registry:block",
+      "title": "Contact Block",
+      "description": "A Contact Block component for displaying contact information.",
+      "files": [
+        {
+          "path": "src/registry/blocks/contact-block.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["card", "button", "input", "label", "textarea"]
+    },
+    {
+      "name": "faqs-block",
+      "type": "registry:block",
+      "title": "FAQs Block",
+      "description": "A FAQs Block component for displaying frequently asked questions.",
+      "files": [
+        {
+          "path": "src/registry/blocks/faqs-block.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["accordion", "button"]
+    },
+    {
+      "name": "faqs-block-two",
+      "type": "registry:block",
+      "title": "FAQs Block Two",
+      "description": "A FAQs Block component for displaying frequently asked questions.",
+      "files": [
+        {
+          "path": "src/registry/blocks/faq-block-two.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"]
     }
   ]
 }
