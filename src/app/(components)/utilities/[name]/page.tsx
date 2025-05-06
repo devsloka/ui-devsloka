@@ -4,7 +4,6 @@ import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { getComponentCode } from "@/utilities/getComponentCode";
 import { utilities } from "@/utilities/hooks.utils";
 import { Metadata } from "next";
-import { formatToDemo } from "@/utilities/format-to-demo";
 import { generateSEO } from "@/config/seo/seo.utils";
 
 export async function generateStaticParams() {
@@ -21,7 +20,6 @@ export async function generateMetadata({
   const component = utilities[name];
   if (!component) return {};
 
-  // Capitalize first letter of each word
   const formattedName = name
     .replace(/-/g, " ")
     .split(" ")
@@ -48,8 +46,8 @@ const UtilPage = async ({ params }: { params: Promise<{ name: string }> }) => {
   }
 
   const { component: ActiveComponent, codeMetadata } = componentInfo;
-  const formate = formatToDemo(name);
-  const componentPath = `src/hooks/devsloka-hooks/demo/${formate}.tsx`;
+
+  const componentPath = `src/hooks/devsloka-hooks/demo/${name + "-demo"}.tsx`;
   const componentCode = getComponentCode(componentPath);
   const secondaryCode = getComponentCode(
     `src/hooks/devsloka-hooks/${name}.tsx`
