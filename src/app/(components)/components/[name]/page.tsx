@@ -69,6 +69,9 @@ export default async function ComponentPage({
         secondaryTitle={componentInfo.codeMetadata.secondaryTitle}
         secondaryLanguage={componentInfo.codeMetadata.secondaryLanguage}
         secondaryDescription={componentInfo.codeMetadata.secondaryDescription}
+        // cliCommands={codeMetadata.cliCommands}
+        manualSteps={["npm i @devsloka/react-components"]}
+        cliCommands="npm i @devsloka/react-components"
       />
     </div>
   );
