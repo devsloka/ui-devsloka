@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { TemplateCard } from "@/components/templates/template-card";
 import { templates } from "@/lib/templates";
-import Spotlight from "@/components/templates/spotlight-background";
 import { Metadata } from "next";
 import { generateSEO } from "@/config/seo/seo.utils";
 import { FloatingDots } from "@/components/devsloka-components/floating-dots";
@@ -29,8 +28,8 @@ export default function Template() {
     <div className="flex min-h-screen flex-col">
       <FloatingDots
         className="w-full"
-        maxRadius={0.3}
-        maxSpeed={0.8}
+        maxRadius={0.4}
+        maxSpeed={0.7}
         minSpeed={0.4}
       />
       <main className="flex-1">
