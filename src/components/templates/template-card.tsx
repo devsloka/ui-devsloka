@@ -48,7 +48,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
               PRO
             </Badge>
           ) : (
-            <Badge className="absolute right-3 top-3 bg-primary text-primary-foreground">
+            <Badge className="absolute right-3 top-3 bg-green-400 text-primary-foreground">
               FREE
             </Badge>
           )}
