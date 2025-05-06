@@ -1,6 +1,6 @@
 import { useOnlineStatus } from "@/hooks/devsloka-hooks/use-online-status";
 import { useScrollPosition } from "@/hooks/devsloka-hooks/use-scroll-position";
-import UseFetchDemo from "@/hooks/devsloka-hooks/demo/useFetchDemo";
+import UseFetchDemo from "@/hooks/devsloka-hooks/demo/use-fetch-demo";
 import UseClipboardDemo from "@/hooks/devsloka-hooks/demo/useClipboardDemo";
 import UseDeviceDetectionDemo from "@/hooks/devsloka-hooks/demo/useDeviceDetectionDemo";
 import UseFormDemo from "@/hooks/devsloka-hooks/demo/useFormDemo";
