@@ -111,6 +111,20 @@
       ],
       "dependencies": ["lucide-react", "framer-motion"],
       "registryDependencies": ["button"]
+    },
+    {
+      "name": "logo-cloud-block",
+      "type": "registry:block",
+      "title": "Logo Cloud Block",
+      "description": "A Logo Cloud Block component for displaying a logo cloud section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/logo-cloud-1.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["button"]
     }
   ]
 }
