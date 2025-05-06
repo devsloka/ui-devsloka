@@ -5,6 +5,7 @@ import { templates } from "@/lib/templates";
 import Spotlight from "@/components/templates/spotlight-background";
 import { Metadata } from "next";
 import { generateSEO } from "@/config/seo/seo.utils";
+import { FloatingDots } from "@/components/devsloka-components/floating-dots";
 
 export function generateMetadata(): Metadata {
   return generateSEO({
@@ -26,9 +27,11 @@ export function generateMetadata(): Metadata {
 export default function Template() {
   return (
     <div className="flex min-h-screen flex-col">
-      <Spotlight
-        className="-top-40 left-0 md:-top-10 md:left-60"
-        fill="white"
+      <FloatingDots
+        className="w-full"
+        maxRadius={0.3}
+        maxSpeed={0.8}
+        minSpeed={0.4}
       />
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32">
