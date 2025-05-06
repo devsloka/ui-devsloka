@@ -15,6 +15,116 @@
         }
       ],
       "dependencies": ["lucide-react"]
+    },
+    {
+      "name": "contact-block",
+      "type": "registry:block",
+      "title": "Contact Block",
+      "description": "A Contact Block component for displaying contact information.",
+      "files": [
+        {
+          "path": "src/registry/blocks/contact-block.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["card", "button", "input", "label", "textarea"]
+    },
+    {
+      "name": "faqs-block",
+      "type": "registry:block",
+      "title": "FAQs Block",
+      "description": "A FAQs Block component for displaying frequently asked questions.",
+      "files": [
+        {
+          "path": "src/registry/blocks/faqs-block.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["accordion", "button"]
+    },
+    {
+      "name": "faqs-block-two",
+      "type": "registry:block",
+      "title": "FAQs Block Two",
+      "description": "A FAQs Block component for displaying frequently asked questions.",
+      "files": [
+        {
+          "path": "src/registry/blocks/faq-block-two.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"]
+    },
+    {
+      "name": "hero-section-block",
+      "type": "registry:block",
+      "title": "Hero Section Block",
+      "description": "A Hero Section Block component for displaying a hero section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/hero-section.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"]
+    },
+    {
+      "name": "hero-floating-elements-block",
+      "type": "registry:block",
+      "title": "Hero Floating Elements Block",
+      "description": "A Hero Floating Elements Block component for displaying a hero section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/hero-floating-elements.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["button"]
+    },
+    {
+      "name": "hero-gradient-mesh-block",
+      "type": "registry:block",
+      "title": "Hero Gradient Mesh Block",
+      "description": "A Hero Gradient Mesh Block component for displaying a hero section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/hero-gradient-mesh.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["button"]
+    },
+    {
+      "name": "hero-split-reveal-block",
+      "type": "registry:block",
+      "title": "Hero Split Reveal Block",
+      "description": "A Hero Split Reveal Block component for displaying a hero section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/hero-split-reveal.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["button"]
+    },
+    {
+      "name": "logo-cloud-block",
+      "type": "registry:block",
+      "title": "Logo Cloud Block",
+      "description": "A Logo Cloud Block component for displaying a logo cloud section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/logo-cloud-1.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["button"]
     }
   ]
 }
