@@ -7,6 +7,7 @@ export interface Template {
   category: string;
   isPro: boolean;
   href?: string;
+  github?: string;
 }
 
 export const templates: Template[] = [
@@ -21,6 +22,7 @@ export const templates: Template[] = [
     category: "ecommerce",
     isPro: false,
     href: "https://next-js-ecommerce-template.vercel.app/",
+    github: "https://github.com/yashraj970/NextJs-Ecommerce-Template",
   },
   {
     id: "template-1",
