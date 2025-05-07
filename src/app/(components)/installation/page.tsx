@@ -3,9 +3,9 @@ import { InstallationSteps } from "@/components/installation/installation-steps"
 import { generateSEO } from "@/config/seo/seo.utils";
 import { Metadata } from "next";
 export const metadata: Metadata = generateSEO({
-  title: "Install DevSloka UI",
+  title: "Install Devsloka UI",
   description:
-    "Quickstart guide for installing DevSloka UI—our animated, minimalist React & Next.js component library built with Tailwind CSS, Shadcn UI & Framer Motion.",
+    "Quickstart guide for installing Devsloka UI—our animated, minimalist React & Next.js component library built with Tailwind CSS, Shadcn UI & Framer Motion.",
   path: "/installation",
   image: "/images/installation-og.png",
   keywords: [

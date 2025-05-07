@@ -5,7 +5,7 @@ import { generateSEO } from "@/config/seo/seo.utils";
 export const metadata: Metadata = generateSEO({
   title: "Introduction – DevSloka UI",
   description:
-    "Welcome to DevSloka UI – your go-to source for animated, minimalist React/Next.js components, blocks, and templates built with Tailwind CSS, Shadcn UI & Framer Motion.",
+    "Welcome to Devsloka UI – your go-to source for animated, minimalist React/Next.js components, blocks, and templates built with Tailwind CSS, Shadcn UI & Framer Motion.",
   path: "/introduction",
   image: "/images/intro-og.png",
   keywords: [

@@ -13,22 +13,20 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-export const metadata: Metadata = {
-  ...generateSEO({
-    title: "DevSloka UI | Animated React & Next.js Components",
-    description:
-      "DevSloka UI offers a curated collection of animated, minimalist React & Next.js components, blocks, and templates—powered by Tailwind CSS, Shadcn UI & Framer Motion.",
-    path: "/",
-    image: "/og-homepage.png",
-    keywords: [
-      "devsloka ui",
-      "react components",
-      "nextjs templates",
-      "tailwind css ui",
-      "framer motion ui",
-    ],
-  }),
-};
+export const metadata: Metadata = generateSEO({
+  title: "Devsloka UI | Animated React & Next.js Components",
+  description:
+    "Devsloka UI offers a curated collection of animated, minimalist React & Next.js components, blocks, and templates—powered by Tailwind CSS, Shadcn UI & Framer Motion.",
+  path: "/",
+  image: "/og-homepage.png",
+  keywords: [
+    "devsloka ui",
+    "react components",
+    "nextjs templates",
+    "tailwind css ui",
+    "framer motion ui",
+  ],
+});
 
 export default function RootLayout({
   children,

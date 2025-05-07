@@ -7,11 +7,10 @@ import { defaultSEO } from "@/config/seo/seo.config";
 import { generateSEO } from "@/config/seo/seo.utils";
 
 export const metadata = generateSEO({
-  title:
-    "Devsloka UI | Premium Components , Blocks and Templates For React.js , Next.js , Remix.js and React-Router-Dom v7.0.0",
+  title: "Devsloka UI | Animated React & Next.js Components",
   description:
     defaultSEO.description ??
-    "Premium Components , Blocks and Templates For React.js , Next.js , Remix.js and React-Router-Dom v7.0.0",
+    "Devsloka UI offers a curated collection of animated, minimalist React & Next.js components, blocks, and templates—powered by Tailwind CSS, Shadcn UI & Framer Motion.",
   image: "/og-home.png",
 });
 
