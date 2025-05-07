@@ -5,13 +5,13 @@
   "items": [
     {
       "name": "tour",
-      "type": "registry:component",
+      "type": "registry:ui",
       "title": "Tour",
       "description": "A Tour component for displaying a tour section.",
       "files": [
         {
           "path": "src/registry/ui/tour.tsx",
-          "type": "registry:component"
+          "type": "registry:ui"
         }
       ],
       "dependencies": ["lucide-react", "motion/react"],
