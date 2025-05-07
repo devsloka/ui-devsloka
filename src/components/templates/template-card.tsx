@@ -60,21 +60,37 @@ export function TemplateCard({ template }: TemplateCardProps) {
             className="absolute bottom-3 left-3 right-3 flex justify-between"
           >
             {template.href ? (
-              <Link href={template.href}>
-                <Button variant="secondary" size="sm" className="h-8 gap-1 cursor-pointer">
+              <Link href={template.href} target="_blank">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="h-8 gap-1 cursor-pointer"
+                >
                   <Eye className="h-3.5 w-3.5" />
                   Preview
                 </Button>
               </Link>
             ) : (
-              <Button variant="secondary" size="sm" className="h-8 gap-1 cursor-not-allowed">
+              <Button
+                variant="secondary"
+                size="sm"
+                className="h-8 gap-1 cursor-not-allowed"
+              >
                 <Eye className="h-3.5 w-3.5" />
                 Preview
               </Button>
             )}
-            <Button size="sm" className="h-8 gap-1">
-              Use <ArrowRight className="h-3.5 w-3.5" />
-            </Button>
+            {template.github ? (
+              <Link href={template.github} target="_blank">
+                <Button size="sm" className="h-8 gap-1 cursor-pointer">
+                  Use <ArrowRight className="h-3.5 w-3.5" />
+                </Button>
+              </Link>
+            ) : (
+              <Button size="sm" className="h-8 gap-1 cursor-not-allowed">
+                Use <ArrowRight className="h-3.5 w-3.5" />
+              </Button>
+            )}
           </motion.div>
         </div>
 
