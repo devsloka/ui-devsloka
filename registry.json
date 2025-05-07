@@ -14,7 +14,7 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["lucide-react", "motion/react"],
+      "dependencies": ["lucide-react", "motion"],
       "registryDependencies": ["button", "card"]
     },
 
