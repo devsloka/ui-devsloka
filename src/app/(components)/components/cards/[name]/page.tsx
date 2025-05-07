@@ -67,6 +67,7 @@ export default async function CardPage({
     <div>
       <AdvancedCodeBlock
         code={componentCode}
+        cliCommands={`npx shadcn@latest add https://ui.devsloka.in/r/${name}.json`}
         preview={
           <div className="w-lg bg-background mx-auto">
             <CardComponent />
