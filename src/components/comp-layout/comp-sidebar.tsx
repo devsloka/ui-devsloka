@@ -38,7 +38,7 @@ const CompSidebar = () => {
       />
 
       <nav>
-        <ul className="w-full space-y-4">
+        <ul className="w-full">
           {sidebarItems.map((section) => (
             <li key={section.title} className="space-y-1 pb-5">
               <h3 className="px-4 text-sm font-bold mb-2">{section.title}</h3>
