@@ -10,6 +10,19 @@ export type SidebarItem = {
 
 export const sidebarItems: SidebarItem[] = [
   {
+    title: "Getting Started",
+    children: [
+      {
+        title: "Introduction",
+        href: "/docs",
+      },
+      {
+        title: "Installation",
+        href: "/installation",
+      },
+    ],
+  },
+  {
     title: "Components",
     children: [
       {
