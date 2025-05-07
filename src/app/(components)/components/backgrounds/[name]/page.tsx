@@ -94,6 +94,7 @@ export default async function BackgroundPage({
     <div>
       <AdvancedCodeBlock
         code={componentCode}
+        cliCommands={`npx shadcn@latest add https://ui.devsloka.in/r/${name}.json`}
         preview={
           <BackgroundPreview
             backgroundComponent={<BackgroundComponent />}
