@@ -3,10 +3,10 @@ import path from "path";
 
 export const getComponentCode = (basePath: string) => {
   try {
-    const componentPath = path.resolve(basePath);
+    const componentPath = path.join(process.cwd(), basePath);
     return fs.readFileSync(componentPath, "utf-8");
   } catch (error) {
-    console.error(`Error reading`, error);
-    return `// Error loading component`;
+    console.error("Error reading component code:", error);
+    return "// Error loading component code";
   }
 };

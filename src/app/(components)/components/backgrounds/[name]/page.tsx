@@ -40,6 +40,11 @@ const backgrounds: Record<string, React.FC> = {
   "gradient-bg": GradientBg,
 };
 
+export async function generateStaticParams() {
+  const backgroundKeys = await Promise.resolve(Object.keys(backgrounds));
+  return backgroundKeys.map((id) => ({ name: id }));
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -82,8 +87,8 @@ export default async function BackgroundPage({
   }
 
   const componentPath = `src/components/backgrounds/${name}.tsx`;
-  console.log("componentPath ===========>", componentPath);
-  const componentCode = getComponentCode(componentPath);
+  const componentCode =
+    getComponentCode(componentPath) || "// Component code not available";
 
   return (
     <div>
@@ -93,7 +98,7 @@ export default async function BackgroundPage({
           <BackgroundPreview
             backgroundComponent={<BackgroundComponent />}
             title={name.replace(/-/g, " ")}
-            description="Beautiful animated backgrounds for your website hero sections"
+            description={`Explore the ${name} animation, a beautiful background effect for web projects.`}
           />
         }
         language="tsx"
