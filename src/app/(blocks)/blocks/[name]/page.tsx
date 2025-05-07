@@ -7,7 +7,7 @@ import { generateSEO } from "@/config/seo/seo.utils";
 
 export async function generateStaticParams() {
   const blockKeys = await Promise.resolve(Object.keys(blocks));
-  return blockKeys.map((id) => ({ id }));
+  return blockKeys.map((name) => ({ name }));
 }
 
 export async function generateMetadata({
@@ -53,10 +53,13 @@ export default async function BlockPage({
   const { block: MainComponent, codeMetadata } = blockInfo;
   const { mainFile, relatedFiles = [] } = codeMetadata;
 
-  const codeFiles = [mainFile, ...relatedFiles].map((file) => ({
-    ...file,
-    content: getComponentCode(`src/components/blocks/${file.codePath}`),
-  }));
+  const codeFiles = [mainFile, ...relatedFiles].map((file) => {
+    const fullPath = `src/components/blocks/${file.codePath}`;
+    return {
+      ...file,
+      content: getComponentCode(fullPath) || "// Component code not available",
+    };
+  });
 
   return (
     <div className="w-full space-y-12">
