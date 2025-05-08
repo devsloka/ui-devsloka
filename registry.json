@@ -140,6 +140,31 @@
       "dependencies": ["motion", "lucide-react"],
       "registryDependencies": ["button"]
     },
+    {
+      "name": "expanding-cards",
+      "type": "registry:ui",
+      "title": "Expanding Cards",
+      "description": "An Expanding Cards component for displaying a set of cards that expand on hover.",
+      "files": [
+        {
+          "path": "src/registry/ui/expanding-cards.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion", "lucide-react"]
+    },
+    {
+      "name": "floating-dots",
+      "type": "registry:ui",
+      "title": "Floating Dots",
+      "description": "A Floating Dots component for displaying a set of floating animated dots.",
+      "files": [
+        {
+          "path": "src/registry/ui/floating-dots.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
 
     {
       "name": "pricing-block",
