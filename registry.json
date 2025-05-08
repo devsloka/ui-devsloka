@@ -165,6 +165,58 @@
         }
       ]
     },
+    {
+      "name": "gradient-text",
+      "type": "registry:ui",
+      "title": "Gradient Text",
+      "description": "A Gradient Text component for displaying a gradient text.",
+      "files": [
+        {
+          "path": "src/registry/ui/gradient-text.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion"]
+    },
+    {
+      "name": "icon-radio",
+      "type": "registry:ui",
+      "title": "Icon Radio",
+      "description": "An Icon Radio component for displaying a radio button with an icon.",
+      "files": [
+        {
+          "path": "src/registry/ui/icon-radio.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion", "lucide-react"]
+    },
+    {
+      "name": "logo-cloud-carousel",
+      "type": "registry:ui",
+      "title": "Logo Cloud Carousel",
+      "description": "A Logo Cloud Carousel component for displaying a carousel of logos.",
+      "files": [
+        {
+          "path": "src/registry/ui/logo-cloud-carousel.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion"]
+    },
+    {
+      "name": "laptop-closes-on-scroll",
+      "type": "registry:ui",
+      "title": "Laptop Closes on Scroll",
+      "description": "A Laptop Closes on Scroll component for displaying a laptop that closes on scroll.",
+      "files": [
+        {
+          "path": "src/registry/ui/laptop-closes-on-scroll.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion"]
+    },
 
     {
       "name": "pricing-block",
