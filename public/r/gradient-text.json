@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-text",
+  "type": "registry:ui",
+  "title": "Gradient Text",
+  "description": "A Gradient Text component for displaying a gradient text.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/gradient-text.tsx",
+      "content": "\"use client\";\r\n\r\nimport React from \"react\";\r\nimport { motion } from \"motion/react\";\r\n\r\ninterface GradientTextProps {\r\n  children: React.ReactNode;\r\n  className?: string;\r\n  gradient?: string;\r\n  animate?: boolean;\r\n  animationDuration?: number;\r\n}\r\n\r\nconst GradientText: React.FC<GradientTextProps> = ({\r\n  children,\r\n  className = \"\",\r\n  gradient = \"bg-gradient-to-r from-[#E43D19] via-[#3472BC] to-[#06D7D7]\",\r\n  animate = true,\r\n  animationDuration = 4,\r\n}) => {\r\n  const animationProps = animate\r\n    ? {\r\n        animate: { backgroundPosition: [\"0% 50%\", \"100% 50%\", \"0% 50%\"] },\r\n        transition: {\r\n          duration: animationDuration,\r\n          repeat: Infinity,\r\n          ease: \"linear\",\r\n        },\r\n      }\r\n    : {};\r\n\r\n  return (\r\n    <motion.span\r\n      className={`relative ${gradient} bg-clip-text text-transparent font-edu ${className}`}\r\n      style={{\r\n        backgroundSize: animate ? \"200% 200%\" : \"100% 100%\",\r\n      }}\r\n      {...animationProps}\r\n    >\r\n      {children}\r\n    </motion.span>\r\n  );\r\n};\r\n\r\nexport default GradientText;\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}
