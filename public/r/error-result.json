@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "error-result",
+  "type": "registry:ui",
+  "title": "Error Result",
+  "description": "An Error Result component for displaying an error message.",
+  "dependencies": [
+    "motion",
+    "lottiefiles/dotlottie-react"
+  ],
+  "registryDependencies": [
+    "card"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/error-result.tsx",
+      "content": "\"use client\";\r\n\r\nimport React from \"react\";\r\nimport { Card, CardContent } from \"@/components/ui/card\";\r\nimport { DotLottieReact } from \"@lottiefiles/dotlottie-react\";\r\nimport { motion } from \"motion/react\";\r\n\r\nconst MotionCard = motion(Card);\r\n\r\nconst ErrorResult = () => {\r\n  const textVariants = {\r\n    initial: { opacity: 0, y: 20 },\r\n    animate: { opacity: 1, y: 0 },\r\n  };\r\n\r\n  const cardShake = {\r\n    initial: { x: 0 },\r\n    animate: {\r\n      x: [0, -10, 10, -10, 0],\r\n      rotate: [0, -5, 5, -5, 0],\r\n      transition: {\r\n        duration: 0.6,\r\n        // repeat: Infinity,\r\n        // repeatType: \"loop\" as const,\r\n      },\r\n    },\r\n  };\r\n\r\n  return (\r\n    <MotionCard\r\n      className=\"max-w-sm mx-auto shadow-lg\"\r\n      variants={cardShake}\r\n      initial=\"initial\"\r\n      animate=\"animate\"\r\n    >\r\n      <CardContent className=\"flex flex-col items-center p-6\">\r\n        <div className=\"w-32 h-32\">\r\n          <DotLottieReact src=\"/dot-lottie/error.lottie\" loop autoplay />\r\n        </div>\r\n\r\n        {/* Animated Heading */}\r\n        <motion.h2\r\n          initial=\"initial\"\r\n          animate=\"animate\"\r\n          variants={textVariants}\r\n          transition={{ duration: 0.6, ease: \"easeOut\" }}\r\n          className=\"mt-4 text-xl font-semibold text-center text-red-600\"\r\n        >\r\n          Error Occurred!\r\n        </motion.h2>\r\n\r\n        {/* Animated Description */}\r\n        <motion.p\r\n          initial=\"initial\"\r\n          animate=\"animate\"\r\n          variants={textVariants}\r\n          transition={{\r\n            duration: 0.8,\r\n            ease: \"easeOut\",\r\n            delay: 0.2,\r\n          }}\r\n          className=\"mt-2 text-center text-gray-600\"\r\n        >\r\n          There was a problem processing your request. Please try again.\r\n        </motion.p>\r\n      </CardContent>\r\n    </MotionCard>\r\n  );\r\n};\r\n\r\nexport default ErrorResult;\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}
