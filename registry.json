@@ -217,6 +217,110 @@
       ],
       "dependencies": ["motion"]
     },
+    {
+      "name": "content-carousel",
+      "type": "registry:ui",
+      "title": "Content Carousel",
+      "description": "A Content Carousel component for displaying a carousel of content.",
+      "files": [
+        {
+          "path": "src/registry/ui/content-carousel.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["select", "button", "tooltip"]
+    },
+    {
+      "name": "card-radio",
+      "type": "registry:ui",
+      "title": "Card Radio",
+      "description": "A Card Radio component for displaying a radio button with a card.",
+      "files": [
+        {
+          "path": "src/registry/ui/card-radio.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["button"]
+    },
+    {
+      "name": "card-decorator",
+      "type": "registry:ui",
+      "title": "Card Decorator",
+      "description": "A Card Decorator component for displaying a card with a decorator.",
+      "files": [
+        {
+          "path": "src/registry/ui/card-decorator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "border-gradient-icon",
+      "type": "registry:ui",
+      "title": "Border Gradient Icon",
+      "description": "A Border Gradient Icon component for displaying an icon with a border gradient.",
+      "files": [
+        {
+          "path": "src/registry/ui/border-gradient-icon.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "animated-smartwatch",
+      "type": "registry:ui",
+      "title": "Animated Smartwatch",
+      "description": "An Animated Smartwatch component for displaying a smartwatch animation.",
+      "files": [
+        {
+          "path": "src/registry/ui/animated-smartwatch.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion"]
+    },
+    {
+      "name": "animated-multi-select",
+      "type": "registry:ui",
+      "title": "Animated Multi Select",
+      "description": "An Animated Multi Select component for displaying a multi-select dropdown.",
+      "files": [
+        {
+          "path": "src/registry/ui/animated-multi-select.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion", "lucide-react"]
+    },
+    {
+      "name": "animated-image-gallery",
+      "type": "registry:ui",
+      "title": "Animated Image Gallery",
+      "description": "An Animated Image Gallery component for displaying a gallery of images.",
+      "files": [
+        {
+          "path": "src/registry/ui/animated-image-gallery.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "airbnb-card",
+      "type": "registry:ui",
+      "title": "Airbnb Card",
+      "description": "An Airbnb Card component for displaying a card with an image and text.",
+      "files": [
+        {
+          "path": "src/registry/ui/airbnb-card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["badge"]
+    },
 
     {
       "name": "pricing-block",
