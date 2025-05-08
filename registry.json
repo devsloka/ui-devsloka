@@ -58,6 +58,34 @@
       "registryDependencies": ["card"]
     },
     {
+      "name": "empty-result",
+      "type": "registry:ui",
+      "title": "Empty Result",
+      "description": "An Empty Result component for displaying an empty state.",
+      "files": [
+        {
+          "path": "src/registry/ui/empty-result.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion", "lottiefiles/dotlottie-react"],
+      "registryDependencies": ["card"]
+    },
+    {
+      "name": "error-result",
+      "type": "registry:ui",
+      "title": "Error Result",
+      "description": "An Error Result component for displaying an error message.",
+      "files": [
+        {
+          "path": "src/registry/ui/error-result.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion", "lottiefiles/dotlottie-react"],
+      "registryDependencies": ["card"]
+    },
+    {
       "name": "range-slider-with-histogram",
       "type": "registry:ui",
       "title": "Range Slider with Histogram",
