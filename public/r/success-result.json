@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "success-result",
+  "type": "registry:ui",
+  "title": "Success Result",
+  "description": "A Success Result component for displaying a success message.",
+  "dependencies": [
+    "motion",
+    "lottiefiles/dotlottie-react"
+  ],
+  "registryDependencies": [
+    "card"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/success-result.tsx",
+      "content": "\"use client\";\r\n\r\nimport React from \"react\";\r\nimport { AnimatePresence, motion } from \"motion/react\";\r\nimport { DotLottieReact } from \"@lottiefiles/dotlottie-react\";\r\nimport { Card, CardContent } from \"@/components/ui/card\";\r\n\r\nconst SuccessResult: React.FC = () => {\r\n  // Animation variants for reusability\r\n  const textVariants = {\r\n    initial: { opacity: 0, y: 20 },\r\n    animate: { opacity: 1, y: 0 },\r\n  };\r\n\r\n  return (\r\n    <AnimatePresence>\r\n      <Card className=\"max-w-sm mx-auto shadow-lg\">\r\n        <CardContent className=\"flex flex-col items-center p-6\">\r\n          <div className=\"w-32 h-32\">\r\n            <DotLottieReact src=\"/dot-lottie/success.lottie\" loop autoplay />\r\n          </div>\r\n\r\n          {/* Animated Heading */}\r\n          <motion.h2\r\n            initial=\"initial\"\r\n            animate=\"animate\"\r\n            variants={textVariants}\r\n            transition={{ duration: 0.6, ease: \"easeOut\" }}\r\n            className=\"mt-4 text-xl font-semibold text-center text-blue-600\"\r\n          >\r\n            Success!\r\n          </motion.h2>\r\n\r\n          {/* Animated Description */}\r\n          <motion.p\r\n            initial=\"initial\"\r\n            animate=\"animate\"\r\n            variants={textVariants}\r\n            transition={{\r\n              duration: 0.8,\r\n              ease: \"easeOut\",\r\n              delay: 0.2, // Staggered animation\r\n            }}\r\n            className=\"mt-2 text-center text-gray-600\"\r\n          >\r\n            Your operation was completed successfully.\r\n          </motion.p>\r\n        </CardContent>\r\n      </Card>\r\n    </AnimatePresence>\r\n  );\r\n};\r\n\r\nexport default SuccessResult;\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}
