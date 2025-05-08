@@ -43,6 +43,75 @@
       ],
       "dependencies": ["motion"]
     },
+    {
+      "name": "success-result",
+      "type": "registry:ui",
+      "title": "Success Result",
+      "description": "A Success Result component for displaying a success message.",
+      "files": [
+        {
+          "path": "src/registry/ui/success-result.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion", "lottiefiles/dotlottie-react"],
+      "registryDependencies": ["card"]
+    },
+    {
+      "name": "range-slider-with-histogram",
+      "type": "registry:ui",
+      "title": "Range Slider with Histogram",
+      "description": "A Range Slider with Histogram component for displaying a range slider with histogram.",
+      "files": [
+        {
+          "path": "src/registry/ui/range-slider-with-histogram.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion"],
+      "registryDependencies": ["card", "tooltip", "slider"]
+    },
+    {
+      "name": "morphing-nav",
+      "type": "registry:ui",
+      "title": "Morphing Nav",
+      "description": "A Morphing Nav component for displaying a morphing navigation menu.",
+      "files": [
+        {
+          "path": "src/registry/ui/morphing-nav.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion"]
+    },
+    {
+      "name": "morphing-modal",
+      "type": "registry:ui",
+      "title": "Modal",
+      "description": "A Modal component for displaying a modal dialog.",
+      "files": [
+        {
+          "path": "src/registry/ui/morphing-modal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["button"]
+    },
+    {
+      "name": "morphing-card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "A Card component for displaying content in a card format.",
+      "files": [
+        {
+          "path": "src/registry/ui/morphing-card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["button"]
+    },
 
     {
       "name": "pricing-block",
