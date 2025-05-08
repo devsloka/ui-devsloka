@@ -22,7 +22,7 @@ const DocsPage = () => {
       {/* Intro */}
       <div className="space-y-2">
         <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
-          Welcome to DevSloka UI
+          Welcome to Devsloka UI
         </h1>
         <p className="text-lg text-muted-foreground">
           A curated collection of animated, minimalist components, blocks, and
