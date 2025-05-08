@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card-radio",
+  "type": "registry:ui",
+  "title": "Card Radio",
+  "description": "A Card Radio component for displaying a radio button with a card.",
+  "dependencies": [
+    "motion",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/card-radio.tsx",
+      "content": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { motion } from \"framer-motion\";\r\nimport { Check } from \"lucide-react\";\r\n\r\nexport default function CardRadio() {\r\n  const [selected, setSelected] = useState(\"option1\");\r\n\r\n  const options = [\r\n    {\r\n      id: \"option1\",\r\n      title: \"Basic Plan\",\r\n      description: \"Perfect for starters\",\r\n      price: \"$9/mo\",\r\n    },\r\n    {\r\n      id: \"option2\",\r\n      title: \"Pro Plan\",\r\n      description: \"For growing businesses\",\r\n      price: \"$19/mo\",\r\n    },\r\n    {\r\n      id: \"option3\",\r\n      title: \"Enterprise\",\r\n      description: \"For large organizations\",\r\n      price: \"$49/mo\",\r\n    },\r\n  ];\r\n\r\n  return (\r\n    <div className=\"space-y-4\">\r\n      <h2 className=\"text-xl font-semibold\">Card Radio Selection</h2>\r\n      <div className=\"grid grid-cols-1 md:grid-cols-3 gap-4\">\r\n        {options.map((option) => (\r\n          <motion.div\r\n            key={option.id}\r\n            className={`relative bg-background dark:bg-zinc-900 cursor-pointer rounded-xl border-2 p-4 ${\r\n              selected === option.id ? \"border-[#0A6EFF]\" : \"\"\r\n            }`}\r\n            onClick={() => setSelected(option.id)}\r\n            whileHover={{ scale: 1.02 }}\r\n            whileTap={{ scale: 0.98 }}\r\n            transition={{ type: \"spring\", stiffness: 300, damping: 20 }}\r\n          >\r\n            <div className=\"flex flex-col h-full\">\r\n              <h3 className=\"font-bold text-lg\">{option.title}</h3>\r\n              <p className=\"text-gray-500 flex-grow\">{option.description}</p>\r\n              <p className=\"font-bold text-xl mt-2\">{option.price}</p>\r\n            </div>\r\n\r\n            {selected === option.id && (\r\n              <motion.div\r\n                className=\"absolute top-2 right-2 bg-[#0A6EFF] text-white rounded-full p-1\"\r\n                initial={{ scale: 0 }}\r\n                animate={{ scale: 1 }}\r\n                transition={{ type: \"spring\", stiffness: 500, damping: 20 }}\r\n              >\r\n                <Check className=\"h-4 w-4\" />\r\n              </motion.div>\r\n            )}\r\n          </motion.div>\r\n        ))}\r\n      </div>\r\n    </div>\r\n  );\r\n}\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}
