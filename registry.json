@@ -17,6 +17,32 @@
       "dependencies": ["lucide-react", "motion"],
       "registryDependencies": ["button", "card"]
     },
+    {
+      "name": "text-effect",
+      "type": "registry:ui",
+      "title": "Text Effect",
+      "description": "A Text Effect component for displaying animated text.",
+      "files": [
+        {
+          "path": "src/registry/ui/text-effect.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion"]
+    },
+    {
+      "name": "tabs-switcher",
+      "type": "registry:ui",
+      "title": "Tabs Switcher",
+      "description": "A Tabs Switcher component for displaying a tabbed interface.",
+      "files": [
+        {
+          "path": "src/registry/ui/tabs-switcher.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["motion"]
+    },
 
     {
       "name": "pricing-block",
