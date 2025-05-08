@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "morphing-card",
+  "type": "registry:ui",
+  "title": "Card",
+  "description": "A Card component for displaying content in a card format.",
+  "dependencies": [
+    "motion",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/morphing-card.tsx",
+      "content": "\"use client\";\r\n\r\nimport { motion } from \"framer-motion\";\r\nimport { ArrowRight, X } from \"lucide-react\";\r\nimport { Button } from \"@/components/ui/button\";\r\nimport Image from \"next/image\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ninterface MorphingCardProps {\r\n  id: string;\r\n  title: string;\r\n  description: string;\r\n  content: string;\r\n  image: string;\r\n  className?: string;\r\n  isExpanded?: boolean;\r\n  onExpand?: () => void;\r\n  onCollapse?: () => void;\r\n  actionText?: string;\r\n  onAction?: () => void;\r\n}\r\n\r\nexport function MorphingCard({\r\n  id,\r\n  title,\r\n  description,\r\n  content,\r\n  image,\r\n  className,\r\n  isExpanded = false,\r\n  onExpand,\r\n  onCollapse,\r\n  actionText = \"Learn More\",\r\n  onAction,\r\n}: MorphingCardProps) {\r\n  return (\r\n    <div className=\"relative\">\r\n      <motion.div\r\n        layoutId={`card-${id}`}\r\n        className={cn(\r\n          \"rounded-xl border bg-card text-card-foreground shadow-sm overflow-hidden\",\r\n          className,\r\n          isExpanded\r\n            ? \"fixed inset-0 z-50 m-auto w-[95vw] max-w-4xl h-[90vh] overflow-y-auto\"\r\n            : \"cursor-pointer hover:shadow-md\"\r\n        )}\r\n        onClick={!isExpanded ? onExpand : undefined}\r\n      >\r\n        <motion.div layoutId={`image-${id}`} className=\"relative aspect-video\">\r\n          <Image\r\n            src={image}\r\n            alt={title}\r\n            fill\r\n            className=\"object-cover\"\r\n            sizes=\"(max-width: 768px) 100vw, 33vw\"\r\n          />\r\n        </motion.div>\r\n\r\n        <motion.div layoutId={`content-${id}`} className=\"p-4\">\r\n          <motion.h3 layoutId={`title-${id}`} className=\"text-xl font-semibold\">\r\n            {title}\r\n          </motion.h3>\r\n\r\n          <motion.div layoutId={`description-${id}`} className=\"mt-2\">\r\n            {isExpanded ? (\r\n              <motion.div\r\n                initial={{ opacity: 0 }}\r\n                animate={{ opacity: 1 }}\r\n                className=\"space-y-4\"\r\n              >\r\n                <p className=\"text-muted-foreground\">{content}</p>\r\n                <Button onClick={onAction} className=\"mt-4\">\r\n                  {actionText}\r\n                </Button>\r\n              </motion.div>\r\n            ) : (\r\n              <p className=\"text-sm text-muted-foreground line-clamp-3\">\r\n                {description}\r\n              </p>\r\n            )}\r\n          </motion.div>\r\n        </motion.div>\r\n\r\n        {isExpanded && (\r\n          <motion.button\r\n            initial={{ opacity: 0 }}\r\n            animate={{ opacity: 1 }}\r\n            className=\"absolute top-4 right-4 p-2 rounded-full bg-background/80 backdrop-blur-sm shadow-sm hover:bg-background\"\r\n            onClick={(e) => {\r\n              e.stopPropagation();\r\n              onCollapse?.();\r\n            }}\r\n          >\r\n            <X className=\"h-5 w-5 cursor-pointer\" />\r\n          </motion.button>\r\n        )}\r\n\r\n        {!isExpanded && (\r\n          <motion.div className=\"absolute bottom-4 right-4 p-2 rounded-full bg-background/80 backdrop-blur-sm shadow-sm\">\r\n            <ArrowRight className=\"h-4 w-4\" />\r\n          </motion.div>\r\n        )}\r\n      </motion.div>\r\n    </div>\r\n  );\r\n}\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}
