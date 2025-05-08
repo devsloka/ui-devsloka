@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "border-gradient-icon",
+  "type": "registry:ui",
+  "title": "Border Gradient Icon",
+  "description": "A Border Gradient Icon component for displaying an icon with a border gradient.",
+  "files": [
+    {
+      "path": "src/registry/ui/border-gradient-icon.tsx",
+      "content": "import React, { ReactNode } from \"react\";\r\n\r\nexport type BorderGradientIconProps = {\r\n  title: string;\r\n  icon: ReactNode;\r\n  width?: string;\r\n  height?: string;\r\n  iconClassName?: string;\r\n};\r\n\r\nexport const BorderGradientIcon = ({\r\n  title,\r\n  icon,\r\n  width = \"120px\",\r\n  height = \"120px\",\r\n  iconClassName = \"\",\r\n}: BorderGradientIconProps) => {\r\n  return (\r\n    <div\r\n      className=\"rounded-[38px] p-[1px]\r\n                 bg-gradient-to-b from-neutral-300 to-background\r\n                 dark:from-[#404040] dark:to-black cursor-pointer\"\r\n      style={{ width, height }}\r\n    >\r\n      <div\r\n        className=\"flex justify-center items-center w-full h-full rounded-[38px]\r\n                   bg-gradient-to-br from-gray-100 to-white\r\n                   dark:from-[#101010] dark:to-[#000000]\r\n                   transition-all duration-300\r\n                   hover:opacity-60 active:opacity-75\"\r\n        role=\"button\"\r\n        aria-label={title}\r\n        title={title}\r\n      >\r\n        <div\r\n          className={`text-black dark:text-white flex justify-center items-center ${iconClassName}`}\r\n        >\r\n          {icon}\r\n        </div>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}
