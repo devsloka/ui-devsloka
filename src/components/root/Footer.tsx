@@ -30,8 +30,8 @@ const Footer = () => {
       { label: "Prenium", href: "/prenium" },
     ],
     contactInfo: {
-      address: "123 Fashion Street, Design District\nNew York, NY 10001",
-      phone: "+1 (555) 123-4567",
+      address: "India",
+      phone: "+91 840-705-3234",
       email: "support@devsloka.in",
     },
   };
