@@ -1,6 +1,7 @@
 export type SidebarItemChild = {
   title: string;
   href: string;
+  isNew?: boolean;
 };
 
 export type SidebarItem = {
@@ -32,6 +33,7 @@ export const sidebarItems: SidebarItem[] = [
       {
         title: "Tour",
         href: "/components/tour",
+        isNew: true,
       },
       {
         title: "Animated Smartwatch",
