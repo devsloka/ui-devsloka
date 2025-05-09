@@ -12,6 +12,19 @@ export interface Template {
 
 export const templates: Template[] = [
   {
+    id: "template-1",
+    title: "AI Agent Template Landing Page",
+    description:
+      "A responsive landing page template for AI agents and chatbots.",
+    image:
+      "/images/ai-agent-template-demo.png",
+    tags: ["AI Agent", "Chatbot", "Landing Page"],
+    category: "landing-page",
+    isPro: false,
+    href: "https://ai-agent-template-wkwu.vercel.app/",
+    github: "https://github.com/yashraj970/AI-Agent-Template",
+  },
+  {
     id: "template-2",
     title: "E-commerce Store",
     description:
@@ -25,7 +38,7 @@ export const templates: Template[] = [
     github: "https://github.com/yashraj970/NextJs-Ecommerce-Template",
   },
   {
-    id: "template-1",
+    id: "template-8",
     title: "Modern Dashboard",
     description:
       "A sleek dashboard template with analytics, charts, and user management.",
@@ -87,17 +100,6 @@ export const templates: Template[] = [
       "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop",
     tags: ["Marketing", "Landing", "Conversion"],
     category: "marketing",
-    isPro: true,
-  },
-  {
-    id: "template-8",
-    title: "Form Components",
-    description:
-      "Collection of beautiful form components and validation examples.",
-    image:
-      "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2070&auto=format&fit=crop",
-    tags: ["Forms", "Input", "Validation"],
-    category: "forms",
     isPro: true,
   },
 ];
