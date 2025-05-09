@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { sidebarItems } from "@/utilities/sidebarItems";
+import { Badge } from "../ui/badge";
 
 const CompSidebar = () => {
   const pathname = usePathname();
@@ -53,7 +54,7 @@ const CompSidebar = () => {
                       <Link
                         href={item.href}
                         className={cn(
-                          "group flex items-center px-4 py-2 rounded-lg",
+                          "group flex items-center px-4 py-2 rounded-lg relative",
                           "text-muted-foreground hover:text-foreground",
                           "transition-colors duration-200",
                           "hover:bg-muted/70 hover:text-foreground",
@@ -63,6 +64,11 @@ const CompSidebar = () => {
                         aria-current={isActive ? "page" : undefined}
                       >
                         <span className="truncate text-xs">{item.title}</span>
+                        {item?.isNew && (
+                          <Badge className="absolute right-0">
+                            {item.isNew ? "New" : ""}
+                          </Badge>
+                        )}
                       </Link>
                     </motion.li>
                   );
