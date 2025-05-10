@@ -27,16 +27,17 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { name: string };
+  params: Promise<{ name: string }>;
 }): Promise<Metadata> {
-  const template = getTemplateData(params.name);
+  const { name } = await params;
+  const template = getTemplateData(name);
   if (!template) return {};
 
   return generateSEO({
     title: `${template.seo.title} - Devsloka Templates`,
     description: template.seo.description,
-    path: `templates/${params.name}`,
-    image: `/templates/${params.name}.png`,
+    path: `templates/${name}`,
+    image: `/templates/${name}.png`,
     keywords: [template.seo.keywords, "Devsloka", "AI Templates"],
   });
 }
