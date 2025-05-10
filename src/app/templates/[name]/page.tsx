@@ -27,7 +27,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ name: string }>;
+  params: { name: string };
 }): Promise<Metadata> {
   const { name } = await params;
   const template = getTemplateData(name);
@@ -42,8 +42,13 @@ export async function generateMetadata({
   });
 }
 
-export default function TemplatePage({ params }: { params: { name: string } }) {
-  const template = getTemplateData(params.name);
+export default async function TemplatePage({
+  params,
+}: {
+  params: Promise<{ name: string }>;
+}) {
+  const { name } = await params;
+  const template = getTemplateData(name);
   if (!template) notFound();
 
   const { heroContent, benefits, features, dependencies, seo } = template;
@@ -70,11 +75,11 @@ export default function TemplatePage({ params }: { params: { name: string } }) {
               muted
               loop
               className="absolute inset-0 w-full h-full object-cover z-0"
-              poster={`https://source.unsplash.com/random/1920x1080/?${params.name},ai`}
+              poster={`https://source.unsplash.com/random/1920x1080/?${name},ai`}
             >
               <source src={heroContent.videoUrl} type="video/mp4" />
               <Image
-                src={`https://source.unsplash.com/random/1920x1080/?${params.name},technology`}
+                src={`https://source.unsplash.com/random/1920x1080/?${name},technology`}
                 alt={heroContent.title}
                 fill
                 className="object-cover"
