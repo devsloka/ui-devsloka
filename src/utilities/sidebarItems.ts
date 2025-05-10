@@ -2,6 +2,7 @@ export type SidebarItemChild = {
   title: string;
   href: string;
   isNew?: boolean;
+  isPro?: boolean;
 };
 
 export type SidebarItem = {
@@ -20,6 +21,21 @@ export const sidebarItems: SidebarItem[] = [
       {
         title: "Installation",
         href: "/installation",
+      },
+    ],
+  },
+  {
+    title: "Templates",
+    children: [
+      {
+        title: "AI Agent Template",
+        href: "/templates/ai-agent-template",
+        isPro: true,
+      },
+      {
+        title: "E-commerce Store",
+        href: "/templates/e-commerce-store",
+        isPro: false,
       },
     ],
   },
