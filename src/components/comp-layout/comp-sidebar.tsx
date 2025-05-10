@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { sidebarItems } from "@/utilities/sidebarItems";
 import { Badge } from "../ui/badge";
+import { templatesNames } from "@/utilities/utilis";
 
 const CompSidebar = () => {
   const pathname = usePathname();
@@ -30,7 +31,7 @@ const CompSidebar = () => {
   return (
     <div
       aria-label="Secondary navigation"
-      className="w-64 overflow-y-auto border-l border-dashed p-4 bg-background"
+      className="w-64 overflow-y-auto border-l border-dashed px-4 pt-6 bg-background"
     >
       {/* Secondary navigation structured data */}
       <script
@@ -59,14 +60,26 @@ const CompSidebar = () => {
                           "transition-colors duration-200",
                           "hover:bg-muted/70 hover:text-foreground",
                           isActive &&
-                            "bg-muted/70 font-medium border-l-4 border-blue-500"
+                            "bg-muted/70 font-medium border-l-4 border-[#0A6EFF]"
                         )}
                         aria-current={isActive ? "page" : undefined}
                       >
                         <span className="truncate text-xs">{item.title}</span>
                         {item?.isNew && (
-                          <Badge className="absolute right-0">
+                          <Badge className={cn("absolute right-0")}>
                             {item.isNew ? "New" : ""}
+                          </Badge>
+                        )}
+                        {templatesNames.includes(item.title) && (
+                          <Badge
+                            className={cn(
+                              "absolute right-0",
+                              item?.isPro
+                                ? "bg-[#0A6EFF] text-white"
+                                : "bg-gray-600 text-white"
+                            )}
+                          >
+                            {item.isPro ? "Pro" : "Free"}
                           </Badge>
                         )}
                       </Link>
