@@ -21,13 +21,12 @@ import { getTemplateData } from "@/utilities/template.utils";
 import { generateSEO } from "@/config/seo/seo.utils";
 
 export async function generateStaticParams() {
-  const templateNames = ["ai-agent-template", "e-commerce-store"];
+  const templateNames = await Promise.resolve([
+    "ai-agent-template",
+    "e-commerce-store",
+  ]);
 
-  return await Promise.all(
-    templateNames.map(async (name) => {
-      return name;
-    })
-  );
+  return templateNames.map((id) => ({ name: id }));
 }
 
 export async function generateMetadata({
