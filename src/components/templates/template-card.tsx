@@ -9,6 +9,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface TemplateCardProps {
   template: Template;
@@ -16,6 +17,7 @@ interface TemplateCardProps {
 
 export function TemplateCard({ template }: TemplateCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const isMobile = useIsMobile();
 
   return (
     <motion.div
@@ -55,7 +57,10 @@ export function TemplateCard({ template }: TemplateCardProps) {
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
+            animate={{
+              opacity: isMobile || isHovered ? 1 : 0,
+              y: isMobile || isHovered ? 0 : 10,
+            }}
             transition={{ duration: 0.2 }}
             className="absolute bottom-3 left-3 right-3 flex justify-between"
           >
