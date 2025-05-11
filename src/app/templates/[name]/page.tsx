@@ -34,9 +34,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { name: string }; // ← now a plain object, not a Promise
+  params: Promise<{ name: string }>;
 }): Promise<Metadata> {
-  const { name } = params;
+  const { name } = await params;
   const template = getTemplateData(name);
   if (!template) return {};
 
@@ -53,9 +53,9 @@ export async function generateMetadata({
 export default async function TemplatePage({
   params,
 }: {
-  params: { name: string }; // ← plain object, matches Next.js runtime
+  params: Promise<{ name: string }>;
 }) {
-  const { name } = params;
+  const { name } = await params;
   const template = getTemplateData(name);
   if (!template) notFound();
 
