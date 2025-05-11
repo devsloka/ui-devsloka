@@ -20,6 +20,7 @@ import Image from "next/image";
 import { getTemplateData } from "@/utilities/template.utils";
 import { generateSEO } from "@/config/seo/seo.utils";
 
+// Pre-generate the list of template names for static builds
 export async function generateStaticParams() {
   const templateNames = await Promise.resolve([
     "ai-agent-template",
@@ -29,12 +30,13 @@ export async function generateStaticParams() {
   return templateNames.map((id) => ({ name: id }));
 }
 
+// Generate SEO metadata based on the template
 export async function generateMetadata({
   params,
 }: {
-  params: { name: string };
+  params: { name: string }; // ← now a plain object, not a Promise
 }): Promise<Metadata> {
-  const { name } = await params;
+  const { name } = params;
   const template = getTemplateData(name);
   if (!template) return {};
 
@@ -47,12 +49,13 @@ export async function generateMetadata({
   });
 }
 
+// Main page component
 export default async function TemplatePage({
   params,
 }: {
-  params: Promise<{ name: string }>;
+  params: { name: string }; // ← plain object, matches Next.js runtime
 }) {
-  const { name } = await params;
+  const { name } = params;
   const template = getTemplateData(name);
   if (!template) notFound();
 
@@ -74,7 +77,6 @@ export default async function TemplatePage({
 
           {/* Dynamic Media Section */}
           <div className="mt-8 overflow-hidden rounded-lg border shadow-md relative aspect-video">
-            {/* <div className="absolute inset-0 bg-gradient-to-r from-background via-background/10 to-background z-10" /> */}
             <video
               autoPlay
               muted
@@ -106,9 +108,9 @@ export default async function TemplatePage({
           </div>
         </section>
 
-        {/* Template Details Sections */}
+        {/* Template Details */}
         <section className="container space-y-24 py-20">
-          {/* Description Section */}
+          {/* Overview */}
           <div>
             <h2 className="mb-6 text-3xl font-bold">Template Overview</h2>
             <div className="rounded-xl border bg-card p-6 shadow-md">
@@ -116,7 +118,7 @@ export default async function TemplatePage({
             </div>
           </div>
 
-          {/* Use Cases Section */}
+          {/* Use Cases */}
           <div>
             <h2 className="mb-6 text-3xl font-bold">Ideal For</h2>
             <div className="rounded-xl border bg-card p-6 shadow-md">
@@ -151,7 +153,7 @@ export default async function TemplatePage({
             </div>
           </div>
 
-          {/* Features Section */}
+          {/* Core Features */}
           <div>
             <h2 className="mb-6 text-3xl font-bold">Core Features</h2>
             <div className="grid gap-6">
@@ -165,9 +167,9 @@ export default async function TemplatePage({
                 </CardHeader>
                 <CardContent>
                   <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-                    {features[0].subItems?.map((item, index) => (
+                    {features[0].subItems?.map((item, i) => (
                       <div
-                        key={index}
+                        key={i}
                         className="rounded-lg bg-background p-3 shadow-sm"
                       >
                         <p className="text-sm">{item}</p>
@@ -206,7 +208,7 @@ export default async function TemplatePage({
             </div>
           </div>
 
-          {/* Tech Stack Section */}
+          {/* Tech Stack */}
           <div>
             <h2 className="mb-6 text-3xl font-bold">Technology Stack</h2>
             <div className="rounded-xl border bg-card p-6 shadow-md">
