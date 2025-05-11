@@ -28,6 +28,10 @@ export const sidebarItems: SidebarItem[] = [
     title: "Templates",
     children: [
       {
+        title: "All Templates",
+        href: "/templates",
+      },
+      {
         title: "AI Agent Template",
         href: "/templates/ai-agent-template",
         isPro: true,
