@@ -582,6 +582,46 @@
         }
       ],
       "dependencies": ["lucide-react", "framer-motion"]
+    },
+    {
+      "name": "team-block",
+      "type": "registry:block",
+      "title": "Team Block",
+      "description": "A Team Block component for displaying a team section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/teams/team-block.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"]
+    },
+    {
+      "name": "testimonials-block",
+      "type": "registry:block",
+      "title": "Testimonials Block",
+      "description": "A Testimonials Block component for displaying a testimonials section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/testimonials/testimonials-block.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["card", "avatar"]
+    },
+    {
+      "name": "testimonials-block-2",
+      "type": "registry:block",
+      "title": "Testimonials Block Two",
+      "description": "A Testimonials Block Two component for displaying a testimonials section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/testimonials/testimonials-block-2.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react", "framer-motion"]
     }
   ]
 }
