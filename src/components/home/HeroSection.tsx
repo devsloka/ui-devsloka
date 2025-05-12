@@ -3,14 +3,14 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { motion } from "motion/react";
-import { FloatingDots } from "../devsloka-components/floating-dots";
+import { FloatingDots } from "../ui/floating-dots";
 import { useTheme } from "next-themes";
-import { Tour } from "../devsloka-components/tour";
-import SuccessResult from "../devsloka-components/success-result";
-import RangeSliderWithHistogram from "../devsloka-components/range-slider-with-histogram";
+import { Tour } from "../ui/tour";
+import SuccessResult from "../ui/success-result";
+import RangeSliderWithHistogram from "../ui/range-slider-with-histogram";
 import MorphingNavDemo from "../devsloka-components/demo/morphing-nav-demo";
 import Link from "next/link";
-import { TextEffect } from "../devsloka-components/text-effect";
+import { TextEffect } from "@/components/ui/text-effect";
 
 const HeroSection = () => {
   const { theme } = useTheme();

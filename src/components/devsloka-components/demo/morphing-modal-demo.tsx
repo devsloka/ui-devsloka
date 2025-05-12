@@ -9,7 +9,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import { MorphingModal, MorphingModalTab } from "../morphing-modal";
+import {
+  MorphingModal,
+  MorphingModalTab,
+} from "@/components/ui/morphing-modal";
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 

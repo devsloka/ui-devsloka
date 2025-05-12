@@ -1,4 +1,4 @@
-import { AirbnbListingCard, ListingProps } from "../airbnb-card";
+import { AirbnbListingCard, ListingProps } from "@/components/ui/airbnb-card";
 
 export default function AirbnbListingCardExample() {
   const listings: ListingProps[] = [

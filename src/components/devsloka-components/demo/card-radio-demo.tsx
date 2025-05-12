@@ -1,5 +1,5 @@
 import React from "react";
-import CardRadio from "../card-radio";
+import CardRadio from "@/components/ui/card-radio";
 
 const CardRadioDemo = () => {
   return (

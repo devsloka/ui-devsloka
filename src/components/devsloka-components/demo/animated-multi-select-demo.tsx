@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatedMultiSelect, type Option } from "../animated-multi-select";
+import {
+  AnimatedMultiSelect,
+  type Option,
+} from "@/components/ui/animated-multi-select";
 
 const sampleOptions: Option[] = [
   { value: "react", label: "React" },

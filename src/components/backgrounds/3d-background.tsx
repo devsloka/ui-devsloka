@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Sphere, Line } from "@react-three/drei";
 import * as THREE from "three";
-import { FloatingDots } from "../devsloka-components/floating-dots";
+import { FloatingDots } from "@/components/ui/floating-dots";
 
 interface CountryFeature {
   type: "Feature";

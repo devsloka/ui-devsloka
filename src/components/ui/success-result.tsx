@@ -3,7 +3,7 @@
 import React from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { Card, CardContent } from "../ui/card";
+import { Card, CardContent } from "./card";
 
 const SuccessResult: React.FC = () => {
   // Animation variants for reusability

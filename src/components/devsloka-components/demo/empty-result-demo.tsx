@@ -1,5 +1,5 @@
 import React from "react";
-import EmptyResult from "../empty-result";
+import EmptyResult from "@/components/ui/empty-result";
 
 const EmptyResultDemo: React.FC = () => {
   return <EmptyResult />;

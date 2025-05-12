@@ -1,5 +1,5 @@
 import React from "react";
-import { TabsSwitcher } from "../tabs-switcher";
+import { TabsSwitcher } from "@/components/ui/tabs-switcher";
 
 const TabsSwitcherDemo: React.FC = () => {
   return (

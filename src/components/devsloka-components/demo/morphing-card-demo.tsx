@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { AnimatePresence } from "motion/react";
-import { MorphingCard } from "../morphing-card";
+import { MorphingCard } from "@/components/ui/morphing-card";
 import { motion } from "motion/react";
 export function MorphingCardDemo() {
   const [expandedId, setExpandedId] = useState<string | null>(null);

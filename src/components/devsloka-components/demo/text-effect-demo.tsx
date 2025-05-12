@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AnimationEffect, TextEffect } from "../text-effect";
+import { AnimationEffect, TextEffect } from "@/components/ui/text-effect";
 import { Button } from "@/components/ui/button";
 
 export const TextEffectDemo = () => {

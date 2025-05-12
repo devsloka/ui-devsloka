@@ -1,5 +1,5 @@
 import React from "react";
-import { LogoCloudCarousel } from "../logo-cloud-carousel";
+import { LogoCloudCarousel } from "@/components/ui/logo-cloud-carousel";
 
 const LogoCloudCarouselDemo = () => {
   return (

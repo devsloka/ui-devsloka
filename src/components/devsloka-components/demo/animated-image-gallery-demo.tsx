@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "motion/react";
-import { Image, ImageGallery } from "../animated-image-gallery";
+import { Image, ImageGallery } from "@/components/ui/animated-image-gallery";
 
 const ImageGalleryDemo = () => {
   return (

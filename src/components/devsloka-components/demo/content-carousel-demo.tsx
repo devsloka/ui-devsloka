@@ -1,6 +1,6 @@
 "use client";
 
-import { ContentCarousel } from "../content-carousel";
+import { ContentCarousel } from "@/components/ui/content-carousel";
 
 const items = [
   {

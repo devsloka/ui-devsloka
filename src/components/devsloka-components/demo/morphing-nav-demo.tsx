@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { MorphingNav } from "../morphing-nav";
+import { MorphingNav } from "@/components/ui/morphing-nav";
 import { Home, Search, Settings, User } from "lucide-react";
 
 const MorphingNavDemo = () => {

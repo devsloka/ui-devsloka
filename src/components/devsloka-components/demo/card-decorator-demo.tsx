@@ -1,5 +1,5 @@
 import React from "react";
-import { CardDecorator } from "../card-decorator";
+import { CardDecorator } from "@/components/ui/card-decorator";
 import { cn } from "@/lib/utils";
 
 const CardDecoratorDemo: React.FC = () => {

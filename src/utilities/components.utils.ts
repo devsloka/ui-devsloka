@@ -16,9 +16,9 @@ import RangeSliderWithHistogramDemo from "@/components/devsloka-components/demo/
 import TabsSwitcherDemo from "@/components/devsloka-components/demo/tabs-switcher-demo";
 import { TextEffectDemo } from "@/components/devsloka-components/demo/text-effect-demo";
 import TourDemo from "@/components/devsloka-components/demo/tour-demo";
-import EmptyResult from "@/components/devsloka-components/empty-result";
-import ErrorResult from "@/components/devsloka-components/error-result";
-import SuccessResult from "@/components/devsloka-components/success-result";
+import EmptyResult from "@/components/ui/empty-result";
+import ErrorResult from "@/components/ui/error-result";
+import SuccessResult from "@/components/ui/success-result";
 import AnimatedMultiSelectDemo from "@/components/devsloka-components/demo/animated-multi-select-demo";
 import ImageGalleryDemo from "@/components/devsloka-components/demo/animated-image-gallery-demo";
 import AnimatedSmartwatchDemo from "@/components/devsloka-components/demo/animated-smartwatch-demo";

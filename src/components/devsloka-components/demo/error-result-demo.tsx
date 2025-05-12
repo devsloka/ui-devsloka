@@ -1,5 +1,5 @@
 import React from "react";
-import ErrorResult from "../error-result";
+import ErrorResult from "@/components/ui/error-result";
 
 const ErrorResultDemo: React.FC = () => {
   return <ErrorResult />;

@@ -1,6 +1,6 @@
 "use client";
 
-import RangeSliderWithHistogram from "../range-slider-with-histogram";
+import RangeSliderWithHistogram from "@/components/ui/range-slider-with-histogram";
 
 const generateHistogramData = () => {
   const min = 0;

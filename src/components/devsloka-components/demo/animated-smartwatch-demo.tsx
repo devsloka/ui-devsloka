@@ -1,4 +1,4 @@
-import AnimatedSmartwatch from "../animated-smartwatch";
+import AnimatedSmartwatch from "@/components/ui/animated-smartwatch";
 
 export default function AnimatedSmartwatchDemo() {
   return (

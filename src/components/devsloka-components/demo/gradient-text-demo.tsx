@@ -1,5 +1,5 @@
 import React from "react";
-import GradientText from "../gradient-text";
+import GradientText from "@/components/ui/gradient-text";
 
 const GradientTextDemo = () => {
   return (

@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
-import { Tour } from "../tour";
+import { Tour } from "@/components/ui/tour";
 
 const TourDemo: React.FC = () => {
   const [isTourOpen, setIsTourOpen] = useState(false);

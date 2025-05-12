@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "../ui/button";
-import { CardDecorator } from "../devsloka-components/card-decorator";
+import { Button } from "@/components/ui/button";
+import { CardDecorator } from "@/components/ui/card-decorator";
 import { cn } from "@/lib/utils";
 
 const CTASection: React.FC = () => {

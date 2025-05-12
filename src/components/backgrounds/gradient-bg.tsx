@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { FloatingDots } from "../devsloka-components/floating-dots";
+import { FloatingDots } from "@/components/ui/floating-dots";
 import { useTheme } from "next-themes";
 
 const GradientBg = () => {

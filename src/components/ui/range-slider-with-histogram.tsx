@@ -2,13 +2,13 @@
 import React, { useState, useMemo } from "react";
 import { Slider } from "@/components/ui/slider";
 import { motion } from "framer-motion";
-import { Card } from "../ui/card";
+import { Card } from "./card";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "../ui/tooltip";
+} from "./tooltip";
 
 interface RangeSliderWithHistogramProps {
   min?: number;

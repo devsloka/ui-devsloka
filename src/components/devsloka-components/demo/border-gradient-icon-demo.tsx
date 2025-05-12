@@ -1,5 +1,5 @@
 import React from "react";
-import { BorderGradientIcon } from "../border-gradient-icon";
+import { BorderGradientIcon } from "@/components/ui/border-gradient-icon";
 import { FigmaIcon, Layers } from "lucide-react";
 const skillsData = [
   {

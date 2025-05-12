@@ -1,4 +1,4 @@
-import AnimatedMacBook from "@/components/devsloka-components/laptop-closes-on-scroll";
+import AnimatedMacBook from "@/components/ui/laptop-closes-on-scroll";
 
 export default function AnimatedLaptopDemo() {
   return (

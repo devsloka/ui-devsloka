@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { motion, useAnimation, useInView, type Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { LogoCloudCarousel } from "@/components/devsloka-components/logo-cloud-carousel";
+import { LogoCloudCarousel } from "@/components/ui/logo-cloud-carousel";
 const LogoCloudBlock: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: false, amount: 0.2 });

@@ -1,6 +1,6 @@
 "use client";
 
-import { ExpandingCards } from "../expanding-cards";
+import { ExpandingCards } from "@/components/ui/expanding-cards";
 
 export function ExpandingCardsDemo() {
   const demoCards = [

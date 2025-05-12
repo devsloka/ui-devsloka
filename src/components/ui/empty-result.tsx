@@ -1,41 +1,27 @@
 "use client";
 
 import React from "react";
-import { Card, CardContent } from "../ui/card";
+import { Card, CardContent } from "./card";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 
 const MotionCard = motion(Card);
 
-const ErrorResult = () => {
+const EmptyResult = () => {
   const textVariants = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
   };
 
-  const cardShake = {
-    initial: { x: 0 },
-    animate: {
-      x: [0, -10, 10, -10, 0],
-      rotate: [0, -5, 5, -5, 0],
-      transition: {
-        duration: 0.6,
-        // repeat: Infinity,
-        // repeatType: "loop" as const,
-      },
-    },
-  };
-
   return (
     <MotionCard
       className="max-w-sm mx-auto shadow-lg"
-      variants={cardShake}
       initial="initial"
       animate="animate"
     >
       <CardContent className="flex flex-col items-center p-6">
         <div className="w-32 h-32">
-          <DotLottieReact src="/dot-lottie/error.lottie" loop autoplay />
+          <DotLottieReact src="/dot-lottie/empty.lottie" loop autoplay />
         </div>
 
         {/* Animated Heading */}
@@ -44,9 +30,9 @@ const ErrorResult = () => {
           animate="animate"
           variants={textVariants}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mt-4 text-xl font-semibold text-center text-red-600"
+          className="mt-4 text-xl font-semibold text-center"
         >
-          Error Occurred!
+          No Data Found
         </motion.h2>
 
         {/* Animated Description */}
@@ -61,11 +47,11 @@ const ErrorResult = () => {
           }}
           className="mt-2 text-center text-gray-600"
         >
-          There was a problem processing your request. Please try again.
+          It looks like there&apos;s nothing here yet!
         </motion.p>
       </CardContent>
     </MotionCard>
   );
 };
 
-export default ErrorResult;
+export default EmptyResult;
