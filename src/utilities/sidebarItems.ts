@@ -34,7 +34,7 @@ export const sidebarItems: SidebarItem[] = [
       {
         title: "AI Agent Template",
         href: "/templates/ai-agent-template",
-        isPro: true,
+        isPro: false,
       },
       {
         title: "E-commerce Store",
