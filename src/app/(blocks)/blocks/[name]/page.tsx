@@ -54,7 +54,7 @@ export default async function BlockPage({
   const { mainFile, relatedFiles = [] } = codeMetadata;
 
   const codeFiles = [mainFile, ...relatedFiles].map((file) => {
-    const fullPath = `src/components/blocks/${file.codePath}`;
+    const fullPath = `src/registry/blocks/${file.codePath}`;
     return {
       ...file,
       content: getComponentCode(fullPath) || "// Component code not available",

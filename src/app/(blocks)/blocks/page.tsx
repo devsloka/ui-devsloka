@@ -30,7 +30,7 @@ const BlocksPage: React.FC = () => {
       </p>
       <div className="space-y-12">
         {Object.values(blocks).map((block) => {
-          const componentPath = `src/components/blocks/${block.codeMetadata.mainFile.codePath}`;
+          const componentPath = `src/registry/blocks/${block.codeMetadata.mainFile.codePath}`;
           const componentCode = getComponentCode(componentPath);
           const BlockComponent = block.block;
 
