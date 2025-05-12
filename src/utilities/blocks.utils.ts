@@ -9,7 +9,6 @@ import HeroFloatingElements from "@/components/blocks/hero-floating-elements";
 import HeroGradientMesh from "@/components/blocks/hero-gradient-mesh";
 import HeroSectionBlock from "@/components/blocks/hero-section";
 import HeroSplitReveal from "@/components/blocks/hero-split-reveal";
-// import { NewsletterBlock } from "@/components/blocks/newsletter/newsletter-block";
 import PricingBlock from "@/components/blocks/pricing-block";
 import { WaveFooter } from "@/components/blocks/wave-footer";
 import { FeatureInteractiveCards } from "@/components/blocks/feature-interactive-cards";
@@ -254,14 +253,6 @@ export const blocks: Record<string, BlockMeta> = {
       },
       keywords: ["newsletter", "email", "subscription"],
       dependencies: "npm i react-email",
-      // relatedFiles: [
-      //   {
-      //     codePath: "newsletter/newsletter-block.tsx",
-      //     title: "Newsletter Component",
-      //     language: "typescript",
-      //     block: NewsletterBlock,
-      //   },
-      // ],
     },
   },
   "logo-cloud": {
