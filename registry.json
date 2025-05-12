@@ -563,7 +563,7 @@
       "description": "A Newsletter Block component for displaying a newsletter section.",
       "files": [
         {
-          "path": "src/registry/blocks/newsletter-block.tsx",
+          "path": "src/registry/blocks/newsletter/newsletter-block.tsx",
           "type": "registry:block"
         }
       ],
@@ -577,7 +577,7 @@
       "description": "A Newsletter Block Two component for displaying a newsletter section.",
       "files": [
         {
-          "path": "src/registry/blocks/newsletter-block-two.tsx",
+          "path": "src/registry/blocks/newsletter/newsletter-block-two.tsx",
           "type": "registry:block"
         }
       ],
