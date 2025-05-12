@@ -77,11 +77,9 @@ const HeroSection = () => {
             <span className="text-[#0A6EFF] font-bold">Devsloka UI</span>
           </h1>
           <p className="text-lg text-zinc-400" id="description">
-            Learn to build unique, stunning interfaces that set you apart from
-            the
-            <span className="text-[#0A6EFF] font-bold"> copy-paste</span> crowd.
-            you &apos;ll master the art of crafting user experiences that
-            attract more users and leave a lasting impression.
+            Empower your React, Next.js or Remix apps with 20+ plug-and-play
+            components, stunning backgrounds, custom hooks, and templates—build
+            unique, high-performance interfaces in seconds.
           </p>
           <Link href={"/components"}>
             <Button
