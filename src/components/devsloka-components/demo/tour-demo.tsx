@@ -11,7 +11,7 @@ const TourDemo: React.FC = () => {
       title: "Welcome Message",
       description: "This is the main welcome message of our application.",
       placement: "top" as const,
-      offset: { y: 10 }, // Add some extra space below the title
+      offset: { y: -20 }, // Add some extra space below the title
     },
     {
       target: "#start-button",
