@@ -4,7 +4,7 @@ import { TemplateCard } from "@/components/templates/template-card";
 import { templates } from "@/lib/templates";
 import { Metadata } from "next";
 import { generateSEO } from "@/config/seo/seo.utils";
-import { FloatingDots } from "@/components/devsloka-components/floating-dots";
+import { FloatingDots } from "@/components/ui/floating-dots";
 
 export function generateMetadata(): Metadata {
   return generateSEO({
