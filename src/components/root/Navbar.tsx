@@ -17,7 +17,7 @@ import { Menu } from "lucide-react";
 import { BsTwitterX } from "react-icons/bs";
 import SearchCommand from "../ui/SearchCommand";
 import { useId } from "react";
-import { sidebarItems } from "../../utilities/sidebarItems";
+import { sidebarItems } from "@/utilities/sidebarItems";
 
 const navLinks = [
   {
