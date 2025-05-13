@@ -19,6 +19,7 @@ import {
 import Image from "next/image";
 import { getTemplateData } from "@/utilities/template.utils";
 import { generateSEO } from "@/config/seo/seo.utils";
+import Link from "next/link";
 
 // Pre-generate the list of template names for static builds
 export async function generateStaticParams() {
@@ -44,7 +45,7 @@ export async function generateMetadata({
     title: `${template.seo.title} - Devsloka Templates`,
     description: template.seo.description,
     path: `templates/${name}`,
-    image: `/templates/${name}.png`,
+    image: `/images/${name}.png`,
     keywords: [template.seo.keywords, "Devsloka", "AI Templates"],
   });
 }
@@ -97,14 +98,18 @@ export default async function TemplatePage({
 
           {/* Action Buttons */}
           <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Button size="lg" className="gap-2">
-              {heroContent.ctaPrimary}
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-            <Button size="lg" variant="outline" className="gap-2">
-              Live Preview
-              <ExternalLink className="h-4 w-4" />
-            </Button>
+            <Link href={heroContent.ctaLink || "#"} target="_blank">
+              <Button size="lg" className="gap-2">
+                {heroContent.ctaPrimary}
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+            <Link href={heroContent.ctaPreview || "#"} target="_blank">
+              <Button size="lg" variant="outline" className="gap-2">
+                Live Preview
+                <ExternalLink className="h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </section>
 

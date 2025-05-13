@@ -37,8 +37,8 @@ export const sidebarItems: SidebarItem[] = [
         isPro: false,
       },
       {
-        title: "E-commerce Store",
-        href: "/templates/e-commerce-store",
+        title: "Devspro Portfolio",
+        href: "/templates/devspro-portfolio",
         isPro: false,
       },
     ],
