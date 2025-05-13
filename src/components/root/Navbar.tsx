@@ -14,7 +14,6 @@ import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "../ui/ModeToggle";
 import { Menu } from "lucide-react";
-import { BsTwitterX } from "react-icons/bs";
 import SearchCommand from "../ui/SearchCommand";
 import { useId } from "react";
 import { sidebarItems } from "@/utilities/sidebarItems";
@@ -112,9 +111,6 @@ const Navbar = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-4">
-          <Button variant={"outline"}>
-            <BsTwitterX />
-          </Button>
           <ModeToggle />
           <SearchCommand />
         </div>
