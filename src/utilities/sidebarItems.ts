@@ -44,6 +44,15 @@ export const sidebarItems: SidebarItem[] = [
     ],
   },
   {
+    title: "Blocks",
+    children: [
+      {
+        title: "Premium Blocks for Free",
+        href: "/blocks",
+      },
+    ],
+  },
+  {
     title: "Components",
     children: [
       {
