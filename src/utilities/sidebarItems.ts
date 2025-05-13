@@ -59,10 +59,10 @@ export const sidebarItems: SidebarItem[] = [
         title: "Animated Smartwatch",
         href: "/components/animated-smartwatch",
       },
-      {
-        title: "Animated Laptop",
-        href: "/components/laptop-closes-on-scroll",
-      },
+      // {
+      //   title: "Animated Laptop",
+      //   href: "/components/laptop-closes-on-scroll",
+      // },
       {
         title: "Image Gallery",
         href: "/components/animated-image-gallery",
