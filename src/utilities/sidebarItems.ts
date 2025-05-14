@@ -245,14 +245,6 @@ export const sidebarItems: SidebarItem[] = [
         title: "useKeyPress",
         href: "/utilities/use-key-press",
       },
-      // {
-      //   title: "useScrollPosition",
-      //   href: "/utilities/use-scroll-position",
-      // },
-      // {
-      //   title: "useAnimation",
-      //   href: "/utilities/use-animation",
-      // },
       {
         title: "useDateFormatter",
         href: "/utilities/use-date-formatter",
