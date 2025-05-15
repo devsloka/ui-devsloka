@@ -1,4 +1,37 @@
-const templates = {
+type TemplateType = {
+  seo: {
+    title: string;
+    description: string;
+    keywords: string[];
+  };
+  heroContent: {
+    title: string;
+    subtitle: string;
+    videoUrl: string;
+    ctaPrimary: string;
+    ctaLink?: string;
+    ctaPreview?: string;
+    targetAudience: string | string[];
+  };
+  benefits: {
+    id: number;
+    title: string;
+    description: string;
+  }[];
+  features: {
+    id: number;
+    title: string;
+    description: string;
+    subItems: string[];
+  }[];
+  dependencies: {
+    id: number;
+    name: string;
+    description: string;
+  }[];
+};
+
+const templates: Record<string, TemplateType> = {
   "ai-agent-template": {
     seo: {
       title: "AI Agent Landing Page Template",
@@ -15,8 +48,7 @@ const templates = {
     heroContent: {
       title: "AI Agent Template",
       subtitle: "The ultimate landing page template for your AI agent startup.",
-      videoUrl:
-        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      videoUrl: "/videos/devs-portfolio.mp4",
       ctaPrimary: "Get Template",
       targetAudience: [
         "You are launching a new AI agent startup and need a professional, eye-catching landing page to showcase your product's features.",
@@ -126,8 +158,7 @@ const templates = {
     heroContent: {
       title: "E-commerce Store Template",
       subtitle: "E commerce store template with modern design and animations.",
-      videoUrl:
-        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      videoUrl: "/videos/devs-portfolio.mp4",
       ctaPrimary: "Download Now",
       targetAudience:
         "Data scientists and developers looking to kickstart machine learning projects with proper infrastructure",
@@ -202,6 +233,90 @@ const templates = {
         id: 6,
         name: "React Icons",
         description: "Icon library for React",
+      },
+    ],
+  },
+  "devspro-portfolio": {
+    seo: {
+      title: "Portfolio Template",
+      description: "Portfolio template with modern design and animations.",
+      keywords: [
+        "Next.js",
+        "Tailwind CSS",
+        "React",
+        "Framer Motion",
+        "Shadcn Ui",
+        "Lucide Icons",
+      ],
+    },
+    heroContent: {
+      title: "Portfolio Template",
+      subtitle: "Portfolio template with modern design and animations.",
+      videoUrl: "/videos/devs-portfolio.mp4",
+      ctaPrimary: "Download Now",
+      ctaLink: "https://github.com/PriyanshuGupta28/portfolio-devsloka",
+      ctaPreview: "https://portfolio-devsloka.vercel.app",
+      targetAudience:
+        "Developers and designers looking to showcase their work in a professional way",
+    },
+    benefits: [
+      {
+        id: 1,
+        title: "Easy to Use",
+        description:
+          "Just start adding your details into the template and you're good to go",
+      },
+      {
+        id: 2,
+        title: "Deployment Ready",
+        description: "Ready to deploy on Vercel , Netlify or cloudflare",
+      },
+    ],
+    features: [
+      {
+        id: 1,
+        title: "Intractive & Animated Portfolio",
+        description: "Animate your portfolio with animations and interactivity",
+        subItems: [
+          "Minimalistic design",
+          "Animate on scroll",
+          "Responsive design",
+          "Dark and light mode",
+          "Seo friendly",
+          "Just add your details and you're good to go",
+        ],
+      },
+    ],
+    dependencies: [
+      {
+        id: 2,
+        name: "Next.js 15.2.2",
+        description: "The React framework for production",
+      },
+      {
+        id: 3,
+        name: "Tailwind CSS 4.0",
+        description: "Utility-first CSS framework for rapid UI development",
+      },
+      {
+        id: 4,
+        name: "React 18.2.0",
+        description: "The JavaScript library for building user interfaces",
+      },
+      {
+        id: 5,
+        name: "Framer Motion",
+        description: "Animation library for React",
+      },
+      {
+        id: 6,
+        name: "Lucide icons",
+        description: "Icon library for React",
+      },
+      {
+        id: 7,
+        name: "Shadcn UI",
+        description: "Styling library for React",
       },
     ],
   },
