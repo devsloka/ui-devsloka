@@ -233,10 +233,6 @@ export const sidebarItems: SidebarItem[] = [
       //   title: "useHover",
       //   href: "/utilities/use-hover",
       // },
-      // {
-      //   title: "useWindowSize",
-      //   href: "/utilities/use-window-size",
-      // },
       {
         title: "useForm",
         href: "/utilities/use-form",
