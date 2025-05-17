@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { sidebarItems } from "@/utilities/sidebarItems";
-import { Badge } from "../ui/badge";
+import { Badge } from "@/components/ui/badge";
 import { templatesNames } from "@/utilities/utilis";
 
 const CompSidebar = () => {
