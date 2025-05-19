@@ -50,6 +50,8 @@ const templates: Record<string, TemplateType> = {
       subtitle: "The ultimate landing page template for your AI agent startup.",
       videoUrl: "/videos/devs-portfolio.mp4",
       ctaPrimary: "Get Template",
+      ctaPreview: "https://ai-agent-template-wkwu.vercel.app/",
+      ctaLink: "https://github.com/yashraj970/AI-Agent-Template",
       targetAudience: [
         "You are launching a new AI agent startup and need a professional, eye-catching landing page to showcase your product's features.",
         "You are a seasoned entrepreneur and want to create a landing page that captures the attention of potential customers.",
@@ -160,6 +162,8 @@ const templates: Record<string, TemplateType> = {
       subtitle: "E commerce store template with modern design and animations.",
       videoUrl: "/videos/devs-portfolio.mp4",
       ctaPrimary: "Download Now",
+      ctaLink: "https://github.com/yashraj970/NextJs-Ecommerce-Template",
+      ctaPreview: "https://next-js-ecommerce-template.vercel.app/",
       targetAudience:
         "Data scientists and developers looking to kickstart machine learning projects with proper infrastructure",
     },
