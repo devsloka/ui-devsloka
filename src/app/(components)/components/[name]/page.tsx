@@ -70,8 +70,6 @@ export default async function ComponentPage({
         secondaryLanguage={componentInfo.codeMetadata.secondaryLanguage}
         secondaryDescription={componentInfo.codeMetadata.secondaryDescription}
         cliCommands={`npx shadcn@latest add https://ui.devsloka.in/r/${name}.json`}
-        manualSteps={["npm i @devsloka/react-components"]}
-        // cliCommands="npm i @devsloka/react-components"
       />
     </div>
   );
