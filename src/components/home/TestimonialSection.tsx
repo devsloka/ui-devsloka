@@ -18,20 +18,10 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    id: 1,
-    name: "Sarah Johnson",
-    role: "Frontend Developer",
-    company: "TechCorp",
-    quote:
-      "These components have saved me countless hours. The integration was seamless!",
-    avatar: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
-    position: { x: -320, y: -180, rotate: -15 },
-  },
-  {
     id: 2,
     name: "Yash Raj",
     role: "Founder & Developer",
-    company: "Excellogics",
+    company: "Works at Excellogics",
     quote:
       "Built with love and care. The components are intuitive and easy to use.",
     avatar: "https://avatars.githubusercontent.com/u/112754137?v=4",
@@ -41,10 +31,20 @@ const testimonials: Testimonial[] = [
     id: 3,
     name: "Priyanshu Gupta",
     role: "Founder & Developer",
-    company: "Bapa Technologies",
+    company: "Works at Bapa Technologies",
     quote: "The design is modern and fresh.",
     avatar: "https://avatars.githubusercontent.com/u/112753528?v=4",
     position: { x: 160, y: -280, rotate: -5 },
+  },
+  {
+    id: 1,
+    name: "Sarah Johnson",
+    role: "Frontend Developer",
+    company: "TechCorp",
+    quote:
+      "These components have saved me countless hours. The integration was seamless!",
+    avatar: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
+    position: { x: -320, y: -180, rotate: -15 },
   },
   {
     id: 4,
