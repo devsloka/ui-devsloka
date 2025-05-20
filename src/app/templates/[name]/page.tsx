@@ -31,7 +31,7 @@ export async function generateStaticParams() {
   return templateNames.map((id) => ({ name: id }));
 }
 
-// Generate SEO metadata based on the template
+// Generate SEO metadata based on the template details
 export async function generateMetadata({
   params,
 }: {
