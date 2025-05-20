@@ -48,7 +48,7 @@ const templates: Record<string, TemplateType> = {
     heroContent: {
       title: "AI Agent Template",
       subtitle: "The ultimate landing page template for your AI agent startup.",
-      videoUrl: "/videos/devs-portfolio.mp4",
+      videoUrl: "/videos/ai-agent-demo.mp4",
       ctaPrimary: "Get Template",
       ctaPreview: "https://ai-agent-template-wkwu.vercel.app/",
       ctaLink: "https://github.com/yashraj970/AI-Agent-Template",
