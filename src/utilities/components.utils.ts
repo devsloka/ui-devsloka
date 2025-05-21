@@ -22,6 +22,8 @@ import SuccessResult from "@/components/ui/success-result";
 import AnimatedMultiSelectDemo from "@/components/devsloka-components/demo/animated-multi-select-demo";
 import ImageGalleryDemo from "@/components/devsloka-components/demo/animated-image-gallery-demo";
 import AnimatedSmartwatchDemo from "@/components/devsloka-components/demo/animated-smartwatch-demo";
+import PricingCardDemo from "@/components/devsloka-components/demo/pricing-card-demo";
+import { ProductCardDemo } from "@/components/devsloka-components/demo/product-card-demo";
 
 export type ComponentMeta = {
   component: React.FC;
@@ -507,6 +509,35 @@ export const components: Record<string, ComponentMeta> = {
       secondaryTitle: "Copy the source code",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/animated-multi-select.tsx",
+    },
+  },
+  "pricing-card": {
+    component: PricingCardDemo,
+    codeMetadata: {
+      title: "Pricing Card",
+      description: "Pricing Card",
+      keywords: ["React", "Pricing", "Card"],
+      language: "tsx",
+      dependencies: "npm i motion lucide-react",
+      secondaryTitle: "Pricing Card",
+      secondaryLanguage: "typescript",
+      secondaryDescription:
+        "Create a file named pricing-card.tsx under the ui folder and use it in your project . also follow the demo file.",
+    },
+  },
+  "product-card": {
+    component: ProductCardDemo,
+    codeMetadata: {
+      title: "Product Card",
+      description: "Product Card",
+      keywords: ["React", "Product", "Card"],
+      language: "tsx",
+      dependencies:
+        "npm i motion lucide-react; npx shadcn@latest add button card badge",
+      secondaryTitle: "Product Card",
+      secondaryLanguage: "typescript",
+      secondaryDescription:
+        "Create a file named product-card.tsx under the ui folder and use it in your project . also follow the demo file.",
     },
   },
 };
