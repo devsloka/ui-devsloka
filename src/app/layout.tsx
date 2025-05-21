@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/contexts/theme-provider";
 import Footer from "@/components/root/Footer";
 import { generateSEO } from "@/config/seo/seo.utils";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Configure Poppins (variable font)
 const poppins = Poppins({
@@ -44,6 +45,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Analytics />
+          <SpeedInsights />
           <Navbar />
           <main className="mx-auto w-full max-w-[88rem] items-start px-4">
             {children}
