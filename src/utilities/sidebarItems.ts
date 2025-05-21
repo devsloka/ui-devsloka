@@ -178,10 +178,10 @@ export const sidebarItems: SidebarItem[] = [
   {
     title: "Cards",
     children: [
-      {
-        title: "Explore Animated Card",
-        href: "/components/cards/explore-animated-card",
-      },
+      // {
+      //   title: "Explore Animated Card",
+      //   href: "/components/cards/explore-animated-card",
+      // },
       {
         title: "Pricing Card",
         href: "/components/cards/pricing-card",
