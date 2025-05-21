@@ -155,10 +155,9 @@ export const components: Record<string, ComponentMeta> = {
       language: "tsx",
       dependencies: "npm i motion tailwind-merge lucide-react",
       secondaryCode: "card-content.ts",
-      secondaryTitle: "Card Content Data",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Data structure and sample content for expandable cards",
+      secondaryDescription: "components/ui/expanding-cards.tsx",
     },
   },
   "floating-dots": {
@@ -170,10 +169,9 @@ export const components: Record<string, ComponentMeta> = {
       keywords: ["React", "Canvas", "Particles", "Background Effect"],
       language: "tsx",
       secondaryCode: "particle-config.ts",
-      secondaryTitle: "Floating Dots ",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named floating-dots.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/floating-dots.tsx",
     },
   },
   "morphing-card": {
@@ -186,10 +184,9 @@ export const components: Record<string, ComponentMeta> = {
       dependencies:
         "npm i motion lucide-react clsx tailwind-merge shadcn@latest add button",
       secondaryCode: "morphing-transitions.ts",
-      secondaryTitle: "Morphing Card",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named morphing-card.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/morphing-card.tsx",
     },
   },
   "morphing-modal": {
@@ -202,10 +199,9 @@ export const components: Record<string, ComponentMeta> = {
       language: "tsx",
       dependencies: "npm i motion @floating-ui/react",
       secondaryCode: "modal-context.ts",
-      secondaryTitle: "Modal Context Provider",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Context API implementation for modal state management",
+      secondaryDescription: "components/ui/morphing-modal.tsx",
     },
   },
   "morphing-nav": {
@@ -224,10 +220,9 @@ export const components: Record<string, ComponentMeta> = {
       language: "tsx",
       dependencies: "npm i motion clsx tailwind-merge lucide-react",
       secondaryCode: "nav-items.ts",
-      secondaryTitle: "Morphing Nav",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named morphing-nav.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/morphing-nav.tsx",
     },
   },
   "range-slider-with-histogram": {
@@ -249,10 +244,9 @@ export const components: Record<string, ComponentMeta> = {
       dependencies:
         "npm i motion clsx tailwind-merge lucide-react shadcn@latest add slider card tooltip",
       secondaryCode: "histogram-data.ts",
-      secondaryTitle: "Budget Range Slider",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named budget-range-slider.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/range-slider-with-histogram.tsx",
     },
   },
   "success-result": {
@@ -273,10 +267,9 @@ export const components: Record<string, ComponentMeta> = {
       language: "tsx",
       dependencies: "npm i motion @lottiefiles/dotlottie-react",
       secondaryCode: "receipt-generator.ts",
-      secondaryTitle: "Receipt Generator",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Logic for generating and formatting transaction receipts",
+      secondaryDescription: "components/ui/success-result-with-receipt.tsx",
     },
   },
   tour: {
@@ -295,10 +288,9 @@ export const components: Record<string, ComponentMeta> = {
       language: "tsx",
       dependencies:
         "npm i motion clsx tailwind-merge lucide-react shadcn@latest add card button",
-      secondaryTitle: "Tour",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named tour.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/tour.tsx",
     },
   },
   "text-effect": {
@@ -316,10 +308,9 @@ export const components: Record<string, ComponentMeta> = {
       ],
       language: "tsx",
       dependencies: "npm i motion clsx tailwind-merge",
-      secondaryTitle: "Text Effect",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named text-effect.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/text-effect.tsx",
     },
   },
   "border-gradient-icon": {
@@ -330,10 +321,9 @@ export const components: Record<string, ComponentMeta> = {
       keywords: ["React", "Border Gradient", "Icon Animation"],
       language: "tsx",
       dependencies: "npm i lucide-react",
-      secondaryTitle: "Border Gradient Icon",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named border-gradient-icon.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/border-gradient-icon.tsx",
     },
   },
   "gradient-text": {
@@ -344,10 +334,9 @@ export const components: Record<string, ComponentMeta> = {
       keywords: ["React", "Text Animation", "Gradient Text Animation"],
       language: "tsx",
       dependencies: "npm i motion",
-      secondaryTitle: "Gradient Text",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named gradient-text.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/gradient-text.tsx",
     },
   },
   "animated-image-gallery": {
@@ -367,7 +356,7 @@ export const components: Record<string, ComponentMeta> = {
       ],
       language: "tsx",
       dependencies: "npx shadcn@latest init",
-      secondaryTitle: "Copy the source code and add lib/utils file",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/animated-image-gallery.tsx",
     },
@@ -382,10 +371,9 @@ export const components: Record<string, ComponentMeta> = {
       language: "tsx",
       dependencies: "npm i motion clsx tailwind-merge",
       secondaryCode: "tour-steps.ts",
-      secondaryTitle: "Tab Switcher",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named tabs-switcher.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/tabs-switcher.tsx",
     },
   },
   "card-radio": {
@@ -397,10 +385,9 @@ export const components: Record<string, ComponentMeta> = {
       keywords: ["React", "Card Radio"],
       language: "tsx",
       dependencies: "npm i motion lucide-react ",
-      secondaryTitle: "Card Radio",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named card-radio.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/card-radio.tsx",
     },
   },
   "icon-radio": {
@@ -412,10 +399,9 @@ export const components: Record<string, ComponentMeta> = {
       keywords: ["React", "Icon", "Icon Radio"],
       language: "tsx",
       dependencies: "npm i motion lucide-react ",
-      secondaryTitle: "Icon Radio",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named icon-radio.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/icon-radio.tsx",
     },
   },
   "card-decorator": {
@@ -426,10 +412,9 @@ export const components: Record<string, ComponentMeta> = {
       keywords: ["React", "Card", "Decorator"],
       language: "tsx",
       dependencies: "npm i motion clsx tailwind-merge class-variance-authority",
-      secondaryTitle: "Card Decorator",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named card-decorator.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/card-decorator.tsx",
     },
   },
   "logo-cloud-carousel": {
@@ -440,10 +425,9 @@ export const components: Record<string, ComponentMeta> = {
       keywords: ["React", "Logo Cloud", "Infinite Scroll"],
       language: "tsx",
       dependencies: "npm i motion next-themes",
-      secondaryTitle: "Logo Cloud Carousel",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named logo-cloud-carousel.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/logo-cloud-carousel.tsx",
     },
   },
   "laptop-closes-on-scroll": {
@@ -462,10 +446,9 @@ export const components: Record<string, ComponentMeta> = {
       ],
       language: "tsx",
       dependencies: "npm i motion",
-      secondaryTitle: "Tour Step Configuration",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Data structure and validation for tour step definitions",
+      secondaryDescription: "components/ui/laptop-closes-on-scroll.tsx",
     },
   },
   "animated-smartwatch": {
@@ -484,10 +467,9 @@ export const components: Record<string, ComponentMeta> = {
       ],
       language: "tsx",
       dependencies: "npm i framer-motion",
-      secondaryTitle: "Animated Smart watch Configuration",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Data structure and validation for Animated Smartwatch",
+      secondaryDescription: "components/ui/animated-smartwatch.tsx",
     },
   },
   "animated-multi-select": {
@@ -519,10 +501,9 @@ export const components: Record<string, ComponentMeta> = {
       keywords: ["React", "Pricing", "Card"],
       language: "tsx",
       dependencies: "npm i motion lucide-react",
-      secondaryTitle: "Pricing Card",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named pricing-card.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/pricing-card.tsx",
     },
   },
   "product-card": {
@@ -534,10 +515,9 @@ export const components: Record<string, ComponentMeta> = {
       language: "tsx",
       dependencies:
         "npm i motion lucide-react; npx shadcn@latest add button card badge",
-      secondaryTitle: "Product Card",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named product-card.tsx under the ui folder and use it in your project . also follow the demo file.",
+      secondaryDescription: "components/ui/product-card.tsx",
     },
   },
 };
