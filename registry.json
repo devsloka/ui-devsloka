@@ -321,6 +321,33 @@
       "dependencies": ["lucide-react"],
       "registryDependencies": ["badge"]
     },
+    {
+      "name": "pricing-card",
+      "type": "registry:ui",
+      "title": "Pricing Card",
+      "description": "A Pricing Card component for displaying pricing information.",
+      "files": [
+        {
+          "path": "src/registry/ui/pricing-card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["lucide-react"]
+    },
+    {
+      "name": "product-card",
+      "type": "registry:ui",
+      "title": "Product Card",
+      "description": "A Product Card component for displaying product information.",
+      "files": [
+        {
+          "path": "src/registry/ui/product-card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["lucide-react", "motion"],
+      "registryDependencies": ["badge", "card", "button"]
+    },
 
     {
       "name": "pricing-block",
