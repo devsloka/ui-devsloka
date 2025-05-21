@@ -2,17 +2,13 @@ import { notFound } from "next/navigation";
 import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { getComponentCode } from "@/utilities/getComponentCode";
 import { Metadata } from "next";
-import ExploreAnimatedCard from "@/components/cards/explore-animated-card";
-import { GlitchCard } from "@/components/cards/glitch-card";
 import PricingCardDemo from "@/components/cards/demo/pricing-card";
 import { ProductCardDemo } from "@/components/cards/demo/product-card";
 import { generateSEO } from "@/config/seo/seo.utils";
 
 const cards: Record<string, React.FC> = {
-  "explore-animated-card": ExploreAnimatedCard,
   "product-card": ProductCardDemo,
   "pricing-card": PricingCardDemo,
-  "glitch-card": GlitchCard,
 };
 
 export async function generateStaticParams() {
