@@ -45,8 +45,10 @@ export const utilities: Record<string, UtilityMeta> = {
       keywords: ["React", "API", "Data Fetching"],
       language: "tsx",
       dependencies: "npm i axios", // If using axios
-      secondaryTitle: "useFetch Hook",
+      secondaryTitle:
+        "Copy source code and paste it in hooks/devsloka-hooks folder",
       secondaryLanguage: "tsx",
+      secondaryDescription: "hooks/devsloka-hooks/use-fetch.tsx",
     },
   },
   "use-debounce": {
@@ -56,8 +58,10 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Debounce values for performance optimization",
       keywords: ["React", "Debounce", "Performance"],
       language: "tsx",
-      secondaryTitle: "useDebounce Hook",
+      secondaryTitle:
+        "Copy source code and paste it in hooks/devsloka-hooks folder",
       secondaryLanguage: "tsx",
+      secondaryDescription: "hooks/devsloka-hooks/use-debounce.tsx",
     },
   },
   // "use-on-click-outside": {
@@ -76,8 +80,10 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Copy text to clipboard with feedback state",
       keywords: ["React", "Clipboard", "Browser API"],
       language: "tsx",
-      secondaryTitle: "useClipboard Hook",
+      secondaryTitle:
+        "Copy source code and paste it in hooks/devsloka-hooks folder",
       secondaryLanguage: "tsx",
+      secondaryDescription: "hooks/devsloka-hooks/use-clipboard.tsx",
     },
   },
   "use-online-status": {
@@ -87,8 +93,10 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Detect browser connectivity status",
       keywords: ["React", "Network", "Browser API"],
       language: "tsx",
-      secondaryTitle: "useOnlineStatus Hook",
+      secondaryTitle:
+        "Copy source code and paste it in hooks/devsloka-hooks folder",
       secondaryLanguage: "tsx",
+      secondaryDescription: "hooks/devsloka-hooks/use-online-status.tsx",
     },
   },
   "use-device-detection": {
@@ -98,8 +106,10 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Detect mobile/desktop devices using user agent",
       keywords: ["React", "Device", "Responsive"],
       language: "tsx",
-      secondaryTitle: "useDeviceDetection Hook",
+      secondaryTitle:
+        "Copy source code and paste it in hooks/devsloka-hooks folder",
       secondaryLanguage: "tsx",
+      secondaryDescription: "hooks/devsloka-hooks/use-device-detection.tsx",
     },
   },
   // "use-hover": {
@@ -127,8 +137,10 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Manage form state with validation",
       keywords: ["React", "Forms", "Validation"],
       language: "tsx",
-      secondaryTitle: "useForm Hook",
+      secondaryTitle:
+        "Copy source code and paste it in hooks/devsloka-hooks folder",
       secondaryLanguage: "tsx",
+      secondaryDescription: "hooks/devsloka-hooks/use-form.tsx",
     },
   },
   "use-key-press": {
@@ -138,7 +150,10 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Detect keyboard key presses",
       keywords: ["React", "Keyboard", "Interaction"],
       language: "tsx",
-      secondaryTitle: "useKeyPress Hook",
+      secondaryTitle:
+        "Copy source code and paste it in hooks/devsloka-hooks folder",
+      secondaryLanguage: "tsx",
+      secondaryDescription: "hooks/devsloka-hooks/use-key-press.tsx",
     },
   },
   "use-scroll-position": {
@@ -148,7 +163,10 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Track scroll position in viewport",
       keywords: ["React", "Scroll", "Position"],
       language: "tsx",
-      secondaryTitle: "useScrollPosition Hook",
+      secondaryTitle:
+        "Copy source code and paste it in hooks/devsloka-hooks folder",
+      secondaryLanguage: "tsx",
+      secondaryDescription: "hooks/devsloka-hooks/use-scroll-position.tsx",
     },
   },
   "use-date-formatter": {
@@ -158,8 +176,10 @@ export const utilities: Record<string, UtilityMeta> = {
       description: "Localized date formatting with Intl API",
       keywords: ["React", "Dates", "Localization"],
       language: "tsx",
-      secondaryTitle: "useDateFormatter Hook",
+      secondaryTitle:
+        "Copy source code and paste it in hooks/devsloka-hooks folder",
       secondaryLanguage: "tsx",
+      secondaryDescription: "hooks/devsloka-hooks/use-date-formatter.tsx",
     },
   },
 };
