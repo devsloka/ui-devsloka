@@ -76,9 +76,7 @@ export default async function BlockPage({
           cliCommands={
             index === 0
               ? `npx shadcn@latest add https://ui.devsloka.in/r/${name}.json`
-              : `npx shadcn@latest add https://ui.devsloka.in/r/${name}-${
-                  index + 1
-                }.json`
+              : `npx shadcn@latest add https://ui.devsloka.in/r/${file.codePath}.json`
           }
         />
       ))}
