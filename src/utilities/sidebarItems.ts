@@ -30,6 +30,7 @@ export const sidebarItems: SidebarItem[] = [
       {
         title: "All Templates",
         href: "/templates",
+        isPro: false,
       },
       {
         title: "AI Agent Template",
@@ -49,6 +50,7 @@ export const sidebarItems: SidebarItem[] = [
       {
         title: "Premium Blocks for Free",
         href: "/blocks",
+        isPro: false,
       },
     ],
   },
