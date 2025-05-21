@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pricing-card",
+  "type": "registry:ui",
+  "title": "Pricing Card",
+  "description": "A Pricing Card component for displaying pricing information.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/pricing-card.tsx",
+      "content": "import React from \"react\";\r\nimport { Check } from \"lucide-react\";\r\n\r\nfunction PricingCard({\r\n  plan = \"Standard Plan\",\r\n  price = \"$9.99\",\r\n  features = [\r\n    \"Unlimited transfers\",\r\n    \"Transaction history with export options\",\r\n    \"Priority email support\",\r\n    \"Expanded currency support\",\r\n    \"Advanced security features\",\r\n  ],\r\n  isPopular = true,\r\n}: {\r\n  plan: string;\r\n  price: string;\r\n  features: string[];\r\n  isPopular?: boolean;\r\n}) {\r\n  return (\r\n    <div\r\n      className={`relative bg-card/20 backdrop-blur-2xl rounded-3xl p-8 flex flex-col h-full border shadow-2xl\r\n        ${isPopular ? \"border-primary/20\" : \"border-border/5\"}`}\r\n    >\r\n      <div className=\"mb-8\">\r\n        <p className=\"text-muted-foreground mb-2\">{plan}</p>\r\n        <h2 className=\"text-4xl font-bold text-foreground flex items-end gap-2\">\r\n          {price}\r\n          {price !== \"Free\" && (\r\n            <span className=\"text-xl text-muted-foreground\">/m</span>\r\n          )}\r\n        </h2>\r\n      </div>\r\n\r\n      <div className=\"flex-grow\">\r\n        {features.map((feature, index) => (\r\n          <div key={index} className=\"flex items-center gap-3 mb-4\">\r\n            <div className=\"bg-primary/10 rounded-full p-1\">\r\n              <Check size={16} className=\"text-foreground\" />\r\n            </div>\r\n            <span className=\"text-muted-foreground text-sm\">{feature}</span>\r\n          </div>\r\n        ))}\r\n      </div>\r\n\r\n      <button\r\n        className={`mt-8 py-4 px-6 rounded-full text-sm font-medium transition-all\r\n            ${\r\n              isPopular\r\n                ? \"bg-primary text-primary-foreground hover:bg-primary/90\"\r\n                : \"bg-muted text-muted-foreground hover:bg-muted/80\"\r\n            }`}\r\n      >\r\n        Get Started\r\n      </button>\r\n    </div>\r\n  );\r\n}\r\n\r\nexport default PricingCard;\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}
