@@ -59,11 +59,9 @@ export const components: Record<string, ComponentMeta> = {
       language: "tsx",
       dependencies:
         "npm i lucide-react clsx tailwind-merge shadcn@latest add badge",
-      secondaryCode: "property-data.ts",
-      secondaryTitle: "Airbnb Card",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Create a file named airbnb-card.tsx  under the ui folder and use it in your project",
+      secondaryDescription: "components/ui/airbnb-listing-card.tsx",
     },
   },
   "content-carousel": {
@@ -83,11 +81,9 @@ export const components: Record<string, ComponentMeta> = {
       ],
       language: "tsx",
       dependencies: "npm i motion clsx cobe",
-      secondaryCode: "carousel-hooks.ts",
-      secondaryTitle: "Carousel Navigation Logic",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Custom hooks for carousel navigation and touch gesture handling",
+      secondaryDescription: "components/ui/content-carousel.tsx",
     },
   },
   "empty-result": {
@@ -107,11 +103,9 @@ export const components: Record<string, ComponentMeta> = {
       ],
       language: "tsx",
       dependencies: "npm i motion @lottiefiles/dotlottie-react",
-      secondaryCode: "empty-states-config.ts",
-      secondaryTitle: "Empty State Configurations",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Configuration objects for different empty state scenarios",
+      secondaryDescription: "components/ui/empty-result.tsx",
     },
   },
   "error-result": {
@@ -131,11 +125,9 @@ export const components: Record<string, ComponentMeta> = {
       ],
       language: "tsx",
       dependencies: "npm i motion @lottiefiles/dotlottie-react",
-      secondaryCode: "error-codes.ts",
-      secondaryTitle: "Error Code Definitions",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription:
-        "Standardized error codes and their metadata for consistent error handling",
+      secondaryDescription: "components/ui/error-result.tsx",
     },
   },
   "expanding-cards": {
@@ -154,7 +146,6 @@ export const components: Record<string, ComponentMeta> = {
       ],
       language: "tsx",
       dependencies: "npm i motion tailwind-merge lucide-react",
-      secondaryCode: "card-content.ts",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/expanding-cards.tsx",
@@ -168,7 +159,6 @@ export const components: Record<string, ComponentMeta> = {
         "Interactive background animation with where floating dots are moving bottom to top.",
       keywords: ["React", "Canvas", "Particles", "Background Effect"],
       language: "tsx",
-      secondaryCode: "particle-config.ts",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/floating-dots.tsx",
@@ -183,7 +173,6 @@ export const components: Record<string, ComponentMeta> = {
       language: "tsx",
       dependencies:
         "npm i motion lucide-react clsx tailwind-merge shadcn@latest add button",
-      secondaryCode: "morphing-transitions.ts",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/morphing-card.tsx",
@@ -198,7 +187,6 @@ export const components: Record<string, ComponentMeta> = {
       keywords: ["React", "Modal", "Transition Animation", "Overlay"],
       language: "tsx",
       dependencies: "npm i motion @floating-ui/react",
-      secondaryCode: "modal-context.ts",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/morphing-modal.tsx",
@@ -219,7 +207,6 @@ export const components: Record<string, ComponentMeta> = {
       ],
       language: "tsx",
       dependencies: "npm i motion clsx tailwind-merge lucide-react",
-      secondaryCode: "nav-items.ts",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/morphing-nav.tsx",
@@ -243,7 +230,6 @@ export const components: Record<string, ComponentMeta> = {
       language: "tsx",
       dependencies:
         "npm i motion clsx tailwind-merge lucide-react shadcn@latest add slider card tooltip",
-      secondaryCode: "histogram-data.ts",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/range-slider-with-histogram.tsx",
@@ -266,10 +252,9 @@ export const components: Record<string, ComponentMeta> = {
       ],
       language: "tsx",
       dependencies: "npm i motion @lottiefiles/dotlottie-react",
-      secondaryCode: "receipt-generator.ts",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
-      secondaryDescription: "components/ui/success-result-with-receipt.tsx",
+      secondaryDescription: "components/ui/success-result.tsx",
     },
   },
   tour: {
@@ -370,7 +355,6 @@ export const components: Record<string, ComponentMeta> = {
       keywords: ["React", "Tabs", "Tab Switcher"],
       language: "tsx",
       dependencies: "npm i motion clsx tailwind-merge",
-      secondaryCode: "tour-steps.ts",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/tabs-switcher.tsx",
