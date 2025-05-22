@@ -32,7 +32,7 @@ const Footer = () => {
     contactInfo: {
       address: "India",
       phone: "+91 840-705-3234",
-      email: "support@devsloka.in",
+      email: "info@devsloka.in",
     },
   };
   return (
