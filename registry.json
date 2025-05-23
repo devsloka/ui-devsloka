@@ -570,7 +570,7 @@
       "registryDependencies": ["button", "badge", "card"]
     },
     {
-      "name": "feature-floating-showcase-block",
+      "name": "feature-floating-showcase",
       "type": "registry:block",
       "title": "Feature Floating Showcase Block",
       "description": "A Feature Floating Showcase Block component for displaying features.",
