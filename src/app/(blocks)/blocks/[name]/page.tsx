@@ -73,11 +73,10 @@ export default async function BlockPage({
           description={file.description}
           showLineNumbers
           className={index === 0 ? "md:mt-6" : ""}
-          cliCommands={
-            index === 0
-              ? `npx shadcn@latest add https://ui.devsloka.in/r/${name}.json`
-              : `npx shadcn@latest add https://ui.devsloka.in/r/${file.codePath}.json`
-          }
+          cliCommands={`npx shadcn@latest add https://ui.devsloka.in/r/${file.codePath
+            .split("/")
+            .pop()
+            ?.replace(".tsx", "")}.json`}
         />
       ))}
     </div>
