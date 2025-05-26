@@ -423,7 +423,7 @@
       "description": "A Hero Section Four Block component for displaying a hero section.",
       "files": [
         {
-          "path": "src/registry/blocks/hero-section-four.tsx",
+          "path": "src/registry/blocks/hero-section/hero-section-four.tsx",
           "type": "registry:block"
         }
       ],
