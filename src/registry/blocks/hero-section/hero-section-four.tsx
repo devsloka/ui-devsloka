@@ -1,7 +1,15 @@
 "use client";
 import type React from "react";
 import { useState, useEffect } from "react";
-import { ArrowRight, Play, Sparkles, Globe, Shield, Zap } from "lucide-react";
+import {
+  LucideIcon,
+  ArrowRight,
+  Play,
+  Sparkles,
+  Globe,
+  Shield,
+  Zap,
+} from "lucide-react";
 
 function FloatingCard({
   delay = 0,
@@ -35,7 +43,7 @@ function FeatureCard({
   title,
   description,
 }: {
-  icon: React.ElementType;
+  icon: LucideIcon;
   title: string;
   description: string;
 }) {
