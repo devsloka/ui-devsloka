@@ -19,6 +19,7 @@ import TestimonialsBlock from "@/registry/blocks/testimonials/testimonials-block
 import { TestimonialsBlockTwo } from "@/registry/blocks/testimonials/testimonials-block-2";
 import LogoCloudBlock from "@/registry/blocks/logo-cloud-1";
 import { TeamBlock } from "@/registry/blocks/teams/team-block";
+import HeroSection from "@/registry/blocks/hero-section/hero-section-four";
 
 export type CodeFile = {
   codePath: string;
@@ -75,6 +76,12 @@ export const blocks: Record<string, BlockMeta> = {
         hasPreview: true,
       },
       relatedFiles: [
+        {
+          codePath: "hero-section-four.tsx",
+          title: "Hero Section Four",
+          language: "typescript",
+          block: HeroSection,
+        },
         {
           codePath: "hero-split-reveal.tsx",
           title: "Hero Split Reveal",
