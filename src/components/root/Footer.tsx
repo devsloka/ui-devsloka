@@ -5,10 +5,10 @@ import { FloatingDots } from "@/components/ui/floating-dots";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import {
-  Facebook,
+  // Facebook,
   Instagram,
   Twitter,
-  Youtube,
+  // Youtube,
   Mail,
   MapPin,
   Phone,
@@ -18,20 +18,19 @@ const Footer = () => {
   const { theme } = useTheme();
   const footerData = {
     supportLinks: [
-      { label: "Help Center", href: "/help" },
-      { label: "Contact Us", href: "/contact" },
-      { label: "Privacy Policy", href: "/privacy" },
-      { label: "Discord", href: "/discord" },
+      { label: "Contact Us", href: "https://www.devsloka.in/contact-us" },
+      { label: "About Us", href: "https://www.devsloka.in/contact-us" },
+      { label: "X", href: "https://x.com/devsloka_in" },
     ],
     accountLinks: [
       { label: "Components", href: "/components" },
       { label: "Templates", href: "/templates" },
       { label: "Blocks", href: "/blocks" },
-      { label: "Prenium", href: "/prenium" },
+      // { label: "Prenium", href: "/prenium" },
     ],
     contactInfo: {
       address: "India",
-      phone: "+91 840-705-3234",
+      phone: "+91 8407053234",
       email: "info@devsloka.in",
     },
   };
@@ -59,34 +58,34 @@ const Footer = () => {
               Discover premium components, blocks, and templates for React.js.
             </p>
             <div className="flex space-x-4">
-              <Link
+              {/* <Link
                 href="#"
                 className="text-neutral-400 hover:text-[#0A6EFF] transition-colors"
               >
                 <Facebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
-              </Link>
+              </Link> */}
               <Link
-                href="#"
+                href="https://www.instagram.com/devsloka.in"
                 className="text-neutral-400 hover:text-[#0A6EFF] transition-colors"
               >
                 <Instagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </Link>
               <Link
-                href="#"
+                href="https://x.com/devsloka_ui"
                 className="text-neutral-400 hover:text-[#0A6EFF] transition-colors"
               >
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </Link>
-              <Link
+              {/* <Link
                 href="#"
                 className="text-neutral-400 hover:text-[#0A6EFF] transition-colors"
               >
                 <Youtube className="h-5 w-5" />
                 <span className="sr-only">YouTube</span>
-              </Link>
+              </Link> */}
             </div>
           </div>
 
@@ -97,7 +96,9 @@ const Footer = () => {
               {footerData.supportLinks.map((item, index) => (
                 <li key={index}>
                   <Link
-                    href={item.href}
+                    href={`${item.href}`}
+                    target="_blank"
+                    rel="devsloka_ui"
                     className="text-neutral-400 hover:text-[#0A6EFF] transition-colors"
                   >
                     {item.label}
@@ -134,17 +135,27 @@ const Footer = () => {
                   {footerData.contactInfo.address}
                 </span>
               </li>
-              <li className="flex items-center">
-                <Phone className="h-5 w-5 text-[#0A6EFF]/80 mr-3 flex-shrink-0" />
-                <span className="text-neutral-400">
-                  {footerData.contactInfo.phone}
-                </span>
+              <li>
+                <Link
+                  href={`tel:${footerData.contactInfo.phone}`}
+                  className="flex items-center"
+                >
+                  <Phone className="h-5 w-5 text-[#0A6EFF]/80 mr-3 flex-shrink-0" />
+                  <span className="text-neutral-400">
+                    {footerData.contactInfo.phone}
+                  </span>
+                </Link>
               </li>
-              <li className="flex items-center">
-                <Mail className="h-5 w-5 text-[#0A6EFF]/80 mr-3 flex-shrink-0" />
-                <span className="text-neutral-400">
-                  {footerData.contactInfo.email}
-                </span>
+              <li>
+                <Link
+                  href={`mailto:${footerData.contactInfo.email}`}
+                  className="flex items-center"
+                >
+                  <Mail className="h-5 w-5 text-[#0A6EFF]/80 mr-3 flex-shrink-0" />
+                  <span className="text-neutral-400">
+                    {footerData.contactInfo.email}
+                  </span>
+                </Link>
               </li>
             </ul>
           </div>
