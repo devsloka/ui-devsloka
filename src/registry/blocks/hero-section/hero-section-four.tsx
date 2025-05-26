@@ -209,7 +209,7 @@ function HeroSection() {
                 Join millions who trust us with their international money
                 transfers. Get started in less than 2 minutes.
               </p>
-              <button className="bg-gradient-to-r from-primary to-secondary text-primary-foreground px-10 py-4 rounded-full text-lg font-medium hover:scale-105 transition-all duration-300 shadow-2xl">
+              <button className="bg-primary text-primary-foreground px-10 py-4 rounded-full text-lg font-medium hover:scale-105 transition-all duration-300 shadow-2xl">
                 Create Free Account
               </button>
             </div>
