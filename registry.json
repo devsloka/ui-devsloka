@@ -417,6 +417,19 @@
       "dependencies": ["lucide-react", "framer-motion"]
     },
     {
+      "name": "hero-section-four",
+      "type": "registry:block",
+      "title": "Hero Section Four Block",
+      "description": "A Hero Section Four Block component for displaying a hero section.",
+      "files": [
+        {
+          "path": "src/registry/blocks/hero-section-four.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["lucide-react"]
+    },
+    {
       "name": "hero-floating-elements",
       "type": "registry:block",
       "title": "Hero Floating Elements Block",
