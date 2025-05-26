@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { CardDecorator } from "@/components/ui/card-decorator";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const CTASection: React.FC = () => {
   return (
@@ -19,9 +20,9 @@ const CTASection: React.FC = () => {
           Let&apos;s bring your dream website to life — reach out to us and
           let&apos;s make it happen!
         </p>
-        <Button className="mt-6 bg-white text-black hover:bg-gray-100 transition-colors">
-          Contact Us
-        </Button>
+        <Link href="https://www.devsloka.in/contact-us" target="_blank">
+          <Button className="mt-4">Contact Us</Button>
+        </Link>
       </div>
     </div>
   );
