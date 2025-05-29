@@ -70,6 +70,7 @@ export default async function ComponentPage({
         secondaryLanguage={componentInfo.codeMetadata.secondaryLanguage}
         secondaryDescription={componentInfo.codeMetadata.secondaryDescription}
         cliCommands={`npx shadcn@latest add https://ui.devsloka.in/r/${name}.json`}
+        v0Url={`https://ui.devsloka.in/r/${name}.json`}
       />
     </div>
   );
