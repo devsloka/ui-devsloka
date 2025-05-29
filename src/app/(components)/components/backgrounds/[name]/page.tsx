@@ -105,6 +105,7 @@ export default async function BackgroundPage({
         language="tsx"
         showLineNumbers
         title={name.replace(/-/g, " ")}
+        v0Url={`https://ui.devsloka.in/r/${name}.json`}
       />
     </div>
   );
