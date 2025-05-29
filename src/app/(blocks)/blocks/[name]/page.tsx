@@ -77,6 +77,10 @@ export default async function BlockPage({
             .split("/")
             .pop()
             ?.replace(".tsx", "")}.json`}
+          v0Url={`https://ui.devsloka.in/r/${file.codePath
+            .split("/")
+            .pop()
+            ?.replace(".tsx", "")}.json`}
         />
       ))}
     </div>
