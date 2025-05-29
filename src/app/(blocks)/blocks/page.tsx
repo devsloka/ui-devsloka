@@ -45,6 +45,7 @@ const BlocksPage: React.FC = () => {
                 title={`${block.title} Component`}
                 className="rounded-lg"
                 cliCommands={`npx shadcn@latest add https://ui.devsloka.in/r/${block.name}.json`}
+                v0Url={`https://ui.devsloka.in/r/${block.name}.json`}
               />
             </section>
           );
