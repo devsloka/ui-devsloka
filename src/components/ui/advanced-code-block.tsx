@@ -9,6 +9,7 @@ import { CodeHighlighter } from "@/lib/code-highlighter";
 import { cn } from "@/lib/utils";
 import { formatCode } from "@/utilities/code";
 import { CopyButton } from "../../lib/copy-button";
+import { OpenInV0Button } from "../root/OpenInV0Button";
 
 interface AdvancedCodeBlockProps {
   // Primary code preview block
@@ -32,7 +33,7 @@ interface AdvancedCodeBlockProps {
   secondaryLanguage?: string;
   secondaryTitle?: string;
   secondaryDescription?: string;
-
+  v0Url?: string;
   className?: string;
 }
 
@@ -52,6 +53,7 @@ export function AdvancedCodeBlock({
   secondaryDescription,
   className,
   dependencies,
+  v0Url,
 }: AdvancedCodeBlockProps) {
   const [viewTab, setViewTab] = useState<string>("preview");
   const hasCLI = !!cliCommands;
@@ -104,6 +106,7 @@ export function AdvancedCodeBlock({
                 </Badge>
               )}
               <CopyButton textToCopy={formatCode(code)} />
+              <OpenInV0Button url={v0Url || ""} />
             </div>
           </div>
           <TabsContent value="preview" className="p-6 border-none">
