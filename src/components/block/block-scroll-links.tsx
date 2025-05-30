@@ -43,7 +43,7 @@ const BlockScrollLinks = () => {
 
     viewport.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleResize);
-    handleScroll(); // Initial check
+    handleScroll();
 
     return () => {
       viewport.removeEventListener("scroll", handleScroll);
