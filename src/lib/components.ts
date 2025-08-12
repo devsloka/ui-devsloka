@@ -27,7 +27,7 @@ const components: ComponentCardProps[] = [
   },
   {
     title: "Image Gallery",
-    href: "/components/image-gallery",
+    href: "/components/animated-image-gallery",
     description: "A responsive image gallery with masonry layout",
     image: "/images/image-gallery.png",
   },
