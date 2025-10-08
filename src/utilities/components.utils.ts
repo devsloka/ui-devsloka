@@ -24,6 +24,7 @@ import ImageGalleryDemo from "@/components/devsloka-components/demo/animated-ima
 import AnimatedSmartwatchDemo from "@/components/devsloka-components/demo/animated-smartwatch-demo";
 import PricingCardDemo from "@/components/devsloka-components/demo/pricing-card-demo";
 import { ProductCardDemo } from "@/components/devsloka-components/demo/product-card-demo";
+import Loader from "@/registry/ui/loader";
 
 export type ComponentMeta = {
   component: React.FC;
@@ -210,6 +211,18 @@ export const components: Record<string, ComponentMeta> = {
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/morphing-nav.tsx",
+    },
+  },
+  "loader": {
+    component: Loader,
+    codeMetadata: {
+      title: "Loader",
+      description: "Loader component with gradient animated dots.",
+      keywords: ["React", "Loader", "Loading Animation"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/loader.tsx",
     },
   },
   "range-slider-with-histogram": {
