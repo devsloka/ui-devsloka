@@ -15,12 +15,12 @@ export const sidebarItems: SidebarItem[] = [
     title: "Getting Started",
     children: [
       {
-        title: "Introduction",
-        href: "/docs",
-      },
-      {
         title: "Installation",
         href: "/installation",
+      },
+      {
+        title: "Introduction",
+        href: "/docs",
       },
     ],
   },
@@ -28,13 +28,13 @@ export const sidebarItems: SidebarItem[] = [
     title: "Templates",
     children: [
       {
-        title: "All Templates",
-        href: "/templates",
+        title: "AI Agent Template",
+        href: "/templates/ai-agent-template",
         isPro: false,
       },
       {
-        title: "AI Agent Template",
-        href: "/templates/ai-agent-template",
+        title: "All Templates",
+        href: "/templates",
         isPro: false,
       },
       {
@@ -58,33 +58,36 @@ export const sidebarItems: SidebarItem[] = [
     title: "Components",
     children: [
       {
-        title: "Animated Multi Select",
-        href: "/components/animated-multi-select",
+        title: "Airbnb Card",
+        href: "/components/airbnb-card",
       },
       {
-        title: "Tour",
-        href: "/components/tour",
-        isNew: true,
+        title: "Animated Multi Select",
+        href: "/components/animated-multi-select",
       },
       {
         title: "Animated Smartwatch",
         href: "/components/animated-smartwatch",
       },
-      // {
-      //   title: "Animated Laptop",
-      //   href: "/components/laptop-closes-on-scroll",
-      // },
       {
-        title: "Image Gallery",
-        href: "/components/animated-image-gallery",
-      },
-      {
-        title: "Content Carousel",
-        href: "/components/content-carousel",
+        title: "Border Gradient Icon",
+        href: "/components/border-gradient-icon",
       },
       {
         title: "Budget Slider",
         href: "/components/range-slider-with-histogram",
+      },
+      {
+        title: "Card Decorator",
+        href: "/components/card-decorator",
+      },
+      {
+        title: "Card Radio",
+        href: "/components/card-radio",
+      },
+      {
+        title: "Content Carousel",
+        href: "/components/content-carousel",
       },
       {
         title: "Expanding Cards",
@@ -95,52 +98,50 @@ export const sidebarItems: SidebarItem[] = [
         href: "/components/floating-dots",
       },
       {
-        title: "Airbnb Card",
-        href: "/components/airbnb-card",
-      },
-      {
-        title: "Morphing Nav",
-        href: "/components/morphing-nav",
-      },
-      {
-        title: "Morphing Modal",
-        href: "/components/morphing-modal",
-      },
-      {
-        title: "Morphing Cards",
-        href: "/components/morphing-card",
-      },
-      {
-        title: "Text Effect",
-        href: "/components/text-effect",
-      },
-      {
-        title: "Border Gradient Icon",
-        href: "/components/border-gradient-icon",
-      },
-      {
         title: "Gradient Text",
         href: "/components/gradient-text",
-      },
-      {
-        title: "Tabs Switcher",
-        href: "/components/tabs-switcher",
-      },
-      {
-        title: "Card Radio",
-        href: "/components/card-radio",
       },
       {
         title: "Icon Radio",
         href: "/components/icon-radio",
       },
       {
+        title: "Image Gallery",
+        href: "/components/animated-image-gallery",
+      },
+      {
         title: "Logo Cloud Carousel",
         href: "/components/logo-cloud-carousel",
       },
       {
-        title: "Card Decorator",
-        href: "/components/card-decorator",
+        title: "Morphing Cards",
+        href: "/components/morphing-card",
+      },
+      {
+        title: "Morphing Modal",
+        href: "/components/morphing-modal",
+      },
+      {
+        title: "Morphing Nav",
+        href: "/components/morphing-nav",
+      },
+      {
+        title: "Tabs Switcher",
+        href: "/components/tabs-switcher",
+      },
+      {
+        title: "Loader",
+        href: "/components/loader",
+        isNew: true,
+      },
+      {
+        title: "Text Effect",
+        href: "/components/text-effect",
+      },
+      {
+        title: "Tour",
+        href: "/components/tour",
+        isNew: true,
       },
     ],
   },
@@ -148,32 +149,32 @@ export const sidebarItems: SidebarItem[] = [
     title: "Background",
     children: [
       {
-        title: "Sky Particles Background",
-        href: "/components/backgrounds/particles-background",
-      },
-      {
-        title: "Galaxy & Milky Way",
-        href: "/components/backgrounds/galaxy-background",
-      },
-      {
-        title: "Moon & Stars",
-        href: "/components/backgrounds/moon-stars-background",
+        title: "3d globe Background",
+        href: "/components/backgrounds/3d-background",
       },
       {
         title: "Confetti Background",
         href: "/components/backgrounds/confetti-background",
       },
       {
-        title: "Noise Background",
-        href: "/components/backgrounds/noise-background",
-      },
-      {
-        title: "3d globe Background",
-        href: "/components/backgrounds/3d-background",
+        title: "Galaxy & Milky Way",
+        href: "/components/backgrounds/galaxy-background",
       },
       {
         title: "Gradient Background",
         href: "/components/backgrounds/gradient-bg",
+      },
+      {
+        title: "Moon & Stars",
+        href: "/components/backgrounds/moon-stars-background",
+      },
+      {
+        title: "Noise Background",
+        href: "/components/backgrounds/noise-background",
+      },
+      {
+        title: "Sky Particles Background",
+        href: "/components/backgrounds/particles-background",
       },
     ],
   },
@@ -188,23 +189,26 @@ export const sidebarItems: SidebarItem[] = [
         title: "Pricing Card",
         href: "/components/pricing-card",
       },
-      { title: "Product Card", href: "/components/product-card" },
+      { 
+        title: "Product Card", 
+        href: "/components/product-card" 
+      },
     ],
   },
   {
     title: "Results",
     children: [
       {
-        title: "Success Result",
-        href: "/components/success-result",
+        title: "Empty Result",
+        href: "/components/empty-result",
       },
       {
         title: "Error Result",
         href: "/components/error-result",
       },
       {
-        title: "Empty Result",
-        href: "/components/empty-result",
+        title: "Success Result",
+        href: "/components/success-result",
       },
     ],
   },
@@ -212,29 +216,25 @@ export const sidebarItems: SidebarItem[] = [
     title: "Utilities",
     children: [
       {
-        title: "useFetch",
-        href: "/utilities/use-fetch",
+        title: "useClipboard",
+        href: "/utilities/use-clipboard",
+      },
+      {
+        title: "useDateFormatter",
+        href: "/utilities/use-date-formatter",
       },
       {
         title: "useDebounce",
         href: "/utilities/use-debounce",
       },
       {
-        title: "useClipboard",
-        href: "/utilities/use-clipboard",
-      },
-      // {
-      //   title: "useOnlineStatus",
-      //   href: "/utilities/use-online-status",
-      // },
-      {
         title: "useDeviceDetection",
         href: "/utilities/use-device-detection",
       },
-      // {
-      //   title: "useHover",
-      //   href: "/utilities/use-hover",
-      // },
+      {
+        title: "useFetch",
+        href: "/utilities/use-fetch",
+      },
       {
         title: "useForm",
         href: "/utilities/use-form",
@@ -242,10 +242,6 @@ export const sidebarItems: SidebarItem[] = [
       {
         title: "useKeyPress",
         href: "/utilities/use-key-press",
-      },
-      {
-        title: "useDateFormatter",
-        href: "/utilities/use-date-formatter",
       },
     ],
   },

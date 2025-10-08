@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "loader",
+  "type": "registry:ui",
+  "title": "Loader",
+  "description": "Loader component with animated gradient dots for indicating loading state.",
+  "files": [
+    {
+      "path": "src/registry/ui/loader.tsx",
+      "content": "\"use client\";\r\nimport React from \"react\";\r\n\r\nconst Loader: React.FC = () => {\r\n  return (\r\n    <div className=\"flex flex-row items-center justify-center\">\r\n      <div className=\"w-5 h-5 rounded-full mr-4 animate-[pulse_1.2s_ease-in-out_infinite] bg-primary\" />\r\n      <div className=\"w-5 h-5 rounded-full mr-4 animate-[pulse_1.2s_ease-in-out_infinite] [animation-delay:0.2s] bg-primary\" />\r\n      <div className=\"w-5 h-5 rounded-full mr-4 animate-[pulse_1.2s_ease-in-out_infinite] [animation-delay:0.4s] bg-primary\" />\r\n      <div className=\"w-5 h-5 rounded-full mr-4 animate-[pulse_1.2s_ease-in-out_infinite] [animation-delay:0.6s] bg-primary\" />\r\n      <div className=\"w-5 h-5 rounded-full mr-4 animate-[pulse_1.2s_ease-in-out_infinite] [animation-delay:0.8s] bg-primary\" />\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default Loader;\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}
