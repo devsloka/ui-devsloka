@@ -1,56 +1,135 @@
-# Devsloka 🌟
+# Devsloka UI 🌟
 
-[![npm version](https://img.shields.io/npm/v/@devsloka/core.svg)](https://www.npmjs.com/package/@devsloka/core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
 
-A free, open-source UI library offering modern React components, templates, and blocks for Next.js, Remix, and React Router applications. Built with accessibility, performance, and developer happiness in mind.
 
-![Devsloka Component Showcase](https://via.placeholder.com/1920x800.png?text=Devsloka+Component+Showcase)
+> **Devsloka UI** is a free, open-source React component library and template collection for building beautiful, animated, and accessible UIs with Next.js, Remix, and React Router. Powered by Tailwind CSS, Framer Motion, and Radix UI.
+
+![Devsloka Component Showcase](public/og-home.png)
+
+---
 
 ## ✨ Features
 
-- **50+ Production-Ready Components**: Buttons, Forms, Cards, Navigation, and more
-- **Multi-Framework Support**: Next.js 14+, Remix 2+, React Router v7
-- **Prebuilt Templates**: Landing pages, dashboards, auth flows, and admin panels
-- **Modern Styling**: Tailwind CSS with CSS Variables + CSS Modules
-- **Accessibility First**: WCAG 2.1 compliant components
-- **Zero Dependencies**: Lightweight and framework-agnostic
-- **TypeScript Ready**: Full type definitions included
-- **Dark Mode**: Built-in dark/light theme support
+- **50+ Production-Ready Components**: Buttons, Cards, Forms, Navigation, Carousels, and more
+- **Prebuilt Blocks & Templates**: Hero sections, pricing, testimonials, footers, dashboards, and landing pages
+- **Modern Styling**: Tailwind CSS, CSS Variables, and theme support
+- **Accessibility First**: WCAG 2.1 compliant, keyboard navigation, and ARIA
+- **TypeScript Support**: Full type definitions for all components
+- **Dark/Light Mode**: Built-in theme switching
+- **Zero Vendor Lock-in**: Use with Next.js, Remix, or React Router
+- **Easy Copy-Paste Usage**: Drop code into your project and go
 
-### 📚 Documentation
+---
 
-Explore our comprehensive documentation and interactive playground:
-
-###### 📖 Documentation Website |
-
-###### 🎮 Component Playground
-
-### 🎨 Theming
+## 📦 Installation
 
 ```bash
-
+# With npm
+npx shadcn@latest add https://ui.devsloka.in/r/component-name
+# Or with bun
+bunx shadcn@latest add https://ui.devsloka.in/r/component-name
 ```
 
-### 🤝 Contributing
+> Or simply copy-paste any component from the `/src/registry/ui` or `/src/registry/blocks` folders into your project.
 
-We welcome contributions! Please read our Contribution Guidelines first.
+---
 
-Fork the repository
+## 🚀 Usage
 
-Create feature branch (git checkout -b feature/awesome-feature)
+1. **Import a component:**
+	```tsx
+	import { Button } from "@/components/ui/button";
+   
+	export default function Example() {
+	  return <Button>Click me</Button>;
+	}
+	```
+2. **Or copy-paste from the registry:**
+	- UI Components: [`src/registry/ui`](src/registry/ui)
+	- Blocks: [`src/registry/blocks`](src/registry/blocks)
+	- Templates: [`src/lib/templates.ts`](src/lib/templates.ts)
 
-Commit changes (git commit -m 'Add awesome feature')
+---
 
-Push branch (git push origin feature/awesome-feature)
+## 🧩 Components & Blocks
 
-Open Pull Request
+### UI Components
 
-### 📄 License
+- Airbnb Card
+- Animated Image Gallery
+- Animated Multi-Select
+- Animated Smartwatch
+- Border Gradient Icon
+- Card Decorator
+- Card Radio
+- Content Carousel
+- Empty Result
+- Error Result
+- Expanding Cards
+- Floating Dots
+- Gradient Text
+- Icon Radio
+- Laptop Closes on Scroll
+- Loader
+- Logo Cloud Carousel
+- Morphing Card
+- Morphing Modal
+- Morphing Nav
+- Pricing Card
+- Product Card
+- Range Slider with Histogram
+- Success Result
+- Tabs Switcher
+- Text Effect
+- Tour
 
-MIT License - See LICENSE for details.
+### Blocks
 
-Built with ❤️ by the Devsloka Community ·
-Report Issue ·
-Request Feature
+- Contact Block
+- FAQ Block
+- Features Block
+- Feature Floating Showcase
+- Feature Interactive Cards
+- Footer Block
+- Floating Footer
+- Grid Footer
+- Hero Section (multiple variants)
+- Logo Cloud Block
+- Newsletter Block
+- Pricing Block
+- Team Block
+- Testimonials Block
+- Wave Footer
+
+See [`src/registry/blocks`](src/registry/blocks) for all block code.
+
+---
+
+## 🎨 Theming & Customization
+
+- Built with [Tailwind CSS](https://tailwindcss.com/) and CSS variables
+- Multiple color themes: see [`src/app/themes.css`](src/app/themes.css)
+- Easily switch between dark/light mode
+- Customize fonts, colors, and spacing in [`tailwind.config.js`](tailwind.config.js)
+
+---
+
+## 📚 Documentation & Playground
+
+- [Documentation Website](https://ui.devsloka.in/)
+- [Component Playground](https://ui.devsloka.in/playground)
+
+---
+
+## 📄 License
+
+MIT License - See [LICENSE](LICENSE) for details.
+
+---
+
+Built with ❤️ by the [Devsloka](https://www.devsloka.in/)
+
+---
+
+_Report Issues · Request Features · Join the Community!_
