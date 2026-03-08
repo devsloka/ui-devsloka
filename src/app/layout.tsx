@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/root/Navbar";
 import { ThemeProvider } from "@/contexts/theme-provider";
 import Footer from "@/components/root/Footer";
+import TestimonialBubble from "@/components/root/TestimonialBubble";
 import { generateSEO } from "@/config/seo/seo.utils";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -51,6 +52,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <TestimonialBubble />
         </ThemeProvider>
       </body>
     </html>
