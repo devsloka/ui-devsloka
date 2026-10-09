@@ -1,5 +1,4 @@
-import { Input } from "@/components/ui/input";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Command,
   CommandDialog,
@@ -15,7 +14,6 @@ import Link from "next/link";
 import { sidebarItems } from "@/utilities/sidebarItems";
 
 export default function SearchCommand() {
-  const id = useId();
   const [isOpen, setIsOpen] = useState(false);
 
   // Keyboard shortcut handler
@@ -33,20 +31,14 @@ export default function SearchCommand() {
 
   return (
     <>
-      <div className="relative">
-        <Input
-          id={id}
-          className="pe-11"
-          placeholder="Search components"
-          type="search"
-          onClick={() => setIsOpen(true)}
-        />
-        <div className="text-muted-foreground pointer-events-none absolute inset-y-0 end-0 flex items-center justify-center pe-2">
-          <kbd className="text-muted-foreground/70 inline-flex h-5 max-h-full items-center rounded border px-1 font-[inherit] text-[0.625rem] font-medium">
-            ⌘K
-          </kbd>
-        </div>
-      </div>
+      <button
+        type="button"
+        onClick={() => setIsOpen(true)}
+        className="flex h-8 w-56 cursor-pointer items-center justify-between gap-4 border border-border px-3 font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
+      >
+        <span>Search components</span>
+        <kbd className="font-mono text-[0.625rem]">⌘K</kbd>
+      </button>
       <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
         <Command className="rounded-lg border shadow-2xs md:min-w-[450px]">
           <CommandInput placeholder="Type a component or search..." />

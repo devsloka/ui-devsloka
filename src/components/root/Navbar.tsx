@@ -1,170 +1,186 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu } from "lucide-react";
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import { Button } from "../ui/button";
-import { usePathname } from "next/navigation";
 import { ModeToggle } from "../ui/ModeToggle";
-import { Menu } from "lucide-react";
 import SearchCommand from "../ui/SearchCommand";
-import { useId } from "react";
 import { sidebarItems } from "@/utilities/sidebarItems";
+import { cn } from "@/lib/utils";
 
-const navLinks = [
-  {
-    name: "Components",
-    href: "/components",
-  },
-  {
-    name: "Template",
-    href: "/templates",
-  },
-  {
-    name: "Docs",
-    href: "/docs",
-  },
-  {
-    name: "Blocks",
-    href: "/blocks",
-  },
+const NAV_LINKS = [
+  { label: "Components", href: "/components" },
+  { label: "Blocks", href: "/blocks" },
+  { label: "Templates", href: "/templates" },
+  { label: "Docs", href: "/docs" },
 ];
+
+const isActivePath = (pathname: string, href: string) =>
+  pathname === href || pathname.startsWith(`${href}/`);
+
+function Wordmark() {
+  return (
+    <Link
+      href="/"
+      className="flex items-center gap-2.5"
+      aria-label="Devsloka UI home"
+    >
+      <Image
+        src="/favicon-dark.png"
+        alt=""
+        width={22}
+        height={22}
+        className="hidden object-contain dark:block"
+      />
+      <Image
+        src="/favicon-light.png"
+        alt=""
+        width={22}
+        height={22}
+        className="object-contain dark:hidden"
+      />
+      <span className="text-[0.9375rem] font-medium tracking-[-0.02em]">
+        Devsloka
+      </span>
+      <span className="font-mono text-[0.625rem] uppercase tracking-wider text-muted-foreground">
+        UI
+      </span>
+    </Link>
+  );
+}
 
 const Navbar = () => {
   const pathname = usePathname();
-  const sheetId = useId();
 
-  const renderSidebarItems = (items: typeof sidebarItems) => {
-    return items.map((item) => (
-      <li key={sheetId + item.title}>
-        <span className="font-bold text-muted-foreground">{item.title}</span>
-        <ul className="pl-4">
-          {item.children.map((child) => (
-            <li key={sheetId + child.href}>
-              <SheetClose asChild key={sheetId + child.href}>
+  return (
+    <header className="fixed inset-x-0 top-0 z-40 h-14 border-b border-border bg-background">
+      <nav
+        aria-label="Main"
+        className="mx-auto flex h-full max-w-[88rem] items-center justify-between gap-8 px-4"
+      >
+        <div className="flex items-center gap-12">
+          <Wordmark />
+          <ul className="hidden items-center gap-7 lg:flex">
+            {NAV_LINKS.map((link) => {
+              const isActive = isActivePath(pathname, link.href);
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={cn(
+                      "font-mono text-xs uppercase tracking-wider transition-colors",
+                      isActive
+                        ? "text-foreground"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
+            <li>
+              <Link
+                href="/#editions"
+                className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Pro
+                <span className="size-1.5 bg-[#0A6EFF]" aria-hidden />
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <div className="hidden lg:block">
+            <SearchCommand />
+          </div>
+          <ModeToggle />
+          <MobileMenu pathname={pathname} />
+        </div>
+      </nav>
+    </header>
+  );
+};
+
+function MobileMenu({ pathname }: { pathname: string }) {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <button
+          type="button"
+          className="flex size-8 cursor-pointer items-center justify-center text-muted-foreground transition-colors hover:text-foreground lg:hidden"
+          aria-label="Open menu"
+        >
+          <Menu className="size-4" />
+        </button>
+      </SheetTrigger>
+      <SheetContent className="gap-0 overflow-y-auto border-border p-0">
+        <div className="flex h-14 shrink-0 items-center border-b border-border px-5">
+          <SheetTitle className="sr-only">Menu</SheetTitle>
+          <Wordmark />
+        </div>
+
+        <ul className="border-b border-border px-5 py-6">
+          {[...NAV_LINKS, { label: "Pro", href: "/#editions" }].map((link) => (
+            <li key={link.href}>
+              <SheetClose asChild>
                 <Link
-                  href={child.href}
-                  className={`${
-                    pathname === child.href
-                      ? "text-[#0A6EFF] font-bold"
-                      : "text-zinc-500"
-                  }`}
+                  href={link.href}
+                  className={cn(
+                    "block py-1.5 text-3xl font-medium tracking-[-0.04em] transition-colors",
+                    isActivePath(pathname, link.href)
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
                 >
-                  {child.title}
+                  {link.label}
                 </Link>
               </SheetClose>
             </li>
           ))}
         </ul>
-      </li>
-    ));
-  };
 
-  return (
-    <nav className="fixed top-0 z-40 w-full border-b border-dashed bg-background/80 backdrop-blur-lg h-16">
-      <div className="h-full max-w-[88rem] mx-auto px-6 flex justify-between items-center">
-        <div className="flex items-center gap-24">
-          <Link href="/">
-            <div className="flex items-center gap-2">
-              <Image
-                src={"/favicon-dark.png"}
-                alt="logo"
-                width={32}
-                height={32}
-                className="object-contain dark:block hidden"
-              />
-              <Image
-                src={"/favicon-light.png"}
-                alt="logo"
-                width={32}
-                height={32}
-                className="object-contain dark:hidden"
-              />
-              <span className="text-2xl font-bold text-[#0A6EFF]">
-                Devsloka UI
-              </span>
-            </div>
-          </Link>
-          <ul className="hidden lg:flex items-center gap-5">
-            {navLinks.map((link) => (
-              <li key={sheetId + link.name}>
-                <Link
-                  href={link.href}
-                  className={`${
-                    pathname === link.href
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground/80"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className="space-y-8 px-5 py-6">
+          {sidebarItems.map((group) => (
+            <section key={group.title}>
+              <h2 className="mb-3 font-mono text-[0.6875rem] uppercase tracking-wider text-muted-foreground">
+                {group.title}
+              </h2>
+              <ul className="space-y-2">
+                {group.children.map((child) => (
+                  <li key={child.href}>
+                    <SheetClose asChild>
+                      <Link
+                        href={child.href}
+                        className={cn(
+                          "text-sm transition-colors",
+                          pathname === child.href
+                            ? "text-[#0A6EFF]"
+                            : "text-foreground/80 hover:text-foreground"
+                        )}
+                      >
+                        {child.title}
+                      </Link>
+                    </SheetClose>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
         </div>
-
-        <div className="hidden lg:flex items-center gap-4">
-          <ModeToggle />
-          <SearchCommand />
-        </div>
-
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline" className="lg:hidden">
-              <Menu className="w-6 h-6" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent className="overflow-y-auto max-h-screen">
-            <SheetHeader className="flex flex-row items-center gap-2">
-              <Image
-                src={"/favicon-dark.png"}
-                alt="logo"
-                width={32}
-                height={32}
-                className="object-contain dark:block hidden"
-              />
-              <Image
-                src={"/favicon-light.png"}
-                alt="logo"
-                width={32}
-                height={32}
-                className="object-contain dark:hidden"
-              />
-              <span className="text-2xl font-bold text-[#0A6EFF]">
-                Devsloka UI
-              </span>
-            </SheetHeader>
-            <ul className="flex flex-col gap-4 px-4">
-              {navLinks.map((link) => (
-                <li key={sheetId + link.href}>
-                  <Link
-                    href={link.href}
-                    className={`${
-                      pathname === link.href
-                        ? "text-[#0A6EFF] font-bold"
-                        : "text-zinc-500"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <ul className="flex flex-col gap-4 px-4">
-              {renderSidebarItems(sidebarItems)}
-            </ul>
-          </SheetContent>
-        </Sheet>
-      </div>
-    </nav>
+      </SheetContent>
+    </Sheet>
   );
-};
+}
 
 export default Navbar;
