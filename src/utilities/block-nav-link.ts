@@ -7,7 +7,7 @@ export type BlockNavLinkType = {
 export const blockNavLinks: BlockNavLinkType[] = [
   {
     id: "blocks",
-    title: "Blocks",
+    title: "All",
     href: "/blocks",
   },
   {

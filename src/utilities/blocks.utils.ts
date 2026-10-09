@@ -213,7 +213,7 @@ export const blocks: Record<string, BlockMeta> = {
     block: FloatingFeatureShowcase,
     name: "features-block",
     title: "Floating Feature Showcase",
-    description: "Feature showcase with icon grid layout",
+    description: "Feature showcase with floating cards and an icon grid",
     imageUrl: "https://yourwebsite.com/images/features-block.png",
     codeMetadata: {
       mainFile: {
@@ -266,7 +266,7 @@ export const blocks: Record<string, BlockMeta> = {
     block: LogoCloudBlock,
     name: "logo-cloud",
     title: "Logo Cloud",
-    description: "Email newsletter subscription form",
+    description: "Logo cloud with an infinite marquee of brand logos",
     imageUrl: "https://yourwebsite.com/images/newsletter-block.png",
     codeMetadata: {
       mainFile: {
@@ -281,7 +281,7 @@ export const blocks: Record<string, BlockMeta> = {
   },
   "team-block": {
     block: TeamBlock,
-    name: "team",
+    name: "team-block",
     title: "Team Section",
     description: "Responsive team section with call-to-action",
     imageUrl: "https://yourwebsite.com/images/team.png",

@@ -7,7 +7,8 @@ type TemplateType = {
   heroContent: {
     title: string;
     subtitle: string;
-    videoUrl: string;
+    /** Demo video in /public; falls back to the card image when absent. */
+    videoUrl?: string;
     ctaPrimary: string;
     ctaLink?: string;
     ctaPreview?: string;
@@ -160,7 +161,6 @@ const templates: Record<string, TemplateType> = {
     heroContent: {
       title: "E-commerce Store Template",
       subtitle: "E commerce store template with modern design and animations.",
-      videoUrl: "/videos/devs-portfolio.mp4",
       ctaPrimary: "Download Now",
       ctaLink: "https://github.com/yashraj970/NextJs-Ecommerce-Template",
       ctaPreview: "https://next-js-ecommerce-template.vercel.app/",
@@ -340,3 +340,5 @@ export function getTemplateData(name: string) {
 }
 
 export type TemplateData = ReturnType<typeof getTemplateData>;
+
+export const templateSlugs = Object.keys(templates);

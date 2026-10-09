@@ -16,15 +16,15 @@ import RangeSliderWithHistogramDemo from "@/components/devsloka-components/demo/
 import TabsSwitcherDemo from "@/components/devsloka-components/demo/tabs-switcher-demo";
 import { TextEffectDemo } from "@/components/devsloka-components/demo/text-effect-demo";
 import TourDemo from "@/components/devsloka-components/demo/tour-demo";
-import EmptyResult from "@/components/ui/empty-result";
-import ErrorResult from "@/components/ui/error-result";
-import SuccessResult from "@/components/ui/success-result";
+import EmptyResultDemo from "@/components/devsloka-components/demo/empty-result-demo";
+import ErrorResultDemo from "@/components/devsloka-components/demo/error-result-demo";
+import SuccessResultDemo from "@/components/devsloka-components/demo/success-result-demo";
 import AnimatedMultiSelectDemo from "@/components/devsloka-components/demo/animated-multi-select-demo";
 import ImageGalleryDemo from "@/components/devsloka-components/demo/animated-image-gallery-demo";
 import AnimatedSmartwatchDemo from "@/components/devsloka-components/demo/animated-smartwatch-demo";
 import PricingCardDemo from "@/components/devsloka-components/demo/pricing-card-demo";
 import { ProductCardDemo } from "@/components/devsloka-components/demo/product-card-demo";
-import Loader from "@/registry/ui/loader";
+import LoaderDemo from "@/components/devsloka-components/demo/loader-demo";
 
 export type ComponentMeta = {
   component: React.FC;
@@ -33,7 +33,6 @@ export type ComponentMeta = {
     description: string;
     keywords: string[];
     language: string;
-    dependencies?: string;
     secondaryCode?: string;
     secondaryTitle?: string;
     secondaryLanguage?: string;
@@ -45,21 +44,11 @@ export const components: Record<string, ComponentMeta> = {
   "airbnb-card": {
     component: AirbnbListingCardExample,
     codeMetadata: {
-      title: "Airbnb Card",
+      title: "Listing Card",
       description:
-        "Adaptive rental listing component with image gallery, rating system, and price formatting. Implements favoriting logic and hover states.",
-      keywords: [
-        "React",
-        "Property Showcase",
-        "Image Carousel",
-        "Rating System",
-        "Commerce UI",
-        "Commerce-ready",
-        "Responsive",
-      ],
+        "Rental listing card with a swipeable scroll-snap photo carousel, rating, badge and a controllable favorite toggle.",
+      keywords: ["React", "Listing Card", "Image Carousel", "Scroll Snap", "Commerce UI", "Accessible"],
       language: "tsx",
-      dependencies:
-        "npm i lucide-react clsx tailwind-merge shadcn@latest add badge",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/airbnb-listing-card.tsx",
@@ -68,64 +57,37 @@ export const components: Record<string, ComponentMeta> = {
   "content-carousel": {
     component: ContentCarouselDemo,
     codeMetadata: {
-      title: "Full-width Image Carousel",
+      title: "Content Carousel",
       description:
-        "Touch-enabled gallery slider with lazy loading and adaptive breakpoints. Supports drag navigation and custom transition easing.",
-      keywords: [
-        "React",
-        "Carousel",
-        "Responsive",
-        "Touch Gestures",
-        "Image Optimization",
-        "Mobile-friendly",
-        "SWR Integration",
-      ],
+        "Step through titled content with labelled previous/next controls, dot navigation and live-region announcements.",
+      keywords: ["React", "Carousel", "Controlled", "Motion", "Accessible"],
       language: "tsx",
-      dependencies: "npm i motion clsx cobe",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/content-carousel.tsx",
     },
   },
   "empty-result": {
-    component: EmptyResult,
+    component: EmptyResultDemo,
     codeMetadata: {
-      title: "Zero-state Illustration",
+      title: "Empty Result",
       description:
-        "Empty content state with configurable illustrations and action prompts. Supports dynamic theming and SVG customization.",
-      keywords: [
-        "React",
-        "Empty State",
-        "Zero Data",
-        "Illustration System",
-        "User Guidance",
-        "Customizable SVG",
-        "Theming",
-      ],
+        "Empty state with an animated icon, title, description and an action slot.",
+      keywords: ["React", "Empty State", "Motion", "Feedback"],
       language: "tsx",
-      dependencies: "npm i motion @lottiefiles/dotlottie-react",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/empty-result.tsx",
     },
   },
   "error-result": {
-    component: ErrorResult,
+    component: ErrorResultDemo,
     codeMetadata: {
-      title: "Error Feedback Screen",
+      title: "Error Result",
       description:
-        "Interactive error display with recovery options and diagnostic logging. Implements error boundary integration and retry mechanisms.",
-      keywords: [
-        "React",
-        "Error Handling",
-        "User Feedback",
-        "Error Boundaries",
-        "Recovery UI",
-        "Error Logging",
-        "Analytics",
-      ],
+        "Error state announced as an alert, with an animated icon, description and recovery actions.",
+      keywords: ["React", "Error State", "Alert", "Motion", "Feedback"],
       language: "tsx",
-      dependencies: "npm i motion @lottiefiles/dotlottie-react",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/error-result.tsx",
@@ -134,19 +96,11 @@ export const components: Record<string, ComponentMeta> = {
   "expanding-cards": {
     component: ExpandingCardsDemo,
     codeMetadata: {
-      title: "Expandable Cards",
-      description: "Expandable card component with smooth transitions effects.",
-      keywords: [
-        "React",
-        "Spring Animation",
-        "UI Cards",
-        "Content Reveal",
-        "Framer Motion",
-        "CSS Transitions",
-        "Responsive",
-      ],
+      title: "Expanding Cards",
+      description:
+        "Image cards that expand on selection using pure CSS flex-grow transitions, with accessible buttons.",
+      keywords: ["React", "Accordion", "Image Cards", "CSS Transitions", "Accessible"],
       language: "tsx",
-      dependencies: "npm i motion tailwind-merge lucide-react",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/expanding-cards.tsx",
@@ -155,10 +109,10 @@ export const components: Record<string, ComponentMeta> = {
   "floating-dots": {
     component: FloatingDotsDemo,
     codeMetadata: {
-      title: "Floating Dots Background",
+      title: "Floating Dots",
       description:
-        "Interactive background animation with where floating dots are moving bottom to top.",
-      keywords: ["React", "Canvas", "Particles", "Background Effect"],
+        "Lightweight canvas background of rising dots that pauses offscreen, scales for high-DPI screens and respects reduced motion.",
+      keywords: ["React", "Canvas", "Particles", "Background", "Performance"],
       language: "tsx",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
@@ -169,11 +123,10 @@ export const components: Record<string, ComponentMeta> = {
     component: MorphingCardDemo,
     codeMetadata: {
       title: "Morphing Card",
-      description: "Toggleable card component with smooth layout transitions.",
-      keywords: ["React", "Content Toggle", "Layout Animation"],
+      description:
+        "A card that morphs into a dialog with shared-layout animation, built on Radix Dialog for focus and Escape handling.",
+      keywords: ["React", "Dialog", "Shared Layout", "Motion", "Accessible"],
       language: "tsx",
-      dependencies:
-        "npm i motion lucide-react clsx tailwind-merge shadcn@latest add button",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/morphing-card.tsx",
@@ -184,10 +137,9 @@ export const components: Record<string, ComponentMeta> = {
     codeMetadata: {
       title: "Morphing Modal",
       description:
-        "Context-aware modal that morphs from trigger elements. Features shared element transitions and adaptive positioning.",
-      keywords: ["React", "Modal", "Transition Animation", "Overlay"],
+        "A dialog that grows from its trigger and contains animated tabs, built on Radix Dialog and Tabs.",
+      keywords: ["React", "Modal", "Tabs", "Shared Layout", "Motion"],
       language: "tsx",
-      dependencies: "npm i motion @floating-ui/react",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/morphing-modal.tsx",
@@ -198,27 +150,21 @@ export const components: Record<string, ComponentMeta> = {
     codeMetadata: {
       title: "Morphing Nav",
       description:
-        "Shape-shifting menu with seamless icon transitions. Implements path morphing animations and adaptive mobile layout.",
-      keywords: [
-        "React",
-        "SVG Morphing",
-        "Responsive Nav",
-        "Menu Animation",
-        "UI/UX",
-      ],
+        "Segmented navigation with a sliding active indicator. Renders links or a keyboard-navigable radio group.",
+      keywords: ["React", "Navigation", "Segmented Control", "Motion", "Accessible"],
       language: "tsx",
-      dependencies: "npm i motion clsx tailwind-merge lucide-react",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/morphing-nav.tsx",
     },
   },
   "loader": {
-    component: Loader,
+    component: LoaderDemo,
     codeMetadata: {
       title: "Loader",
-      description: "Loader component with gradient animated dots.",
-      keywords: ["React", "Loader", "Loading Animation"],
+      description:
+        "Accessible pulsing-dot loader that inherits the current text color, in three sizes.",
+      keywords: ["React", "Loader", "Loading State", "Accessible"],
       language: "tsx",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
@@ -228,43 +174,24 @@ export const components: Record<string, ComponentMeta> = {
   "range-slider-with-histogram": {
     component: RangeSliderWithHistogramDemo,
     codeMetadata: {
-      title: "Budget Range Slider",
+      title: "Range Slider with Histogram",
       description:
-        "Dual-thumb slider with currency formatting and live range updates. Features dynamic value labels and accessible keyboard controls.",
-      keywords: [
-        "React",
-        "Range Slider",
-        "Form Control",
-        "Financial Input",
-        "TSX",
-        "Interactive",
-        "TypeScript",
-      ],
+        "Dual-thumb range slider over a histogram that highlights the selected range. Controlled or uncontrolled.",
+      keywords: ["React", "Range Slider", "Histogram", "Form Control", "Radix"],
       language: "tsx",
-      dependencies:
-        "npm i motion clsx tailwind-merge lucide-react shadcn@latest add slider card tooltip",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/range-slider-with-histogram.tsx",
     },
   },
   "success-result": {
-    component: SuccessResult,
+    component: SuccessResultDemo,
     codeMetadata: {
-      title: "Animated Confirmation",
+      title: "Success Result",
       description:
-        "Payment success state with Lottie animation integration. Features auto-redirect timing and printable receipt layout.",
-      keywords: [
-        "React",
-        "Lottie",
-        "Success State",
-        "E-commerce",
-        "Payment Flow",
-        "SVG Animations",
-        "i18n Ready",
-      ],
+        "Success state with a self-drawing check icon, announced as a status, plus an action slot.",
+      keywords: ["React", "Success State", "SVG Animation", "Motion", "Feedback"],
       language: "tsx",
-      dependencies: "npm i motion @lottiefiles/dotlottie-react",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/success-result.tsx",
@@ -273,19 +200,11 @@ export const components: Record<string, ComponentMeta> = {
   tour: {
     component: TourDemo,
     codeMetadata: {
-      title: "Interactive Product Tour",
+      title: "Product Tour",
       description:
-        "Step-by-step user onboarding system with spotlight effects and tooltip positioning. Supports async step transitions and event hooks.",
-      keywords: [
-        "React",
-        "User Onboarding",
-        "Guided Tour",
-        "Accessibility",
-        "Focus Management",
-      ],
+        "Step-by-step spotlight tour with smart card placement, keyboard navigation and focus management.",
+      keywords: ["React", "Onboarding", "Spotlight", "Guided Tour", "Accessible"],
       language: "tsx",
-      dependencies:
-        "npm i motion clsx tailwind-merge lucide-react shadcn@latest add card button",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/tour.tsx",
@@ -295,17 +214,10 @@ export const components: Record<string, ComponentMeta> = {
     component: TextEffectDemo,
     codeMetadata: {
       title: "Text Effect",
-      description: "Text animation with custom shapes and color palettes.",
-      keywords: [
-        "React",
-        "Text Animation",
-        "SVG Morphing",
-        "UI/UX",
-        "Interactive",
-        "Motion",
-      ],
+      description:
+        "Cycles words in place with eight transition styles, sized to the longest word so nothing shifts.",
+      keywords: ["React", "Text Animation", "Motion", "Typography"],
       language: "tsx",
-      dependencies: "npm i motion clsx tailwind-merge",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/text-effect.tsx",
@@ -315,10 +227,10 @@ export const components: Record<string, ComponentMeta> = {
     component: BorderGradientIconDemo,
     codeMetadata: {
       title: "Border Gradient Icon",
-      description: "Border gradient icon with hover effects.",
-      keywords: ["React", "Border Gradient", "Icon Animation"],
+      description:
+        "Icon tile with a subtle gradient border that can render as a link or button.",
+      keywords: ["React", "Icon", "Gradient Border", "Radix Slot"],
       language: "tsx",
-      dependencies: "npm i lucide-react",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/border-gradient-icon.tsx",
@@ -327,11 +239,11 @@ export const components: Record<string, ComponentMeta> = {
   "gradient-text": {
     component: GradientTextDemo,
     codeMetadata: {
-      title: "Gradient Text Demo",
-      description: "Text animation with custom shapes and color palettes.",
-      keywords: ["React", "Text Animation", "Gradient Text Animation"],
+      title: "Gradient Text",
+      description:
+        "CSS-only animated gradient text using your theme colors. No client JavaScript.",
+      keywords: ["React", "Typography", "Gradient", "CSS Animation"],
       language: "tsx",
-      dependencies: "npm i motion",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/gradient-text.tsx",
@@ -340,20 +252,11 @@ export const components: Record<string, ComponentMeta> = {
   "animated-image-gallery": {
     component: ImageGalleryDemo,
     codeMetadata: {
-      title: "Scroll Effect Image Gallery",
+      title: "Image Gallery",
       description:
-        "Dynamic image gallery with smooth scroll animations and accessibility features. Scroll down to see the animations in action.",
-      keywords: [
-        "React",
-        "Image Gallery",
-        "Smooth Scroll",
-        "Accessibility",
-        "Focus Management",
-        "Keyboard Nav",
-        "ARIA-compliant",
-      ],
+        "Masonry image gallery whose items fade in as they scroll into view, with captions.",
+      keywords: ["React", "Image Gallery", "Masonry", "Scroll Animation", "next/image"],
       language: "tsx",
-      dependencies: "npx shadcn@latest init",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/animated-image-gallery.tsx",
@@ -364,10 +267,9 @@ export const components: Record<string, ComponentMeta> = {
     codeMetadata: {
       title: "Tabs Switcher",
       description:
-        "Tabs switcher shows active tab effect and acording to selected tab it shows content",
-      keywords: ["React", "Tabs", "Tab Switcher"],
+        "Feature tabs with descriptions and cross-fading panels, built on Radix Tabs.",
+      keywords: ["React", "Tabs", "Radix", "Motion", "Accessible"],
       language: "tsx",
-      dependencies: "npm i motion clsx tailwind-merge",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/tabs-switcher.tsx",
@@ -378,10 +280,9 @@ export const components: Record<string, ComponentMeta> = {
     codeMetadata: {
       title: "Card Radio",
       description:
-        "Card radio shows active card effect and acording to selected card it shows content",
-      keywords: ["React", "Card Radio"],
+        "Selectable cards with real radio semantics and arrow-key navigation, built on Radix Radio Group.",
+      keywords: ["React", "Radio Group", "Form Control", "Radix", "Accessible"],
       language: "tsx",
-      dependencies: "npm i motion lucide-react ",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/card-radio.tsx",
@@ -392,10 +293,9 @@ export const components: Record<string, ComponentMeta> = {
     codeMetadata: {
       title: "Icon Radio",
       description:
-        "Icon radio shows active card effect and acording to selected icon it shows content",
-      keywords: ["React", "Icon", "Icon Radio"],
+        "Icon-based radio options with a playful check animation, built on Radix Radio Group.",
+      keywords: ["React", "Radio Group", "Icons", "Radix", "Accessible"],
       language: "tsx",
-      dependencies: "npm i motion lucide-react ",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/icon-radio.tsx",
@@ -405,10 +305,10 @@ export const components: Record<string, ComponentMeta> = {
     component: CardDecoratorDemo,
     codeMetadata: {
       title: "Card Decorator",
-      description: "Card decorator Add add a decorative element to your card.",
-      keywords: ["React", "Card", "Decorator"],
+      description:
+        "Decorative corner accents for cards: brackets, dashes, dots or glow, in the current text color.",
+      keywords: ["React", "Card", "Decoration"],
       language: "tsx",
-      dependencies: "npm i motion clsx tailwind-merge class-variance-authority",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/card-decorator.tsx",
@@ -418,10 +318,10 @@ export const components: Record<string, ComponentMeta> = {
     component: LogoCloudCarouselDemo,
     codeMetadata: {
       title: "Logo Cloud Carousel",
-      description: "Logo Cloud Carousel",
-      keywords: ["React", "Logo Cloud", "Infinite Scroll"],
+      description:
+        "Infinite CSS marquee of logos with hover pause, edge fade, dark-mode logos and a reduced-motion fallback.",
+      keywords: ["React", "Logo Cloud", "Marquee", "CSS Animation"],
       language: "tsx",
-      dependencies: "npm i motion next-themes",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/logo-cloud-carousel.tsx",
@@ -431,18 +331,10 @@ export const components: Record<string, ComponentMeta> = {
     component: AnimatedLaptopDemo,
     codeMetadata: {
       title: "Laptop Closes on Scroll",
-      description: "Animated laptop that closes on scroll",
-      keywords: [
-        "React",
-        "Smooth Scroll",
-        "Accessibility",
-        "Focus Management",
-        "Keyboard Nav",
-        "ARIA-compliant",
-        "Animated Laptop",
-      ],
+      description:
+        "Scroll-driven laptop mockup whose lid closes as you scroll, with any content on its screen.",
+      keywords: ["React", "Scroll Animation", "Device Mockup", "Motion"],
       language: "tsx",
-      dependencies: "npm i motion",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/laptop-closes-on-scroll.tsx",
@@ -452,18 +344,10 @@ export const components: Record<string, ComponentMeta> = {
     component: AnimatedSmartwatchDemo,
     codeMetadata: {
       title: "Animated Smartwatch",
-      description: "Animated smartwatch that closes on scroll",
-      keywords: [
-        "React",
-        "Smooth Scroll",
-        "Accessibility",
-        "Focus Management",
-        "Keyboard Nav",
-        "ARIA-compliant",
-        "Animated Smartwatch",
-      ],
+      description:
+        "Scroll-driven smartwatch mockup that rotates into view, with a live clock face or your own screen content.",
+      keywords: ["React", "Scroll Animation", "Device Mockup", "Motion"],
       language: "tsx",
-      dependencies: "npm i framer-motion",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/animated-smartwatch.tsx",
@@ -472,19 +356,11 @@ export const components: Record<string, ComponentMeta> = {
   "animated-multi-select": {
     component: AnimatedMultiSelectDemo,
     codeMetadata: {
-      title: "Animated Multi-Select",
+      title: "Animated Multi Select",
       description:
-        "Search and select multiple options with animations. Features keyboard navigation and accessibility support.",
-      keywords: [
-        "React",
-        "Multi-Select",
-        "Animated",
-        "Accessibility",
-        "Keyboard Nav",
-        "ARIA-compliant",
-      ],
+        "Searchable multi-select with animated chips, built on cmdk and Radix Popover with full keyboard support.",
+      keywords: ["React", "Multi Select", "Combobox", "Form Control", "Accessible"],
       language: "tsx",
-      dependencies: "npm i framer-motion lucide-react",
       secondaryTitle: "Copy the source code",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/animated-multi-select.tsx",
@@ -494,10 +370,10 @@ export const components: Record<string, ComponentMeta> = {
     component: PricingCardDemo,
     codeMetadata: {
       title: "Pricing Card",
-      description: "Pricing Card",
-      keywords: ["React", "Pricing", "Card"],
+      description:
+        "Plan card with price, period, feature list, badge and a call to action.",
+      keywords: ["React", "Pricing", "Card", "SaaS"],
       language: "tsx",
-      dependencies: "npm i motion lucide-react",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/pricing-card.tsx",
@@ -507,11 +383,10 @@ export const components: Record<string, ComponentMeta> = {
     component: ProductCardDemo,
     codeMetadata: {
       title: "Product Card",
-      description: "Product Card",
-      keywords: ["React", "Product", "Card"],
+      description:
+        "E-commerce product card with color swatches, wishlist toggle, ratings and add-to-cart.",
+      keywords: ["React", "Product Card", "E-commerce", "Accessible"],
       language: "tsx",
-      dependencies:
-        "npm i motion lucide-react; npx shadcn@latest add button card badge",
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/product-card.tsx",
