@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback } from "react";
 import { MessageSquareHeart, X } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 
 const FORM_URL = "https://forms.gle/wCs5knKiXRtFXb9C7";
 
