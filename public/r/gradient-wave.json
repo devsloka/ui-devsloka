@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-wave",
+  "type": "registry:ui",
+  "title": "Gradient Wave Background",
+  "description": "A gentle animated gradient that flows like a wave.",
+  "files": [
+    {
+      "path": "src/registry/backgrounds/gradient-wave.tsx",
+      "type": "registry:ui",
+      "content": "import { cn } from \"@/lib/utils\";\n\nexport type GradientWaveBackgroundProps = Omit<\n  React.ComponentProps<\"div\">,\n  \"children\" | \"color\"\n> & {\n  /** Any CSS color for the waves. Defaults to the theme primary color (`text-primary`). */\n  color?: string;\n  /** Number of stacked waves (1–8). @default 5 */\n  waves?: number;\n  /** Animation speed multiplier. @default 1 */\n  speed?: number;\n};\n\nconst KEYFRAMES = `@keyframes devsloka-gradient-wave{from{transform:translateY(var(--wave-y)) rotate(var(--wave-r))}to{transform:translateY(calc(var(--wave-y) + 5%)) rotate(calc(var(--wave-r) * -1))}}`;\n\n/** Layered translucent arcs gently rising and tilting from the bottom, over a soft vertical gradient. */\nexport function GradientWaveBackground({\n  color,\n  waves = 5,\n  speed = 1,\n  className,\n  style,\n  ...props\n}: GradientWaveBackgroundProps) {\n  const count = Math.max(1, Math.min(8, Math.floor(waves)));\n  const rate = speed > 0 ? speed : 1;\n\n  return (\n    <div\n      aria-hidden\n      data-slot=\"gradient-wave\"\n      className={cn(\n        \"pointer-events-none absolute inset-0 overflow-hidden text-primary\",\n        \"bg-[linear-gradient(to_bottom,transparent,color-mix(in_oklab,currentColor_8%,transparent))]\",\n        className\n      )}\n      style={color ? { color, ...style } : style}\n      {...props}\n    >\n      <style href=\"devsloka-gradient-wave\" precedence=\"default\">\n        {KEYFRAMES}\n      </style>\n      {Array.from({ length: count }, (_, i) => (\n        <span\n          key={i}\n          className=\"absolute -left-1/4 bottom-0 h-1/2 w-[150%] rounded-t-[100%] bg-current will-change-transform animate-[devsloka-gradient-wave_8s_ease-in-out_infinite_alternate] motion-reduce:animate-none\"\n          style={\n            {\n              opacity: 0.04 + i * 0.02,\n              transform: `translateY(${10 + i * 15}%) rotate(${i % 2 ? -1 : 1}deg)`,\n              \"--wave-y\": `${10 + i * 15}%`,\n              \"--wave-r\": `${i % 2 ? -1.5 : 1.5}deg`,\n              animationDuration: `${(8 + i * 2) / rate}s`,\n            } as React.CSSProperties\n          }\n        />\n      ))}\n    </div>\n  );\n}\n"
+    }
+  ]
+}

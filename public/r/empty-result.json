@@ -4,18 +4,15 @@
   "type": "registry:ui",
   "title": "Empty Result",
   "description": "An Empty Result component for displaying an empty state.",
-  "dependencies": [
-    "motion",
-    "lottiefiles/dotlottie-react"
-  ],
-  "registryDependencies": [
-    "card"
-  ],
   "files": [
     {
       "path": "src/registry/ui/empty-result.tsx",
-      "content": "\"use client\";\r\n\r\nimport React from \"react\";\r\nimport { Card, CardContent } from \"@/components/ui/card\";\r\nimport { DotLottieReact } from \"@lottiefiles/dotlottie-react\";\r\nimport { motion } from \"framer-motion\";\r\n\r\nconst MotionCard = motion(Card);\r\n\r\nconst EmptyResult = () => {\r\n  const textVariants = {\r\n    initial: { opacity: 0, y: 20 },\r\n    animate: { opacity: 1, y: 0 },\r\n  };\r\n\r\n  return (\r\n    <MotionCard\r\n      className=\"max-w-sm mx-auto shadow-lg\"\r\n      initial=\"initial\"\r\n      animate=\"animate\"\r\n    >\r\n      <CardContent className=\"flex flex-col items-center p-6\">\r\n        <div className=\"w-32 h-32\">\r\n          <DotLottieReact src=\"/dot-lottie/empty.lottie\" loop autoplay />\r\n        </div>\r\n\r\n        {/* Animated Heading */}\r\n        <motion.h2\r\n          initial=\"initial\"\r\n          animate=\"animate\"\r\n          variants={textVariants}\r\n          transition={{ duration: 0.6, ease: \"easeOut\" }}\r\n          className=\"mt-4 text-xl font-semibold text-center\"\r\n        >\r\n          No Data Found\r\n        </motion.h2>\r\n\r\n        {/* Animated Description */}\r\n        <motion.p\r\n          initial=\"initial\"\r\n          animate=\"animate\"\r\n          variants={textVariants}\r\n          transition={{\r\n            duration: 0.8,\r\n            ease: \"easeOut\",\r\n            delay: 0.2,\r\n          }}\r\n          className=\"mt-2 text-center text-gray-600\"\r\n        >\r\n          It looks like there&apos;s nothing here yet!\r\n        </motion.p>\r\n      </CardContent>\r\n    </MotionCard>\r\n  );\r\n};\r\n\r\nexport default EmptyResult;\r\n",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion } from \"motion/react\";\nimport { Inbox } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type EmptyResultProps = Omit<React.ComponentProps<\"div\">, \"title\"> & {\n  title?: React.ReactNode;\n  description?: React.ReactNode;\n  /** Replaces the default animated icon. */\n  icon?: React.ReactNode;\n  /** Slot for follow-up actions, e.g. a Button. */\n  action?: React.ReactNode;\n};\n\nexport function EmptyResult({\n  title = \"No results\",\n  description,\n  icon,\n  action,\n  className,\n  ...props\n}: EmptyResultProps) {\n  const reduceMotion = useReducedMotion();\n\n  return (\n    <div\n      data-slot=\"empty-result\"\n      className={cn(\n        \"flex flex-col items-center gap-2 rounded-xl border bg-card p-8 text-center text-card-foreground\",\n        className\n      )}\n      {...props}\n    >\n      <motion.div\n        aria-hidden\n        className=\"mb-2 flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground\"\n        initial={reduceMotion ? false : { opacity: 0, y: 12 }}\n        animate={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: [12, -3, 0] }}\n        transition={{ duration: 0.6, ease: \"easeOut\" }}\n      >\n        {icon ?? <Inbox className=\"size-6\" />}\n      </motion.div>\n      <motion.div\n        className=\"flex flex-col items-center gap-2\"\n        initial={reduceMotion ? false : { opacity: 0, y: 8 }}\n        animate={{ opacity: 1, y: 0 }}\n        transition={{ duration: 0.4, ease: \"easeOut\", delay: 0.15 }}\n      >\n        <h3 className=\"text-lg font-semibold\">{title}</h3>\n        {description && (\n          <p className=\"max-w-sm text-sm text-balance text-muted-foreground\">{description}</p>\n        )}\n      </motion.div>\n      {action && <div className=\"mt-4 flex flex-wrap justify-center gap-2\">{action}</div>}\n    </div>\n  );\n}\n"
     }
+  ],
+  "dependencies": [
+    "lucide-react",
+    "motion"
   ]
 }

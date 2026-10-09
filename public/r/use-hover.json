@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-hover",
+  "type": "registry:hook",
+  "title": "useHover",
+  "description": "Track whether the pointer is over an element through a callback ref.",
+  "files": [
+    {
+      "path": "src/registry/hooks/use-hover.ts",
+      "type": "registry:hook",
+      "content": "import { useCallback, useState } from \"react\";\n\nexport type UseHoverReturn<T extends HTMLElement> = [\n  /** Callback ref: attach to the element you want to watch. */\n  ref: (node: T | null) => void,\n  /** `true` while a pointer is over the element. */\n  isHovered: boolean,\n];\n\n/**\n * Track whether the pointer is over an element. Returns a callback ref, so it keeps\n * working when the element mounts later or is swapped for another node.\n *\n * @example\n * const [ref, isHovered] = useHover<HTMLDivElement>();\n * <div ref={ref}>{isHovered ? \"Hovering\" : \"Hover me\"}</div>\n */\nexport function useHover<\n  T extends HTMLElement = HTMLElement,\n>(): UseHoverReturn<T> {\n  const [isHovered, setIsHovered] = useState(false);\n\n  // React 19 callback refs can return a cleanup function.\n  const ref = useCallback((node: T | null) => {\n    if (!node) return;\n    const enter = () => setIsHovered(true);\n    const leave = () => setIsHovered(false);\n    node.addEventListener(\"pointerenter\", enter);\n    node.addEventListener(\"pointerleave\", leave);\n    return () => {\n      node.removeEventListener(\"pointerenter\", enter);\n      node.removeEventListener(\"pointerleave\", leave);\n      setIsHovered(false);\n    };\n  }, []);\n\n  return [ref, isHovered];\n}\n"
+    }
+  ]
+}

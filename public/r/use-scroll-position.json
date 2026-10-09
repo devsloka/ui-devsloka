@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-scroll-position",
+  "type": "registry:hook",
+  "title": "useScrollPosition",
+  "description": "Track the scroll offset of the window or a scrollable element.",
+  "files": [
+    {
+      "path": "src/registry/hooks/use-scroll-position.ts",
+      "type": "registry:hook",
+      "content": "import { useCallback, useSyncExternalStore, type RefObject } from \"react\";\n\nexport type ScrollPosition = { x: number; y: number };\n\nexport type UseScrollPositionOptions = {\n  /** Scrollable element to track. Defaults to the window. */\n  target?: RefObject<HTMLElement | null>;\n};\n\nconst SERVER_SNAPSHOT = \"0,0\";\n\nconst getElement = (target?: RefObject<HTMLElement | null>) =>\n  target?.current ?? null;\n\n/**\n * Track the scroll offset of the window or a scrollable element. Returns `{ x: 0, y: 0 }`\n * on the server and until the element mounts.\n *\n * @example\n * const { y } = useScrollPosition();\n * const showBackToTop = y > 400;\n */\nexport function useScrollPosition({\n  target,\n}: UseScrollPositionOptions = {}): ScrollPosition {\n  const subscribe = useCallback(\n    (callback: () => void) => {\n      const el: HTMLElement | Window = getElement(target) ?? window;\n      el.addEventListener(\"scroll\", callback, { passive: true });\n      window.addEventListener(\"resize\", callback);\n      return () => {\n        el.removeEventListener(\"scroll\", callback);\n        window.removeEventListener(\"resize\", callback);\n      };\n    },\n    [target],\n  );\n\n  // Snapshot as a string so identical positions compare equal between reads.\n  const getSnapshot = useCallback(() => {\n    const el = getElement(target);\n    if (el) return `${el.scrollLeft},${el.scrollTop}`;\n    return target ? SERVER_SNAPSHOT : `${window.scrollX},${window.scrollY}`;\n  }, [target]);\n\n  const snapshot = useSyncExternalStore(\n    subscribe,\n    getSnapshot,\n    () => SERVER_SNAPSHOT,\n  );\n  const [x, y] = snapshot.split(\",\").map(Number);\n  return { x, y };\n}\n"
+    }
+  ]
+}

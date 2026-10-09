@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "blob-background",
+  "type": "registry:ui",
+  "title": "Blobs Background",
+  "description": "Blurred organic shapes that drift and morph.",
+  "files": [
+    {
+      "path": "src/registry/backgrounds/blob-background.tsx",
+      "type": "registry:ui",
+      "content": "import { cn } from \"@/lib/utils\";\n\nexport type BlobBackgroundProps = Omit<React.ComponentProps<\"div\">, \"children\"> & {\n  /** One blob per color. Any CSS colors. Defaults to the theme chart colors. */\n  colors?: string[];\n  /** Strength of each blob's color, 0–1. @default 0.35 */\n  intensity?: number;\n  /** Animation speed multiplier. @default 1 */\n  speed?: number;\n};\n\nconst DEFAULT_COLORS = [\n  \"var(--chart-1)\",\n  \"var(--chart-2)\",\n  \"var(--chart-3)\",\n  \"var(--chart-4)\",\n  \"var(--chart-5)\",\n];\n\nconst PATHS = [\n  [\"-20%,-20%,1\", \"10%,10%,1.2\", \"30%,-10%,.8\", \"0%,20%,1.1\"],\n  [\"20%,20%,1.1\", \"-10%,10%,.9\", \"-30%,-10%,1.2\", \"10%,-20%,.8\"],\n  [\"0%,-30%,.9\", \"20%,0%,1.1\", \"-20%,30%,.8\", \"-10%,-10%,1.2\"],\n  [\"-30%,10%,1.2\", \"0%,-20%,.8\", \"30%,0%,1.1\", \"-10%,30%,.9\"],\n  [\"10%,30%,.8\", \"-30%,-10%,1.1\", \"10%,-30%,.9\", \"30%,10%,1.2\"],\n];\n\nconst frame = (value: string) => {\n  const [x, y, scale] = value.split(\",\");\n  return `transform:translate(${x},${y}) scale(${scale})`;\n};\n\nconst KEYFRAMES = PATHS.map(\n  ([a, b, c, d], i) =>\n    `@keyframes devsloka-blob-${i}{0%,100%{${frame(a)}}25%{${frame(b)}}50%{${frame(c)}}75%{${frame(d)}}}`\n).join(\"\");\n\n/** Soft colored blobs drifting around the parent. */\nexport function BlobBackground({\n  colors = DEFAULT_COLORS,\n  intensity = 0.35,\n  speed = 1,\n  className,\n  ...props\n}: BlobBackgroundProps) {\n  const mix = Math.round(Math.max(0, Math.min(1, intensity)) * 100);\n  const duration = 20 / (speed > 0 ? speed : 1);\n\n  return (\n    <div\n      aria-hidden\n      data-slot=\"blob-background\"\n      className={cn(\"pointer-events-none absolute inset-0 overflow-hidden\", className)}\n      {...props}\n    >\n      <style href=\"devsloka-blob-background\" precedence=\"default\">\n        {KEYFRAMES}\n      </style>\n      {colors.map((color, i) => (\n        <span\n          key={i}\n          className=\"absolute top-1/2 aspect-square w-[60%] rounded-full will-change-transform motion-reduce:animate-none!\"\n          style={{\n            // Margins in % resolve against the parent's width, so this centers the square vertically.\n            left: `${5 + ((i * 17) % 35)}%`,\n            marginTop: \"-30%\",\n            background: `radial-gradient(closest-side, color-mix(in oklab, ${color} ${mix}%, transparent), transparent)`,\n            animation: `devsloka-blob-${i % PATHS.length} ${duration}s ease-in-out ${-i * (duration / 5)}s infinite`,\n          }}\n        />\n      ))}\n    </div>\n  );\n}\n"
+    }
+  ]
+}
