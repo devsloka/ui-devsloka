@@ -1,119 +1,67 @@
-"use client";
-
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import type { Template } from "@/lib/templates";
-import { ArrowRight, Eye } from "lucide-react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { useState } from "react";
 import Link from "next/link";
-import { useIsMobile } from "@/hooks/use-mobile";
+import type { Template } from "@/lib/templates";
 
-interface TemplateCardProps {
-  template: Template;
-}
+const externalLink =
+  "font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground";
 
-export function TemplateCard({ template }: TemplateCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  const isMobile = useIsMobile();
-
+export function TemplateCard({ template }: { template: Template }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      whileHover={{ y: -5 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-    >
-      <Card className="group overflow-hidden border-0 bg-background/50 backdrop-blur-sm transition-all hover:shadow-xl dark:bg-muted/10">
-        <div className="relative aspect-[16/9] overflow-hidden rounded-t-lg">
-          <motion.div
-            animate={{ scale: isHovered ? 1.05 : 1 }}
-            transition={{ duration: 0.4 }}
-            className="h-full w-full"
+    <article className="group flex h-full flex-col border bg-card transition-colors hover:border-foreground/30">
+      <Link
+        href={`/templates/${template.slug}`}
+        className="relative block aspect-[16/10] overflow-hidden border-b bg-muted"
+        aria-label={`${template.title} details`}
+      >
+        <Image
+          src={template.image}
+          alt=""
+          fill
+          sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
+          className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+        />
+        <span className="absolute top-3 left-3 bg-background px-2 py-1 font-mono text-[0.625rem] uppercase tracking-wider">
+          {template.isPro ? "Pro" : "Free"}
+        </span>
+      </Link>
+
+      <div className="flex flex-1 flex-col gap-1.5 p-4">
+        <h2 className="font-medium">
+          <Link href={`/templates/${template.slug}`} className="hover:underline underline-offset-4">
+            {template.title}
+          </Link>
+        </h2>
+        <p className="line-clamp-2 text-sm text-muted-foreground">{template.description}</p>
+        <p className="mt-1 font-mono text-[0.6875rem] uppercase tracking-wider text-muted-foreground">
+          {template.tags.join(" · ")}
+        </p>
+      </div>
+
+      <div className="flex divide-x border-t">
+        <Link href={`/templates/${template.slug}`} className={`flex-1 px-4 py-3 ${externalLink}`}>
+          Details →
+        </Link>
+        {template.href && (
+          <a
+            href={template.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex-1 px-4 py-3 ${externalLink}`}
           >
-            <Image
-              src={template.image || "/placeholder.svg"}
-              alt={template.title}
-              fill
-              className="object-cover"
-            />
-          </motion.div>
-
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-
-          {template.isPro ? (
-            <Badge className="absolute right-3 top-3 bg-primary text-primary-foreground">
-              PRO
-            </Badge>
-          ) : (
-            <Badge className="absolute right-3 top-3 bg-green-400 text-primary-foreground">
-              FREE
-            </Badge>
-          )}
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{
-              opacity: isMobile || isHovered ? 1 : 0,
-              y: isMobile || isHovered ? 0 : 10,
-            }}
-            transition={{ duration: 0.2 }}
-            className="absolute bottom-3 left-3 right-3 flex justify-between"
+            Live ↗
+          </a>
+        )}
+        {template.github && (
+          <a
+            href={template.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex-1 px-4 py-3 ${externalLink}`}
           >
-            {template.href ? (
-              <Link href={template.href} target="_blank">
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="h-8 gap-1 cursor-pointer"
-                >
-                  <Eye className="h-3.5 w-3.5" />
-                  Preview
-                </Button>
-              </Link>
-            ) : (
-              <Button
-                variant="secondary"
-                size="sm"
-                className="h-8 gap-1 cursor-not-allowed"
-              >
-                <Eye className="h-3.5 w-3.5" />
-                Preview
-              </Button>
-            )}
-            {template.github ? (
-              <Link href={template.github} target="_blank">
-                <Button size="sm" className="h-8 gap-1 cursor-pointer">
-                  Use <ArrowRight className="h-3.5 w-3.5" />
-                </Button>
-              </Link>
-            ) : (
-              <Button size="sm" className="h-8 gap-1 cursor-not-allowed">
-                Use <ArrowRight className="h-3.5 w-3.5" />
-              </Button>
-            )}
-          </motion.div>
-        </div>
-
-        <CardContent className="p-4">
-          <h3 className="font-semibold">{template.title}</h3>
-          <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-            {template.description}
-          </p>
-        </CardContent>
-
-        <CardFooter className="flex items-center justify-start gap-1 p-4 pt-0">
-          {template.tags.map((tag) => (
-            <Badge key={tag} variant="secondary" className="text-xs">
-              {tag}
-            </Badge>
-          ))}
-        </CardFooter>
-      </Card>
-    </motion.div>
+            Code ↗
+          </a>
+        )}
+      </div>
+    </article>
   );
 }
