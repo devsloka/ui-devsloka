@@ -1,203 +1,192 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ShoppingBag, Star, Heart, Eye, Check, Clock } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import Image from "next/image";
+import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
+import { Heart, ShoppingBag, Star } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-export interface ProductCardProps {
-  id: number;
-  image: string;
-  title: string;
-  price: number;
-  originalPrice?: number;
-  category: string;
-  rating: number;
+export type ProductColor = { name: string; value: string };
+
+export type ProductCardProps = Omit<React.ComponentProps<"div">, "title"> & {
+  image: { src: string; alt: string };
+  title: React.ReactNode;
+  category?: React.ReactNode;
+  /** Pre-formatted price, e.g. "$89.99". */
+  price: React.ReactNode;
+  /** Pre-formatted original price, shown struck through. */
+  compareAtPrice?: React.ReactNode;
+  rating?: number;
+  reviewCount?: number;
+  /** Badges shown over the top-left of the image. */
+  badges?: React.ReactNode[];
+  colors?: ProductColor[];
+  /** Selected color name (controlled). */
+  color?: string;
+  defaultColor?: string;
+  onColorChange?: (color: string) => void;
   inStock?: boolean;
-  isNew?: boolean;
-  isFeatured?: boolean;
-  discount?: number;
-  colors?: string[];
-}
+  /** Small note under the price, e.g. "Free shipping". */
+  stockNote?: React.ReactNode;
+  onAddToCart?: () => void;
+  addToCartLabel?: React.ReactNode;
+  outOfStockLabel?: React.ReactNode;
+  wishlisted?: boolean;
+  defaultWishlisted?: boolean;
+  onWishlistChange?: (wishlisted: boolean) => void;
+  wishlistLabel?: string;
+  imageSizes?: string;
+};
 
-export default function ProductCard({
+export function ProductCard({
   image,
   title,
-  price,
-  originalPrice,
   category,
+  price,
+  compareAtPrice,
   rating,
+  reviewCount,
+  badges,
+  colors,
+  color,
+  defaultColor,
+  onColorChange,
   inStock = true,
-  isNew = false,
-  isFeatured = false,
-  discount,
-  colors = ["#000000", "#FFFFFF", "#FF0000", "#0000FF"],
+  stockNote,
+  onAddToCart,
+  addToCartLabel = "Add to cart",
+  outOfStockLabel = "Out of stock",
+  wishlisted,
+  defaultWishlisted = false,
+  onWishlistChange,
+  wishlistLabel = "Add to wishlist",
+  imageSizes = "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw",
+  className,
+  ...props
 }: ProductCardProps) {
-  const [isWishlisted, setIsWishlisted] = useState(false);
-  const [selectedColor, setSelectedColor] = useState(colors[0]);
+  const [uncontrolledColor, setUncontrolledColor] = useState(
+    defaultColor ?? colors?.[0]?.name
+  );
+  const selectedColor = color ?? uncontrolledColor;
+  const setColor = (next: string) => {
+    if (color === undefined) setUncontrolledColor(next);
+    onColorChange?.(next);
+  };
+
+  const [uncontrolledWishlisted, setUncontrolledWishlisted] = useState(defaultWishlisted);
+  const isWishlisted = wishlisted ?? uncontrolledWishlisted;
+  const toggleWishlist = () => {
+    const next = !isWishlisted;
+    if (wishlisted === undefined) setUncontrolledWishlisted(next);
+    onWishlistChange?.(next);
+  };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="h-full"
+    <div
+      data-slot="product-card"
+      className={cn(
+        "group flex w-full max-w-xs flex-col overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm",
+        className
+      )}
+      {...props}
     >
-      <Card className="group py-0 relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col">
-        {/* Badges */}
-        <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
-          {isNew && (
-            <Badge className="bg-emerald-500 hover:bg-emerald-600">New</Badge>
+      <div className="relative aspect-square overflow-hidden bg-muted">
+        <Image
+          src={image.src}
+          alt={image.alt}
+          fill
+          sizes={imageSizes}
+          className="object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+        />
+
+        {badges && badges.length > 0 && (
+          <div className="absolute top-3 left-3 flex flex-col items-start gap-1.5">
+            {badges.map((badge, i) => (
+              <Badge key={i} variant="secondary">
+                {badge}
+              </Badge>
+            ))}
+          </div>
+        )}
+
+        <Button
+          type="button"
+          variant="secondary"
+          size="icon"
+          aria-label={wishlistLabel}
+          aria-pressed={isWishlisted}
+          onClick={toggleWishlist}
+          className="absolute top-3 right-3 size-8 rounded-full shadow-sm"
+        >
+          <Heart className={cn("size-4", isWishlisted && "fill-current text-destructive")} />
+        </Button>
+      </div>
+
+      <div className="flex flex-1 flex-col gap-3 p-4">
+        <div className="space-y-1">
+          {(category || rating !== undefined) && (
+            <div className="flex items-center justify-between gap-2 text-xs">
+              {category && <span className="text-muted-foreground">{category}</span>}
+              {rating !== undefined && (
+                <span className="ml-auto flex items-center gap-1 text-foreground">
+                  <Star aria-hidden className="size-3.5 fill-current" />
+                  <span className="sr-only">Rated </span>
+                  {rating.toFixed(1)}
+                  {reviewCount !== undefined && (
+                    <span className="text-muted-foreground">
+                      ({reviewCount}
+                      <span className="sr-only"> reviews</span>)
+                    </span>
+                  )}
+                </span>
+              )}
+            </div>
           )}
-          {discount && (
-            <Badge className="bg-red-500 hover:bg-red-600">-{discount}%</Badge>
-          )}
-          {isFeatured && (
-            <Badge
-              variant="outline"
-              className="border-amber-400 text-amber-500 bg-amber-50"
-            >
-              Featured
-            </Badge>
-          )}
+          <h3 className="line-clamp-2 font-medium">{title}</h3>
         </div>
 
-        {/* Wishlist button */}
-        <motion.button
-          className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-md"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setIsWishlisted(!isWishlisted)}
-        >
-          <Heart
-            className={`h-5 w-5 transition-colors ${
-              isWishlisted ? "text-red-500 fill-red-500" : "text-muted-foreground"
-            }`}
-          />
-        </motion.button>
-
-        {/* Image container */}
-        <motion.div
-          className="relative aspect-square overflow-hidden"
-          whileHover={{ scale: 1.03 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Image
-            src={image || "/placeholder.svg"}
-            alt={title}
-            fill
-            className="object-cover"
-          />
-
-          {/* Overlay */}
-          <motion.div
-            className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
+        {colors && colors.length > 0 && (
+          <RadioGroupPrimitive.Root
+            aria-label="Color"
+            value={selectedColor}
+            onValueChange={setColor}
+            orientation="horizontal"
+            className="flex flex-wrap items-center gap-2"
           >
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              whileHover={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.2 }}
-              className="flex gap-2"
-            >
-              <Button
-                variant="secondary"
-                size="sm"
-                className="rounded-full px-4 flex items-center gap-1"
-              >
-                <Eye className="h-4 w-4" />
-                Quick View
-              </Button>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+            {colors.map((c) => (
+              <RadioGroupPrimitive.Item
+                key={c.name}
+                value={c.name}
+                aria-label={c.name}
+                title={c.name}
+                className="size-6 rounded-full border shadow-sm outline-none transition-shadow focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state=checked]:ring-2 data-[state=checked]:ring-primary data-[state=checked]:ring-offset-2 data-[state=checked]:ring-offset-background"
+                style={{ backgroundColor: c.value }}
+              />
+            ))}
+          </RadioGroupPrimitive.Root>
+        )}
 
-        {/* Content */}
-        <motion.div
-          className="p-6 flex flex-col flex-grow"
-          initial={{ y: 10, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.1 }}
-        >
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium text-primary">{category}</span>
-            <div className="flex items-center">
-              <Star className="h-4 w-4 text-yellow-400 fill-yellow-400 mr-1" />
-              <span className="text-sm font-medium">{rating.toFixed(1)}</span>
+        <div className="mt-auto flex items-end justify-between gap-3 pt-1">
+          <div className="min-w-0">
+            <div className="flex items-baseline gap-2">
+              <span className="text-lg font-semibold">{price}</span>
+              {compareAtPrice && (
+                <s className="text-sm text-muted-foreground">
+                  <span className="sr-only">Original price </span>
+                  {compareAtPrice}
+                </s>
+              )}
             </div>
+            {stockNote && <p className="text-xs text-muted-foreground">{stockNote}</p>}
           </div>
-
-          <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2">
-            {title}
-          </h3>
-
-          {/* Stock status */}
-          <div className="flex items-center mb-3 text-sm">
-            {inStock ? (
-              <div className="flex items-center text-emerald-600">
-                <Check className="h-4 w-4 mr-1" />
-                <span>In Stock</span>
-              </div>
-            ) : (
-              <div className="flex items-center text-amber-600">
-                <Clock className="h-4 w-4 mr-1" />
-                <span>Ships in 2-3 weeks</span>
-              </div>
-            )}
-          </div>
-
-          {/* Color options */}
-          <div className="mb-4">
-            <div className="text-sm text-muted-foreground mb-2">Colors</div>
-            <div className="flex gap-2">
-              {colors.map((color) => (
-                <button
-                  key={color}
-                  className={`h-6 w-6 rounded-full border-2 transition-all ${
-                    selectedColor === color
-                      ? "ring-2 ring-primary ring-offset-2"
-                      : "ring-0"
-                  }`}
-                  style={{ backgroundColor: color }}
-                  onClick={() => setSelectedColor(color)}
-                  aria-label={`Select ${color} color`}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Spacer to push price and button to bottom */}
-          <div className="flex-grow"></div>
-
-          <div className="flex items-center justify-between mt-3">
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-primary/90">
-                  ${price.toFixed(2)}
-                </span>
-                {originalPrice && (
-                  <span className="text-sm text-muted-foreground line-through">
-                    ${originalPrice.toFixed(2)}
-                  </span>
-                )}
-              </div>
-              <div className="text-sm text-muted-foreground">Free shipping</div>
-            </div>
-
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button className="bg-primary hover:bg-primary/90 rounded-full">
-                <ShoppingBag className="mr-2 h-4 w-4" />
-                Add to Cart
-              </Button>
-            </motion.div>
-          </div>
-        </motion.div>
-      </Card>
-    </motion.div>
+          <Button type="button" size="sm" disabled={!inStock} onClick={onAddToCart}>
+            {inStock && <ShoppingBag aria-hidden />}
+            {inStock ? addToCartLabel : outOfStockLabel}
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 }

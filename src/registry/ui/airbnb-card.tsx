@@ -1,234 +1,218 @@
 "use client";
 
-import { Star, Heart } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { ChevronLeft, ChevronRight, Heart, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
 
-export interface ListingProps {
-  id: string;
-  title: string;
-  location: string;
-  host: string;
-  images: string[];
-  rating: number;
-  reviewCount: number;
-  price: number;
-  perNight: boolean;
-  dates: string;
-  isSuperhost?: boolean;
-  isNew?: boolean;
-  category?: string;
-}
+export type ListingImage = { src: string; alt: string };
 
-export function AirbnbListingCard({
-  title,
-  location,
-  host,
+export type ListingCardProps = Omit<React.ComponentProps<"div">, "title"> & {
+  images: ListingImage[];
+  title: React.ReactNode;
+  /** Secondary line, e.g. the location. */
+  subtitle?: React.ReactNode;
+  /** Extra details such as dates or the host line. */
+  meta?: React.ReactNode;
+  rating?: number;
+  reviewCount?: number;
+  /** Pre-formatted price, e.g. "$250". */
+  price: React.ReactNode;
+  /** Shown after the price, e.g. "night". */
+  priceSuffix?: React.ReactNode;
+  /** Shown over the top-left of the image, e.g. "Superhost". */
+  badge?: React.ReactNode;
+  favorite?: boolean;
+  defaultFavorite?: boolean;
+  onFavoriteChange?: (favorite: boolean) => void;
+  /** Accessible label for the favorite toggle. */
+  favoriteLabel?: string;
+  /** `sizes` passed to next/image for the carousel slides. */
+  imageSizes?: string;
+};
+
+const navButton =
+  "absolute top-1/2 z-10 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border bg-background/90 text-foreground shadow-sm transition-opacity outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:opacity-100 disabled:hidden opacity-0 group-hover/media:opacity-100";
+
+export function ListingCard({
   images,
+  title,
+  subtitle,
+  meta,
   rating,
   reviewCount,
   price,
-  perNight = true,
-  dates,
-  isSuperhost = false,
-  isNew = false,
-  category,
-}: ListingProps) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [touchStartX, setTouchStartX] = useState(0);
-  const [touchEndX, setTouchEndX] = useState(0);
+  priceSuffix,
+  badge,
+  favorite,
+  defaultFavorite = false,
+  onFavoriteChange,
+  favoriteLabel = "Save to wishlist",
+  imageSizes = "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw",
+  className,
+  ...props
+}: ListingCardProps) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(0);
+  const [uncontrolledFavorite, setUncontrolledFavorite] = useState(defaultFavorite);
+  const isFavorite = favorite ?? uncontrolledFavorite;
 
-  // Handle next image navigation
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  const toggleFavorite = () => {
+    const next = !isFavorite;
+    if (favorite === undefined) setUncontrolledFavorite(next);
+    onFavoriteChange?.(next);
   };
 
-  // Handle previous image navigation
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  // Sync the active dot with the native scroll position (rAF-throttled).
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const width = track.clientWidth || 1;
+        setIndex(Math.round(track.scrollLeft / width));
+      });
+    };
+    track.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      track.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  const scrollToIndex = (next: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.scrollTo({ left: next * track.clientWidth, behavior: "smooth" });
   };
 
-  // Touch event handlers for mobile swipe
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStartX(e.touches[0].clientX);
-    setTouchEndX(e.touches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEndX(e.touches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStartX || !touchEndX) return;
-
-    const distance = touchStartX - touchEndX;
-    const swipeThreshold = 50; // Minimum swipe distance in pixels
-
-    if (Math.abs(distance) < swipeThreshold) return;
-
-    if (distance > 0) {
-      nextImage(); // Swipe left
-    } else {
-      prevImage(); // Swipe right
-    }
-  };
+  const count = images.length;
 
   return (
-    <div className="group w-[200px] sm:w-[300px] md:w-[400px] lg:w-[400px] xl:w-[400px]">
-      <div
-        className="relative aspect-square rounded-xl overflow-hidden mb-2"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        {/* Image carousel container with sliding animation */}
+    <div data-slot="airbnb-card" className={cn("w-full max-w-sm", className)} {...props}>
+      <div className="group/media relative mb-3 aspect-square overflow-hidden rounded-xl bg-muted">
         <div
-          className="absolute inset-0 flex transition-transform duration-500 ease-in-out"
-          style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+          ref={trackRef}
+          className="flex size-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth [scrollbar-width:none] motion-reduce:scroll-auto [&::-webkit-scrollbar]:hidden"
         >
-          {images.map((image, index) => (
+          {images.map((image, i) => (
             <div
-              key={index}
-              className="min-w-full h-full relative flex-shrink-0"
+              key={image.src}
+              className="relative size-full shrink-0 snap-center"
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} of ${count}`}
             >
               <Image
-                src={image || "/placeholder.svg"}
-                alt={`${title} - Image ${index + 1}`}
+                src={image.src}
+                alt={image.alt}
                 fill
+                sizes={imageSizes}
                 className="object-cover"
               />
             </div>
           ))}
         </div>
 
-        {images.length > 1 && (
+        {/* Scrim keeps the overlaid controls legible on bright photos. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/40 to-transparent"
+        />
+
+        {badge && (
+          <div className="absolute top-3 left-3 rounded-md bg-background px-2 py-0.5 text-xs font-medium text-foreground shadow-sm">
+            {badge}
+          </div>
+        )}
+
+        <button
+          type="button"
+          aria-label={favoriteLabel}
+          aria-pressed={isFavorite}
+          onClick={toggleFavorite}
+          className="absolute top-2.5 right-2.5 z-10 flex size-9 items-center justify-center rounded-full text-white outline-none transition-transform hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none motion-reduce:hover:scale-100"
+        >
+          <Heart
+            className={cn(
+              "size-6 drop-shadow-sm",
+              isFavorite && "fill-current text-destructive"
+            )}
+            strokeWidth={2}
+          />
+        </button>
+
+        {count > 1 && (
           <>
-            {/* Navigation buttons */}
             <button
-              onClick={prevImage}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white rounded-full p-1 shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+              type="button"
               aria-label="Previous image"
+              disabled={index === 0}
+              onClick={() => scrollToIndex(index - 1)}
+              className={cn(navButton, "left-2")}
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-black"
-              >
-                <path
-                  d="M10 12L6 8L10 4"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <ChevronLeft className="size-4" />
             </button>
             <button
-              onClick={nextImage}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white rounded-full p-1 shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+              type="button"
               aria-label="Next image"
+              disabled={index === count - 1}
+              onClick={() => scrollToIndex(index + 1)}
+              className={cn(navButton, "right-2")}
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-black"
-              >
-                <path
-                  d="M6 12L10 8L6 4"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <ChevronRight className="size-4" />
             </button>
 
-            {/* Image position indicators */}
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
-              {images.map((_, index) => (
-                <div
-                  key={index}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5"
+            >
+              {images.map((image, i) => (
+                <span
+                  key={image.src}
                   className={cn(
-                    "h-1.5 rounded-full transition-all",
-                    currentImageIndex === index
-                      ? "w-6 bg-white"
-                      : "w-1.5 bg-white/60"
+                    "size-1.5 rounded-full bg-white shadow-sm transition-opacity",
+                    i === index ? "opacity-100" : "opacity-60"
                   )}
                 />
               ))}
             </div>
           </>
         )}
-
-        {/* Favorite button */}
-        <button
-          onClick={() => setIsFavorite(!isFavorite)}
-          className="absolute top-3 right-3 text-white hover:scale-110 transition-transform"
-          aria-label={isFavorite ? "Remove from wishlist" : "Add to wishlist"}
-        >
-          <Heart
-            className="h-7 w-7 drop-shadow-md"
-            fill={isFavorite ? "#FF385C" : "transparent"}
-            stroke={isFavorite ? "#FF385C" : "white"}
-            strokeWidth={2}
-          />
-        </button>
-
-        {/* Badges for superhost/new listing */}
-        {(isSuperhost || isNew) && (
-          <div className="absolute top-3 left-3">
-            {isSuperhost && (
-              <Badge className="bg-white text-black font-medium text-xs mb-2">
-                Superhost
-              </Badge>
-            )}
-            {isNew && (
-              <Badge className="bg-white text-black font-medium text-xs">
-                New
-              </Badge>
-            )}
-          </div>
-        )}
       </div>
 
-      {/* Listing details */}
-      <div className="space-y-1">
-        <div className="flex justify-between">
-          <h3 className="font-medium text-gray-900 dark:text-white">
-            {location}
-          </h3>
-          <div className="flex items-center">
-            <Star className="h-4 w-4 fill-current" />
-            <span className="ml-1">{rating}</span>
-            {reviewCount > 0 && (
-              <span className="text-gray-500 dark:text-gray-400 ml-1">
-                ({reviewCount})
+      <div className="space-y-0.5 text-sm">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="font-medium text-foreground">{title}</h3>
+          {rating !== undefined && (
+            <p className="flex shrink-0 items-center gap-1 text-foreground">
+              <Star aria-hidden className="size-3.5 fill-current" />
+              <span>
+                <span className="sr-only">Rated </span>
+                {rating}
               </span>
-            )}
-          </div>
-        </div>
-
-        <p className="text-gray-500 dark:text-gray-400 text-sm">
-          {category ? `${category} • ` : ""}Hosted by {host}
-        </p>
-        <p className="text-gray-500 dark:text-gray-400 text-sm">{dates}</p>
-
-        <p className="pt-1">
-          <span className="font-semibold">${price}</span>
-          {perNight && (
-            <span className="text-gray-900 dark:text-white"> night</span>
+              {reviewCount !== undefined && (
+                <span className="text-muted-foreground">
+                  ({reviewCount}
+                  <span className="sr-only"> reviews</span>)
+                </span>
+              )}
+            </p>
           )}
+        </div>
+        {subtitle && <p className="text-muted-foreground">{subtitle}</p>}
+        {meta && <div className="text-muted-foreground">{meta}</div>}
+        <p className="pt-1 text-foreground">
+          <span className="font-semibold">{price}</span>
+          {priceSuffix && <span> {priceSuffix}</span>}
         </p>
       </div>
     </div>
   );
 }
+
+/** @deprecated Use `ListingCard`. Kept for backwards compatibility. */
+export const AirbnbListingCard = ListingCard;
+export type ListingProps = ListingCardProps;

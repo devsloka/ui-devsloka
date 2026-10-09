@@ -1,152 +1,231 @@
 "use client";
 
-import { ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useId, useState } from "react";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+import * as TabsPrimitive from "@radix-ui/react-tabs";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export interface MorphingModalTab {
-  id: string;
-  label: string;
-  icon: React.ComponentType<{ className?: string }>;
-  content: ReactNode;
-}
+export type MorphingModalTab = {
+  value: string;
+  label: React.ReactNode;
+  icon?: React.ComponentType<{ className?: string }>;
+  content: React.ReactNode;
+};
 
-interface MorphingModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  activeTab: string;
-  onTabChange: (tab: string) => void;
+export type MorphingModalProps = Omit<React.ComponentProps<"button">, "title" | "children"> & {
+  /** Content of the button that opens the modal. */
+  trigger: React.ReactNode;
+  title: React.ReactNode;
+  description?: React.ReactNode;
   tabs: MorphingModalTab[];
-  originElement?: HTMLElement | null;
-  submitLabel?: string | ((tab: string) => string);
-  title?: string;
-}
+  tab?: string;
+  defaultTab?: string;
+  onTabChange?: (tab: string) => void;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  /** Rendered below the tab panels, e.g. cancel / submit buttons. */
+  footer?: React.ReactNode;
+  /** Accessible label for the close button. */
+  closeLabel?: string;
+  contentClassName?: string;
+};
+
+const spring = { type: "spring", bounce: 0.15, duration: 0.45 } as const;
 
 export function MorphingModal({
-  isOpen,
-  onClose,
-  activeTab,
-  onTabChange,
+  trigger,
+  title,
+  description,
   tabs,
-  originElement,
-  submitLabel,
-  title = "Create Content",
+  tab,
+  defaultTab,
+  onTabChange,
+  open,
+  defaultOpen = false,
+  onOpenChange,
+  footer,
+  closeLabel = "Close",
+  className,
+  contentClassName,
+  ...props
 }: MorphingModalProps) {
-  const getSubmitLabel = () => {
-    if (typeof submitLabel === "function") return submitLabel(activeTab);
-    if (submitLabel) return submitLabel;
-    return "Submit";
+  const id = useId();
+  const reduceMotion = useReducedMotion();
+
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  const isOpen = open ?? uncontrolledOpen;
+  const setOpen = (next: boolean) => {
+    if (open === undefined) setUncontrolledOpen(next);
+    onOpenChange?.(next);
   };
 
+  const [uncontrolledTab, setUncontrolledTab] = useState(defaultTab ?? tabs[0]?.value);
+  const activeTab = tab ?? uncontrolledTab;
+  const setTab = (next: string) => {
+    if (tab === undefined) setUncontrolledTab(next);
+    onTabChange?.(next);
+  };
+
+  const surfaceId = reduceMotion ? undefined : `${id}-surface`;
+  const transition = reduceMotion ? { duration: 0.15 } : spring;
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 bg-black/50 z-40"
-          />
-
-          <motion.div
-            layoutId={`modal-${activeTab}`}
-            initial={{
-              opacity: 0,
-              scale: 0.8,
-              x: originElement
-                ? originElement.getBoundingClientRect().left +
-                  originElement.offsetWidth / 2 -
-                  200
-                : 0,
-              y: originElement
-                ? originElement.getBoundingClientRect().top +
-                  originElement.offsetHeight / 2 -
-                  200
-                : 0,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              x: 0,
-              y: 0,
-            }}
-            exit={{
-              opacity: 0,
-              scale: 0.8,
-              x: originElement
-                ? originElement.getBoundingClientRect().left +
-                  originElement.offsetWidth / 2 -
-                  200
-                : 0,
-              y: originElement
-                ? originElement.getBoundingClientRect().top +
-                  originElement.offsetHeight / 2 -
-                  200
-                : 0,
-            }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-background border rounded-xl shadow-xl z-50"
+    <DialogPrimitive.Root open={isOpen} onOpenChange={setOpen}>
+      <DialogPrimitive.Trigger asChild>
+        <button
+          type="button"
+          data-slot="morphing-modal"
+          className={cn(
+            "relative inline-flex h-9 items-center justify-center gap-2 rounded-lg px-4 text-sm font-medium text-foreground outline-none",
+            "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+            "disabled:pointer-events-none disabled:opacity-50",
+            className
+          )}
+          {...props}
+        >
+          {/* The button's surface is the element that morphs into the dialog. */}
+          {!isOpen && (
+            <motion.span
+              aria-hidden
+              layoutId={surfaceId}
+              transition={transition}
+              className="absolute inset-0 rounded-lg border bg-background transition-colors hover:bg-muted"
+            />
+          )}
+          <span
+            className={cn(
+              "pointer-events-none relative inline-flex items-center gap-2 transition-opacity",
+              isOpen && "opacity-0"
+            )}
           >
-            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-              <h2 className="text-xl font-bold">
-                {title} {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-              </h2>
-              <Button variant="ghost" size="icon" onClick={onClose}>
-                <X className="h-5 w-5" />
-              </Button>
-            </div>
+            {trigger}
+          </span>
+        </button>
+      </DialogPrimitive.Trigger>
 
-            <div className="flex border-b border-gray-200 dark:border-gray-700">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => onTabChange(tab.id)}
-                  className={cn(
-                    "flex-1 py-2 text-sm font-medium relative",
-                    activeTab === tab.id
-                      ? "text-primary"
-                      : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-                  )}
-                >
-                  {activeTab === tab.id && (
-                    <motion.div
-                      layoutId="tab-indicator"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                      transition={{ type: "spring", bounce: 0.2 }}
-                    />
-                  )}
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="p-4">
-              <AnimatePresence mode="wait">
+      <AnimatePresence>
+        {isOpen && (
+          <DialogPrimitive.Portal forceMount>
+            <DialogPrimitive.Overlay asChild forceMount>
+              <motion.div
+                className="fixed inset-0 z-50 bg-black/50"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              />
+            </DialogPrimitive.Overlay>
+            <div className="pointer-events-none fixed inset-0 z-50 grid place-items-center p-4">
+              <DialogPrimitive.Content
+                asChild
+                forceMount
+                {...(description ? {} : { "aria-describedby": undefined })}
+              >
                 <motion.div
-                  key={activeTab}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
+                  layoutId={surfaceId}
+                  transition={transition}
+                  initial={reduceMotion ? { opacity: 0 } : undefined}
+                  animate={reduceMotion ? { opacity: 1 } : undefined}
+                  exit={reduceMotion ? { opacity: 0 } : undefined}
+                  className={cn(
+                    "pointer-events-auto relative flex max-h-[calc(100dvh-2rem)] w-full max-w-lg flex-col overflow-hidden rounded-xl border bg-background text-foreground outline-none",
+                    contentClassName
+                  )}
                 >
-                  {tabs.find((tab) => tab.id === activeTab)?.content}
-                </motion.div>
-              </AnimatePresence>
+                  <motion.div
+                    className="flex min-h-0 flex-1 flex-col"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, transition: { delay: reduceMotion ? 0 : 0.12 } }}
+                    exit={{ opacity: 0, transition: { duration: 0.08 } }}
+                  >
+                    <div className="space-y-1.5 p-6 pr-14 pb-4">
+                      <DialogPrimitive.Title className="text-lg font-semibold">
+                        {title}
+                      </DialogPrimitive.Title>
+                      {description && (
+                        <DialogPrimitive.Description className="text-sm text-muted-foreground">
+                          {description}
+                        </DialogPrimitive.Description>
+                      )}
+                    </div>
 
-              <div className="mt-6 flex justify-end space-x-2">
-                <Button variant="outline" onClick={onClose}>
-                  Cancel
-                </Button>
-                <Button>{getSubmitLabel()}</Button>
-              </div>
+                    <TabsPrimitive.Root
+                      value={activeTab}
+                      onValueChange={setTab}
+                      className="flex min-h-0 flex-1 flex-col"
+                    >
+                      <TabsPrimitive.List className="mx-6 flex gap-1 overflow-x-auto rounded-lg bg-muted p-1">
+                        {tabs.map((item) => {
+                          const Icon = item.icon;
+                          return (
+                            <TabsPrimitive.Trigger
+                              key={item.value}
+                              value={item.value}
+                              className={cn(
+                                "relative flex flex-1 items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium whitespace-nowrap outline-none transition-colors",
+                                "text-muted-foreground hover:text-foreground data-[state=active]:text-foreground",
+                                "focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                              )}
+                            >
+                              {item.value === activeTab && (
+                                <motion.span
+                                  aria-hidden
+                                  layoutId={`${id}-tab-indicator`}
+                                  transition={reduceMotion ? { duration: 0 } : spring}
+                                  className="absolute inset-0 rounded-md border bg-background shadow-sm"
+                                />
+                              )}
+                              {Icon && <Icon className="relative size-4 shrink-0" />}
+                              <span className="relative">{item.label}</span>
+                            </TabsPrimitive.Trigger>
+                          );
+                        })}
+                      </TabsPrimitive.List>
+
+                      <div className="min-h-0 flex-1 overflow-y-auto p-6">
+                        {tabs.map((item) => (
+                          <TabsPrimitive.Content
+                            key={item.value}
+                            value={item.value}
+                            className="rounded-md outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                          >
+                            <motion.div
+                              initial={reduceMotion ? false : { opacity: 0, y: 4 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              {item.content}
+                            </motion.div>
+                          </TabsPrimitive.Content>
+                        ))}
+                      </div>
+                    </TabsPrimitive.Root>
+
+                    {footer && (
+                      <div className="flex justify-end gap-2 border-t bg-muted/50 px-6 py-4">
+                        {footer}
+                      </div>
+                    )}
+                  </motion.div>
+
+                  <DialogPrimitive.Close
+                    aria-label={closeLabel}
+                    className={cn(
+                      "absolute top-4 right-4 flex size-8 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors",
+                      "hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                    )}
+                  >
+                    <X className="size-4" aria-hidden />
+                  </DialogPrimitive.Close>
+                </motion.div>
+              </DialogPrimitive.Content>
             </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+          </DialogPrimitive.Portal>
+        )}
+      </AnimatePresence>
+    </DialogPrimitive.Root>
   );
 }

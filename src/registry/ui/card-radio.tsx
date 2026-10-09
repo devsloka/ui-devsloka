@@ -1,67 +1,99 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { createContext, useContext, useState } from "react";
+import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Check } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export default function CardRadio() {
-  const [selected, setSelected] = useState("option1");
+const SelectedValueContext = createContext<string | undefined>(undefined);
 
-  const options = [
-    {
-      id: "option1",
-      title: "Basic Plan",
-      description: "Perfect for starters",
-      price: "$9/mo",
-    },
-    {
-      id: "option2",
-      title: "Pro Plan",
-      description: "For growing businesses",
-      price: "$19/mo",
-    },
-    {
-      id: "option3",
-      title: "Enterprise",
-      description: "For large organizations",
-      price: "$49/mo",
-    },
-  ];
+export type CardRadioGroupProps = React.ComponentProps<typeof RadioGroupPrimitive.Root>;
+
+export function CardRadioGroup({
+  value,
+  defaultValue,
+  onValueChange,
+  className,
+  ...props
+}: CardRadioGroupProps) {
+  // Mirrors the selection so items can animate their check badge in and out.
+  const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
+  const selected = value ?? uncontrolledValue;
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-semibold">Card Radio Selection</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {options.map((option) => (
-          <motion.div
-            key={option.id}
-            className={`relative bg-background dark:bg-zinc-900 cursor-pointer rounded-xl border-2 p-4 ${
-              selected === option.id ? "border-[#0A6EFF]" : ""
-            }`}
-            onClick={() => setSelected(option.id)}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          >
-            <div className="flex flex-col h-full">
-              <h3 className="font-bold text-lg">{option.title}</h3>
-              <p className="text-gray-500 flex-grow">{option.description}</p>
-              <p className="font-bold text-xl mt-2">{option.price}</p>
-            </div>
+    <SelectedValueContext.Provider value={selected}>
+      <RadioGroupPrimitive.Root
+        data-slot="card-radio-group"
+        value={selected}
+        onValueChange={(next) => {
+          if (value === undefined) setUncontrolledValue(next);
+          onValueChange?.(next);
+        }}
+        className={cn(
+          "grid gap-3 sm:aria-[orientation=horizontal]:auto-cols-fr sm:aria-[orientation=horizontal]:grid-flow-col",
+          className
+        )}
+        {...props}
+      />
+    </SelectedValueContext.Provider>
+  );
+}
 
-            {selected === option.id && (
-              <motion.div
-                className="absolute top-2 right-2 bg-[#0A6EFF] text-white rounded-full p-1"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 500, damping: 20 }}
-              >
-                <Check className="h-4 w-4" />
-              </motion.div>
-            )}
-          </motion.div>
-        ))}
-      </div>
-    </div>
+export type CardRadioItemProps = Omit<
+  React.ComponentProps<typeof RadioGroupPrimitive.Item>,
+  "title" | "children"
+> & {
+  title: React.ReactNode;
+  description?: React.ReactNode;
+  /** Trailing content such as a price. */
+  aside?: React.ReactNode;
+};
+
+export function CardRadioItem({
+  value,
+  title,
+  description,
+  aside,
+  className,
+  ...props
+}: CardRadioItemProps) {
+  const isChecked = useContext(SelectedValueContext) === value;
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <RadioGroupPrimitive.Item
+      data-slot="card-radio-item"
+      value={value}
+      className={cn(
+        "relative flex h-full w-full cursor-pointer flex-col gap-1 rounded-xl border bg-card p-4 pr-10 text-left text-card-foreground outline-none",
+        "transition-colors hover:bg-muted/50 data-[state=checked]:border-primary data-[state=checked]:bg-primary/5",
+        "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "disabled:cursor-not-allowed disabled:opacity-50",
+        className
+      )}
+      {...props}
+    >
+      <span className="font-medium">{title}</span>
+      {description && <span className="text-sm text-muted-foreground">{description}</span>}
+      {aside && <span className="mt-auto pt-2 text-lg font-semibold">{aside}</span>}
+      <AnimatePresence initial={false}>
+        {isChecked && (
+          <motion.span
+            key="check"
+            aria-hidden
+            className="absolute top-3 right-3 flex size-5 items-center justify-center rounded-full bg-primary text-primary-foreground"
+            initial={reduceMotion ? { opacity: 0 } : { scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={reduceMotion ? { opacity: 0 } : { scale: 0, opacity: 0 }}
+            transition={
+              reduceMotion ? { duration: 0.15 } : { type: "spring", stiffness: 500, damping: 25 }
+            }
+          >
+            <Check className="size-3" strokeWidth={3} />
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </RadioGroupPrimitive.Item>
   );
 }
