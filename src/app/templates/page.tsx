@@ -1,98 +1,54 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { TemplateCard } from "@/components/templates/template-card";
-import { templates } from "@/lib/templates";
+import Link from "next/link";
 import { Metadata } from "next";
+import { TemplateCard } from "@/components/templates/template-card";
 import { generateSEO } from "@/config/seo/seo.utils";
-import { FloatingDots } from "@/components/ui/floating-dots";
+import { templates } from "@/lib/templates";
 
 export function generateMetadata(): Metadata {
   return generateSEO({
-    title: "Premium UI Templates - DevsLoka",
+    title: "Templates - Devsloka UI",
     description:
-      "Professionally designed templates to accelerate your workflow. Ready to use in your projects.",
+      "Complete Next.js templates built with Devsloka UI. Preview them live and start from the source.",
     path: "templates",
     image: "images/templates-og.png",
-    keywords: [
-      "UI templates",
-      "Next.js templates",
-      "React templates",
-      "website templates",
-      "starter kits",
-    ],
+    keywords: ["next.js templates", "react templates", "landing page template", "portfolio template"],
   });
 }
 
-export default function Template() {
+export default function TemplatesPage() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <FloatingDots
-        className="w-full"
-        maxRadius={0.4}
-        maxSpeed={0.7}
-        minSpeed={0.4}
-      />
-      <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
-                  Premium Templates
-                </div>
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                  Beautiful UI Templates
-                </h1>
-                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Professionally designed templates to accelerate your workflow.
-                  Ready to use in your projects.
-                </p>
-              </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button size="lg">Browse All Templates</Button>
-                <Button size="lg" variant="outline">
-                  View Pricing
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
+    <div>
+      <header className="mb-10 max-w-2xl space-y-3">
+        <h1 className="text-4xl font-semibold tracking-tight">Templates</h1>
+        <p className="text-lg text-muted-foreground">
+          Complete Next.js sites built with Devsloka UI. Open the live preview,
+          then start from the source.
+        </p>
+      </header>
 
-        <section className="container py-12 px-4 md:px-6">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-8">
-            {templates.map((template) => (
-              <TemplateCard key={template.id} template={template} />
-            ))}
-          </div>
-        </section>
+      <ul className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        {templates.map((template) => (
+          <li key={template.id}>
+            <TemplateCard template={template} />
+          </li>
+        ))}
+      </ul>
 
-        <section className="w-full py-12 md:py-24 lg:py-32 relative overflow-hidden">
-          <div className="absolute inset-0 bg-primary/5 dark:bg-primary/10" />
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1974&auto=format&fit=crop')] bg-cover bg-center opacity-5" />
-
-          <div className="container relative px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Ready to elevate your projects?
-                </h2>
-                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Get unlimited access to all premium templates and future
-                  updates with a Pro subscription.
-                </p>
-              </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button size="lg" className="gap-1">
-                  Get Pro Access <ArrowRight className="h-4 w-4" />
-                </Button>
-                <Button size="lg" variant="outline">
-                  Learn More
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
+      <section className="mt-16 flex flex-wrap items-center justify-between gap-4 border p-6">
+        <div>
+          <h2 className="font-medium">More templates are coming with Pro</h2>
+          <p className="text-sm text-muted-foreground">
+            Full-page templates for SaaS, dashboards and portfolios.
+          </p>
+        </div>
+        <Link
+          href="/#editions"
+          className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider transition-colors hover:text-[#0A6EFF]"
+        >
+          See Pro
+          <span aria-hidden className="size-1.5 bg-[#0A6EFF]" />
+        </Link>
+      </section>
     </div>
   );
 }
