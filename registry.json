@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "acme",
+  "name": "devsloka",
   "homepage": "https://ui.devsloka.in/",
   "items": [
     {
@@ -14,8 +14,13 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["lucide-react", "motion"],
-      "registryDependencies": ["button", "card"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "button"
+      ]
     },
     {
       "name": "text-effect",
@@ -28,7 +33,9 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion"]
+      "dependencies": [
+        "motion"
+      ]
     },
     {
       "name": "tabs-switcher",
@@ -41,7 +48,10 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion"]
+      "dependencies": [
+        "@radix-ui/react-tabs",
+        "motion"
+      ]
     },
     {
       "name": "success-result",
@@ -54,8 +64,9 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion", "lottiefiles/dotlottie-react"],
-      "registryDependencies": ["card"]
+      "dependencies": [
+        "motion"
+      ]
     },
     {
       "name": "empty-result",
@@ -68,8 +79,10 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion", "lottiefiles/dotlottie-react"],
-      "registryDependencies": ["card"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ]
     },
     {
       "name": "error-result",
@@ -82,8 +95,10 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion", "lottiefiles/dotlottie-react"],
-      "registryDependencies": ["card"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ]
     },
     {
       "name": "range-slider-with-histogram",
@@ -96,8 +111,9 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion"],
-      "registryDependencies": ["card", "tooltip", "slider"]
+      "registryDependencies": [
+        "slider"
+      ]
     },
     {
       "name": "morphing-nav",
@@ -110,7 +126,9 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion"]
+      "dependencies": [
+        "motion"
+      ]
     },
     {
       "name": "morphing-modal",
@@ -123,8 +141,12 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion", "lucide-react"],
-      "registryDependencies": ["button"]
+      "dependencies": [
+        "@radix-ui/react-dialog",
+        "@radix-ui/react-tabs",
+        "lucide-react",
+        "motion"
+      ]
     },
     {
       "name": "morphing-card",
@@ -137,8 +159,11 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion", "lucide-react"],
-      "registryDependencies": ["button"]
+      "dependencies": [
+        "@radix-ui/react-dialog",
+        "lucide-react",
+        "motion"
+      ]
     },
     {
       "name": "expanding-cards",
@@ -150,8 +175,7 @@
           "path": "src/registry/ui/expanding-cards.tsx",
           "type": "registry:ui"
         }
-      ],
-      "dependencies": ["motion", "lucide-react"]
+      ]
     },
     {
       "name": "floating-dots",
@@ -175,8 +199,7 @@
           "path": "src/registry/ui/gradient-text.tsx",
           "type": "registry:ui"
         }
-      ],
-      "dependencies": ["motion"]
+      ]
     },
     {
       "name": "icon-radio",
@@ -189,7 +212,10 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion", "lucide-react"]
+      "dependencies": [
+        "@radix-ui/react-radio-group",
+        "motion"
+      ]
     },
     {
       "name": "logo-cloud-carousel",
@@ -201,8 +227,7 @@
           "path": "src/registry/ui/logo-cloud-carousel.tsx",
           "type": "registry:ui"
         }
-      ],
-      "dependencies": ["motion"]
+      ]
     },
     {
       "name": "laptop-closes-on-scroll",
@@ -215,7 +240,9 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion"]
+      "dependencies": [
+        "motion"
+      ]
     },
     {
       "name": "content-carousel",
@@ -228,8 +255,13 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion", "lucide-react"],
-      "registryDependencies": ["select", "button", "tooltip"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "button"
+      ]
     },
     {
       "name": "card-radio",
@@ -242,8 +274,11 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion", "lucide-react"],
-      "registryDependencies": ["button"]
+      "dependencies": [
+        "@radix-ui/react-radio-group",
+        "lucide-react",
+        "motion"
+      ]
     },
     {
       "name": "card-decorator",
@@ -267,6 +302,9 @@
           "path": "src/registry/ui/border-gradient-icon.tsx",
           "type": "registry:ui"
         }
+      ],
+      "dependencies": [
+        "@radix-ui/react-slot"
       ]
     },
     {
@@ -280,7 +318,9 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion"]
+      "dependencies": [
+        "motion"
+      ]
     },
     {
       "name": "animated-multi-select",
@@ -293,7 +333,15 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["motion", "lucide-react"]
+      "dependencies": [
+        "cmdk",
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "command",
+        "popover"
+      ]
     },
     {
       "name": "animated-image-gallery",
@@ -305,6 +353,9 @@
           "path": "src/registry/ui/animated-image-gallery.tsx",
           "type": "registry:ui"
         }
+      ],
+      "dependencies": [
+        "motion"
       ]
     },
     {
@@ -318,8 +369,9 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["badge"]
+      "dependencies": [
+        "lucide-react"
+      ]
     },
     {
       "name": "pricing-card",
@@ -332,7 +384,12 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["lucide-react"]
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ]
     },
     {
       "name": "product-card",
@@ -345,10 +402,15 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["lucide-react", "motion"],
-      "registryDependencies": ["badge", "card", "button"]
+      "dependencies": [
+        "@radix-ui/react-radio-group",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button"
+      ]
     },
-
     {
       "name": "pricing-block",
       "type": "registry:block",
@@ -360,7 +422,9 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react"]
+      "dependencies": [
+        "lucide-react"
+      ]
     },
     {
       "name": "contact-block",
@@ -373,8 +437,17 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"],
-      "registryDependencies": ["card", "button", "input", "label", "textarea"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label",
+        "textarea"
+      ]
     },
     {
       "name": "faqs-block",
@@ -387,8 +460,14 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"],
-      "registryDependencies": ["accordion", "button"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "accordion",
+        "button"
+      ]
     },
     {
       "name": "faqs-block-two",
@@ -401,7 +480,10 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ]
     },
     {
       "name": "hero-section",
@@ -414,7 +496,9 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"]
+      "dependencies": [
+        "motion"
+      ]
     },
     {
       "name": "hero-section-four",
@@ -427,7 +511,9 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react"]
+      "dependencies": [
+        "lucide-react"
+      ]
     },
     {
       "name": "hero-floating-elements",
@@ -440,8 +526,14 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"],
-      "registryDependencies": ["button"]
+      "dependencies": [
+        "lucide-react",
+        "motion",
+        "next-themes"
+      ],
+      "registryDependencies": [
+        "button"
+      ]
     },
     {
       "name": "hero-gradient-mesh",
@@ -454,8 +546,14 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"],
-      "registryDependencies": ["button"]
+      "dependencies": [
+        "lucide-react",
+        "motion",
+        "next-themes"
+      ],
+      "registryDependencies": [
+        "button"
+      ]
     },
     {
       "name": "hero-split-reveal",
@@ -468,8 +566,14 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"],
-      "registryDependencies": ["button"]
+      "dependencies": [
+        "lucide-react",
+        "motion",
+        "next-themes"
+      ],
+      "registryDependencies": [
+        "button"
+      ]
     },
     {
       "name": "logo-cloud-1",
@@ -482,8 +586,14 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"],
-      "registryDependencies": ["button"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "button",
+        "https://ui.devsloka.in/r/logo-cloud-carousel.json"
+      ]
     },
     {
       "name": "footer-block",
@@ -496,8 +606,13 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["button", "input"]
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input"
+      ]
     },
     {
       "name": "floating-footer",
@@ -510,8 +625,14 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"],
-      "registryDependencies": ["button", "input"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "button",
+        "input"
+      ]
     },
     {
       "name": "grid-footer",
@@ -524,8 +645,14 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"],
-      "registryDependencies": ["button", "input"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "button",
+        "input"
+      ]
     },
     {
       "name": "wave-footer",
@@ -538,8 +665,14 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"],
-      "registryDependencies": ["button", "input"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "button",
+        "input"
+      ]
     },
     {
       "name": "features-block",
@@ -552,7 +685,10 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ]
     },
     {
       "name": "features-block-four",
@@ -565,8 +701,16 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"],
-      "registryDependencies": ["button", "badge", "card"]
+      "dependencies": [
+        "lucide-react",
+        "motion",
+        "next-themes"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "card"
+      ]
     },
     {
       "name": "feature-interactive-cards",
@@ -579,8 +723,15 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"],
-      "registryDependencies": ["button", "badge", "card"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "card"
+      ]
     },
     {
       "name": "feature-floating-showcase",
@@ -593,8 +744,14 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"],
-      "registryDependencies": ["button", "badge"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button"
+      ]
     },
     {
       "name": "newsletter-block",
@@ -607,8 +764,14 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"],
-      "registryDependencies": ["button", "input"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "button",
+        "input"
+      ]
     },
     {
       "name": "newsletter-block-two",
@@ -621,7 +784,10 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ]
     },
     {
       "name": "team-block",
@@ -634,7 +800,10 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ]
     },
     {
       "name": "testimonials-block",
@@ -647,8 +816,13 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["card", "avatar"]
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "card"
+      ]
     },
     {
       "name": "testimonials-block-2",
@@ -661,7 +835,429 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": ["lucide-react", "framer-motion"]
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ]
+    },
+    {
+      "name": "loader",
+      "type": "registry:ui",
+      "title": "Loader",
+      "description": "Loader component with animated dots for indicating loading state.",
+      "files": [
+        {
+          "path": "src/registry/ui/loader.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "galaxy-background",
+      "type": "registry:ui",
+      "title": "Galaxy Background",
+      "description": "A slowly turning spiral galaxy with depth-scaled stars and drifting dust.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/galaxy-background.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "moon-stars-background",
+      "type": "registry:ui",
+      "title": "Moon & Stars Background",
+      "description": "A calm night sky with a glowing moon and twinkling stars.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/moon-stars-background.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "fireflies-background",
+      "type": "registry:ui",
+      "title": "Fireflies Background",
+      "description": "Soft glowing particles that wander and pulse like fireflies.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/fireflies-background.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "3d-background",
+      "type": "registry:ui",
+      "title": "3D Globe Background",
+      "description": "An interactive WebGL globe with country borders, built with three.js.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/3d-background.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@react-three/drei",
+        "@react-three/fiber",
+        "three"
+      ],
+      "registryDependencies": [
+        "https://ui.devsloka.in/r/floating-dots.json"
+      ]
+    },
+    {
+      "name": "particles-background",
+      "type": "registry:ui",
+      "title": "Sky Particles Background",
+      "description": "A field of softly twinkling particles, rendered with CSS only.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/particles-background.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "confetti-background",
+      "type": "registry:ui",
+      "title": "Confetti Background",
+      "description": "Falling confetti in your theme colors.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/confetti-background.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "circles-background",
+      "type": "registry:ui",
+      "title": "Pulsing Circles Background",
+      "description": "Concentric circles that pulse outward from the center.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/circles-background.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "ripple-background",
+      "type": "registry:ui",
+      "title": "Ripple Background",
+      "description": "Ripples that spread from the pointer as it moves across the section.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/ripple-background.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "spotlight-background",
+      "type": "registry:ui",
+      "title": "Spotlight Background",
+      "description": "A soft spotlight that follows the pointer.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/spotlight-background.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "gradient-mesh-background",
+      "type": "registry:ui",
+      "title": "Gradient Mesh Background",
+      "description": "Slowly shifting color fields that blend into a soft mesh.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/gradient-mesh-background.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "gradient-wave",
+      "type": "registry:ui",
+      "title": "Gradient Wave Background",
+      "description": "A gentle animated gradient that flows like a wave.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/gradient-wave.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "gradient-bg",
+      "type": "registry:ui",
+      "title": "Gradient Background",
+      "description": "A soft animated gradient with floating dots.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/gradient-bg.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.devsloka.in/r/floating-dots.json"
+      ]
+    },
+    {
+      "name": "blob-background",
+      "type": "registry:ui",
+      "title": "Blobs Background",
+      "description": "Blurred organic shapes that drift and morph.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/blob-background.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "floating-shapes",
+      "type": "registry:ui",
+      "title": "Floating Shapes Background",
+      "description": "Simple geometric shapes floating at different depths.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/floating-shapes.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "grid-mesh-background",
+      "type": "registry:ui",
+      "title": "Grid Mesh Background",
+      "description": "A fine grid with a subtle animated highlight.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/grid-mesh-background.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "lines-background",
+      "type": "registry:ui",
+      "title": "Lines Background",
+      "description": "Thin lines drifting across the section.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/lines-background.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "noise-background",
+      "type": "registry:ui",
+      "title": "Noise Background",
+      "description": "A fine film-grain texture to add depth to flat surfaces.",
+      "files": [
+        {
+          "path": "src/registry/backgrounds/noise-background.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "use-animation",
+      "type": "registry:hook",
+      "title": "useAnimation",
+      "description": "A boolean flag that switches on when triggered and turns itself off after a set duration, for one-shot CSS animations.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-animation.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-clipboard",
+      "type": "registry:hook",
+      "title": "useClipboard",
+      "description": "Copy text to the clipboard with a temporary copied state, error handling and a fallback for insecure contexts.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-clipboard.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-dark-mode",
+      "type": "registry:hook",
+      "title": "useDarkMode",
+      "description": "Toggle a persisted dark class on the document (or a scoped element) that follows the system color scheme until the user chooses.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-dark-mode.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-date-formatter",
+      "type": "registry:hook",
+      "title": "useDateFormatter",
+      "description": "Memoized, locale-aware absolute, relative and range date formatting built on the Intl API.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-date-formatter.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-debounce",
+      "type": "registry:hook",
+      "title": "useDebounce",
+      "description": "Debounce a changing value, or a callback with cancel and flush controls.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-debounce.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-device-detection",
+      "type": "registry:hook",
+      "title": "useDeviceDetection",
+      "description": "Classify the device as mobile, tablet or desktop from viewport media queries, with pointer and hover capabilities.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-device-detection.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-fetch",
+      "type": "registry:hook",
+      "title": "useFetch",
+      "description": "Fetch data with status, error and refetch, aborting stale requests when the URL changes or the component unmounts.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-fetch.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-form",
+      "type": "registry:hook",
+      "title": "useForm",
+      "description": "Manage typed form values, derived validation errors, touched fields and submission in one hook.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-form.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-hover",
+      "type": "registry:hook",
+      "title": "useHover",
+      "description": "Track whether the pointer is over an element through a callback ref.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-hover.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-key-press",
+      "type": "registry:hook",
+      "title": "useKeyPress",
+      "description": "Detect keys and shortcuts like mod+k, returning whether they are held and optionally calling a handler.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-key-press.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-local-storage",
+      "type": "registry:hook",
+      "title": "useLocalStorage",
+      "description": "useState that persists to localStorage as JSON and stays in sync across components and browser tabs.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-local-storage.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-on-click-outside",
+      "type": "registry:hook",
+      "title": "useOnClickOutside",
+      "description": "Run a handler when a pointer or touch starts outside one or more referenced elements.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-on-click-outside.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-online-status",
+      "type": "registry:hook",
+      "title": "useOnlineStatus",
+      "description": "Read the browser's live online or offline connection status.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-online-status.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-previous",
+      "type": "registry:hook",
+      "title": "usePrevious",
+      "description": "Return the previous distinct value of a prop or state.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-previous.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-scroll-position",
+      "type": "registry:hook",
+      "title": "useScrollPosition",
+      "description": "Track the scroll offset of the window or a scrollable element.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-scroll-position.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-window-size",
+      "type": "registry:hook",
+      "title": "useWindowSize",
+      "description": "Track the viewport's width and height as it resizes.",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-window-size.ts",
+          "type": "registry:hook"
+        }
+      ]
     }
   ]
 }
