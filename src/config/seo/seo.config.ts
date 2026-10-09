@@ -84,6 +84,4 @@ export const defaultSEO: Metadata = {
   },
 
   manifest: "/site.webmanifest",
-
-  themeColor: "#da532c",
 };
