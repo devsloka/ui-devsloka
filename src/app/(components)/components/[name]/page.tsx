@@ -4,6 +4,8 @@ import { getComponentCode } from "@/utilities/getComponentCode";
 import { Metadata } from "next";
 import { components } from "@/utilities/components.utils";
 import { generateSEO } from "@/config/seo/seo.utils";
+import { getCliCommand, getInstallCommands } from "@/utilities/registry";
+
 
 export async function generateStaticParams() {
   const componentKeys = await Promise.resolve(Object.keys(components));
@@ -48,7 +50,7 @@ export default async function ComponentPage({
   }
 
   const { component: ActiveComponent, codeMetadata } = componentInfo;
-  const componentPath = `src/components/ui/${name}.tsx`;
+  const componentPath = `src/registry/ui/${name}.tsx`;
   const componentCode = getComponentCode(componentPath);
   const secondaryCode = getComponentCode(
     `src/components/devsloka-components/demo/${name + "-demo"}.tsx`
@@ -64,12 +66,12 @@ export default async function ComponentPage({
         title={codeMetadata.title}
         description={codeMetadata.description}
         keywords={codeMetadata.keywords}
-        dependencies={codeMetadata.dependencies}
+        dependencies={getInstallCommands(name)}
         secondaryCode={componentCode}
         secondaryTitle={componentInfo.codeMetadata.secondaryTitle}
         secondaryLanguage={componentInfo.codeMetadata.secondaryLanguage}
         secondaryDescription={componentInfo.codeMetadata.secondaryDescription}
-        cliCommands={`npx shadcn@latest add https://ui.devsloka.in/r/${name}.json`}
+        cliCommands={getCliCommand(name)}
         v0Url={`https://ui.devsloka.in/r/${name}.json`}
       />
     </div>
