@@ -17,7 +17,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { EllipsisVertical } from "lucide-react";
 
+// URL segments whose section is labelled differently in the sidebar.
+const SEGMENT_LABELS: Record<string, string> = {
+  docs: "Introduction",
+  utilities: "Hooks",
+};
+
 const formatBreadcrumbText = (str: string): string =>
+  SEGMENT_LABELS[str] ??
   str
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))

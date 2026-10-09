@@ -1,97 +1,91 @@
 "use client";
 
-import React from "react";
+import { useEffect, useId, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
 import { sidebarItems } from "@/utilities/sidebarItems";
-import { Badge } from "@/components/ui/badge";
-import { templatesNames } from "@/utilities/utilis";
 
 const CompSidebar = () => {
   const pathname = usePathname();
+  const indicatorId = useId();
+  const reduceMotion = useReducedMotion();
+  const activeRef = useRef<HTMLAnchorElement>(null);
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "SiteNavigationElement",
-    name: "Secondary Navigation",
-    description: "Supplementary website navigation menu",
-    url: pathname,
-    mainEntity: sidebarItems.flatMap((section) =>
-      section.children.map((item) => ({
-        "@type": "NavigationElement",
-        name: item.title,
-        description: `Navigate to ${item.title}`,
-        url: item.href,
-      }))
-    ),
-  };
+  // Keep the current page visible in the scrollable sidebar after navigation.
+  useEffect(() => {
+    activeRef.current?.scrollIntoView({ block: "nearest" });
+  }, [pathname]);
 
   return (
-    <div
-      aria-label="Secondary navigation"
-      className="w-64 overflow-y-auto border-l border-dashed px-4 pt-6 bg-background"
-    >
-      {/* Secondary navigation structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-
-      <nav>
-        <ul className="w-full">
-          {sidebarItems.map((section) => (
-            <li key={section.title} className="space-y-1 pb-5">
-              <h3 className="px-4 text-sm font-bold mb-2">{section.title}</h3>
-              <ul className="flex flex-col space-y-1">
-                {section.children.map((item) => {
-                  const isActive = pathname === item.href;
-                  return (
-                    <motion.li
-                      key={item.href}
-                      transition={{ type: "spring", stiffness: 300 }}
+    // layoutScroll lets the indicator morph correctly while this container is scrolled.
+    <motion.div layoutScroll className="h-full overflow-x-hidden overflow-y-auto">
+      <nav aria-label="Documentation" className="space-y-8 py-8 pr-4">
+        {sidebarItems.map((section) => (
+          <section key={section.title}>
+            <h2 className="mb-2 flex items-baseline justify-between px-3 font-mono text-[0.6875rem] uppercase tracking-wider text-muted-foreground">
+              {section.href ? (
+                <Link href={section.href} className="transition-colors hover:text-foreground">
+                  {section.title}
+                </Link>
+              ) : (
+                section.title
+              )}
+              {section.children.length > 2 && (
+                <span className="tabular-nums">{section.children.length}</span>
+              )}
+            </h2>
+            <ul className="space-y-px">
+              {section.children.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <li key={item.href}>
+                    <Link
+                      ref={isActive ? activeRef : undefined}
+                      href={item.href}
+                      aria-current={isActive ? "page" : undefined}
+                      className={cn(
+                        "flex items-center gap-2.5 rounded-md px-3 py-1.5 text-sm transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                        isActive
+                          ? "font-medium text-foreground"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
                     >
-                      <Link
-                        href={item.href}
-                        className={cn(
-                          "group flex items-center px-4 py-2 rounded-lg relative",
-                          "text-muted-foreground hover:text-foreground",
-                          "transition-colors duration-200",
-                          "hover:bg-muted/70 hover:text-foreground",
-                          isActive &&
-                            "bg-muted/70 font-medium border-l-4 border-[#0A6EFF]"
+                      {/* Fixed slot so labels don't shift; the square morphs between slots. */}
+                      <span aria-hidden className="relative size-1.5 shrink-0">
+                        {isActive && (
+                          <motion.span
+                            layoutId={indicatorId}
+                            className="absolute inset-0 bg-[#0A6EFF]"
+                            transition={
+                              reduceMotion
+                                ? { duration: 0 }
+                                : { type: "spring", stiffness: 420, damping: 34, mass: 0.6 }
+                            }
+                          />
                         )}
-                        aria-current={isActive ? "page" : undefined}
-                      >
-                        <span className="truncate text-xs">{item.title}</span>
-                        {item?.isNew && (
-                          <Badge className={cn("absolute right-0")}>
-                            {item.isNew ? "New" : ""}
-                          </Badge>
-                        )}
-                        {templatesNames.includes(item.title) && (
-                          <Badge
-                            className={cn(
-                              "absolute right-0",
-                              item?.isPro
-                                ? "bg-[#0A6EFF] text-white"
-                                : "bg-gray-600 text-white"
-                            )}
-                          >
-                            {item.isPro ? "Pro" : "Free"}
-                          </Badge>
-                        )}
-                      </Link>
-                    </motion.li>
-                  );
-                })}
-              </ul>
-            </li>
-          ))}
-        </ul>
+                      </span>
+                      <span className="truncate">{item.title}</span>
+                      {item.badge && (
+                        <span
+                          className={cn(
+                            "ml-auto shrink-0 font-mono text-[0.625rem] uppercase tracking-wider",
+                            item.badge === "Pro" ? "text-[#0A6EFF]" : "text-muted-foreground"
+                          )}
+                        >
+                          {item.badge}
+                        </span>
+                      )}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))}
       </nav>
-    </div>
+    </motion.div>
   );
 };
 
