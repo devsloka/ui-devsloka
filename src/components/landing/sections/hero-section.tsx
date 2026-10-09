@@ -1,12 +1,15 @@
 import Link from "next/link";
-import IconRadio from "@/components/ui/icon-radio";
-import Loader from "@/components/ui/loader";
-import { TextEffect } from "@/components/ui/text-effect";
+import { Loader } from "@/registry/ui/loader";
+import { TextEffect } from "@/registry/ui/text-effect";
 import { cn } from "@/lib/utils";
 import { CATALOG_STATS } from "../data/catalog";
 import { BLOCKS } from "../data/blocks";
 import { HeroPixelGrid } from "../hero-pixel-grid";
-import { BudgetSliderSpecimen, MorphingNavSpecimen } from "../hero-specimens";
+import {
+  BudgetSliderSpecimen,
+  IconRadioSpecimen,
+  MorphingNavSpecimen,
+} from "../hero-specimens";
 
 const STACK = ["React 19", "Next.js", "Tailwind v4", "Motion", "Radix", "TypeScript"];
 
@@ -82,7 +85,7 @@ export function HeroSection() {
             <TextEffect
               words={["faster", "calmer", "better"]}
               effect="slide"
-              duration={2600}
+              interval={2600}
               className="align-bottom text-[#0A6EFF]"
             />
           </div>
@@ -99,9 +102,9 @@ export function HeroSection() {
           number="004"
           name="Icon Radio"
           href="/components/icon-radio"
-          className="md:col-span-3 [&_h2]:sr-only"
+          className="md:col-span-3"
         >
-          <IconRadio />
+          <IconRadioSpecimen />
         </Specimen>
         <Specimen
           number="005"

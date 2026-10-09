@@ -64,6 +64,8 @@ export function HeroPixelGrid() {
     };
 
     const render = (now: number) => {
+      // Before the first layout the canvas can be 0×0, and drawImage throws on it.
+      if (!canvas.width || !canvas.height) return;
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(baseLayer, 0, 0);
