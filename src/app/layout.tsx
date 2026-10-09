@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { geistMono, geistSans } from "@/lib/fonts";
 import Navbar from "@/components/root/Navbar";
 import { ThemeProvider } from "@/contexts/theme-provider";
 import Footer from "@/components/root/Footer";
@@ -8,13 +8,6 @@ import TestimonialBubble from "@/components/root/TestimonialBubble";
 import { generateSEO } from "@/config/seo/seo.utils";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-
-// Configure Poppins (variable font)
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-poppins",
-});
 
 export const metadata: Metadata = generateSEO({
   title: "Devsloka UI | Animated React & Next.js Components",
@@ -31,14 +24,22 @@ export const metadata: Metadata = generateSEO({
   ],
 });
 
+export const viewport: Viewport = {
+  themeColor: "#da532c",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${poppins.variable}`}>
-      <body>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable}`}
+    >
+      <body className="antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
