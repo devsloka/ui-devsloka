@@ -1,30 +1,30 @@
 "use client";
 
-import { ContentCarousel } from "@/components/ui/content-carousel";
+import { ContentCarousel } from "@/registry/ui/content-carousel";
 
 const items = [
   {
-    name: "Aurora",
-    description: "Smooth, flowing aurora-like effects",
-    component: "AuroraBackground",
+    id: "aurora",
+    title: "Aurora",
+    description: "Smooth, flowing aurora-like effects.",
   },
   {
-    name: "Beam",
-    description: "Light beams scanning across the screen",
-    component: "BeamBackground",
+    id: "beam",
+    title: "Beam",
+    description: "Light beams scanning across the screen.",
   },
   {
-    name: "Stars",
-    description: "Twinkling stars in a night sky",
-    component: "StarsBackground",
+    id: "stars",
+    title: "Stars",
+    description: "Twinkling stars in a night sky.",
+  },
+  {
+    id: "grid",
+    title: "Grid",
+    description: "A subtle grid that fades toward the edges.",
   },
 ];
 
 export const ContentCarouselDemo = () => {
-  return (
-    <ContentCarousel
-      items={items}
-      onItemChange={(item) => console.log("Selected background:", item.name)}
-    />
-  );
+  return <ContentCarousel items={items} className="py-12" />;
 };

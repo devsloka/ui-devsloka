@@ -1,74 +1,81 @@
 "use client";
-import { Button } from "@/components/ui/button";
+
 import React, { useState } from "react";
-import { Tour } from "@/components/ui/tour";
+import { Bell, FolderKanban, Search, Settings } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Tour, type TourStep } from "@/registry/ui/tour";
+
+const steps: TourStep[] = [
+  {
+    target: "#tour-search",
+    title: "Search everything",
+    description: "Find projects, people and files from one place.",
+    placement: "bottom",
+  },
+  {
+    target: "#tour-projects",
+    title: "Your projects",
+    description: "Pinned projects stay here so you can jump back in quickly.",
+    placement: "right",
+  },
+  {
+    target: "#tour-notifications",
+    title: "Stay in the loop",
+    description: "Mentions and review requests show up as notifications.",
+    placement: "bottom",
+  },
+  {
+    target: "#tour-settings",
+    title: "Make it yours",
+    description: "Change your theme, shortcuts and notification preferences.",
+    placement: "left",
+  },
+];
+
+const projects = ["Website redesign", "Mobile app", "Q3 roadmap"];
 
 const TourDemo: React.FC = () => {
-  const [isTourOpen, setIsTourOpen] = useState(false);
-  const steps = [
-    {
-      target: "#welcome-message",
-      title: "Welcome Message",
-      description: "This is the main welcome message of our application.",
-      placement: "top" as const,
-      offset: { y: -20 }, // Add some extra space below the title
-    },
-    {
-      target: "#start-button",
-      title: "Get Started",
-      description: "Click this button to begin your journey.",
-      placement: "bottom" as const,
-      offset: { x: 5 }, // Slight offset from the button
-    },
-    {
-      target: "#feature-section",
-      title: "Features",
-      description: "Explore all the amazing features we offer.",
-      placement: "bottom" as const,
-      offset: { y: -10 }, // Move slightly closer to the features
-    },
-  ];
-  return (
-    <div className="min-h- bg-background p-8">
-      <div className="max-w-4xl mx-auto space-y-8">
-        <h1 id="welcome-message" className="text-4xl font-bold text-center">
-          Welcome to Devsloka Ui
-        </h1>
+  const [open, setOpen] = useState(false);
 
-        <div className="text-center">
-          <Button
-            id="start-button"
-            variant="default"
-            onClick={() => setIsTourOpen(true)}
+  return (
+    <div className="w-full p-6">
+      <div className="overflow-hidden rounded-xl border bg-background">
+        <div className="flex items-center gap-2 border-b px-4 py-3">
+          <div
+            id="tour-search"
+            className="flex h-9 flex-1 items-center gap-2 rounded-lg border px-3 text-sm text-muted-foreground"
           >
-            Start Tour
+            <Search className="size-4" aria-hidden />
+            Search…
+          </div>
+          <Button id="tour-notifications" variant="ghost" size="icon" aria-label="Notifications">
+            <Bell className="size-4" />
+          </Button>
+          <Button id="tour-settings" variant="ghost" size="icon" aria-label="Settings">
+            <Settings className="size-4" />
           </Button>
         </div>
 
-        <div
-          id="feature-section"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-        >
-          {[1, 2, 3].map((i) => (
-            <div
-              key={i}
-              className="p-4 rounded-lg border bg-card text-card-foreground"
-            >
-              <h3 className="font-semibold">Feature {i}</h3>
-              <p className="text-sm text-muted-foreground">
-                This is an amazing feature that you&apos;ll love.
-              </p>
-            </div>
-          ))}
+        <div className="grid gap-4 p-4 sm:grid-cols-[12rem_1fr]">
+          <nav id="tour-projects" aria-label="Projects" className="space-y-1">
+            {projects.map((project) => (
+              <div
+                key={project}
+                className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm hover:bg-muted"
+              >
+                <FolderKanban className="size-4 text-muted-foreground" aria-hidden />
+                {project}
+              </div>
+            ))}
+          </nav>
+          <div className="flex min-h-40 flex-col items-center justify-center gap-3 rounded-lg border border-dashed p-6 text-center">
+            <p className="text-sm text-muted-foreground">New here? Take a quick look around.</p>
+            <Button onClick={() => setOpen(true)}>Start tour</Button>
+          </div>
         </div>
-
-        <Tour
-          steps={steps}
-          open={isTourOpen}
-          onClose={() => setIsTourOpen(false)}
-          onFinish={() => setIsTourOpen(false)}
-        />
       </div>
+
+      <Tour steps={steps} open={open} onOpenChange={setOpen} />
     </div>
   );
 };

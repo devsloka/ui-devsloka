@@ -1,86 +1,51 @@
-"use client";
-import React from "react";
-import { motion } from "motion/react";
-import { Image, ImageGallery } from "@/components/ui/animated-image-gallery";
+import { ImageGallery, type GalleryImage } from "@/registry/ui/animated-image-gallery";
+
+const images: GalleryImage[] = [
+  {
+    src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80&auto=format&fit=crop",
+    alt: "Glass office tower seen from below against a blue sky",
+    caption: "Downtown, looking up",
+    width: 1200,
+    height: 1800,
+  },
+  {
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80&auto=format&fit=crop",
+    alt: "Mountain ridges above a sea of clouds at sunrise",
+    caption: "Above the clouds",
+    width: 1200,
+    height: 800,
+  },
+  {
+    src: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=1200&q=80&auto=format&fit=crop",
+    alt: "Bright living room with a grey sofa and large windows",
+    caption: "Morning light",
+    width: 1200,
+    height: 800,
+  },
+  {
+    src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&q=80&auto=format&fit=crop",
+    alt: "Misty green hills with a lone tree",
+    width: 1200,
+    height: 1500,
+  },
+  {
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80&auto=format&fit=crop",
+    alt: "Sunlight falling through tall trees in a forest",
+    caption: "Forest walk",
+    width: 1200,
+    height: 800,
+  },
+  {
+    src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&q=80&auto=format&fit=crop",
+    alt: "Lake surrounded by mountains under a clear sky",
+    caption: "Still water",
+    width: 1200,
+    height: 1600,
+  },
+];
 
 const ImageGalleryDemo = () => {
-  return (
-    <div>
-      {/* Header */}
-      <div className="relative overflow-hidden py-24 sm:py-30">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <motion.div
-              initial={{ opacity: 0.0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 0.3,
-                duration: 0.8,
-                ease: "easeInOut",
-              }}
-              className="relative flex flex-col gap-4 items-center justify-center px-4"
-            >
-              <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
-                Dynamic Image Gallery
-              </h1>
-              <p className="text-lg leading-8 text-muted-foreground">
-                A responsive gallery with smooth scroll animations and
-                accessibility features. Scroll down to see the animations in
-                action.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-
-      {/* Gallery */}
-      <ImageGallery
-        duration={800}
-        stagger={100}
-        easing="cubic-bezier(0.16, 1, 0.3, 1)"
-        images={images}
-      />
-    </div>
-  );
+  return <ImageGallery images={images} columns={3} className="w-full" />;
 };
 
 export default ImageGalleryDemo;
-
-const images: Image[] = [
-  {
-    url: "https://plus.unsplash.com/premium_photo-1741858822120-67b84694c095?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    alt: "Architectural detail of a modern building with geometric patterns",
-    width: "1200",
-    height: "800",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1648140574809-29426528395e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    alt: "Abstract art installation with vibrant colors",
-    width: "1200",
-    height: "800",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b?q=80&w=1200&h=800&auto=format&fit=crop",
-    alt: "Minimalist interior design with natural light",
-    width: "1200",
-    height: "800",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1648140574809-29426528395e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    alt: "Urban landscape photography at sunset",
-    width: "1200",
-    height: "800",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1682687220509-61b8a906ca19?q=80&w=1200&h=800&auto=format&fit=crop",
-    alt: "Contemporary sculpture in an outdoor setting",
-    width: "1200",
-    height: "800",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1682687220923-c58b9a4592ae?q=80&w=1200&h=800&auto=format&fit=crop",
-    alt: "Digital art installation with interactive elements",
-    width: "1200",
-    height: "800",
-  },
-];

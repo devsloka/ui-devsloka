@@ -1,28 +1,21 @@
-import React from "react";
-import { FloatingDots } from "@/components/ui/floating-dots";
+import { FloatingDots } from "@/registry/ui/floating-dots";
 
 const FloatingDotsDemo = () => {
   return (
-    <main className="flex w-full flex-col items-center justify-center">
-      <div className="relative w-full h-80 bg-black rounded-lg overflow-hidden">
-        <FloatingDots className="w-full" maxRadius={0.5} />
+    <div className="grid w-full gap-6 md:grid-cols-2">
+      {/* Dots inherit the text color by default. */}
+      <div className="relative h-72 overflow-hidden rounded-xl bg-primary text-primary-foreground/70">
+        <FloatingDots maxRadius={1.5} />
       </div>
 
-      {/* Example with custom props */}
-      <div className="relative w-full h-80 bg-blue-950 rounded-lg overflow-hidden mt-8">
-        <FloatingDots
-          count={100}
-          color="rgba(255, 255, 255, 0.7)"
-          minRadius={1}
-          maxRadius={4}
-          minSpeed={0.3}
-          maxSpeed={1.5}
-        />
-        <div className="relative z-10 flex items-center justify-center h-full">
-          <h1 className="text-4xl font-bold text-white">Customized Dots</h1>
+      <div className="relative h-72 overflow-hidden rounded-xl border bg-muted text-muted-foreground">
+        <FloatingDots count={90} minRadius={1} maxRadius={3} minSpeed={0.3} maxSpeed={1.2} />
+        <div className="relative flex h-full flex-col items-center justify-center gap-1 text-center">
+          <h3 className="text-2xl font-semibold tracking-tight text-foreground">Ship with calm</h3>
+          <p className="text-sm">A quiet, ambient background for hero sections.</p>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 
