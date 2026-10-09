@@ -33,13 +33,13 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    domains: [
+    remotePatterns: [
       "images.unsplash.com",
       "plus.unsplash.com",
       "images.pexels.com",
       "avatars.githubusercontent.com",
       "source.unsplash.com",
-    ],
+    ].map((hostname) => ({ protocol: "https" as const, hostname })),
   },
 };
 
