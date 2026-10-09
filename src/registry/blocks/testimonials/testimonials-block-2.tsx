@@ -1,225 +1,214 @@
 "use client";
 
-import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Star, Quote, MessageCircle } from "lucide-react";
+import { useId, type ComponentProps } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
-const testimonials = [
+export type WallQuote = {
+  quote: string;
+  name: string;
+  /** Role and business, e.g. "Owner, Fernhill Bakery". */
+  detail: string;
+  /** Renders the cell in the accent color. Use on one quote at most. */
+  highlighted?: boolean;
+};
+
+export type TestimonialsBlockTwoProps = {
+  eyebrow?: string;
+  title?: string;
+  rating?: { score: string; count: string };
+  quotes?: WallQuote[];
+  footnote?: string;
+} & ComponentProps<"section">;
+
+const DEFAULT_QUOTES: WallQuote[] = [
   {
-    content:
-      "This platform has completely transformed how we handle our workflow. The AI features are genuinely impressive, not just buzzwords.",
-    author: "Emily Chen",
-    role: "CTO at TechFlow",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
-    rating: 5,
-    gradient: "from-pink-500/10 via-purple-500/10 to-indigo-500/10",
-    company:
-      "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=80&h=80&fit=crop",
+    quote:
+      "Closed March in two evenings. Last year it took me most of April.",
+    name: "Joanna Kerr",
+    detail: "Owner, Fernhill Bakery",
   },
   {
-    content:
-      "The attention to detail in the UI and the smoothness of the animations make this a joy to use. Our team adopted it instantly.",
-    author: "Marcus Johnson",
-    role: "Lead Designer at CreativeHub",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
-    rating: 5,
-    gradient: "from-blue-500/10 via-cyan-500/10 to-teal-500/10",
-    company:
-      "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=80&h=80&fit=crop",
+    quote:
+      "I'm not an accountant and I don't want to become one. Ledgerly matches the bank feed, flags the six things that look off, and gets out of my way. My actual accountant said our books were the cleanest she'd seen from a client our size, which, frankly, has never happened before.",
+    name: "Luis Andrade",
+    detail: "Founder, Quarry Bikes",
   },
   {
-    content:
-      "Security features are top-notch. As a fintech company, this was our primary concern, and this platform exceeded expectations.",
-    author: "Sarah Williams",
-    role: "Security Director at FinSecure",
-    image:
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop",
-    rating: 5,
-    gradient: "from-orange-500/10 via-amber-500/10 to-yellow-500/10",
-    company:
-      "https://images.unsplash.com/photo-1614680376408-16e6faf7d7b4?w=80&h=80&fit=crop",
+    quote:
+      "Receipts from a photo actually work. Even the crumpled ones from the hardware store.",
+    name: "Aisha Bello",
+    detail: "Contractor, Bello Renovations",
+  },
+  {
+    quote:
+      "We switched mid-year, which everyone told me not to do. The import took twenty minutes and the opening balances matched to the cent.",
+    name: "Ronan Fitzgerald",
+    detail: "Finance lead, Sixpoint Studio",
+    highlighted: true,
+  },
+  {
+    quote: "Support answered on a Sunday. A real person, too.",
+    name: "Mei Lin Tan",
+    detail: "Owner, Two Kettles Café",
+  },
+  {
+    quote:
+      "Sales tax across three states used to be a spreadsheet I was scared of. Now it's a report I export on the 18th.",
+    name: "Grace Whitfield",
+    detail: "Ops, Little Fern Goods",
+  },
+  {
+    quote:
+      "Honestly the best part is the weekly email. Cash in, cash out, what's overdue. I read it with my coffee and that's my finance meeting.",
+    name: "Samir Haddad",
+    detail: "Co-owner, Haddad & Sons Tiling",
+  },
+  {
+    quote:
+      "Took a bit to set up the categories the way I like, but once it learned them I stopped touching it.",
+    name: "Ella Novak",
+    detail: "Freelance illustrator",
+  },
+  {
+    quote:
+      "Paid invoices went from 41 days on average to 19 after we turned on reminders. That's payroll, basically.",
+    name: "Kwame Asante",
+    detail: "MD, Asante Logistics",
   },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.3,
-    },
-  },
-};
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("");
 
-const item = {
-  hidden: { opacity: 0, scale: 0.9, y: 20 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15,
-    },
-  },
-};
-
-const starVariants = {
-  initial: { scale: 0, rotate: -180 },
-  animate: (i: number) => ({
-    scale: 1,
-    rotate: 0,
-    transition: {
-      type: "spring",
-      stiffness: 200,
-      damping: 15,
-      delay: i * 0.1,
-    },
-  }),
-};
-
-export function TestimonialsBlockTwo() {
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, 10]);
+export function TestimonialsBlockTwo({
+  eyebrow = "Customers",
+  title = "Small businesses, fewer late nights",
+  rating = { score: "4.9", count: "1,240" },
+  quotes = DEFAULT_QUOTES,
+  footnote = "From in-app reviews, January–September 2026. Unedited except for typos.",
+  className,
+  ...props
+}: TestimonialsBlockTwoProps) {
+  const reduceMotion = useReducedMotion();
+  const titleId = useId();
 
   return (
-    <div className="relative overflow-hidden py-24 sm:py-32">
-      <motion.div style={{ y, rotate }} className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
-        <div className="absolute h-full w-full bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5 }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[800px] w-[800px] rounded-full bg-gradient-radial from-primary/20 via-primary/5 to-transparent blur-3xl"
-      />
-
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mx-auto max-w-2xl text-center mb-16"
-        >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 via-primary/10 to-transparent"
-          >
-            <MessageCircle className="h-10 w-10 text-primary" />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <h2 className="text-base font-semibold leading-7 text-primary">
-              Testimonials
-            </h2>
-            <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary">
-              Loved by teams worldwide
-            </p>
-            <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              Discover why leading companies choose our platform for their
-              critical operations.
-            </p>
-          </motion.div>
-        </motion.div>
-
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="grid grid-cols-1 gap-8 lg:grid-cols-3"
-        >
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              variants={item}
-              whileHover={{ y: -10, scale: 1.02 }}
-              className={cn(
-                "group relative overflow-hidden rounded-3xl p-8",
-                "bg-card/50 backdrop-blur-xl border transition-all duration-300 hover:shadow-2xl",
-                "before:absolute before:inset-0 before:bg-gradient-to-br",
-                `before:${testimonial.gradient}`,
-                "before:opacity-0 before:transition-opacity before:duration-300",
-                "hover:before:opacity-100"
-              )}
+    <section
+      data-slot="testimonials-block-2"
+      aria-labelledby={titleId}
+      className={cn("w-full bg-background text-foreground", className)}
+      {...props}
+    >
+      <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-6 border-t pt-8 md:grid-cols-12">
+          <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground md:col-span-4">
+            {eyebrow}
+          </p>
+          <div className="md:col-span-8">
+            <h2
+              id={titleId}
+              className="max-w-xl text-3xl font-medium tracking-tight text-balance md:text-5xl md:tracking-[-0.03em]"
             >
-              <div className="relative">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex gap-1">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        variants={starVariants}
-                        initial="initial"
-                        animate="animate"
-                        custom={i}
-                      >
-                        <Star className="h-5 w-5 fill-primary text-primary" />
-                      </motion.div>
-                    ))}
-                  </div>
-                  <motion.img
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ duration: 0.3 }}
-                    src={testimonial.company}
-                    alt="Company logo"
-                    className="h-8 w-8 rounded-full object-cover ring-2 ring-background"
-                  />
-                </div>
+              {title}
+            </h2>
+            {rating && (
+              <p className="mt-6 flex items-center gap-3 text-sm text-muted-foreground">
+                <span aria-hidden="true" className="flex gap-0.5">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <span key={i} className="size-2 bg-primary" />
+                  ))}
+                </span>
+                <span>
+                  Rated{" "}
+                  <span className="font-medium tabular-nums text-foreground">
+                    {rating.score}
+                  </span>{" "}
+                  from{" "}
+                  <span className="tabular-nums text-foreground">
+                    {rating.count}
+                  </span>{" "}
+                  reviews
+                </span>
+              </p>
+            )}
+          </div>
+        </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="relative mb-8"
+        <ul className="mt-14 columns-1 gap-4 sm:columns-2 lg:columns-3">
+          {quotes.map((item, i) => (
+            <motion.li
+              key={`${item.name}-${i}`}
+              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{
+                duration: 0.4,
+                delay: (i % 3) * 0.06,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="mb-4 break-inside-avoid"
+            >
+              <figure
+                className={cn(
+                  "flex flex-col gap-6 border p-6",
+                  item.highlighted
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "bg-card text-card-foreground",
+                )}
+              >
+                <blockquote
+                  className={cn(
+                    "text-pretty",
+                    item.highlighted
+                      ? "text-xl leading-snug tracking-tight"
+                      : "text-[0.95rem] leading-relaxed",
+                  )}
                 >
-                  <Quote className="absolute -left-2 -top-2 h-8 w-8 text-primary/20 rotate-180" />
-                  <p className="text-lg leading-relaxed pl-6">
-                    {testimonial.content}
-                  </p>
-                </motion.div>
-
-                <div className="flex items-center gap-4">
-                  <div className="relative h-14 w-14 overflow-hidden rounded-full ring-2 ring-background">
-                    <motion.img
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.3 }}
-                      src={testimonial.image}
-                      alt={testimonial.author}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">{testimonial.author}</h4>
-                    <p className="text-sm text-muted-foreground">
-                      {testimonial.role}
-                    </p>
-                  </div>
-                </div>
-
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileHover={{ scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                  className="absolute right-4 top-4 h-32 w-32 rounded-full bg-gradient-to-br from-primary/5 via-primary/10 to-transparent blur-2xl"
-                />
-              </div>
-            </motion.div>
+                  {item.quote}
+                </blockquote>
+                <figcaption className="flex items-center gap-3">
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "flex size-8 shrink-0 items-center justify-center rounded-sm font-mono text-[0.65rem]",
+                      item.highlighted
+                        ? "bg-primary-foreground/15"
+                        : "bg-muted text-muted-foreground",
+                    )}
+                  >
+                    {initials(item.name)}
+                  </span>
+                  <span className="min-w-0 text-xs leading-tight">
+                    <span className="block font-medium">{item.name}</span>
+                    <span
+                      className={cn(
+                        "mt-0.5 block font-mono uppercase tracking-wider",
+                        item.highlighted
+                          ? "text-primary-foreground/70"
+                          : "text-muted-foreground",
+                      )}
+                    >
+                      {item.detail}
+                    </span>
+                  </span>
+                </figcaption>
+              </figure>
+            </motion.li>
           ))}
-        </motion.div>
+        </ul>
+
+        {footnote && (
+          <p className="mt-8 font-mono text-xs text-muted-foreground">
+            <span aria-hidden="true">* </span>
+            {footnote}
+          </p>
+        )}
       </div>
-    </div>
+    </section>
   );
 }

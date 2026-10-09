@@ -1,204 +1,227 @@
 "use client";
 
-import type React from "react";
-
-import { useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useId, useState, type ComponentProps } from "react";
+import * as TabsPrimitive from "@radix-ui/react-tabs";
+import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Code, Layers, Sparkles } from "lucide-react";
 
-interface FeatureCardProps {
+export type InteractiveFeature = {
+  id: string;
   title: string;
-  description: string;
-  icon: React.ReactNode;
-  color: string;
-  index: number;
-}
+  summary: string;
+  detail: string;
+  points?: string[];
+  stat?: { value: string; label: string };
+};
 
-export function FeatureInteractiveCards() {
-  return (
-    <section className="w-full py-12 md:py-24 lg:py-32 relative overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 bg-grid-pattern dark:bg-grid-pattern-dark opacity-[0.03] dark:opacity-[0.05] pointer-events-none" />
+export type FeatureInteractiveCardsProps = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  features?: InteractiveFeature[];
+  /** Controlled active feature id. */
+  value?: string;
+  /** Initially active feature id when uncontrolled. Defaults to the first feature. */
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+} & Omit<ComponentProps<"section">, "defaultValue" | "onChange">;
 
-      {/* Gradient orbs */}
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-purple-500/20 dark:bg-purple-500/10 rounded-full blur-3xl" />
-      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-cyan-500/20 dark:bg-cyan-500/10 rounded-full blur-3xl" />
+const DEFAULT_FEATURES: InteractiveFeature[] = [
+  {
+    id: "routing",
+    title: "Routing that reads the ticket",
+    summary: "Sends each conversation to the person who closed the last similar one.",
+    detail:
+      "Kestrel looks at the customer's plan, the product area and the language, then routes to whoever resolved the closest match in the past 90 days. If that person is offline, it falls back to the team queue instead of guessing.",
+    points: [
+      "Rules editor for the cases you want to pin by hand",
+      "Round-robin fallback per team",
+      "Every routing decision shows its reason",
+    ],
+    stat: { value: "38%", label: "fewer reassignments in the first month" },
+  },
+  {
+    id: "drafts",
+    title: "Replies drafted from your docs",
+    summary: "Suggests an answer citing your help center, never the open web.",
+    detail:
+      "Drafts are built only from articles and macros you've published. Each one lists the sources it used, and agents edit before sending. Nothing goes out on its own.",
+    points: [
+      "Sources linked inline under every draft",
+      "Per-team tone settings",
+      "Turn it off for any queue",
+    ],
+    stat: { value: "4m 12s", label: "median first response, down from 11m" },
+  },
+  {
+    id: "handoff",
+    title: "Handoffs without re-explaining",
+    summary: "A six-line brief travels with the ticket when it changes hands.",
+    detail:
+      "When a ticket moves from support to engineering, Kestrel writes a short brief: what the customer tried, what was ruled out, and the exact error text. The engineer reads six lines instead of forty messages.",
+    points: [
+      "Linked to the Linear or Jira issue it creates",
+      "Customer is notified when status changes",
+    ],
+    stat: { value: "2.1×", label: "faster escalations, measured over Q2 2026" },
+  },
+  {
+    id: "reporting",
+    title: "Reports the CFO can read",
+    summary: "Cost per resolved ticket, by team and by product area.",
+    detail:
+      "Weekly reports land in your inbox every Monday at 08:00 with cost per resolution, backlog age and the three topics that grew fastest. Export any chart to CSV.",
+    points: [
+      "Scheduled email or Slack digest",
+      "Raw data via the reporting API",
+    ],
+    stat: { value: "Mon 08:00", label: "weekly digest, in your team's time zone" },
+  },
+];
 
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <Badge className="mb-4" variant="outline">
-              Interactive Features
-            </Badge>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              Stunning Interactive Features
-            </h2>
-            <p className="mx-auto max-w-[700px] text-muted-foreground mt-4 md:text-xl">
-              Explore our collection of beautifully designed interactive
-              components with subtle 3D effects.
-            </p>
-          </motion.div>
-        </div>
+const DEFAULTS = {
+  eyebrow: "Kestrel for support teams",
+  title: "Four things your queue does differently on Kestrel.",
+  description:
+    "Pick one to see how it works. Numbers come from 212 teams that switched between January and June 2026.",
+};
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          <FeatureCard
-            title="Responsive Design"
-            description="Fully responsive components that look great on any device, from mobile to desktop."
-            icon={<Layers className="h-6 w-6" />}
-            color="bg-gradient-to-br from-pink-500 to-orange-400"
-            index={0}
-          />
-          <FeatureCard
-            title="Modern Animations"
-            description="Smooth, performant animations that enhance the user experience without being distracting."
-            icon={<Sparkles className="h-6 w-6" />}
-            color="bg-gradient-to-br from-violet-500 to-purple-500"
-            index={1}
-          />
-          <FeatureCard
-            title="Clean Code"
-            description="Well-structured, maintainable code that follows best practices and is easy to customize."
-            icon={<Code className="h-6 w-6" />}
-            color="bg-gradient-to-br from-cyan-500 to-blue-500"
-            index={2}
-          />
-        </div>
-      </div>
-    </section>
+export function FeatureInteractiveCards({
+  eyebrow = DEFAULTS.eyebrow,
+  title = DEFAULTS.title,
+  description = DEFAULTS.description,
+  features = DEFAULT_FEATURES,
+  value,
+  defaultValue,
+  onValueChange,
+  className,
+  ...props
+}: FeatureInteractiveCardsProps) {
+  const headingId = useId();
+  const reduceMotion = useReducedMotion();
+  const [uncontrolled, setUncontrolled] = useState(
+    defaultValue ?? features[0]?.id ?? ""
   );
-}
+  const current = value ?? uncontrolled;
 
-function FeatureCard({
-  title,
-  description,
-  icon,
-  color,
-  index,
-}: FeatureCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Mouse position values
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // Smooth spring physics for mouse movement
-  const springConfig = { damping: 25, stiffness: 300 };
-  const springX = useSpring(mouseX, springConfig);
-  const springY = useSpring(mouseY, springConfig);
-
-  // Transform mouse position into rotation values
-  const rotateX = useTransform(springY, [-0.5, 0.5], ["7deg", "-7deg"]);
-  const rotateY = useTransform(springX, [-0.5, 0.5], ["-7deg", "7deg"]);
-
-  // Handle mouse move on card
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-
-    const rect = cardRef.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-
-    // Calculate mouse position relative to card center (values from -0.5 to 0.5)
-    const xPos = (e.clientX - rect.left) / width - 0.5;
-    const yPos = (e.clientY - rect.top) / height - 0.5;
-
-    mouseX.set(xPos);
-    mouseY.set(yPos);
+  const handleChange = (next: string) => {
+    if (value === undefined) setUncontrolled(next);
+    onValueChange?.(next);
   };
 
   return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      style={{ perspective: 1000 }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        mouseX.set(0);
-        mouseY.set(0);
-      }}
-      className="h-full"
+    <section
+      data-slot="feature-interactive-cards"
+      aria-labelledby={headingId}
+      className={cn("w-full bg-background text-foreground", className)}
+      {...props}
     >
-      <motion.div
-        style={{
-          rotateX: isHovered ? rotateX : 0,
-          rotateY: isHovered ? rotateY : 0,
-          transformStyle: "preserve-3d",
-        }}
-        transition={{ type: "spring", damping: 20 }}
-        className="h-full"
-      >
-        <Card className="h-full border-2 border-border/50 bg-background/80 backdrop-blur-sm overflow-hidden group">
-          <CardHeader className="pb-2">
-            <div
-              className={cn(
-                "w-12 h-12 rounded-lg flex items-center justify-center text-white mb-3",
-                color
-              )}
-            >
-              {icon}
-            </div>
-            <CardTitle className="text-xl font-bold">{title}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <CardDescription className="text-base">
-              {description}
-            </CardDescription>
-          </CardContent>
-          <CardFooter>
-            <Button variant="ghost" size="sm" className="group/button mt-2">
-              Learn more
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/button:translate-x-1" />
-            </Button>
-          </CardFooter>
+      <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <div className="max-w-2xl">
+          <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+            {eyebrow}
+          </p>
+          <h2
+            id={headingId}
+            className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-balance sm:text-4xl md:text-5xl"
+          >
+            {title}
+          </h2>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
+            {description}
+          </p>
+        </div>
 
-          {/* Shine effect */}
-          <motion.div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundImage:
-                "radial-gradient(circle at var(--x) var(--y), rgba(255,255,255,0.15) 0%, transparent 50%)",
-              x: useMotionValue("50%"),
-              y: useMotionValue("50%"),
-              opacity: isHovered ? 1 : 0,
-              zIndex: 1,
-              pointerEvents: "none",
-            }}
-            animate={
-              {
-                "--x": `${(mouseX.get() + 0.5) * 100}%`,
-                "--y": `${(mouseY.get() + 0.5) * 100}%`,
-              } as const
-            }
-            transition={{ type: "spring", damping: 20 }}
-          />
-        </Card>
-      </motion.div>
-    </motion.div>
+        <TabsPrimitive.Root
+          value={current}
+          onValueChange={handleChange}
+          orientation="vertical"
+          className="mt-14 grid border-t lg:grid-cols-12"
+        >
+          <TabsPrimitive.List
+            aria-label="Features"
+            className="flex flex-col divide-y border-b lg:col-span-5 lg:border-r lg:border-b-0"
+          >
+            {features.map((feature, i) => (
+              <TabsPrimitive.Trigger
+                key={feature.id}
+                value={feature.id}
+                className={cn(
+                  "group relative flex gap-5 py-5 pr-6 text-left outline-none transition-colors",
+                  "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
+                  "text-muted-foreground hover:text-foreground data-[state=active]:text-foreground"
+                )}
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute top-0 bottom-0 left-0 w-0.5 bg-primary opacity-0 transition-opacity group-data-[state=active]:opacity-100"
+                />
+                <span className="pl-4 font-mono text-xs tabular-nums pt-1">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span>
+                  <span className="block text-base font-medium tracking-tight">
+                    {feature.title}
+                  </span>
+                  <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
+                    {feature.summary}
+                  </span>
+                </span>
+              </TabsPrimitive.Trigger>
+            ))}
+          </TabsPrimitive.List>
+
+          {features.map((feature, i) => (
+            <TabsPrimitive.Content
+              key={feature.id}
+              value={feature.id}
+              className="outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset lg:col-span-7"
+            >
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="flex h-full flex-col py-8 lg:px-10 lg:py-10"
+              >
+                <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                  {String(i + 1).padStart(2, "0")} / {String(features.length).padStart(2, "0")}
+                </p>
+                <h3 className="mt-6 text-2xl font-semibold tracking-[-0.02em] md:text-3xl">
+                  {feature.title}
+                </h3>
+                <p className="mt-4 max-w-prose text-base leading-relaxed text-muted-foreground">
+                  {feature.detail}
+                </p>
+
+                {feature.points && feature.points.length > 0 && (
+                  <ul className="mt-8 divide-y border-y text-sm">
+                    {feature.points.map((point) => (
+                      <li key={point} className="flex items-baseline gap-3 py-3">
+                        <span
+                          aria-hidden="true"
+                          className="size-1.5 shrink-0 translate-y-[-1px] bg-primary"
+                        />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {feature.stat && (
+                  <div className="mt-auto flex items-baseline gap-4 pt-10">
+                    <span className="text-4xl font-semibold tracking-[-0.03em] tabular-nums">
+                      {feature.stat.value}
+                    </span>
+                    <span className="text-sm text-muted-foreground">
+                      {feature.stat.label}
+                    </span>
+                  </div>
+                )}
+              </motion.div>
+            </TabsPrimitive.Content>
+          ))}
+        </TabsPrimitive.Root>
+      </div>
+    </section>
   );
 }

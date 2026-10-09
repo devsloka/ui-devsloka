@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";

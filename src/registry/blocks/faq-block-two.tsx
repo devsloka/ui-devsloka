@@ -1,188 +1,241 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, Sparkles } from "lucide-react";
+import { useId, useMemo, useState, type ComponentProps } from "react";
+import { Search } from "lucide-react";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-type FAQItemProps = {
-  question: string;
-  answer: string;
-  isOpen: boolean;
-  onToggle: () => void;
-  index: number;
+export type FAQGroup = {
+  label: string;
+  items: { question: string; answer: string }[];
 };
 
-const FAQItem = ({
-  question,
-  answer,
-  isOpen,
-  onToggle,
-  index,
-}: FAQItemProps) => {
+export type FAQBlockTwoProps = {
+  title?: string;
+  description?: string;
+  searchPlaceholder?: string;
+  groups?: FAQGroup[];
+} & ComponentProps<"section">;
+
+const DEFAULT_GROUPS: FAQGroup[] = [
+  {
+    label: "Billing",
+    items: [
+      {
+        question: "Who counts as a paid seat?",
+        answer:
+          "Anyone who builds or edits rotas. Staff who only view their shifts, swap with colleagues or clock in are free. A café with two managers and 30 staff pays for two seats.",
+      },
+      {
+        question: "Can I pay yearly by bank transfer?",
+        answer:
+          "Yes, on any plan with five or more seats. Choose Annual → Invoice in Billing and we'll send a PDF with our IBAN. You have 30 days to pay; the account stays fully active meanwhile.",
+      },
+      {
+        question: "What happens to my bill if I add someone mid-month?",
+        answer:
+          "We charge for the remaining days only, on your next invoice. Removing a seat gives a credit the same way. You'll never see a surprise charge between invoices.",
+      },
+    ],
+  },
+  {
+    label: "Account",
+    items: [
+      {
+        question: "Can one login manage several locations?",
+        answer:
+          "Yes. Add each site under Settings → Locations. Managers can be limited to one site or see all of them, and staff can be shared across sites without duplicate profiles.",
+      },
+      {
+        question: "How do I hand the account over to someone else?",
+        answer:
+          "The current owner opens Settings → Ownership and picks another admin. They get an email to confirm; until they do, nothing changes. Billing details move with the account.",
+      },
+      {
+        question: "Do you support single sign-on?",
+        answer:
+          "SAML and Google Workspace SSO are included on the Business plan. Okta and Entra ID are tested; any SAML 2.0 provider should work. SCIM provisioning is on the roadmap for Q1.",
+      },
+    ],
+  },
+  {
+    label: "Product",
+    items: [
+      {
+        question: "Does Fernway warn me about rest-period breaches?",
+        answer:
+          "Yes. Set the minimum rest between shifts (11 hours by default) and the maximum weekly hours for each contract type. Shifts that break a rule are flagged in amber before you publish, not after.",
+      },
+      {
+        question: "Can staff see the rota without installing the app?",
+        answer:
+          "Every published rota has a private link per person that opens in any browser. They can also subscribe to it in Google or Apple Calendar, and changes appear within 15 minutes.",
+      },
+      {
+        question: "Can I export timesheets to payroll?",
+        answer:
+          "Approved timesheets export as CSV, or sync directly to Xero, Sage and BrightPay. Breaks, overtime and holiday hours land in separate columns so nothing needs retyping.",
+      },
+    ],
+  },
+];
+
+export function FAQBlockTwo({
+  title = "Help centre, the short version",
+  description = "The questions we answer most often, grouped by where they come up. Search across all of them.",
+  searchPlaceholder = "Try “SSO” or “timesheets”",
+  groups = DEFAULT_GROUPS,
+  className,
+  ...props
+}: FAQBlockTwoProps) {
+  const [query, setQuery] = useState("");
+  const id = useId();
+  const searchId = `${id}-search`;
+  const titleId = `${id}-title`;
+
+  const filtered = useMemo(() => {
+    const needle = query.trim().toLowerCase();
+    if (!needle) return groups;
+    return groups
+      .map((group) => ({
+        ...group,
+        items: group.items.filter((item) =>
+          `${item.question} ${item.answer}`.toLowerCase().includes(needle),
+        ),
+      }))
+      .filter((group) => group.items.length > 0);
+  }, [groups, query]);
+
+  const total = groups.reduce((sum, group) => sum + group.items.length, 0);
+  const matches = filtered.reduce((sum, group) => sum + group.items.length, 0);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      className={cn(
-        "group relative mb-4 overflow-hidden rounded-2xl border-2 border-transparent",
-        isOpen
-          ? "bg-primary/5 dark:bg-primary/10"
-          : "bg-background/80 dark:bg-background/20",
-        "transition-all duration-300 ease-in-out hover:border-primary/30"
-      )}
+    <section
+      data-slot="faq-block-two"
+      aria-labelledby={titleId}
+      className={cn("bg-background text-foreground w-full", className)}
+      {...props}
     >
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.1),transparent_60%)]" />
-
-      <button
-        onClick={onToggle}
-        className="flex w-full items-center justify-between p-6 text-left"
-        aria-expanded={isOpen}
-      >
-        <div className="flex items-center gap-3">
-          <motion.div
-            animate={{ rotate: isOpen ? 90 : 0 }}
-            transition={{ duration: 0.2 }}
-            className="flex h-6 w-6 items-center justify-center text-primary"
-          >
-            <ChevronRight size={18} />
-          </motion.div>
-          <h3 className="text-lg font-medium text-foreground">{question}</h3>
-        </div>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            key="content"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="px-6 pb-6 pl-[3.75rem] text-muted-foreground">
-              {answer}
+      <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <div className="grid gap-8 border-b pb-10 md:grid-cols-12 md:items-end">
+          <div className="md:col-span-7">
+            <h2
+              id={titleId}
+              className="text-3xl font-semibold tracking-tight text-balance md:text-5xl"
+            >
+              {title}
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-md text-sm leading-relaxed">
+              {description}
+            </p>
+          </div>
+          <div className="md:col-span-5">
+            <label
+              htmlFor={searchId}
+              className="text-muted-foreground font-mono text-xs tracking-wider uppercase"
+            >
+              Search questions
+            </label>
+            <div className="relative mt-2">
+              <Search
+                aria-hidden="true"
+                className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+              />
+              <Input
+                id={searchId}
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder={searchPlaceholder}
+                autoComplete="off"
+                className="pl-9"
+              />
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <motion.div
-        className="absolute bottom-0 left-0 h-[2px] w-full bg-gradient-to-r from-primary/0 via-primary/50 to-primary/0"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: isOpen ? 1 : 0 }}
-        transition={{ duration: 0.5 }}
-      />
-    </motion.div>
-  );
-};
-
-const BackgroundGradient = () => {
-  return (
-    <div className="absolute inset-0 -z-10 overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-      <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]" />
-    </div>
-  );
-};
-
-export function FAQBlockTwo() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  const faqData = [
-    {
-      question: "What makes your platform different from competitors?",
-      answer:
-        "Our platform stands out with its intuitive design, powerful automation capabilities, and industry-leading security measures. We've built our solution based on a decade of customer feedback, resulting in features that directly address real-world challenges. Additionally, our dedicated support team and comprehensive documentation ensure you're never left without assistance.",
-    },
-    {
-      question: "Do you offer custom solutions for enterprise clients?",
-      answer:
-        "Yes, we provide tailored enterprise solutions designed to meet the specific needs of large organizations. Our enterprise package includes dedicated account management, custom integration development, advanced security features, and personalized training sessions. We work closely with your team to ensure our platform aligns perfectly with your business processes and objectives.",
-    },
-    {
-      question: "How often do you release new features?",
-      answer:
-        "We follow a continuous improvement model with major feature releases every quarter. Our development roadmap is heavily influenced by customer feedback, and we prioritize updates that deliver the most value. All customers receive early access to beta features, and enterprise clients can request specific enhancements to support their unique requirements.",
-    },
-    {
-      question: "What kind of support do you provide?",
-      answer:
-        "We offer multi-tiered support options to meet different needs. All plans include 24/7 email support and access to our extensive knowledge base. Premium plans add priority response times, dedicated support channels, and regular check-in calls. Enterprise clients receive a dedicated support team familiar with their specific implementation.",
-    },
-    {
-      question: "Can I integrate your platform with my existing tools?",
-      answer:
-        "Absolutely. Our platform offers native integrations with over 100 popular business tools across categories like CRM, marketing, analytics, and project management. For specialized needs, our robust API and webhook system allow for custom integrations. Our documentation includes detailed guides for common integration scenarios, and our support team is available to assist with complex setups.",
-    },
-  ];
-
-  return (
-    <div className="relative mx-auto w-full max-w-4xl px-4 py-16">
-      <BackgroundGradient />
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="mb-12"
-      >
-        <div className="mb-2 flex items-center justify-center gap-2">
-          <Sparkles className="h-5 w-5 text-primary" />
-          <p className="text-sm font-medium uppercase tracking-wider text-primary">
-            Support Center
-          </p>
+            <p
+              aria-live="polite"
+              className="text-muted-foreground mt-2 font-mono text-[11px] tracking-wider uppercase tabular-nums"
+            >
+              {query.trim()
+                ? `${matches} of ${total} questions`
+                : `${total} questions`}
+            </p>
+          </div>
         </div>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-4 text-center text-3xl font-bold tracking-tight sm:text-4xl"
-        >
-          Questions & Answers
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mx-auto max-w-2xl text-center text-muted-foreground"
-        >
-          Browse through our frequently asked questions to find quick answers to
-          common inquiries about our platform and services.
-        </motion.p>
-      </motion.div>
 
-      <div className="space-y-4">
-        {faqData.map((faq, index) => (
-          <FAQItem
-            key={index}
-            question={faq.question}
-            answer={faq.answer}
-            isOpen={openIndex === index}
-            onToggle={() => setOpenIndex(openIndex === index ? null : index)}
-            index={index}
-          />
-        ))}
+        {filtered.length === 0 ? (
+          <div className="grid gap-4 py-16 md:grid-cols-12">
+            <p className="text-muted-foreground font-mono text-xs tracking-wider uppercase md:col-span-3">
+              No match
+            </p>
+            <div className="md:col-span-9">
+              <p className="text-lg font-medium tracking-tight">
+                Nothing here mentions “{query.trim()}”.
+              </p>
+              <p className="text-muted-foreground mt-2 max-w-prose text-sm leading-relaxed">
+                Try a shorter word, or{" "}
+                <button
+                  type="button"
+                  onClick={() => setQuery("")}
+                  className="text-foreground decoration-primary rounded-sm underline underline-offset-4 outline-none hover:decoration-2 focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  clear the search
+                </button>{" "}
+                to see every question.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <Accordion type="single" collapsible>
+            {filtered.map((group) => {
+              const groupIndex = groups.findIndex(
+                (original) => original.label === group.label,
+              );
+              return (
+                <div
+                  key={group.label}
+                  role="group"
+                  aria-label={group.label}
+                  className="grid gap-2 border-b py-8 md:grid-cols-12 md:gap-8"
+                >
+                  <div className="md:col-span-3">
+                    <p className="font-mono text-xs tracking-wider uppercase md:sticky md:top-24 md:pt-5">
+                      <span className="text-muted-foreground tabular-nums">
+                        {String(groupIndex + 1).padStart(2, "0")} /{" "}
+                      </span>
+                      {group.label}
+                    </p>
+                  </div>
+                  <div className="divide-y md:col-span-9">
+                    {group.items.map((item) => (
+                      <AccordionItem
+                        key={item.question}
+                        value={`${group.label}-${item.question}`}
+                        className="border-b-0"
+                      >
+                        <AccordionTrigger className="rounded-none py-5 text-base font-medium hover:no-underline [&[data-state=open]]:text-foreground">
+                          <span className="decoration-muted-foreground/40 underline-offset-4 hover:underline">
+                            {item.question}
+                          </span>
+                        </AccordionTrigger>
+                        <AccordionContent className="text-muted-foreground max-w-prose pb-6 text-[15px] leading-relaxed">
+                          {item.answer}
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </Accordion>
+        )}
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.6 }}
-        className="mt-12 text-center"
-      >
-        <p className="text-muted-foreground">
-          Still have questions? We&apos;re here to help.
-        </p>
-        <motion.button
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.98 }}
-          className="mt-4 inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:shadow-xl hover:shadow-primary/30"
-        >
-          Contact Support
-        </motion.button>
-      </motion.div>
-    </div>
+    </section>
   );
 }
