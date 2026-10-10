@@ -5,7 +5,7 @@ import { utilities } from "@/utilities/hooks.utils";
 
 export function generateMetadata(): Metadata {
   return generateSEO({
-    title: "React Hooks - Devsloka UI",
+    title: "Reusable React Hooks",
     description:
       "Small, SSR-safe React hooks for storage, events, network, layout and forms. Install with the shadcn CLI.",
     path: "utilities",

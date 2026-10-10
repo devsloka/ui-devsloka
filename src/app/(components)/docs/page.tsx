@@ -4,7 +4,7 @@ import { generateSEO } from "@/config/seo/seo.utils";
 import { countRegistryItems } from "@/utilities/registry";
 
 export const metadata: Metadata = generateSEO({
-  title: "Introduction - Devsloka UI",
+  title: "Introduction",
   description:
     "Devsloka UI is a collection of animated, accessible React components, backgrounds, hooks and blocks that you copy into your project and own.",
   path: "docs",

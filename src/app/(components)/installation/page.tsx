@@ -3,7 +3,7 @@ import { InstallationSteps } from "@/components/installation/installation-steps"
 import { generateSEO } from "@/config/seo/seo.utils";
 
 export const metadata: Metadata = generateSEO({
-  title: "Installation - Devsloka UI",
+  title: "Installation",
   description:
     "Add Devsloka UI components to any React 19 + Tailwind CSS v4 project with the shadcn CLI, or copy the source manually.",
   path: "installation",

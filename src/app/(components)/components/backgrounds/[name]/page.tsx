@@ -21,7 +21,7 @@ export async function generateMetadata({
   if (!background) return {};
 
   return generateSEO({
-    title: `${background.title} Background - Devsloka UI`,
+    title: `${background.title} Background`,
     description: background.description,
     path: `components/backgrounds/${name}`,
     image: `images/${name}.png`,

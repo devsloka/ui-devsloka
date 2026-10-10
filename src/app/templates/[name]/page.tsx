@@ -19,7 +19,7 @@ export async function generateMetadata({
   if (!template) return {};
 
   return generateSEO({
-    title: `${template.seo.title} - Devsloka Templates`,
+    title: `${template.seo.title}`,
     description: template.seo.description,
     path: `templates/${name}`,
     image: templates.find((card) => card.slug === name)?.image,

@@ -6,9 +6,9 @@ import { templates } from "@/lib/templates";
 
 export function generateMetadata(): Metadata {
   return generateSEO({
-    title: "Templates - Devsloka UI",
+    title: "Free Next.js Templates",
     description:
-      "Complete Next.js templates built with Devsloka UI. Preview them live and start from the source.",
+      "Free Next.js templates for AI landing pages, developer portfolios, and e-commerce websites. Explore live previews and customize the source code.",
     path: "templates",
     image: "images/templates-og.png",
     keywords: ["next.js templates", "react templates", "landing page template", "portfolio template"],
@@ -19,7 +19,7 @@ export default function TemplatesPage() {
   return (
     <div>
       <header className="mb-10 max-w-2xl space-y-3">
-        <h1 className="text-4xl font-semibold tracking-tight">Templates</h1>
+        <h1 className="text-4xl font-semibold tracking-tight">Next.js templates</h1>
         <p className="text-lg text-muted-foreground">
           Complete Next.js sites built with Devsloka UI. Open the live preview,
           then start from the source.

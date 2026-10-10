@@ -5,11 +5,10 @@ import { components } from "@/lib/components";
 
 export function generateMetadata(): Metadata {
   return generateSEO({
-    title: "Components - Devsloka UI",
+    title: "Animated React Components",
     description:
-      "Animated, accessible React components built on shadcn conventions. Preview each one and install it with the shadcn CLI.",
+      "Free animated React and Next.js components built with Tailwind CSS, Motion, and shadcn conventions. Preview live demos and install with the shadcn CLI.",
     path: "components",
-    image: "images/components-og.png",
     keywords: [
       "react components",
       "animated components",
@@ -23,7 +22,7 @@ export default function ComponentsPage() {
   return (
     <div className="mb-20">
       <header className="mb-10 max-w-2xl space-y-3">
-        <h1 className="text-4xl font-semibold tracking-tight">Components</h1>
+        <h1 className="text-4xl font-semibold tracking-tight">Animated React components</h1>
         <p className="text-lg text-muted-foreground">
           {components.length} animated, accessible components. Open one to try
           it, read the code and install it with the shadcn CLI.

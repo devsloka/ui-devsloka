@@ -21,16 +21,10 @@ export async function generateMetadata({
   const component = utilities[name];
   if (!component) return {};
 
-  const formattedName = name
-    .replace(/-/g, " ")
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-
   const imagePath = `/images/${name}.png`;
 
   return generateSEO({
-    title: `${formattedName} - Devsloka Hooks`,
+    title: `${component.codeMetadata.title} React Hook`,
     description: component.codeMetadata.description,
     path: `utilities/${name}`,
     image: imagePath,
