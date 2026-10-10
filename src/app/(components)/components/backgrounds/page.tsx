@@ -7,11 +7,10 @@ import { cn } from "@/lib/utils";
 
 export function generateMetadata(): Metadata {
   return generateSEO({
-    title: "Animated Backgrounds - Devsloka UI",
+    title: "Animated React Backgrounds",
     description:
       "Animated canvas and CSS backgrounds for React. Drop a layer behind any section; it follows your theme and pauses off screen.",
     path: "components/backgrounds",
-    image: "images/backgrounds-og.png",
     keywords: [
       "animated backgrounds",
       "react backgrounds",

@@ -20,14 +20,8 @@ export async function generateMetadata({
   const block = blocks[name];
   if (!block) return {};
 
-  const formattedName = name
-    .replace(/-/g, " ")
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-
   return generateSEO({
-    title: `${formattedName} - Devsloka Blocks`,
+    title: `${block.title} React Blocks`,
     description: block.description,
     path: `blocks/${name}`,
     image: `images/${name}.png`,

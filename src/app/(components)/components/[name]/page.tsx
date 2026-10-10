@@ -3,6 +3,7 @@ import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
 import { getComponentCode } from "@/utilities/getComponentCode";
 import { Metadata } from "next";
 import { components } from "@/utilities/components.utils";
+import { components as componentCards } from "@/lib/components";
 import { generateSEO } from "@/config/seo/seo.utils";
 import { getCliCommand, getInstallCommands } from "@/utilities/registry";
 
@@ -27,10 +28,11 @@ export async function generateMetadata({
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
   const imagePath = `/images/${name}.png`;
+  const card = componentCards.find((entry) => entry.href === `/components/${name}`);
 
   return generateSEO({
-    title: `${formattedName} - Devsloka Components`,
-    description: component.codeMetadata.description,
+    title: `${card?.title ?? formattedName} React Component`,
+    description: card?.description ?? component.codeMetadata.description,
     path: `components/${name}`,
     image: imagePath,
     keywords: [...component.codeMetadata.keywords, "Devsloka", "UI Components"],

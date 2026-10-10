@@ -156,7 +156,7 @@ const templates: Record<string, TemplateType> = {
       title: "E-commerce Store Template",
       description:
         "E commerce store template with modern design and animations.",
-      keywords: ["ML template", "machine learning", "data science", "Next.js"],
+      keywords: ["Next.js e-commerce template", "React storefront", "Tailwind CSS store template"],
     },
     heroContent: {
       title: "E-commerce Store Template",
@@ -327,16 +327,8 @@ const templates: Record<string, TemplateType> = {
 };
 
 export function getTemplateData(name: string) {
-  const template = templates[name as keyof typeof templates];
-  return template
-    ? {
-        ...template,
-        seo: {
-          ...template.seo,
-          keywords: template.seo.keywords.join(", "),
-        },
-      }
-    : null;
+  // Metadata expects an array. Joining here caused callers to spread letters.
+  return templates[name as keyof typeof templates] ?? null;
 }
 
 export type TemplateData = ReturnType<typeof getTemplateData>;

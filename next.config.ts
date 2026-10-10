@@ -2,6 +2,10 @@ import type { NextConfig } from "next";
 
 const securityHeaders = [
   {
+    key: "Link",
+    value: '<https://ui.devsloka.in/llms.txt>; rel="describedby"',
+  },
+  {
     key: "X-Frame-Options",
     value: "SAMEORIGIN",
   },

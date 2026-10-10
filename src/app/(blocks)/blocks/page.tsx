@@ -5,9 +5,9 @@ import { blocks } from "@/utilities/blocks.utils";
 
 export function generateMetadata(): Metadata {
   return generateSEO({
-    title: "Blocks - Devsloka UI",
+    title: "Free React UI Blocks",
     description:
-      "Complete page sections for React: heroes, pricing, features, FAQs, footers and more. Copy them in and restyle like any component.",
+      "React blocks for landing pages, blogs, changelogs, authentication, and 404 screens. Preview multiple layouts and install with the shadcn CLI.",
     path: "blocks",
     image: "images/blocks-og.png",
     keywords: ["ui blocks", "website sections", "react sections", "next.js blocks"],
@@ -20,7 +20,7 @@ export default function BlocksPage() {
   return (
     <div>
       <header className="mb-10 max-w-2xl space-y-3">
-        <h1 className="text-4xl font-semibold tracking-tight">Blocks</h1>
+        <h1 className="text-4xl font-semibold tracking-tight">React UI blocks</h1>
         <p className="text-lg text-muted-foreground">
           {entries.length} complete page sections. Stack them into a page, then
           restyle them like any other component.
