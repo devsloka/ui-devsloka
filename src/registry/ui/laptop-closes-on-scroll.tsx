@@ -16,7 +16,7 @@ export type AnimatedMacBookProps = React.ComponentProps<"div"> & {
   children?: React.ReactNode;
   /** Length of the scroll track, any CSS length. */
   scrollHeight?: string;
-  /** How far the lid closes by the end of the track, in degrees (90 = fully closed). */
+  /** How far the lid closes, clamped to 0–90 degrees (90 = fully closed). */
   maxRotation?: number;
   /** Body color preset. */
   color?: LaptopColor;
@@ -46,8 +46,12 @@ export function AnimatedMacBook({
     offset: ["start start", "end end"],
   });
 
-  const rotateX = useTransform(scrollYProgress, [0.1, 0.9], [0, -maxRotation]);
-  const dim = useTransform(scrollYProgress, [0.1, 0.9], [0, 0.7]);
+  const closingAngle = Math.min(90, Math.max(0, maxRotation));
+  const rotateX = useTransform(scrollYProgress, [0.1, 0.9], [0, -closingAngle]);
+  const dim = useTransform(rotateX, [-90, -75, 0], [1, 0.35, 0]);
+  const screenOpacity = useTransform(rotateX, [-90, -88, 0], [0, 1, 1]);
+  const lidEdgeOpacity = useTransform(rotateX, [-90, -84, 0], [1, 0, 0]);
+  const deviceY = useTransform(rotateX, [-90, 0], ["-45%", "0%"]);
 
   const animated = !reduceMotion;
 
@@ -60,45 +64,67 @@ export function AnimatedMacBook({
       {...props}
     >
       <div className="sticky top-0 flex h-svh items-center justify-center overflow-x-clip px-4">
-        <div className="w-full max-w-4xl perspective-[2000px]">
-          <motion.div
-            className={cn(
-              "relative mx-auto aspect-[16/10] w-[88%] origin-bottom rounded-xl p-[1%] transform-3d",
-              COLORS[color].lid
-            )}
-            style={animated ? { rotateX } : undefined}
-          >
-            <div className="relative size-full rounded-lg bg-neutral-950 p-[2%]">
-              <span
-                aria-hidden
-                className="absolute top-[0.8%] left-1/2 size-1.5 -translate-x-1/2 rounded-full bg-neutral-700"
-              />
-              <div
-                data-slot="laptop-screen"
-                className={cn(
-                  "relative size-full overflow-hidden rounded-sm bg-muted [&>img]:size-full [&>img]:object-cover",
-                  screenClassName
-                )}
+        <motion.div
+          className="w-full max-w-4xl"
+          style={animated ? { y: deviceY } : undefined}
+        >
+          {/* The perspective origin must share the lid's bottom-edge hinge.
+              A centred origin projects the closing screen below the base. */}
+          <div className="relative mx-auto aspect-[16/10] w-[88%] perspective-[2000px] [perspective-origin:50%_100%]">
+            <motion.div
+              className={cn(
+                "absolute inset-0 origin-bottom rounded-xl p-[1%] [backface-visibility:hidden]",
+                COLORS[color].lid
+              )}
+              style={animated ? { rotateX } : undefined}
+            >
+              <motion.div
+                className="relative size-full rounded-lg bg-neutral-950 p-[2%] [backface-visibility:hidden]"
+                style={animated ? { opacity: screenOpacity } : undefined}
               >
-                {children}
-                {animated && (
-                  <motion.div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 bg-black"
-                    style={{ opacity: dim }}
-                  />
+                <span
+                  aria-hidden
+                  className="absolute top-[0.8%] left-1/2 size-1.5 -translate-x-1/2 rounded-full bg-neutral-700"
+                />
+                <div
+                  data-slot="laptop-screen"
+                  className={cn(
+                    "relative size-full overflow-hidden rounded-sm bg-muted [&>img]:size-full [&>img]:object-cover",
+                    screenClassName
+                  )}
+                >
+                  {children}
+                  {animated && (
+                    <motion.div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 bg-black"
+                      style={{ opacity: dim }}
+                    />
+                  )}
+                </div>
+              </motion.div>
+            </motion.div>
+            {animated && (
+              <motion.div
+                aria-hidden
+                data-slot="laptop-lid-edge"
+                className={cn(
+                  "pointer-events-none absolute inset-x-0 bottom-0 h-1.5 rounded-t-md",
+                  COLORS[color].lid
                 )}
-              </div>
-            </div>
-          </motion.div>
+                style={{ opacity: lidEdgeOpacity }}
+              />
+            )}
+          </div>
 
           <div
             aria-hidden
-            className={cn("relative h-3 rounded-b-xl ring-1 ring-black/10 sm:h-4", COLORS[color].base)}
+            data-slot="laptop-base"
+            className={cn("relative z-10 h-3 rounded-b-xl ring-1 ring-black/10 sm:h-4", COLORS[color].base)}
           >
             <div className="absolute top-0 left-1/2 h-1/3 w-[14%] -translate-x-1/2 rounded-b-md bg-black/20" />
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

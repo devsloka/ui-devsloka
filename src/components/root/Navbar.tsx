@@ -21,6 +21,7 @@ const NAV_LINKS = [
   { label: "Blocks", href: "/blocks" },
   { label: "Templates", href: "/templates" },
   { label: "Docs", href: "/docs" },
+  { label: "Changelog", href: "/changelog" },
 ];
 
 const isActivePath = (pathname: string, href: string) =>
@@ -136,6 +137,7 @@ function MobileMenu({ pathname }: { pathname: string }) {
               <SheetClose asChild>
                 <Link
                   href={link.href}
+                  aria-current={isActivePath(pathname, link.href) ? "page" : undefined}
                   className={cn(
                     "block py-1.5 text-3xl font-medium tracking-[-0.04em] transition-colors",
                     isActivePath(pathname, link.href)
