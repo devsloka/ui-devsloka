@@ -60,4 +60,44 @@ export const blockNavLinks: BlockNavLinkType[] = [
     title: "Team",
     href: "/blocks/team-block",
   },
+  {
+    id: "changelog",
+    title: "Changelog",
+    href: "/blocks/changelog",
+  },
+  {
+    id: "blog",
+    title: "Blog",
+    href: "/blocks/blog",
+  },
+  {
+    id: "cta",
+    title: "Call to Action",
+    href: "/blocks/cta",
+  },
+  {
+    id: "sign-in",
+    title: "Sign In",
+    href: "/blocks/sign-in",
+  },
+  {
+    id: "sign-up",
+    title: "Sign Up",
+    href: "/blocks/sign-up",
+  },
+  {
+    id: "forgot-password",
+    title: "Forgot Password",
+    href: "/blocks/forgot-password",
+  },
+  {
+    id: "otp",
+    title: "OTP",
+    href: "/blocks/otp",
+  },
+  {
+    id: "not-found",
+    title: "404",
+    href: "/blocks/not-found",
+  },
 ];

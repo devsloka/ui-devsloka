@@ -1,4 +1,5 @@
-import { getComponentCode } from "@/utilities/getComponentCode";
+import fs from "fs";
+import path from "path";
 
 type RegistryItem = {
   name: string;
@@ -10,7 +11,9 @@ type RegistryItem = {
 const REGISTRY_URL = "https://ui.devsloka.in/r";
 
 function readRegistry(): RegistryItem[] {
-  return (JSON.parse(getComponentCode("registry.json")) as { items: RegistryItem[] }).items;
+  // A fixed path, so the build only traces registry.json rather than the whole project.
+  const source = fs.readFileSync(path.join(process.cwd(), "registry.json"), "utf-8");
+  return (JSON.parse(source) as { items: RegistryItem[] }).items;
 }
 
 /** `npx shadcn add` command for one registry item. */
