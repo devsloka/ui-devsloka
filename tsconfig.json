@@ -26,9 +26,6 @@
       "@/components/ui/floating-dots": [
         "./src/registry/ui/floating-dots"
       ],
-      "@/components/ui/logo-cloud-carousel": [
-        "./src/registry/ui/logo-cloud-carousel"
-      ],
       "@/*": [
         "./src/*"
       ]

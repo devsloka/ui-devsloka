@@ -438,14 +438,13 @@
         }
       ],
       "dependencies": [
-        "lucide-react",
-        "motion"
+        "lucide-react"
       ],
       "registryDependencies": [
         "button",
-        "card",
         "input",
         "label",
+        "radio-group",
         "textarea"
       ]
     },
@@ -460,13 +459,8 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
       "registryDependencies": [
-        "accordion",
-        "button"
+        "accordion"
       ]
     },
     {
@@ -481,8 +475,11 @@
         }
       ],
       "dependencies": [
-        "lucide-react",
-        "motion"
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "accordion",
+        "input"
       ]
     },
     {
@@ -497,7 +494,10 @@
         }
       ],
       "dependencies": [
-        "motion"
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
       ]
     },
     {
@@ -511,8 +511,8 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": [
-        "lucide-react"
+      "registryDependencies": [
+        "button"
       ]
     },
     {
@@ -525,11 +525,6 @@
           "path": "src/registry/blocks/hero-floating-elements.tsx",
           "type": "registry:block"
         }
-      ],
-      "dependencies": [
-        "lucide-react",
-        "motion",
-        "next-themes"
       ],
       "registryDependencies": [
         "button"
@@ -547,12 +542,7 @@
         }
       ],
       "dependencies": [
-        "lucide-react",
-        "motion",
-        "next-themes"
-      ],
-      "registryDependencies": [
-        "button"
+        "lucide-react"
       ]
     },
     {
@@ -567,9 +557,7 @@
         }
       ],
       "dependencies": [
-        "lucide-react",
-        "motion",
-        "next-themes"
+        "motion"
       ],
       "registryDependencies": [
         "button"
@@ -585,14 +573,6 @@
           "path": "src/registry/blocks/logo-cloud-1.tsx",
           "type": "registry:block"
         }
-      ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "button",
-        "https://ui.devsloka.in/r/logo-cloud-carousel.json"
       ]
     },
     {
@@ -605,13 +585,6 @@
           "path": "src/registry/blocks/footer-block.tsx",
           "type": "registry:block"
         }
-      ],
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "button",
-        "input"
       ]
     },
     {
@@ -624,14 +597,6 @@
           "path": "src/registry/blocks/floating-footer.tsx",
           "type": "registry:block"
         }
-      ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "button",
-        "input"
       ]
     },
     {
@@ -645,13 +610,10 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
       "registryDependencies": [
         "button",
-        "input"
+        "input",
+        "label"
       ]
     },
     {
@@ -664,14 +626,6 @@
           "path": "src/registry/blocks/wave-footer.tsx",
           "type": "registry:block"
         }
-      ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "button",
-        "input"
       ]
     },
     {
@@ -684,10 +638,6 @@
           "path": "src/registry/blocks/features-block.tsx",
           "type": "registry:block"
         }
-      ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
       ]
     },
     {
@@ -700,16 +650,6 @@
           "path": "src/registry/blocks/features-block-four.tsx",
           "type": "registry:block"
         }
-      ],
-      "dependencies": [
-        "lucide-react",
-        "motion",
-        "next-themes"
-      ],
-      "registryDependencies": [
-        "badge",
-        "button",
-        "card"
       ]
     },
     {
@@ -724,13 +664,8 @@
         }
       ],
       "dependencies": [
-        "lucide-react",
+        "@radix-ui/react-tabs",
         "motion"
-      ],
-      "registryDependencies": [
-        "badge",
-        "button",
-        "card"
       ]
     },
     {
@@ -745,12 +680,7 @@
         }
       ],
       "dependencies": [
-        "lucide-react",
         "motion"
-      ],
-      "registryDependencies": [
-        "badge",
-        "button"
       ]
     },
     {
@@ -764,13 +694,10 @@
           "type": "registry:block"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
       "registryDependencies": [
         "button",
-        "input"
+        "input",
+        "label"
       ]
     },
     {
@@ -785,8 +712,12 @@
         }
       ],
       "dependencies": [
-        "lucide-react",
-        "motion"
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "label"
       ]
     },
     {
@@ -801,8 +732,7 @@
         }
       ],
       "dependencies": [
-        "lucide-react",
-        "motion"
+        "lucide-react"
       ]
     },
     {
@@ -817,11 +747,8 @@
         }
       ],
       "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "avatar",
-        "card"
+        "lucide-react",
+        "motion"
       ]
     },
     {
@@ -836,7 +763,6 @@
         }
       ],
       "dependencies": [
-        "lucide-react",
         "motion"
       ]
     },
@@ -848,42 +774,6 @@
       "files": [
         {
           "path": "src/registry/ui/loader.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "galaxy-background",
-      "type": "registry:ui",
-      "title": "Galaxy Background",
-      "description": "A slowly turning spiral galaxy with depth-scaled stars and drifting dust.",
-      "files": [
-        {
-          "path": "src/registry/backgrounds/galaxy-background.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "moon-stars-background",
-      "type": "registry:ui",
-      "title": "Moon & Stars Background",
-      "description": "A calm night sky with a glowing moon and twinkling stars.",
-      "files": [
-        {
-          "path": "src/registry/backgrounds/moon-stars-background.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "fireflies-background",
-      "type": "registry:ui",
-      "title": "Fireflies Background",
-      "description": "Soft glowing particles that wander and pulse like fireflies.",
-      "files": [
-        {
-          "path": "src/registry/backgrounds/fireflies-background.tsx",
           "type": "registry:ui"
         }
       ]
@@ -933,81 +823,6 @@
       ]
     },
     {
-      "name": "circles-background",
-      "type": "registry:ui",
-      "title": "Pulsing Circles Background",
-      "description": "Concentric circles that pulse outward from the center.",
-      "files": [
-        {
-          "path": "src/registry/backgrounds/circles-background.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "ripple-background",
-      "type": "registry:ui",
-      "title": "Ripple Background",
-      "description": "Ripples that spread from the pointer as it moves across the section.",
-      "files": [
-        {
-          "path": "src/registry/backgrounds/ripple-background.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "spotlight-background",
-      "type": "registry:ui",
-      "title": "Spotlight Background",
-      "description": "A soft spotlight that follows the pointer.",
-      "files": [
-        {
-          "path": "src/registry/backgrounds/spotlight-background.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "gradient-mesh-background",
-      "type": "registry:ui",
-      "title": "Gradient Mesh Background",
-      "description": "Slowly shifting color fields that blend into a soft mesh.",
-      "files": [
-        {
-          "path": "src/registry/backgrounds/gradient-mesh-background.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "gradient-wave",
-      "type": "registry:ui",
-      "title": "Gradient Wave Background",
-      "description": "A gentle animated gradient that flows like a wave.",
-      "files": [
-        {
-          "path": "src/registry/backgrounds/gradient-wave.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "gradient-bg",
-      "type": "registry:ui",
-      "title": "Gradient Background",
-      "description": "A soft animated gradient with floating dots.",
-      "files": [
-        {
-          "path": "src/registry/backgrounds/gradient-bg.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "registryDependencies": [
-        "https://ui.devsloka.in/r/floating-dots.json"
-      ]
-    },
-    {
       "name": "blob-background",
       "type": "registry:ui",
       "title": "Blobs Background",
@@ -1015,54 +830,6 @@
       "files": [
         {
           "path": "src/registry/backgrounds/blob-background.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "floating-shapes",
-      "type": "registry:ui",
-      "title": "Floating Shapes Background",
-      "description": "Simple geometric shapes floating at different depths.",
-      "files": [
-        {
-          "path": "src/registry/backgrounds/floating-shapes.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "grid-mesh-background",
-      "type": "registry:ui",
-      "title": "Grid Mesh Background",
-      "description": "A fine grid with a subtle animated highlight.",
-      "files": [
-        {
-          "path": "src/registry/backgrounds/grid-mesh-background.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "lines-background",
-      "type": "registry:ui",
-      "title": "Lines Background",
-      "description": "Thin lines drifting across the section.",
-      "files": [
-        {
-          "path": "src/registry/backgrounds/lines-background.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "noise-background",
-      "type": "registry:ui",
-      "title": "Noise Background",
-      "description": "A fine film-grain texture to add depth to flat surfaces.",
-      "files": [
-        {
-          "path": "src/registry/backgrounds/noise-background.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1257,6 +1024,328 @@
           "path": "src/registry/hooks/use-window-size.ts",
           "type": "registry:hook"
         }
+      ]
+    },
+    {
+      "name": "changelog-timeline",
+      "type": "registry:block",
+      "title": "Changelog Timeline",
+      "description": "A dated release timeline with New/Improved/Fixed ink tags and optional visuals.",
+      "files": [
+        {
+          "path": "src/registry/blocks/changelog/changelog-timeline.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "changelog-release",
+      "type": "registry:block",
+      "title": "Changelog Release Spread",
+      "description": "A single release as a poster spread with an oversized version numeral.",
+      "files": [
+        {
+          "path": "src/registry/blocks/changelog/changelog-release.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "changelog-compact",
+      "type": "registry:block",
+      "title": "Changelog Compact",
+      "description": "A compact, filterable changelog with version links and an RSS link.",
+      "files": [
+        {
+          "path": "src/registry/blocks/changelog/changelog-compact.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "blog-featured",
+      "type": "registry:block",
+      "title": "Blog Featured",
+      "description": "A featured story with a large photo beside three recent posts.",
+      "files": [
+        {
+          "path": "src/registry/blocks/blog/blog-featured.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "blog-index",
+      "type": "registry:block",
+      "title": "Blog Index",
+      "description": "A year-grouped archive with category filters and a cursor-following preview.",
+      "files": [
+        {
+          "path": "src/registry/blocks/blog/blog-index.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": [
+        "motion"
+      ]
+    },
+    {
+      "name": "blog-magazine",
+      "type": "registry:block",
+      "title": "Blog Magazine",
+      "description": "A magazine-cover grid of photo tiles and solid ink covers.",
+      "files": [
+        {
+          "path": "src/registry/blocks/blog/blog-magazine.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "cta-poster",
+      "type": "registry:block",
+      "title": "CTA Poster",
+      "description": "A Swiss-poster call to action on a solid ink field.",
+      "files": [
+        {
+          "path": "src/registry/blocks/cta/cta-poster.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "button"
+      ]
+    },
+    {
+      "name": "cta-split-photo",
+      "type": "registry:block",
+      "title": "CTA Split Photo",
+      "description": "A photo split call to action with numbered reasons and bookable demo times.",
+      "files": [
+        {
+          "path": "src/registry/blocks/cta/cta-split-photo.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "button"
+      ]
+    },
+    {
+      "name": "cta-ticket",
+      "type": "registry:block",
+      "title": "CTA Ticket",
+      "description": "An event call to action styled as a printed ticket with a tear-off stub.",
+      "files": [
+        {
+          "path": "src/registry/blocks/cta/cta-ticket.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "button"
+      ]
+    },
+    {
+      "name": "sign-in-split",
+      "type": "registry:block",
+      "title": "Sign In Split",
+      "description": "Split sign-in with an ink panel, researcher quote and SSO options.",
+      "files": [
+        {
+          "path": "src/registry/blocks/auth/sign-in-split.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "checkbox",
+        "input",
+        "label"
+      ]
+    },
+    {
+      "name": "sign-in-minimal",
+      "type": "registry:block",
+      "title": "Sign In Minimal",
+      "description": "Editorial single-column sign-in with an optional magic-link mode.",
+      "files": [
+        {
+          "path": "src/registry/blocks/auth/sign-in-minimal.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "label"
+      ]
+    },
+    {
+      "name": "sign-up-split",
+      "type": "registry:block",
+      "title": "Sign Up Split",
+      "description": "Split sign-up with live password requirements and a plan summary panel.",
+      "files": [
+        {
+          "path": "src/registry/blocks/auth/sign-up-split.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "checkbox",
+        "input",
+        "label"
+      ]
+    },
+    {
+      "name": "sign-up-steps",
+      "type": "registry:block",
+      "title": "Sign Up Steps",
+      "description": "Two-step sign-up: account, then workspace, with focus management.",
+      "files": [
+        {
+          "path": "src/registry/blocks/auth/sign-up-steps.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "label",
+        "select"
+      ]
+    },
+    {
+      "name": "forgot-password-simple",
+      "type": "registry:block",
+      "title": "Forgot Password",
+      "description": "Request a reset link, then a check-your-email screen with a resend cooldown.",
+      "files": [
+        {
+          "path": "src/registry/blocks/auth/forgot-password-simple.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "label"
+      ]
+    },
+    {
+      "name": "forgot-password-reset",
+      "type": "registry:block",
+      "title": "Reset Password",
+      "description": "Choose a new password with live requirements and a security panel.",
+      "files": [
+        {
+          "path": "src/registry/blocks/auth/forgot-password-reset.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "label"
+      ]
+    },
+    {
+      "name": "otp-verify",
+      "type": "registry:block",
+      "title": "OTP Verify",
+      "description": "Six-digit email code that submits itself, with a resend countdown.",
+      "files": [
+        {
+          "path": "src/registry/blocks/auth/otp-verify.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": [
+        "input-otp",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input-otp",
+        "label"
+      ]
+    },
+    {
+      "name": "otp-two-factor",
+      "type": "registry:block",
+      "title": "OTP Two-Factor",
+      "description": "Authenticator two-factor prompt with trust-this-device and a backup code.",
+      "files": [
+        {
+          "path": "src/registry/blocks/auth/otp-two-factor.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": [
+        "input-otp",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "checkbox",
+        "input",
+        "input-otp",
+        "label"
+      ]
+    },
+    {
+      "name": "not-found-poster",
+      "type": "registry:block",
+      "title": "404 Poster",
+      "description": "A poster-style 404 on a solid ink field with quick routes home.",
+      "files": [
+        {
+          "path": "src/registry/blocks/not-found/not-found-poster.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "not-found-index",
+      "type": "registry:block",
+      "title": "404 Lost and Found",
+      "description": "An editorial 404 with a request log line, search and a destination index.",
+      "files": [
+        {
+          "path": "src/registry/blocks/not-found/not-found-index.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "label"
       ]
     }
   ]
