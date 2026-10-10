@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "registry:build": "node scripts/build-registry.mjs",
     "registry:check": "node scripts/build-registry.mjs --check",
-    "previews": "node scripts/capture-previews.mjs"
+    "previews": "node scripts/capture-previews.mjs",
+    "seo:check": "node scripts/check-seo.mjs"
   },
   "dependencies": {
     "@fontsource/poppins": "^5.2.5",
