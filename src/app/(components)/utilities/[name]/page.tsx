@@ -5,6 +5,7 @@ import { getComponentCode } from "@/utilities/getComponentCode";
 import { utilities } from "@/utilities/hooks.utils";
 import { Metadata } from "next";
 import { generateSEO } from "@/config/seo/seo.utils";
+import { getCliCommand, getInstallCommands } from "@/utilities/registry";
 
 export async function generateStaticParams() {
   const utilitiesKeys = await Promise.resolve(Object.keys(utilities));
@@ -29,7 +30,7 @@ export async function generateMetadata({
   const imagePath = `/images/${name}.png`;
 
   return generateSEO({
-    title: `${formattedName} - Devsloka Components`,
+    title: `${formattedName} - Devsloka Hooks`,
     description: component.codeMetadata.description,
     path: `utilities/${name}`,
     image: imagePath,
@@ -47,10 +48,10 @@ const UtilPage = async ({ params }: { params: Promise<{ name: string }> }) => {
 
   const { component: ActiveComponent, codeMetadata } = componentInfo;
 
-  const componentPath = `src/hooks/devsloka-hooks/demo/${name + "-demo"}.tsx`;
+  const componentPath = `src/components/devsloka-components/demo/hooks/${name}-demo.tsx`;
   const componentCode = getComponentCode(componentPath);
   const secondaryCode = getComponentCode(
-    `src/hooks/devsloka-hooks/${name}.tsx`
+    `src/registry/hooks/${name}.ts`
   );
 
   return (
@@ -63,7 +64,9 @@ const UtilPage = async ({ params }: { params: Promise<{ name: string }> }) => {
         title={codeMetadata.title}
         description={codeMetadata.description}
         keywords={codeMetadata.keywords}
-        dependencies={codeMetadata.dependencies}
+        dependencies={getInstallCommands(name)}
+        cliCommands={getCliCommand(name)}
+        v0Url={`https://ui.devsloka.in/r/${name}.json`}
         secondaryCode={secondaryCode}
         secondaryTitle={componentInfo.codeMetadata.secondaryTitle}
         secondaryLanguage={componentInfo.codeMetadata.secondaryLanguage}

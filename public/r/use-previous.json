@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-previous",
+  "type": "registry:hook",
+  "title": "usePrevious",
+  "description": "Return the previous distinct value of a prop or state.",
+  "files": [
+    {
+      "path": "src/registry/hooks/use-previous.ts",
+      "type": "registry:hook",
+      "content": "import { useState } from \"react\";\n\n/**\n * Return the value from the previous render where `value` was different, or `undefined`\n * before the first change.\n *\n * Implemented with state instead of the classic ref-read-during-render pattern, which\n * breaks under concurrent rendering and the React Compiler. Comparison uses `Object.is`.\n *\n * @example\n * const prevCount = usePrevious(count);\n */\nexport function usePrevious<T>(value: T): T | undefined {\n  const [current, setCurrent] = useState(value);\n  const [previous, setPrevious] = useState<T | undefined>(undefined);\n\n  // \"Adjusting state when a prop changes\": React re-renders immediately with the\n  // updated state, before committing, so consumers never see a stale pair.\n  if (!Object.is(value, current)) {\n    setPrevious(current);\n    setCurrent(value);\n  }\n\n  return previous;\n}\n"
+    }
+  ]
+}

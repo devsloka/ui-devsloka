@@ -1,22 +1,25 @@
-import ProductCard from "@/components/ui/product-card";
+import { ProductCard } from "@/registry/ui/product-card";
 
 export function ProductCardDemo() {
   return (
-    <div className="px-4">
-      <ProductCard
-        id={1}
-        image="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=2080&auto=format&fit=crop"
-        title="Nike Air Force 1"
-        price={89.99}
-        originalPrice={99.99}
-        category="Shoes"
-        rating={4.5}
-        inStock={true}
-        isNew={true}
-        isFeatured={true}
-        discount={10}
-        colors={["red", "blue", "white"]}
-      />
-    </div>
+    <ProductCard
+      image={{
+        src: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1200&auto=format&fit=crop",
+        alt: "Plain white crew-neck t-shirt",
+      }}
+      title="Essential Cotton Tee"
+      category="Apparel"
+      price="$29.00"
+      compareAtPrice="$35.00"
+      rating={4.6}
+      reviewCount={212}
+      badges={["New", "-17%"]}
+      colors={[
+        { name: "White", value: "#f5f5f4" },
+        { name: "Black", value: "#1c1917" },
+        { name: "Sage", value: "#9caf88" },
+      ]}
+      stockNote="Free shipping"
+    />
   );
 }

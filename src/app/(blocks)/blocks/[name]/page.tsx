@@ -4,6 +4,7 @@ import { getComponentCode } from "@/utilities/getComponentCode";
 import { Metadata } from "next";
 import { blocks } from "@/utilities/blocks.utils";
 import { generateSEO } from "@/config/seo/seo.utils";
+import { getCliCommand, getInstallCommands } from "@/utilities/registry";
 
 export async function generateStaticParams() {
   const blockKeys = await Promise.resolve(Object.keys(blocks));
@@ -61,28 +62,38 @@ export default async function BlockPage({
     };
   });
 
+  const itemName = (codePath: string) =>
+    codePath.split("/").pop()!.replace(/\.tsx$/, "");
+
   return (
-    <div className="w-full space-y-12">
-      {codeFiles.map((file, index) => (
-        <AdvancedCodeBlock
-          key={file.codePath}
-          code={file.content}
-          preview={file.block ? <file.block /> : <MainComponent />}
-          language={file.language}
-          title={file.title}
-          description={file.description}
-          showLineNumbers
-          className={index === 0 ? "md:mt-6" : ""}
-          cliCommands={`npx shadcn@latest add https://ui.devsloka.in/r/${file.codePath
-            .split("/")
-            .pop()
-            ?.replace(".tsx", "")}.json`}
-          v0Url={`https://ui.devsloka.in/r/${file.codePath
-            .split("/")
-            .pop()
-            ?.replace(".tsx", "")}.json`}
-        />
-      ))}
+    <div>
+      <header className="mb-10 max-w-2xl space-y-3">
+        <h1 className="text-4xl font-semibold tracking-tight">{blockInfo.title}</h1>
+        <p className="text-lg text-muted-foreground">
+          {blockInfo.description}.{" "}
+          {codeFiles.length > 1 && `${codeFiles.length} variants below.`}
+        </p>
+      </header>
+
+      <div className="space-y-16">
+        {codeFiles.map((file, index) => (
+          <section key={file.codePath} aria-label={file.title}>
+            <p className="mb-2 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+              ({String(index + 1).padStart(2, "0")}) {file.title.trim()}
+            </p>
+            <AdvancedCodeBlock
+              code={file.content}
+              preview={file.block ? <file.block /> : <MainComponent />}
+              language={file.language}
+              description={file.description}
+              showLineNumbers
+              cliCommands={getCliCommand(itemName(file.codePath))}
+              dependencies={getInstallCommands(itemName(file.codePath))}
+              v0Url={`https://ui.devsloka.in/r/${itemName(file.codePath)}.json`}
+            />
+          </section>
+        ))}
+      </div>
     </div>
   );
 }

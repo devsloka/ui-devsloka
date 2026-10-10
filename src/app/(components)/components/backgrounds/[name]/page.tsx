@@ -1,48 +1,14 @@
 import { notFound } from "next/navigation";
-import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
-import { getComponentCode } from "@/utilities/getComponentCode";
-import ConfettiBackground from "@/components/backgrounds/confetti-background";
-import NoiseBackground from "@/components/backgrounds/noise-background";
-import CirclesBackground from "@/components/backgrounds/circles-background";
-import GradientMeshBackground from "@/components/backgrounds/gradient-mesh-background";
-import SpotlightBackground from "@/components/backgrounds/spotlight-background";
-import RippleBackground from "@/components/backgrounds/ripple-background";
-import GalaxyBackground from "@/components/backgrounds/galaxy-background";
-import FirefliesBackground from "@/components/backgrounds/fireflies-background";
-import GradientWaveBackground from "@/components/backgrounds/gradient-wave";
-import FloatingShapesBackground from "@/components/backgrounds/floating-shapes";
-import ParticleBackground from "@/components/backgrounds/particles-background";
-import GridMeshBackground from "@/components/backgrounds/grid-mesh-background";
-import BlobBackground from "@/components/backgrounds/blob-background";
-import NightSkyCanvas from "@/components/backgrounds/moon-stars-background";
-import BackgroundPreview from "@/components/backgrounds/preview/BackgroundPreview";
 import { Metadata } from "next";
-import { GlobeHero } from "@/components/backgrounds/3d-background";
-import GradientBg from "@/components/backgrounds/gradient-bg";
+import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
+import { BackgroundPreview } from "@/components/root/background-preview";
 import { generateSEO } from "@/config/seo/seo.utils";
+import { backgrounds } from "@/utilities/backgrounds.utils";
+import { getComponentCode } from "@/utilities/getComponentCode";
+import { getCliCommand, getInstallCommands } from "@/utilities/registry";
 
-const backgrounds: Record<string, React.FC> = {
-  "particles-background": ParticleBackground,
-  "moon-stars-background": NightSkyCanvas,
-  "galaxy-background": GalaxyBackground,
-  "gradient-wave": GradientWaveBackground,
-  "floating-shapes": FloatingShapesBackground,
-  "grid-mesh-background": GridMeshBackground,
-  "blob-background": BlobBackground,
-  "fireflies-background": FirefliesBackground,
-  "confetti-background": ConfettiBackground,
-  "noise-background": NoiseBackground,
-  "circles-background": CirclesBackground,
-  "gradient-mesh-background": GradientMeshBackground,
-  "spotlight-background": SpotlightBackground,
-  "ripple-background": RippleBackground,
-  "3d-background": GlobeHero,
-  "gradient-bg": GradientBg,
-};
-
-export async function generateStaticParams() {
-  const backgroundKeys = await Promise.resolve(Object.keys(backgrounds));
-  return backgroundKeys.map((id) => ({ name: id }));
+export function generateStaticParams() {
+  return Object.keys(backgrounds).map((name) => ({ name }));
 }
 
 export async function generateMetadata({
@@ -51,28 +17,20 @@ export async function generateMetadata({
   params: Promise<{ name: string }>;
 }): Promise<Metadata> {
   const { name } = await params;
-
-  // Format name with capitalized words
-  const formattedName = name
-    .replace(/-/g, " ")
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+  const background = backgrounds[name];
+  if (!background) return {};
 
   return generateSEO({
-    title: `${formattedName} - Animated Background`,
-    description: `Explore the ${formattedName} animation, a beautiful background effect for web projects.`,
+    title: `${background.title} Background - Devsloka UI`,
+    description: background.description,
     path: `components/backgrounds/${name}`,
     image: `images/${name}.png`,
-    keywords: [
-      formattedName,
-      "animated background",
-      "CSS background",
-      "React background effects",
-      "Next.js animated UI",
-    ],
+    keywords: [background.title, "animated background", "React background", "Next.js"],
   });
 }
+
+const toPascalCase = (value: string) =>
+  value.replace(/(^|-)(\w)/g, (_, __, char: string) => char.toUpperCase());
 
 export default async function BackgroundPage({
   params,
@@ -80,33 +38,49 @@ export default async function BackgroundPage({
   params: Promise<{ name: string }>;
 }) {
   const { name } = await params;
-  const BackgroundComponent = backgrounds[name];
+  const background = backgrounds[name];
+  if (!background) notFound();
 
-  if (!BackgroundComponent) {
-    return notFound();
-  }
+  const Background = background.component;
+  const exportName = getComponentCode(`src/registry/backgrounds/${name}.tsx`).match(
+    /export function (\w+)/
+  )?.[1] ?? toPascalCase(name);
+  const usage = `import { ${exportName} } from "@/components/ui/${name}";
 
-  const componentPath = `src/components/backgrounds/${name}.tsx`;
-  const componentCode =
-    getComponentCode(componentPath) || "// Component code not available";
+export function Hero() {
+  return (
+    <section className="relative isolate h-[480px] overflow-hidden">
+      <${exportName} />
+      <div className="relative z-10 flex h-full items-center justify-center">
+        <h1 className="text-4xl font-semibold">Your content</h1>
+      </div>
+    </section>
+  );
+}`;
 
   return (
-    <div>
-      <AdvancedCodeBlock
-        code={componentCode}
-        cliCommands={`npx shadcn@latest add https://ui.devsloka.in/r/${name}.json`}
-        preview={
-          <BackgroundPreview
-            backgroundComponent={<BackgroundComponent />}
-            title={name.replace(/-/g, " ")}
-            description={`Explore the ${name} animation, a beautiful background effect for web projects.`}
-          />
-        }
-        language="tsx"
-        showLineNumbers
-        title={name.replace(/-/g, " ")}
-        v0Url={`https://ui.devsloka.in/r/${name}.json`}
-      />
-    </div>
+    <AdvancedCodeBlock
+      title={background.title}
+      description={background.description}
+      code={usage}
+      preview={
+        <BackgroundPreview
+          title={background.title}
+          description={background.description}
+          tone={background.tone}
+        >
+          <Background />
+        </BackgroundPreview>
+      }
+      language="tsx"
+      showLineNumbers
+      cliCommands={getCliCommand(name)}
+      dependencies={getInstallCommands(name)}
+      secondaryCode={getComponentCode(`src/registry/backgrounds/${name}.tsx`)}
+      secondaryTitle="Copy the source into components/ui"
+      secondaryLanguage="tsx"
+      secondaryDescription={`components/ui/${name}.tsx`}
+      v0Url={`https://ui.devsloka.in/r/${name}.json`}
+    />
   );
 }

@@ -1,58 +1,51 @@
-import React from "react";
-import { AdvancedCodeBlock } from "@/components/ui/advanced-code-block";
-import { blocks } from "@/utilities/blocks.utils";
-import { getComponentCode } from "@/utilities/getComponentCode";
 import { Metadata } from "next";
+import { ComponentCard } from "@/components/root/component-card";
 import { generateSEO } from "@/config/seo/seo.utils";
+import { blocks } from "@/utilities/blocks.utils";
+
 export function generateMetadata(): Metadata {
   return generateSEO({
-    title: "UI Blocks Collection - DevsLoka",
+    title: "Blocks - Devsloka UI",
     description:
-      "Explore our collection of beautiful and customizable blocks for your web projects",
+      "Complete page sections for React: heroes, pricing, features, FAQs, footers and more. Copy them in and restyle like any component.",
     path: "blocks",
     image: "images/blocks-og.png",
-    keywords: [
-      "UI blocks",
-      "website sections",
-      "prebuilt components",
-      "Next.js blocks",
-    ],
+    keywords: ["ui blocks", "website sections", "react sections", "next.js blocks"],
   });
 }
 
-const BlocksPage: React.FC = () => {
-  return (
-    <div className="w-full">
-      <h1 className="text-5xl font-bold my-3 text-center">Blocks</h1>
-      <p className="text-muted-foreground mb-12 text-center">
-        Explore our collection of beautiful and customizable blocks for your web
-        projects.
-      </p>
-      <div className="space-y-12">
-        {Object.values(blocks).map((block) => {
-          const componentPath = `src/registry/blocks/${block.codeMetadata.mainFile.codePath}`;
-          const componentCode = getComponentCode(componentPath);
-          const BlockComponent = block.block;
+export default function BlocksPage() {
+  const entries = Object.entries(blocks);
 
+  return (
+    <div>
+      <header className="mb-10 max-w-2xl space-y-3">
+        <h1 className="text-4xl font-semibold tracking-tight">Blocks</h1>
+        <p className="text-lg text-muted-foreground">
+          {entries.length} complete page sections. Stack them into a page, then
+          restyle them like any other component.
+        </p>
+      </header>
+
+      <ul className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        {entries.map(([slug, block]) => {
+          const variants = 1 + (block.codeMetadata.relatedFiles?.length ?? 0);
           return (
-            <section key={block.name} className="border-b pb-12">
-              <AdvancedCodeBlock
-                code={componentCode}
-                preview={<BlockComponent />}
-                language={block.codeMetadata.mainFile.language || "tsx"}
-                description={block.description}
-                showLineNumbers
-                title={`${block.title} Component`}
-                className="rounded-lg"
-                cliCommands={`npx shadcn@latest add https://ui.devsloka.in/r/${block.name}.json`}
-                v0Url={`https://ui.devsloka.in/r/${block.name}.json`}
+            <li key={slug}>
+              <ComponentCard
+                title={block.title}
+                href={`/blocks/${slug}`}
+                description={
+                  variants > 1
+                    ? `${block.description}. ${variants} variants.`
+                    : `${block.description}.`
+                }
+                image={`/images/${slug}.png`}
               />
-            </section>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   );
-};
-
-export default BlocksPage;
+}

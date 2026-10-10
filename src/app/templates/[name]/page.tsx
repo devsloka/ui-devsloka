@@ -1,37 +1,14 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  ArrowRight,
-  BarChart,
-  CheckCircle2,
-  ExternalLink,
-  Shield,
-  Zap,
-} from "lucide-react";
-import Image from "next/image";
-import { getTemplateData } from "@/utilities/template.utils";
 import { generateSEO } from "@/config/seo/seo.utils";
-import Link from "next/link";
+import { templates } from "@/lib/templates";
+import { getTemplateData, templateSlugs } from "@/utilities/template.utils";
 
-// Pre-generate the list of template names for static builds
-export async function generateStaticParams() {
-  const templateNames = await Promise.resolve([
-    "ai-agent-template",
-    "e-commerce-store",
-  ]);
-
-  return templateNames.map((id) => ({ name: id }));
+export function generateStaticParams() {
+  return templateSlugs.map((name) => ({ name }));
 }
 
-// Generate SEO metadata based on the template details
 export async function generateMetadata({
   params,
 }: {
@@ -45,12 +22,41 @@ export async function generateMetadata({
     title: `${template.seo.title} - Devsloka Templates`,
     description: template.seo.description,
     path: `templates/${name}`,
-    image: `/images/${name}.png`,
-    keywords: [template.seo.keywords, "Devsloka", "AI Templates"],
+    image: templates.find((card) => card.slug === name)?.image,
+    keywords: [...template.seo.keywords, "Devsloka", "Next.js template"],
   });
 }
 
-// Main page component
+/** Drops exact repeats, so placeholder data doesn't render the same line twice. */
+function unique<T>(items: T[], key: (item: T) => string) {
+  const seen = new Set<string>();
+  return items.filter((item) => {
+    const id = key(item);
+    if (seen.has(id)) return false;
+    seen.add(id);
+    return true;
+  });
+}
+
+function Section({
+  index,
+  title,
+  children,
+}: {
+  index: number;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="grid gap-6 border-t pt-4 md:grid-cols-12">
+      <h2 className="font-mono text-xs uppercase tracking-wider text-muted-foreground md:col-span-3">
+        ({String(index).padStart(2, "0")}) {title}
+      </h2>
+      <div className="md:col-span-9">{children}</div>
+    </section>
+  );
+}
+
 export default async function TemplatePage({
   params,
 }: {
@@ -61,179 +67,141 @@ export default async function TemplatePage({
   if (!template) notFound();
 
   const { heroContent, benefits, features, dependencies, seo } = template;
+  const card = templates.find((entry) => entry.slug === name);
+  const audience = unique(
+    Array.isArray(heroContent.targetAudience)
+      ? heroContent.targetAudience
+      : [heroContent.targetAudience],
+    (line) => line
+  );
+  const uniqueBenefits = unique(benefits, (b) => `${b.title}|${b.description}`);
+  const uniqueFeatures = unique(features, (f) => `${f.title}|${f.description}`);
+  const uniqueDependencies = unique(dependencies, (d) => d.name);
 
   return (
-    <div className="min-h-screen bg-background">
-      <main>
-        {/* Hero Section */}
-        <section className="mx-auto max-w-4xl">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              {heroContent.title}
-            </h1>
-            <p className="mt-4 text-xl text-muted-foreground">
-              {heroContent.subtitle}
-            </p>
-          </div>
+    <article className="space-y-20">
+      <header className="space-y-8">
+        <div className="max-w-3xl space-y-3">
+          <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+            Template · {card?.isPro ? "Pro" : "Free"}
+          </p>
+          <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
+            {heroContent.title}
+          </h1>
+          <p className="text-lg text-muted-foreground">{heroContent.subtitle}</p>
+        </div>
 
-          {/* Dynamic Media Section */}
-          <div className="mt-8 overflow-hidden rounded-lg border shadow-md relative aspect-video">
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+          {heroContent.ctaPreview && (
+            <a
+              href={heroContent.ctaPreview}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              Live preview ↗
+            </a>
+          )}
+          {heroContent.ctaLink && (
+            <a
+              href={heroContent.ctaLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium underline decoration-1 underline-offset-[6px] transition-colors hover:text-[#0A6EFF]"
+            >
+              Get the code ↗
+            </a>
+          )}
+        </div>
+
+        <div className="relative aspect-video overflow-hidden border bg-muted">
+          {heroContent.videoUrl ? (
             <video
               autoPlay
               muted
               loop
-              className="absolute inset-0 w-full h-full object-cover z-0"
-              poster={`https://source.unsplash.com/random/1920x1080/?${name},ai`}
+              playsInline
+              preload="metadata"
+              poster={card?.image}
+              aria-label={`${heroContent.title} demo`}
+              className="absolute inset-0 size-full object-cover"
             >
               <source src={heroContent.videoUrl} type="video/mp4" />
-              <Image
-                src={`https://source.unsplash.com/random/1920x1080/?${name},technology`}
-                alt={heroContent.title}
-                fill
-                className="object-cover"
-                priority
-              />
             </video>
-          </div>
+          ) : (
+            card?.image && (
+              <Image
+                src={card.image}
+                alt={`${heroContent.title} screenshot`}
+                fill
+                priority
+                sizes="(min-width: 1408px) 1408px, 100vw"
+                className="object-cover object-top"
+              />
+            )
+          )}
+        </div>
+      </header>
 
-          {/* Action Buttons */}
-          <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Link href={heroContent.ctaLink || "#"} target="_blank">
-              <Button size="lg" className="gap-2">
-                {heroContent.ctaPrimary}
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
-            <Link href={heroContent.ctaPreview || "#"} target="_blank">
-              <Button size="lg" variant="outline" className="gap-2">
-                Live Preview
-                <ExternalLink className="h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
-        </section>
+      <Section index={1} title="Overview">
+        <p className="max-w-3xl text-lg leading-relaxed">{seo.description}</p>
+      </Section>
 
-        {/* Template Details */}
-        <section className="container space-y-24 py-20">
-          {/* Overview */}
-          <div>
-            <h2 className="mb-6 text-3xl font-bold">Template Overview</h2>
-            <div className="rounded-xl border bg-card p-6 shadow-md">
-              <p className="text-muted-foreground">{seo.description}</p>
-            </div>
-          </div>
+      <Section index={2} title="Ideal for">
+        <ul className="max-w-3xl space-y-3">
+          {audience.map((line) => (
+            <li key={line} className="flex gap-3 text-muted-foreground">
+              <span aria-hidden className="mt-2 size-1.5 shrink-0 bg-[#0A6EFF]" />
+              {line}
+            </li>
+          ))}
+        </ul>
+      </Section>
 
-          {/* Use Cases */}
-          <div>
-            <h2 className="mb-6 text-3xl font-bold">Ideal For</h2>
-            <div className="rounded-xl border bg-card p-6 shadow-md">
-              <p className="text-muted-foreground">
-                {heroContent.targetAudience}
-              </p>
-            </div>
-          </div>
+      <Section index={3} title="Advantages">
+        <ul className="grid border-t border-l sm:grid-cols-2 lg:grid-cols-3">
+          {uniqueBenefits.map((benefit) => (
+            <li key={benefit.id} className="border-r border-b p-5">
+              <h3 className="font-medium">{benefit.title}</h3>
+              <p className="mt-1.5 text-sm text-muted-foreground">{benefit.description}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
 
-          {/* Benefits Grid */}
-          <div>
-            <h2 className="mb-6 text-3xl font-bold">Key Advantages</h2>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {benefits.map((benefit) => (
-                <Card
-                  key={benefit.id}
-                  className="border-0 bg-gradient-to-br from-card to-muted/30 shadow-md transition-all hover:shadow-lg"
-                >
-                  <CardHeader className="pb-2">
-                    <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                      <CheckCircle2 className="h-5 w-5 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">{benefit.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      {benefit.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Core Features */}
-          <div>
-            <h2 className="mb-6 text-3xl font-bold">Core Features</h2>
-            <div className="grid gap-6">
-              <Card className="overflow-hidden border-0 bg-gradient-to-br from-primary/5 to-primary/10 shadow-md">
-                <CardHeader>
-                  <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                    <Zap className="h-5 w-5 text-primary" />
-                  </div>
-                  <CardTitle>{features[0].title}</CardTitle>
-                  <CardDescription>{features[0].description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-                    {features[0].subItems?.map((item, i) => (
-                      <div
-                        key={i}
-                        className="rounded-lg bg-background p-3 shadow-sm"
-                      >
-                        <p className="text-sm">{item}</p>
-                      </div>
+      <Section index={4} title="Features">
+        <div className="space-y-10">
+          {uniqueFeatures.map((feature) => {
+            const subItems = unique(feature.subItems ?? [], (item) => item);
+            return (
+              <div key={feature.id} className="space-y-3">
+                <h3 className="text-xl font-medium tracking-tight">{feature.title}</h3>
+                <p className="max-w-3xl text-muted-foreground">{feature.description}</p>
+                {subItems.length > 0 && (
+                  <ul className="grid gap-x-8 gap-y-2 pt-1 sm:grid-cols-2">
+                    {subItems.map((item) => (
+                      <li key={item} className="border-t pt-2 text-sm">
+                        {item}
+                      </li>
                     ))}
-                  </div>
-                </CardContent>
-              </Card>
-
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {features.slice(1).map((feature) => (
-                  <Card
-                    key={feature.id}
-                    className="border-0 shadow-md transition-all hover:shadow-lg"
-                  >
-                    <CardHeader className="pb-2">
-                      <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                        {feature.id % 3 === 0 ? (
-                          <Shield className="h-5 w-5 text-primary" />
-                        ) : feature.id % 2 === 0 ? (
-                          <BarChart className="h-5 w-5 text-primary" />
-                        ) : (
-                          <Zap className="h-5 w-5 text-primary" />
-                        )}
-                      </div>
-                      <CardTitle className="text-lg">{feature.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground">
-                        {feature.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                ))}
+                  </ul>
+                )}
               </div>
-            </div>
-          </div>
+            );
+          })}
+        </div>
+      </Section>
 
-          {/* Tech Stack */}
-          <div>
-            <h2 className="mb-6 text-3xl font-bold">Technology Stack</h2>
-            <div className="rounded-xl border bg-card p-6 shadow-md">
-              <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {dependencies.map((dep) => (
-                  <div
-                    key={dep.id}
-                    className="rounded-lg border bg-background p-4 shadow-sm transition-all hover:shadow-md"
-                  >
-                    <h3 className="mb-2 font-semibold">{dep.name}</h3>
-                    <p className="text-xs text-muted-foreground">
-                      {dep.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
+      <Section index={5} title="Built with">
+        <ul className="grid border-t border-l sm:grid-cols-2 lg:grid-cols-4">
+          {uniqueDependencies.map((dependency) => (
+            <li key={dependency.id} className="border-r border-b p-4">
+              <h3 className="font-mono text-sm">{dependency.name}</h3>
+              <p className="mt-1.5 text-xs text-muted-foreground">{dependency.description}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    </article>
   );
 }

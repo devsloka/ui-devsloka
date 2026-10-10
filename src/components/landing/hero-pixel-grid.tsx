@@ -11,9 +11,13 @@ const BLUE = "10, 110, 255";
 const BASE_COLOR = { dark: "rgba(128, 128, 128, 0.055)", light: "rgba(128, 128, 128, 0.03)" };
 const TWINKLE_LIFE = 2400;
 const TWINKLES_PER_SECOND = 9;
-const CURSOR_RADIUS = 140;
+// The cursor paints cells as it moves; each one lingers briefly, then fades out.
+const TRAIL_LIFE = 900;
+const TRAIL_RADIUS = 26;
+const TRAIL_ALPHA = 0.6;
 
 type Twinkle = { column: number; row: number; born: number; strength: number };
+type TrailCell = { born: number; strength: number };
 
 export function HeroPixelGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -37,7 +41,8 @@ export function HeroPixelGrid() {
     let frameId = 0;
     let lastSpawn = 0;
     let twinkles: Twinkle[] = [];
-    let pointer: { x: number; y: number } | null = null;
+    let trail = new Map<number, TrailCell>();
+    let lastPointer: { x: number; y: number } | null = null;
 
     const cellX = (column: number) => offsetX + column * PITCH;
     const cellY = (row: number) => row * PITCH;
@@ -64,6 +69,8 @@ export function HeroPixelGrid() {
     };
 
     const render = (now: number) => {
+      // Before the first layout the canvas can be 0×0, and drawImage throws on it.
+      if (!canvas.width || !canvas.height) return;
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(baseLayer, 0, 0);
@@ -80,19 +87,36 @@ export function HeroPixelGrid() {
         );
       }
 
-      if (pointer) {
-        const minColumn = Math.max(0, Math.floor((pointer.x - CURSOR_RADIUS - offsetX) / PITCH));
-        const maxColumn = Math.min(columns - 1, Math.ceil((pointer.x + CURSOR_RADIUS - offsetX) / PITCH));
-        const minRow = Math.max(0, Math.floor((pointer.y - CURSOR_RADIUS) / PITCH));
-        const maxRow = Math.min(rows - 1, Math.ceil((pointer.y + CURSOR_RADIUS) / PITCH));
+      for (const [key, cell] of trail) {
+        const age = now - cell.born;
+        if (age >= TRAIL_LIFE) {
+          trail.delete(key);
+          continue;
+        }
+        const fade = 1 - age / TRAIL_LIFE;
+        fillCell(key % columns, Math.floor(key / columns), fade * fade * cell.strength * TRAIL_ALPHA);
+      }
+    };
 
-        for (let column = minColumn; column <= maxColumn; column++) {
-          for (let row = minRow; row <= maxRow; row++) {
-            const dx = cellX(column) + CELL / 2 - pointer.x;
-            const dy = cellY(row) + CELL / 2 - pointer.y;
-            const falloff = 1 - Math.hypot(dx, dy) / CURSOR_RADIUS;
-            if (falloff > 0) fillCell(column, row, falloff * falloff * 0.45);
-          }
+    // Light up the cells around one point; revisiting a cell restarts its fade.
+    const paint = (x: number, y: number, now: number) => {
+      const minColumn = Math.max(0, Math.floor((x - TRAIL_RADIUS - offsetX) / PITCH));
+      const maxColumn = Math.min(columns - 1, Math.ceil((x + TRAIL_RADIUS - offsetX) / PITCH));
+      const minRow = Math.max(0, Math.floor((y - TRAIL_RADIUS) / PITCH));
+      const maxRow = Math.min(rows - 1, Math.ceil((y + TRAIL_RADIUS) / PITCH));
+
+      for (let column = minColumn; column <= maxColumn; column++) {
+        for (let row = minRow; row <= maxRow; row++) {
+          const dx = cellX(column) + CELL / 2 - x;
+          const dy = cellY(row) + CELL / 2 - y;
+          const strength = 1 - Math.hypot(dx, dy) / TRAIL_RADIUS;
+          if (strength <= 0) continue;
+          const key = row * columns + column;
+          const existing = trail.get(key);
+          trail.set(key, {
+            born: now,
+            strength: Math.max(strength, existing ? existing.strength : 0),
+          });
         }
       }
     };
@@ -137,17 +161,28 @@ export function HeroPixelGrid() {
       columns = Math.floor((width + GAP) / PITCH);
       rows = Math.floor((height + GAP) / PITCH);
       offsetX = Math.floor((width - (columns * PITCH - GAP)) / 2);
+      // Trail keys encode the column count, so they're stale after a resize.
+      trail = new Map();
       drawBaseLayer();
       render(performance.now());
     };
 
     const handlePointerMove = (event: PointerEvent) => {
-      if (event.pointerType !== "mouse") return;
+      if (event.pointerType !== "mouse" || reduceMotion) return;
       const rect = canvas.getBoundingClientRect();
-      pointer = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+      const next = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+      const now = performance.now();
+      // Fast moves skip whole cells between events, so fill in the path between them.
+      const from = lastPointer ?? next;
+      const steps = Math.max(1, Math.ceil(Math.hypot(next.x - from.x, next.y - from.y) / (PITCH / 2)));
+      for (let i = 1; i <= steps; i++) {
+        const t = i / steps;
+        paint(from.x + (next.x - from.x) * t, from.y + (next.y - from.y) * t, now);
+      }
+      lastPointer = next;
     };
     const handlePointerLeave = () => {
-      pointer = null;
+      lastPointer = null;
     };
 
     const resizeObserver = new ResizeObserver(resize);

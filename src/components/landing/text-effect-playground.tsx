@@ -1,31 +1,24 @@
 "use client";
 
 import { useId, useState } from "react";
-import { TextEffect, type AnimationEffect } from "@/components/ui/text-effect";
+import {
+  TEXT_EFFECTS,
+  TextEffect,
+  type TextEffectName,
+} from "@/registry/ui/text-effect";
 import { cn } from "@/lib/utils";
-
-const EFFECTS: AnimationEffect[] = [
-  "flip",
-  "fade",
-  "slide",
-  "scale",
-  "rotate",
-  "bounce",
-  "morph",
-  "blur",
-];
 
 const WORDS = ["calm", "precise", "alive", "yours"];
 
 export function TextEffectPlayground() {
-  const [effect, setEffect] = useState<AnimationEffect>("flip");
+  const [effect, setEffect] = useState<TextEffectName>("flip");
   const [duration, setDuration] = useState(2500);
   const durationId = useId();
 
   const code = `<TextEffect
   words={${JSON.stringify(WORDS)}}
   effect="${effect}"
-  duration={${duration}}
+  interval={${duration}}
 />`;
 
   return (
@@ -36,7 +29,7 @@ export function TextEffectPlayground() {
           <TextEffect
             words={WORDS}
             effect={effect}
-            duration={duration}
+            interval={duration}
             className="text-[#0A6EFF]"
           />
         </div>
@@ -49,7 +42,7 @@ export function TextEffectPlayground() {
             effect
           </p>
           <div className="grid grid-cols-4 gap-px bg-border">
-            {EFFECTS.map((name) => (
+            {TEXT_EFFECTS.map((name) => (
               <button
                 key={name}
                 type="button"
@@ -73,7 +66,7 @@ export function TextEffectPlayground() {
             htmlFor={durationId}
             className="mb-3 flex justify-between uppercase tracking-wider text-muted-foreground"
           >
-            <span>duration</span>
+            <span>interval</span>
             <span className="text-foreground">{duration}ms</span>
           </label>
           <input

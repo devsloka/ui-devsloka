@@ -1,5 +1,7 @@
 export interface Template {
   id: string;
+  /** Detail page at /templates/<slug>. */
+  slug: string;
   title: string;
   description: string;
   image: string;
@@ -13,6 +15,7 @@ export interface Template {
 export const templates: Template[] = [
   {
     id: "template-1",
+    slug: "ai-agent-template",
     title: "AI Agent Template Landing Page",
     description:
       "A responsive landing page template for AI agents and chatbots.",
@@ -25,6 +28,7 @@ export const templates: Template[] = [
   },
   {
     id: "template-2",
+    slug: "devspro-portfolio",
     title: "Devspro Portfolio Template",
     description:
       "A responsive portfolio template for web developers and designers.",
@@ -37,6 +41,7 @@ export const templates: Template[] = [
   },
   {
     id: "template-3",
+    slug: "e-commerce-store",
     title: "E-commerce Store",
     description:
       "Complete e-commerce template with product listings, cart, and checkout.",

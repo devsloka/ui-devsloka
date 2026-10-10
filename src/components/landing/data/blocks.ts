@@ -21,4 +21,12 @@ export const BLOCKS: BlockEntry[] = [
   block("Newsletter", "newsletter-block"),
   block("Logo Cloud", "logo-cloud"),
   block("Footer", "footer-block"),
+  block("Changelog", "changelog"),
+  block("Blog", "blog"),
+  block("Call to Action", "cta"),
+  block("Sign In", "sign-in"),
+  block("Sign Up", "sign-up"),
+  block("Forgot Password", "forgot-password"),
+  block("OTP", "otp"),
+  block("404", "not-found"),
 ];

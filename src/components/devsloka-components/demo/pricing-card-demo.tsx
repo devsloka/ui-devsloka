@@ -1,22 +1,31 @@
-"use client";
-
-import React from "react";
-import PricingCard from "@/components/ui/pricing-card";
+import { PricingCard } from "@/registry/ui/pricing-card";
 
 export default function PricingCardDemo() {
   return (
-    <div>
+    <div className="grid w-full max-w-3xl gap-4 sm:grid-cols-2">
       <PricingCard
-        plan="Standard Plan"
+        name="Starter"
+        description="For individuals getting started."
+        price="Free"
+        features={["Up to 3 projects", "Basic analytics", "Community support"]}
+        ctaLabel="Get started"
+        ctaHref="#"
+      />
+      <PricingCard
+        name="Pro"
+        description="For growing teams that need more."
         price="$9.99"
+        period="/month"
         features={[
-          "Unlimited transfers",
-          "Transaction history with export options",
+          "Unlimited projects",
+          "Advanced analytics with export",
           "Priority email support",
-          "Expanded currency support",
-          "Advanced security features",
+          "SSO and audit logs",
         ]}
-        isPopular={true}
+        ctaLabel="Start free trial"
+        ctaHref="#"
+        highlighted
+        badge="Popular"
       />
     </div>
   );

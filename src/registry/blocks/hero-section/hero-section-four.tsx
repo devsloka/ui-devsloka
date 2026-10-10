@@ -1,223 +1,141 @@
-"use client";
-import type React from "react";
-import { useState, useEffect } from "react";
-import {
-  LucideIcon,
-  ArrowRight,
-  Play,
-  Sparkles,
-  Globe,
-  Shield,
-  Zap,
-} from "lucide-react";
+import { useId, type ComponentProps } from "react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-function FloatingCard({
-  delay = 0,
-  children,
-  className = "",
-}: {
-  delay?: number;
-  children: React.ReactNode;
-  className?: string;
-}) {
-  const [isVisible, setIsVisible] = useState(false);
+type Action = { label: string; href: string };
 
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), delay);
-    return () => clearTimeout(timer);
-  }, [delay]);
+export type HeroSectionProps = {
+  eyebrow?: string;
+  /** The headline. The part after `emphasis` is set in italic. */
+  title?: string;
+  emphasis?: string;
+  description?: string;
+  primaryAction?: Action;
+  secondaryAction?: Action;
+  /** Paragraphs shown in the manuscript preview. */
+  manuscript?: string[];
+  comment?: { author: string; text: string };
+} & ComponentProps<"section">;
+
+const pad = (n: number) => String(n).padStart(2, "0");
+
+const DEFAULTS = {
+  eyebrow: "Quire · For long-form writers",
+  title: "Write the long thing.",
+  emphasis: "the long thing.",
+  description:
+    "A quiet editor for books, theses and 40-page specs. Chapters, footnotes and an editor's margin, without a single toolbar in the way.",
+  primaryAction: { label: "Start a manuscript", href: "#" },
+  secondaryAction: { label: "Read a sample chapter", href: "#" },
+  manuscript: [
+    "The harbour had been closed for eleven days when the first letter arrived, and nobody in the village could say who had carried it.",
+    "Ines read it twice at the kitchen table, then folded it into the back of her ledger, between the March accounts and a recipe she had never tried.",
+    "By evening the wind had turned. She could hear the boats knocking against the pier, patient as clocks.",
+  ],
+  comment: {
+    author: "M. Ostrowski, editor",
+    text: "Love this line. Could the ledger come back in chapter four?",
+  },
+};
+
+export default function HeroSection({
+  eyebrow = DEFAULTS.eyebrow,
+  title = DEFAULTS.title,
+  emphasis = DEFAULTS.emphasis,
+  description = DEFAULTS.description,
+  primaryAction = DEFAULTS.primaryAction,
+  secondaryAction = DEFAULTS.secondaryAction,
+  manuscript = DEFAULTS.manuscript,
+  comment = DEFAULTS.comment,
+  className,
+  ...props
+}: HeroSectionProps) {
+  const headingId = useId();
+  const split = emphasis && title.endsWith(emphasis) ? title.length - emphasis.length : -1;
+  const words = manuscript.join(" ").split(/\s+/).length;
 
   return (
-    <div
-      className={`transform transition-all duration-1000 ${
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-      } ${className}`}
+    <section
+      data-slot="hero-section-four"
+      aria-labelledby={headingId}
+      className={cn("w-full bg-background text-foreground", className)}
+      {...props}
     >
-      {children}
-    </div>
-  );
-}
-
-function FeatureCard({
-  icon: Icon,
-  title,
-  description,
-}: {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="bg-card/20 backdrop-blur-2xl rounded-2xl p-6 border border-border/10 hover:border-primary/20 transition-all duration-300 hover:scale-105">
-      <div className="bg-primary/10 rounded-full p-3 w-fit mb-4">
-        <Icon size={24} className="text-primary" />
-      </div>
-      <h3 className="text-lg font-semibold text-foreground mb-2">{title}</h3>
-      <p className="text-muted-foreground text-sm">{description}</p>
-    </div>
-  );
-}
-
-function HeroSection() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
-  const features = [
-    {
-      icon: Globe,
-      title: "Global Reach",
-      description: "Send money to 180+ countries with real-time exchange rates",
-    },
-    {
-      icon: Shield,
-      title: "Bank-Level Security",
-      description:
-        "Your transactions are protected with enterprise-grade encryption",
-    },
-    {
-      icon: Zap,
-      title: "Instant Transfers",
-      description: "Lightning-fast transfers that arrive in minutes, not days",
-    },
-  ];
-
-  return (
-    <div className="min-h-screen bg-background overflow-hidden relative">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-background to-background" />
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
-
-      {/* Animated Background Watermark */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none">
-        <div
-          className={`transition-all duration-2000 ${
-            isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-110"
-          }`}
-        >
-          <h1 className="text-[25rem] font-bold text-muted/30 leading-none">
-            SEND
+      <div className="mx-auto grid max-w-6xl gap-14 px-6 py-20 md:grid-cols-12 md:gap-10 md:py-28">
+        <div className="md:col-span-6 md:pt-6">
+          <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+            {eyebrow}
+          </p>
+          <h1
+            id={headingId}
+            className="mt-8 font-serif text-6xl leading-[0.95] tracking-[-0.03em] text-balance md:text-7xl lg:text-8xl"
+          >
+            {split > 0 ? (
+              <>
+                {title.slice(0, split)}
+                <em className="italic">{title.slice(split)}</em>
+              </>
+            ) : (
+              title
+            )}
           </h1>
+          <p className="mt-8 max-w-md text-base leading-relaxed text-muted-foreground">
+            {description}
+          </p>
+          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Button asChild size="lg" className="rounded-none">
+              <a href={primaryAction.href}>{primaryAction.label}</a>
+            </Button>
+            <a
+              href={secondaryAction.href}
+              className="text-sm font-medium underline decoration-1 underline-offset-[6px] hover:text-muted-foreground"
+            >
+              {secondaryAction.label}
+            </a>
+          </div>
         </div>
-      </div>
 
-      {/* Floating Orbs */}
-      <div className="absolute top-20 left-20 w-32 h-32 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 right-20 w-40 h-40 bg-secondary/20 rounded-full blur-3xl animate-pulse delay-1000" />
-      <div className="absolute top-1/2 right-10 w-24 h-24 bg-accent/20 rounded-full blur-2xl animate-pulse delay-500" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-8 py-20">
-        {/* Main Hero Content */}
-        <div className="text-center mb-20">
-          <FloatingCard delay={200}>
-            <div className="inline-flex items-center gap-2 bg-card/40 backdrop-blur-xl px-4 py-2 rounded-full border border-border/10 mb-8">
-              <Sparkles size={16} className="text-primary" />
-              <span className="text-sm text-muted-foreground">
-                Trusted by 10M+ users worldwide
-              </span>
+        {/* The manuscript: a page with line numbers and an editor's margin note. */}
+        <figure className="relative md:col-span-6">
+          <div className="border bg-card">
+            <div className="flex items-center justify-between border-b px-5 py-2.5 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+              <span>Ch. 1 · The Letter</span>
+              <span>Draft 3</span>
             </div>
-          </FloatingCard>
-
-          <FloatingCard delay={400}>
-            <h1 className="text-7xl md:text-9xl font-bold mb-6 leading-none">
-              <span className="bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
-                Send Money
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Anywhere
-              </span>
-            </h1>
-          </FloatingCard>
-
-          <FloatingCard delay={600}>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-              Experience the future of international money transfers. Fast,
-              secure, and transparent with real-time tracking and the best
-              exchange rates.
-            </p>
-          </FloatingCard>
-
-          <FloatingCard delay={800}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button className="group bg-primary text-primary-foreground px-8 py-4 rounded-full text-lg font-medium hover:bg-primary/90 transition-all duration-300 flex items-center gap-2 hover:scale-105">
-                Start Sending Now
-                <ArrowRight
-                  size={20}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
-              </button>
-
-              <button className="group bg-card/40 backdrop-blur-xl text-foreground px-8 py-4 rounded-full text-lg font-medium border border-border/10 hover:border-primary/20 transition-all duration-300 flex items-center gap-2 hover:scale-105">
-                <div className="bg-primary/10 rounded-full p-2">
-                  <Play size={16} className="text-primary ml-0.5" />
+            <div className="grid grid-cols-[2.5rem_1fr] gap-x-2 px-5 py-8 sm:grid-cols-[2.5rem_1fr_9rem]">
+              {manuscript.map((paragraph, i) => (
+                <div key={i} className="contents">
+                  <span className="pt-1 text-right font-mono text-[11px] tabular-nums text-muted-foreground">
+                    {pad(i * 4 + 1)}
+                  </span>
+                  <p
+                    className={cn(
+                      "mb-5 font-serif text-[15px] leading-7",
+                      i === 1 && "bg-primary/10 underline decoration-primary decoration-1 underline-offset-4"
+                    )}
+                  >
+                    {paragraph}
+                  </p>
+                  <div className="hidden sm:block">
+                    {i === 1 && comment && (
+                      <aside className="border-l-2 border-primary pl-3 text-xs leading-relaxed">
+                        <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                          {comment.author}
+                        </p>
+                        <p className="mt-1">{comment.text}</p>
+                      </aside>
+                    )}
+                  </div>
                 </div>
-                Watch Demo
-              </button>
+              ))}
             </div>
-          </FloatingCard>
-        </div>
-
-        {/* Stats Section */}
-        <FloatingCard delay={1000}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                $2.5B+
-              </div>
-              <div className="text-muted-foreground">Transferred Monthly</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                180+
-              </div>
-              <div className="text-muted-foreground">Countries Supported</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                99.9%
-              </div>
-              <div className="text-muted-foreground">Uptime Guarantee</div>
+            <div className="flex items-center justify-between border-t px-5 py-2.5 font-mono text-[11px] text-muted-foreground">
+              <span>{words} words in this view</span>
+              <span>Saved just now</span>
             </div>
           </div>
-        </FloatingCard>
-
-        {/* Features Grid */}
-        <FloatingCard delay={1200}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <FeatureCard
-                key={index}
-                icon={feature.icon}
-                title={feature.title}
-                description={feature.description}
-              />
-            ))}
-          </div>
-        </FloatingCard>
-
-        {/* Bottom CTA */}
-        <FloatingCard delay={1400}>
-          <div className="text-center mt-20">
-            <div className="bg-card/20 backdrop-blur-2xl rounded-3xl p-12 border border-border/10">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Ready to revolutionize your transfers?
-              </h2>
-              <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-                Join millions who trust us with their international money
-                transfers. Get started in less than 2 minutes.
-              </p>
-              <button className="bg-primary text-primary-foreground px-10 py-4 rounded-full text-lg font-medium hover:scale-105 transition-all duration-300 shadow-2xl">
-                Create Free Account
-              </button>
-            </div>
-          </div>
-        </FloatingCard>
+        </figure>
       </div>
-    </div>
+    </section>
   );
 }
-
-export default HeroSection;

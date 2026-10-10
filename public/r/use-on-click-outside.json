@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-on-click-outside",
+  "type": "registry:hook",
+  "title": "useOnClickOutside",
+  "description": "Run a handler when a pointer or touch starts outside one or more referenced elements.",
+  "files": [
+    {
+      "path": "src/registry/hooks/use-on-click-outside.ts",
+      "type": "registry:hook",
+      "content": "import { useEffect, useRef, type RefObject } from \"react\";\n\nexport type OutsideEvent = PointerEvent | TouchEvent;\n\nexport type UseOnClickOutsideOptions = {\n  /** Disable the listener without unmounting. Defaults to `true`. */\n  enabled?: boolean;\n};\n\n/**\n * Call `handler` when a pointer or touch starts outside the referenced element(s).\n * Pass an array of refs to treat several elements (e.g. a trigger and its popover) as \"inside\".\n *\n * @example\n * const ref = useRef<HTMLDivElement>(null);\n * useOnClickOutside(ref, () => setOpen(false));\n */\nexport function useOnClickOutside(\n  refs: RefObject<HTMLElement | null> | RefObject<HTMLElement | null>[],\n  handler: (event: OutsideEvent) => void,\n  { enabled = true }: UseOnClickOutsideOptions = {},\n): void {\n  const handlerRef = useRef(handler);\n  const refsRef = useRef(refs);\n\n  useEffect(() => {\n    handlerRef.current = handler;\n    refsRef.current = refs;\n  });\n\n  useEffect(() => {\n    if (!enabled) return;\n\n    const listener = (event: OutsideEvent) => {\n      const target = event.target;\n      if (!(target instanceof Node) || !target.isConnected) return;\n      const list = Array.isArray(refsRef.current)\n        ? refsRef.current\n        : [refsRef.current];\n      const inside = list.some((ref) => ref.current?.contains(target));\n      if (!inside) handlerRef.current(event);\n    };\n\n    document.addEventListener(\"pointerdown\", listener);\n    document.addEventListener(\"touchstart\", listener, { passive: true });\n    return () => {\n      document.removeEventListener(\"pointerdown\", listener);\n      document.removeEventListener(\"touchstart\", listener);\n    };\n  }, [enabled]);\n}\n"
+    }
+  ]
+}

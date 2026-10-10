@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-animation",
+  "type": "registry:hook",
+  "title": "useAnimation",
+  "description": "A boolean flag that switches on when triggered and turns itself off after a set duration, for one-shot CSS animations.",
+  "files": [
+    {
+      "path": "src/registry/hooks/use-animation.ts",
+      "type": "registry:hook",
+      "content": "import { useCallback, useEffect, useRef, useState } from \"react\";\n\nexport type UseAnimationOptions = {\n  /** How long the animating state stays `true`, in ms. Defaults to 300. */\n  duration?: number;\n  /** Called when the animation window ends. */\n  onComplete?: () => void;\n};\n\nexport type UseAnimationReturn = {\n  /** `true` while the animation window is running. */\n  isAnimating: boolean;\n  /** Start (or restart) the animation window. */\n  start: () => void;\n  /** End the animation window immediately. */\n  stop: () => void;\n};\n\n/**\n * Toggle a short-lived \"animating\" flag that turns itself off after `duration` ms.\n * Useful for one-shot CSS animations (shake, pulse, flash) triggered by events.\n *\n * @example\n * const { isAnimating, start } = useAnimation({ duration: 500 });\n * <div className={isAnimating ? \"animate-bounce\" : \"\"} onClick={start} />\n */\nexport function useAnimation({\n  duration = 300,\n  onComplete,\n}: UseAnimationOptions = {}): UseAnimationReturn {\n  // `run` increments on every start so restarting while animating resets the timer.\n  const [run, setRun] = useState(0);\n  const [isAnimating, setIsAnimating] = useState(false);\n  const onCompleteRef = useRef(onComplete);\n\n  useEffect(() => {\n    onCompleteRef.current = onComplete;\n  }, [onComplete]);\n\n  useEffect(() => {\n    if (!isAnimating) return;\n    const timer = setTimeout(() => {\n      setIsAnimating(false);\n      onCompleteRef.current?.();\n    }, duration);\n    return () => clearTimeout(timer);\n  }, [isAnimating, run, duration]);\n\n  const start = useCallback(() => {\n    setIsAnimating(true);\n    setRun((r) => r + 1);\n  }, []);\n\n  const stop = useCallback(() => setIsAnimating(false), []);\n\n  return { isAnimating, start, stop };\n}\n"
+    }
+  ]
+}

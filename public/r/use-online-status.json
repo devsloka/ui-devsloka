@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-online-status",
+  "type": "registry:hook",
+  "title": "useOnlineStatus",
+  "description": "Read the browser's live online or offline connection status.",
+  "files": [
+    {
+      "path": "src/registry/hooks/use-online-status.ts",
+      "type": "registry:hook",
+      "content": "import { useSyncExternalStore } from \"react\";\n\nfunction subscribe(callback: () => void) {\n  window.addEventListener(\"online\", callback);\n  window.addEventListener(\"offline\", callback);\n  return () => {\n    window.removeEventListener(\"online\", callback);\n    window.removeEventListener(\"offline\", callback);\n  };\n}\n\nconst getSnapshot = () => navigator.onLine;\n// Assume online during SSR; the client corrects it after hydration if needed.\nconst getServerSnapshot = () => true;\n\n/**\n * Whether the browser reports a network connection (`navigator.onLine`), updated live\n * from the `online` / `offline` events.\n *\n * @example\n * const isOnline = useOnlineStatus();\n * if (!isOnline) return <p>You are offline</p>;\n */\nexport function useOnlineStatus(): boolean {\n  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);\n}\n"
+    }
+  ]
+}

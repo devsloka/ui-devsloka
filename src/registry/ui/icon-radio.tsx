@@ -1,67 +1,84 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Heart, Star, Zap, Shield } from "lucide-react";
+import { createContext, useContext, useState } from "react";
+import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
+import { motion, useReducedMotion } from "motion/react";
+import { cn } from "@/lib/utils";
 
-const IconRadio = () => {
-  const [selected, setSelected] = useState("favorite");
+const SelectedValueContext = createContext<string | undefined>(undefined);
 
-  const options = [
-    { id: "favorite", label: "Favorite", icon: Heart },
-    { id: "popular", label: "Popular", icon: Star },
-    { id: "trending", label: "Trending", icon: Zap },
-    { id: "secure", label: "Secure", icon: Shield },
-  ];
+export type IconRadioGroupProps = React.ComponentProps<typeof RadioGroupPrimitive.Root>;
+
+export function IconRadioGroup({
+  value,
+  defaultValue,
+  onValueChange,
+  className,
+  ...props
+}: IconRadioGroupProps) {
+  // Mirrors the selection so items can animate when they become checked.
+  const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
+  const selected = value ?? uncontrolledValue;
+
   return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-semibold">Icon Radio Selection</h2>
-      <div className="flex flex-wrap gap-4">
-        {options.map((option) => {
-          const isSelected = selected === option.id;
-          const Icon = option.icon;
-
-          return (
-            <motion.div
-              key={option.id}
-              className={`
-            cursor-pointer flex flex-col items-center space-y-2
-            ${
-              isSelected
-                ? "text-[#0A6EFF]"
-                : "text-primary/50 hover:text-primary/80"
-            }
-          `}
-              onClick={() => setSelected(option.id)}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.div
-                className={`
-              w-16 h-16 rounded-full border flex items-center justify-center
-              ${isSelected ? "border-[#0A6EFF]" : ""}
-            `}
-                animate={{
-                  scale: isSelected ? [1, 1.2, 1] : 1,
-                  rotate: isSelected ? [0, 10, -10, 0] : 0,
-                }}
-                transition={{
-                  duration: 0.5,
-                  times: [0, 0.2, 0.5, 1],
-                  ease: "easeInOut",
-                }}
-              >
-                <Icon
-                  className={`h-6 w-6 ${isSelected ? "text-[#0A6EFF]" : ""}`}
-                />
-              </motion.div>
-              <span className="font-medium">{option.label}</span>
-            </motion.div>
-          );
-        })}
-      </div>
-    </div>
+    <SelectedValueContext.Provider value={selected}>
+      <RadioGroupPrimitive.Root
+        data-slot="icon-radio-group"
+        value={selected}
+        onValueChange={(next) => {
+          if (value === undefined) setUncontrolledValue(next);
+          onValueChange?.(next);
+        }}
+        className={cn("flex flex-wrap gap-4", className)}
+        {...props}
+      />
+    </SelectedValueContext.Provider>
   );
+}
+
+export type IconRadioItemProps = React.ComponentProps<typeof RadioGroupPrimitive.Item> & {
+  icon: React.ComponentType<{ className?: string }>;
+  label: React.ReactNode;
 };
 
-export default IconRadio;
+export function IconRadioItem({
+  icon: Icon,
+  label,
+  value,
+  className,
+  ...props
+}: IconRadioItemProps) {
+  const isChecked = useContext(SelectedValueContext) === value;
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <RadioGroupPrimitive.Item
+      data-slot="icon-radio-item"
+      value={value}
+      className={cn(
+        "group flex cursor-pointer flex-col items-center gap-2 rounded-md text-sm font-medium outline-none",
+        "text-muted-foreground transition-colors hover:text-foreground data-[state=checked]:text-primary",
+        "disabled:cursor-not-allowed disabled:opacity-50",
+        className
+      )}
+      {...props}
+    >
+      <motion.span
+        className={cn(
+          "flex size-14 items-center justify-center rounded-full border bg-background transition-colors",
+          "group-data-[state=checked]:border-primary group-data-[state=checked]:bg-primary/10",
+          "group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-background"
+        )}
+        animate={
+          isChecked && !reduceMotion
+            ? { scale: [1, 1.15, 1], rotate: [0, 8, -8, 0] }
+            : { scale: 1, rotate: 0 }
+        }
+        transition={{ duration: 0.45, ease: "easeInOut" }}
+      >
+        <Icon className="size-5" />
+      </motion.span>
+      {label}
+    </RadioGroupPrimitive.Item>
+  );
+}

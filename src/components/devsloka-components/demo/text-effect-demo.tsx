@@ -1,60 +1,44 @@
 "use client";
 
 import { useState } from "react";
-import { AnimationEffect, TextEffect } from "@/components/ui/text-effect";
-import { Button } from "@/components/ui/button";
+import {
+  TEXT_EFFECTS,
+  TextEffect,
+  type TextEffectName,
+} from "@/registry/ui/text-effect";
+import { cn } from "@/lib/utils";
+
+const WORDS = ["Innovative", "Creative", "Dynamic", "Powerful", "Elegant"];
 
 export const TextEffectDemo = () => {
-  const [currentEffect, setCurrentEffect] = useState<AnimationEffect>("flip");
-
-  const words = ["Innovative", "Creative", "Dynamic", "Powerful", "Elegant"];
-
-  const effects = [
-    { name: "Flip", value: "flip" },
-    { name: "Fade", value: "fade" },
-    { name: "Slide", value: "slide" },
-    { name: "Scale", value: "scale" },
-    { name: "Rotate", value: "rotate" },
-    { name: "Bounce", value: "bounce" },
-    { name: "morph", value: "morph" },
-    { name: "blur", value: "blur" },
-  ] as const;
+  const [effect, setEffect] = useState<TextEffectName>("flip");
 
   return (
-    <div className="min-h-[400px] w-full bg-background flex items-center justify-center">
-      <div className="text-center">
-        <p className="text-2xl mb-4 font-bold">We create</p>
-        <div className="flex flex-col lg:flex-row items-center justify-center text-4xl font-bold">
-          <TextEffect
-            words={words}
-            className="rounded-lg "
-            textClassName="font-bold"
-            effect={currentEffect}
-            duration={3000}
-          />
-          <span className="">Websites</span>
-        </div>
-        <p className=" mt-8 max-w-md mx-auto">
-          Experience the smooth text effects that adds a dynamic and engaging
-          element to your web applications.
-        </p>
+    <div className="flex flex-col items-center gap-10 text-center">
+      <p className="text-4xl font-semibold tracking-tight">
+        We create{" "}
+        <TextEffect words={WORDS} effect={effect} className="text-primary" />
+        <br />
+        websites
+      </p>
 
-        <div className="flex flex-wrap gap-2 justify-center mt-8">
-          {effects.map((effect) => (
-            <Button
-              key={effect.value}
-              onClick={() => setCurrentEffect(effect.value)}
-              className={`cursor-pointer
-                  ${
-                    currentEffect === effect.value
-                      ? "bg-foreground text-primary-foreground"
-                      : "bg-foreground/35 hover:bg-foreground/40 text-white"
-                  }`}
-            >
-              {effect.name}
-            </Button>
-          ))}
-        </div>
+      <div className="flex flex-wrap justify-center gap-2" role="group" aria-label="Effect">
+        {TEXT_EFFECTS.map((name) => (
+          <button
+            key={name}
+            type="button"
+            onClick={() => setEffect(name)}
+            aria-pressed={effect === name}
+            className={cn(
+              "cursor-pointer rounded-md border px-3 py-1.5 text-sm capitalize transition-colors",
+              effect === name
+                ? "border-primary bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            {name}
+          </button>
+        ))}
       </div>
     </div>
   );

@@ -1,187 +1,137 @@
-import React from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import type { ComponentProps } from "react";
 
-const FooterBlock = () => {
+import { cn } from "@/lib/utils";
+
+export type FooterLink = { label: string; href: string };
+export type FooterColumn = { title: string; links: FooterLink[] };
+
+export type FooterBlockProps = {
+  brand?: string;
+  statement?: string;
+  address?: string;
+  columns?: FooterColumn[];
+  legalLinks?: FooterLink[];
+  year?: number;
+} & ComponentProps<"footer">;
+
+const DEFAULT_COLUMNS: FooterColumn[] = [
+  {
+    title: "Product",
+    links: [
+      { label: "Notebooks", href: "#" },
+      { label: "Interview recorder", href: "#" },
+      { label: "Tagging", href: "#" },
+      { label: "Pricing", href: "#" },
+      { label: "Changelog", href: "#" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Field guide", href: "#" },
+      { label: "Templates", href: "#" },
+      { label: "API reference", href: "#" },
+      { label: "Status", href: "#" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "#" },
+      { label: "Careers — 3 open", href: "#" },
+      { label: "Press kit", href: "#" },
+      { label: "Contact", href: "#" },
+    ],
+  },
+];
+
+const DEFAULT_LEGAL: FooterLink[] = [
+  { label: "Privacy", href: "#" },
+  { label: "Terms", href: "#" },
+  { label: "DPA", href: "#" },
+];
+
+/**
+ * Classic footer: brand statement on the left, labelled link columns on the
+ * right, and a hairline bottom bar with copyright and legal links.
+ */
+function FooterBlock({
+  brand = "Fieldnote",
+  statement = "A research notebook for product teams. Record the interview, tag what matters, and find it again six months later.",
+  address = "Made in Lisbon and Rotterdam",
+  columns = DEFAULT_COLUMNS,
+  legalLinks = DEFAULT_LEGAL,
+  year = 2026,
+  className,
+  ...props
+}: FooterBlockProps) {
   return (
-    <div>
-      <footer className="relative overflow-hidden">
-        {/* Gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/5 dark:from-primary/10 dark:to-background pointer-events-none" />
-
-        <div className="container mx-auto relative z-10 px-5">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 py-12">
-            {/* Brand section */}
-            <div className="md:col-span-4 space-y-4">
-              <div className="flex items-center space-x-2">
-                <div className="h-8 w-8 rounded-full bg-primary" />
-                <span className="text-2xl font-bold">Brand</span>
-              </div>
-              <p className="text-muted-foreground">
-                Creating beautiful digital experiences that inspire and connect
-                people around the world.
-              </p>
-              <div className="flex space-x-4">
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="rounded-full h-9 w-9"
-                >
-                  <Facebook className="h-4 w-4" />
-                  <span className="sr-only">Facebook</span>
-                </Button>
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="rounded-full h-9 w-9"
-                >
-                  <Twitter className="h-4 w-4" />
-                  <span className="sr-only">Twitter</span>
-                </Button>
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="rounded-full h-9 w-9"
-                >
-                  <Instagram className="h-4 w-4" />
-                  <span className="sr-only">Instagram</span>
-                </Button>
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="rounded-full h-9 w-9"
-                >
-                  <Linkedin className="h-4 w-4" />
-                  <span className="sr-only">LinkedIn</span>
-                </Button>
-              </div>
-            </div>
-
-            {/* Links section */}
-            <div className="md:col-span-2 space-y-4">
-              <h3 className="font-semibold">Company</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Careers
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Press
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="md:col-span-2 space-y-4">
-              <h3 className="font-semibold">Resources</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Documentation
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Help Center
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Guides
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    API
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Newsletter section */}
-            <div className="md:col-span-4 space-y-4">
-              <h3 className="font-semibold">Subscribe to our newsletter</h3>
-              <p className="text-muted-foreground">
-                Get the latest updates and news right at your inbox.
-              </p>
-              <div className="flex space-x-2">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="rounded-full"
-                />
-                <Button className="rounded-full">Subscribe</Button>
-              </div>
-            </div>
+    <footer
+      data-slot="footer-block"
+      className={cn("w-full border-t bg-background text-foreground", className)}
+      {...props}
+    >
+      <div className="mx-auto max-w-6xl px-6 pt-16 md:pt-20">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <h2 className="flex items-center gap-2 text-lg font-semibold tracking-tight">
+              <span aria-hidden className="size-2.5 bg-primary" />
+              {brand}
+            </h2>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              {statement}
+            </p>
+            <p className="mt-6 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+              {address}
+            </p>
           </div>
 
-          {/* Bottom section */}
-          <div className="border-t py-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Brand. All rights reserved.
-            </div>
-            <div className="flex space-x-6 text-sm">
-              <a
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Terms of Service
-              </a>
-              <a
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Cookies
-              </a>
-            </div>
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 md:col-span-7">
+            {columns.map((column) => (
+              <nav key={column.title} aria-label={column.title}>
+                <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                  {column.title}
+                </p>
+                <ul className="mt-4 space-y-2.5 text-sm">
+                  {column.links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="underline-offset-4 outline-none hover:underline focus-visible:underline focus-visible:ring-2 focus-visible:ring-ring"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
           </div>
         </div>
-      </footer>
-    </div>
-  );
-};
 
+        <div className="mt-16 flex flex-col gap-4 border-t py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <p className="tabular-nums">
+            © {year} {brand}, Inc. All rights reserved.
+          </p>
+          <nav aria-label="Legal">
+            <ul className="flex gap-6">
+              {legalLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="underline-offset-4 outline-none hover:text-foreground hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+export { FooterBlock };
 export default FooterBlock;

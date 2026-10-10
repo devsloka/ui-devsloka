@@ -1,122 +1,127 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Loader2, CheckCircle, XCircle } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { useId, useState, type ComponentProps, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
-interface SubmissionState {
-  status: "idle" | "loading" | "success" | "error";
-  message: string;
-}
+export type NewsletterBlockProps = Omit<ComponentProps<"section">, "onSubmit"> & {
+  title?: string;
+  description?: string;
+  /** Short facts shown in a mono row, e.g. cadence and audience size. */
+  details?: string[];
+  submitLabel?: string;
+  successMessage?: string;
+  onSubmit?: (values: { email: string }) => void | Promise<void>;
+};
 
-export const NewsletterBlock = () => {
-  const [email, setEmail] = useState("");
-  const [submission, setSubmission] = useState<SubmissionState>({
-    status: "idle",
-    message: "",
-  });
+const DEFAULTS = {
+  title: "Get the changelog by email.",
+  description:
+    "One message when something ships. Release notes, migration tips and the occasional bug we're not proud of.",
+  details: ["Monthly", "1,480 developers", "Plain text"],
+  submitLabel: "Notify me",
+  successMessage: "Thanks. Check your inbox to confirm.",
+};
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
+type Status = "idle" | "sending" | "success" | "error";
 
-    setSubmission({ status: "loading", message: "" });
+/** A compact, inline sign-up strip that sits between other sections. */
+export const NewsletterBlock = ({
+  title = DEFAULTS.title,
+  description = DEFAULTS.description,
+  details = DEFAULTS.details,
+  submitLabel = DEFAULTS.submitLabel,
+  successMessage = DEFAULTS.successMessage,
+  onSubmit,
+  className,
+  ...props
+}: NewsletterBlockProps) => {
+  const headingId = useId();
+  const emailId = useId();
+  const [status, setStatus] = useState<Status>("idle");
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    if (email.includes("@")) {
-      setSubmission({
-        status: "success",
-        message: "Thank you for subscribing! 🎉",
-      });
-      setEmail("");
-    } else {
-      setSubmission({
-        status: "error",
-        message: "Please enter a valid email address.",
-      });
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const email = String(new FormData(event.currentTarget).get("email") ?? "");
+    setStatus("sending");
+    try {
+      await onSubmit?.({ email });
+      setStatus("success");
+    } catch {
+      setStatus("error");
     }
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="w-full max-w-md mx-auto p-8 rounded-2xl bg-white/10 dark:bg-black/10 backdrop-blur-lg border border-gray-200 dark:border-gray-800 shadow-xl"
+    <section
+      data-slot="newsletter-block"
+      aria-labelledby={headingId}
+      className={cn("w-full bg-background text-foreground", className)}
+      {...props}
     >
-      <div className="text-center mb-6">
-        <motion.div
-          initial={{ scale: 0.5 }}
-          animate={{ scale: 1 }}
-          className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center"
-        >
-          <Mail className="w-6 h-6 text-white" />
-        </motion.div>
-        <h2 className="text-2xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-          Stay Updated
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400">
-          Get the latest updates straight to your inbox.
-        </p>
-      </div>
+      <div className="mx-auto max-w-6xl px-6 py-16">
+        <div className="grid border md:grid-cols-12">
+          <div className="border-b p-6 md:col-span-7 md:border-r md:border-b-0 md:p-8">
+            <h2 id={headingId} className="text-2xl font-semibold tracking-[-0.02em]">
+              {title}
+            </h2>
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
+              {description}
+            </p>
+            {details.length > 0 && (
+              <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-1 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                {details.map((detail) => (
+                  <li key={detail} className="flex items-center gap-2">
+                    <span aria-hidden className="size-1.5 bg-primary" />
+                    {detail}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="relative">
-          <Input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full pl-4 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-black/50 backdrop-blur-sm focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 transition-all duration-300"
-            disabled={
-              submission.status === "loading" || submission.status === "success"
-            }
-          />
-        </div>
-
-        <Button
-          type="submit"
-          disabled={
-            submission.status === "loading" || submission.status === "success"
-          }
-          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg hover:opacity-90 transition-all duration-300 flex items-center justify-center space-x-2"
-        >
-          {submission.status === "loading" ? (
-            <Loader2 className="w-5 h-5 animate-spin" />
-          ) : submission.status === "success" ? (
-            <CheckCircle className="w-5 h-5" />
-          ) : (
-            "Subscribe"
-          )}
-        </Button>
-      </form>
-
-      <AnimatePresence mode="wait">
-        {submission.message && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className={`mt-4 p-3 rounded-lg text-sm ${
-              submission.status === "success"
-                ? "bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400"
-                : "bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400"
-            }`}
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col justify-center gap-3 p-6 md:col-span-5 md:p-8"
           >
-            <div className="flex items-center space-x-2">
-              {submission.status === "success" ? (
-                <CheckCircle className="w-4 h-4 flex-shrink-0" />
-              ) : (
-                <XCircle className="w-4 h-4 flex-shrink-0" />
+            <Label htmlFor={emailId} className="font-mono text-xs uppercase tracking-wider">
+              Work email
+            </Label>
+            <Input
+              id={emailId}
+              name="email"
+              type="email"
+              required
+              autoComplete="email"
+              placeholder="you@company.com"
+              disabled={status === "sending" || status === "success"}
+              className="rounded-none"
+            />
+            <Button
+              type="submit"
+              disabled={status === "sending" || status === "success"}
+              className="w-full rounded-none"
+            >
+              {status === "sending" ? "Sending…" : submitLabel}
+            </Button>
+            <p
+              aria-live="polite"
+              className={cn(
+                "min-h-5 text-sm",
+                status === "error" ? "text-destructive" : "text-muted-foreground"
               )}
-              <span>{submission.message}</span>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+            >
+              {status === "success"
+                ? successMessage
+                : status === "error"
+                  ? "That didn't go through. Please try again."
+                  : ""}
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
   );
 };

@@ -1,35 +1,22 @@
-import AnimatedSmartwatch from "@/components/ui/animated-smartwatch";
+import { AnimatedSmartwatch } from "@/registry/ui/animated-smartwatch";
 
 export default function AnimatedSmartwatchDemo() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-950 to-black text-white">
-      <div className="container mx-auto px-4">
-        <div className="py-20 text-center">
-          <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-500">
-            Animated Smartwatch
-          </h1>
-          <p className="text-gray-400 max-w-lg mx-auto">
-            Watch the smartwatch rotate with realistic reflections and a live
-            watch face.
-          </p>
-        </div>
-
-        <AnimatedSmartwatch
-          fixPositionAtCenter={true}
-          color="black"
-          bandColor="black"
-        />
-
-        <div className="py-20 text-center">
-          <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-500">
-            Premium Design
-          </h2>
-          <p className="text-lg text-gray-400 max-w-xl mx-auto">
-            Meticulously crafted with attention to every detail, from
-            reflections to shadows.
-          </p>
-        </div>
+    <div className="w-full bg-background text-foreground">
+      <div className="mx-auto max-w-xl px-4 py-16 text-center">
+        <h2 className="text-2xl font-semibold tracking-tight">Always on time</h2>
+        <p className="mt-2 text-muted-foreground">
+          Scroll down. The watch settles into place and shows the current time in your locale.
+        </p>
       </div>
-    </main>
+
+      <AnimatedSmartwatch color="midnight" size={200} />
+
+      <div className="mx-auto max-w-xl px-4 py-16 text-center">
+        <p className="text-muted-foreground">
+          Pass any content as children to replace the built-in clock face.
+        </p>
+      </div>
+    </div>
   );
 }

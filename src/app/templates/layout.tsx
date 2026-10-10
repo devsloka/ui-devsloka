@@ -1,11 +1,23 @@
+import { SectionNav } from "@/components/root/section-nav";
+import { templates } from "@/lib/templates";
+
+const NAV_ITEMS = [
+  { title: "All", href: "/templates" },
+  ...templates.map((template) => ({
+    title: template.title.replace(/ (Landing Page|Template)$/i, ""),
+    href: `/templates/${template.slug}`,
+  })),
+];
+
 export default function TemplateLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <div className="py-18">
-      <div className="mt-12">{children}</div>
+    <div className="pt-20 pb-20">
+      <SectionNav items={NAV_ITEMS} aria-label="Templates" className="mb-10" />
+      {children}
     </div>
   );
 }

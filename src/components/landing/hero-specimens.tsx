@@ -1,37 +1,27 @@
 "use client";
 
-import { useState } from "react";
-import { Blocks, Box, LayoutGrid, Tag } from "lucide-react";
-import { MorphingNav } from "@/components/ui/morphing-nav";
-import RangeSliderWithHistogram from "@/components/ui/range-slider-with-histogram";
+import { Blocks, Box, Heart, LayoutGrid, Shield, Star, Tag, Zap } from "lucide-react";
+import { IconRadioGroup, IconRadioItem } from "@/registry/ui/icon-radio";
+import { MorphingNav, type MorphingNavItem } from "@/registry/ui/morphing-nav";
+import { RangeSliderWithHistogram } from "@/registry/ui/range-slider-with-histogram";
 
 // Client wrappers for specimens whose props include functions or components,
 // which a Server Component cannot pass across the boundary.
 
-const NAV_ITEMS = [
-  { id: "components", label: "Components", icon: Box, href: "#" },
-  { id: "blocks", label: "Blocks", icon: Blocks, href: "#" },
-  { id: "templates", label: "Templates", icon: LayoutGrid, href: "#" },
-  { id: "pro", label: "Pro", icon: Tag, href: "#" },
+const NAV_ITEMS: MorphingNavItem[] = [
+  { value: "components", label: "Components", icon: Box },
+  { value: "blocks", label: "Blocks", icon: Blocks },
+  { value: "templates", label: "Templates", icon: LayoutGrid },
+  { value: "pro", label: "Pro", icon: Tag },
 ];
 
 export function MorphingNavSpecimen() {
-  const [active, setActive] = useState(NAV_ITEMS[0].id);
-
   return (
-    // MorphingNav renders links; cancel navigation so the specimen stays a demo.
-    <div
+    <MorphingNav
+      items={NAV_ITEMS}
+      aria-label="Library sections"
       className="max-w-full min-w-0"
-      onClickCapture={(event) => event.preventDefault()}
-    >
-      <MorphingNav
-        items={NAV_ITEMS}
-        value={active}
-        onValueChange={setActive}
-        className="rounded-none border-border shadow-none"
-        activeClass="bg-foreground"
-      />
-    </div>
+    />
   );
 }
 
@@ -47,16 +37,24 @@ const formatPrice = (value: number) => `$${value.toLocaleString("en-US")}`;
 export function BudgetSliderSpecimen() {
   return (
     <RangeSliderWithHistogram
+      data={HISTOGRAM}
       min={0}
       max={4000}
       step={100}
       defaultValue={[800, 3000]}
-      histogramData={HISTOGRAM}
-      title="Price range"
       formatValue={formatPrice}
-      inRangeClass="bg-[#0A6EFF]"
-      outOfRangeClass="bg-foreground/15"
-      className="w-full rounded-none border-0 bg-transparent p-0 shadow-none"
+      className="max-w-md"
     />
+  );
+}
+
+export function IconRadioSpecimen() {
+  return (
+    <IconRadioGroup defaultValue="favorite" aria-label="Collection">
+      <IconRadioItem value="favorite" icon={Heart} label="Favorite" />
+      <IconRadioItem value="popular" icon={Star} label="Popular" />
+      <IconRadioItem value="trending" icon={Zap} label="Trending" />
+      <IconRadioItem value="secure" icon={Shield} label="Secure" />
+    </IconRadioGroup>
   );
 }

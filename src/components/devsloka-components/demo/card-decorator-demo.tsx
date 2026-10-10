@@ -1,19 +1,18 @@
 import React from "react";
-import { CardDecorator } from "@/components/ui/card-decorator";
-import { cn } from "@/lib/utils";
+import { CardDecorator, type CardDecoratorVariant } from "@/registry/ui/card-decorator";
+
+const variants: CardDecoratorVariant[] = ["brackets", "dashed", "dots", "glow"];
 
 const CardDecoratorDemo: React.FC = () => {
   return (
-    <div
-      className={cn(
-        "group relative shadow-zinc-950/5 h-40 w-64 border border-dashed flex justify-center items-center"
-      )}
-    >
-      <CardDecorator variant={"default"} />
-      <div className={cn("p-4")}>
-        <h2 className={cn("text-lg font-semibold")}>Card Title</h2>
-        <p className={cn("text-sm text-muted-foreground")}>Card description</p>
-      </div>
+    <div className="grid w-full max-w-xl grid-cols-1 gap-6 sm:grid-cols-2">
+      {variants.map((variant) => (
+        <div key={variant} className="relative border bg-card p-6 text-card-foreground">
+          <CardDecorator variant={variant} />
+          <h3 className="font-medium capitalize">{variant}</h3>
+          <p className="text-sm text-muted-foreground">Decorative corner accents.</p>
+        </div>
+      ))}
     </div>
   );
 };

@@ -1,194 +1,163 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, ChevronRight, Mail, MapPin, Phone } from "lucide-react";
+import { useId, useState, type ComponentProps, type FormEvent } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
+export type GridFooterLink = { label: string; href: string };
+export type GridFooterColumn = { title: string; links: GridFooterLink[] };
+export type GridFooterNewsletterValues = { email: string };
 
-export function GridFooter() {
-  const [hoveredCell, setHoveredCell] = useState<number | null>(null);
+export type GridFooterProps = {
+  brand?: string;
+  description?: string;
+  columns?: GridFooterColumn[];
+  newsletterTitle?: string;
+  newsletterNote?: string;
+  onSubmit?: (values: GridFooterNewsletterValues) => void | Promise<void>;
+  year?: number;
+} & Omit<ComponentProps<"footer">, "onSubmit">;
 
-  const gridItems = [
-    {
-      title: "Products",
-      items: ["Features", "Integrations", "Pricing", "Changelog"],
-    },
-    {
-      title: "Resources",
-      items: ["Blog", "Documentation", "Guides", "Help Center"],
-    },
-    { title: "Company", items: ["About", "Careers", "Press", "Partners"] },
-    { title: "Legal", items: ["Privacy", "Terms", "Security", "Licenses"] },
-  ];
+const DEFAULT_COLUMNS: GridFooterColumn[] = [
+  {
+    title: "Product",
+    links: [
+      { label: "Invoicing", href: "#" },
+      { label: "Expenses", href: "#" },
+      { label: "Month-end close", href: "#" },
+      { label: "Pricing", href: "#" },
+    ],
+  },
+  {
+    title: "Help",
+    links: [
+      { label: "Guides", href: "#" },
+      { label: "VAT calendar", href: "#" },
+      { label: "Talk to an accountant", href: "#" },
+      { label: "Status", href: "#" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "#" },
+      { label: "Careers", href: "#" },
+      { label: "Privacy", href: "#" },
+      { label: "Terms", href: "#" },
+    ],
+  },
+];
 
-  const contactInfo = [
-    { icon: MapPin, text: "123 Innovation Street, Tech City, TC 10011" },
-    { icon: Phone, text: "+1 (555) 123-4567" },
-    { icon: Mail, text: "hello@gridui.com" },
-  ];
+const linkClass =
+  "underline-offset-4 outline-none hover:underline focus-visible:underline focus-visible:ring-2 focus-visible:ring-ring";
+
+/**
+ * Strict bordered grid footer: every region sits in a hairline cell,
+ * including a newsletter mini-form.
+ */
+export function GridFooter({
+  brand = "Ledgerline",
+  description = "Bookkeeping for studios of 2 to 40 people. Invoices out, receipts matched, books closed by the 5th.",
+  columns = DEFAULT_COLUMNS,
+  newsletterTitle = "The Monthly Close",
+  newsletterNote = "One email on the first Monday of the month. Deadlines, rate changes, nothing else.",
+  onSubmit,
+  year = 2026,
+  className,
+  ...props
+}: GridFooterProps) {
+  const inputId = useId();
+  const [state, setState] = useState<"idle" | "sending" | "done">("idle");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const email = String(new FormData(form).get("email") ?? "");
+    setState("sending");
+    try {
+      await onSubmit?.({ email });
+      form.reset();
+      setState("done");
+    } catch {
+      setState("idle");
+    }
+  }
 
   return (
-    <footer className="relative bg-background overflow-hidden pt-16 pb-8">
-      {/* Grid Pattern Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.02]">
-          {Array.from({ length: 20 }).map((_, i) => (
-            <div
-              key={i}
-              className="absolute border-t border-l border-primary/20"
-              style={{
-                top: `${i * 5}%`,
-                left: 0,
-                right: 0,
-                height: "1px",
-              }}
-            />
-          ))}
-          {Array.from({ length: 20 }).map((_, i) => (
-            <div
-              key={i}
-              className="absolute border-l border-primary/20"
-              style={{
-                left: `${i * 5}%`,
-                top: 0,
-                bottom: 0,
-                width: "1px",
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 mb-16">
-          <div className="lg:col-span-2 space-y-6">
-            <div className="flex items-center space-x-2">
-              <div className="grid grid-cols-2 gap-1">
-                {[0, 1, 2, 3].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="w-5 h-5 rounded-md bg-primary"
-                    initial={{ opacity: 0.5 }}
-                    animate={{
-                      opacity: [0.5, 1, 0.5],
-                      scale: [1, 1.1, 1],
-                    }}
-                    transition={{
-                      duration: 3,
-                      delay: i * 0.2,
-                      repeat: Infinity,
-                      repeatType: "loop",
-                    }}
-                  />
-                ))}
-              </div>
-              <span className="text-2xl font-bold">GridUI</span>
-            </div>
-
-            <p className="text-muted-foreground max-w-md">
-              Building the future of user interfaces with a focus on
-              accessibility, performance, and beautiful design.
+    <footer
+      data-slot="grid-footer"
+      className={cn("w-full bg-background text-foreground", className)}
+      {...props}
+    >
+      <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <div className="grid grid-cols-1 border-l border-t sm:grid-cols-2 lg:grid-cols-4">
+          <div className="border-b border-r p-6 sm:col-span-2 lg:col-span-2">
+            <h2 className="text-2xl font-semibold tracking-tight">{brand}</h2>
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              {description}
             </p>
+          </div>
 
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Contact Us</h3>
-              <ul className="space-y-3">
-                {contactInfo.map((item, index) => (
-                  <motion.li
-                    key={index}
-                    className="flex items-start gap-3 text-muted-foreground"
-                    whileHover={{ x: 5, color: "var(--primary)" }}
-                  >
-                    <item.icon className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                    <span>{item.text}</span>
-                  </motion.li>
+          <div className="border-b border-r p-6 sm:col-span-2 lg:col-span-2">
+            <form onSubmit={handleSubmit} className="space-y-3">
+              <Label
+                htmlFor={inputId}
+                className="font-mono text-xs uppercase tracking-wider text-muted-foreground"
+              >
+                {newsletterTitle}
+              </Label>
+              <div className="flex gap-2">
+                <Input
+                  id={inputId}
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  placeholder="you@studio.com"
+                  disabled={state === "sending"}
+                />
+                <Button type="submit" disabled={state === "sending"}>
+                  {state === "sending" ? "Subscribing…" : "Subscribe"}
+                </Button>
+              </div>
+              <p aria-live="polite" className="text-xs text-muted-foreground">
+                {state === "done"
+                  ? "You're on the list. First issue lands next month."
+                  : newsletterNote}
+              </p>
+            </form>
+          </div>
+
+          {columns.map((column, index) => (
+            <nav
+              key={column.title}
+              aria-label={column.title}
+              className="border-b border-r p-6"
+            >
+              <p className="flex justify-between font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                <span>{column.title}</span>
+                <span className="tabular-nums">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </p>
+              <ul className="mt-6 space-y-2.5 text-sm">
+                {column.links.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} className={linkClass}>
+                      {link.label}
+                    </a>
+                  </li>
                 ))}
               </ul>
-            </div>
-          </div>
+            </nav>
+          ))}
 
-          <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {gridItems.map((group, groupIndex) => (
-              <div key={group.title} className="space-y-4">
-                <h3 className="text-lg font-semibold">{group.title}</h3>
-                <ul className="space-y-3">
-                  {group.items.map((item, itemIndex) => {
-                    const cellIndex = groupIndex * 10 + itemIndex;
-                    return (
-                      <motion.li key={item}>
-                        <a
-                          href="#"
-                          className="group flex items-center text-muted-foreground hover:text-foreground transition-colors"
-                          onMouseEnter={() => setHoveredCell(cellIndex)}
-                          onMouseLeave={() => setHoveredCell(null)}
-                        >
-                          <motion.div
-                            animate={{
-                              x: hoveredCell === cellIndex ? 5 : 0,
-                            }}
-                            className="flex items-center"
-                          >
-                            <ChevronRight
-                              className={`w-4 h-4 mr-1 transition-opacity duration-200 ${
-                                hoveredCell === cellIndex
-                                  ? "opacity-100"
-                                  : "opacity-0"
-                              }`}
-                            />
-                            {item}
-                          </motion.div>
-                        </a>
-                      </motion.li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="border-t pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex flex-col sm:flex-row gap-4 items-center">
-              <p className="text-sm text-muted-foreground">
-                © {new Date().getFullYear()} GridUI. All rights reserved.
-              </p>
-              <div className="flex gap-4 text-sm text-muted-foreground">
-                <a href="#" className="hover:text-foreground transition-colors">
-                  Privacy
-                </a>
-                <a href="#" className="hover:text-foreground transition-colors">
-                  Terms
-                </a>
-                <a href="#" className="hover:text-foreground transition-colors">
-                  Cookies
-                </a>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-muted-foreground">
-                Subscribe to our newsletter
-              </span>
-              <div className="relative">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="pr-10 bg-muted/50 w-64"
-                />
-                <motion.div
-                  className="absolute right-1 top-1/2 -translate-y-1/2"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button size="icon" className="h-7 w-7">
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </motion.div>
-              </div>
-            </div>
+          <div className="flex flex-col justify-end border-b border-r bg-muted p-6 text-xs text-muted-foreground">
+            <p className="tabular-nums">© {year} {brand} Ltd.</p>
+            <p className="mt-1">Registered in England, No. 11842907.</p>
           </div>
         </div>
       </div>

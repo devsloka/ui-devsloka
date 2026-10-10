@@ -21,6 +21,7 @@ const NAV_LINKS = [
   { label: "Blocks", href: "/blocks" },
   { label: "Templates", href: "/templates" },
   { label: "Docs", href: "/docs" },
+  { label: "Changelog", href: "/changelog" },
 ];
 
 const isActivePath = (pathname: string, href: string) =>
@@ -136,6 +137,7 @@ function MobileMenu({ pathname }: { pathname: string }) {
               <SheetClose asChild>
                 <Link
                   href={link.href}
+                  aria-current={isActivePath(pathname, link.href) ? "page" : undefined}
                   className={cn(
                     "block py-1.5 text-3xl font-medium tracking-[-0.04em] transition-colors",
                     isActivePath(pathname, link.href)
@@ -162,13 +164,17 @@ function MobileMenu({ pathname }: { pathname: string }) {
                     <SheetClose asChild>
                       <Link
                         href={child.href}
+                        aria-current={pathname === child.href ? "page" : undefined}
                         className={cn(
-                          "text-sm transition-colors",
+                          "flex items-center gap-2 text-sm transition-colors",
                           pathname === child.href
-                            ? "text-[#0A6EFF]"
+                            ? "font-medium text-foreground"
                             : "text-foreground/80 hover:text-foreground"
                         )}
                       >
+                        {pathname === child.href && (
+                          <span aria-hidden className="size-1.5 shrink-0 bg-[#0A6EFF]" />
+                        )}
                         {child.title}
                       </Link>
                     </SheetClose>

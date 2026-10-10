@@ -1,126 +1,165 @@
-"use client";
+import { useId, type ComponentProps } from "react";
+import { cn } from "@/lib/utils";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import {
-  BarChart3,
-  Clock,
-  Compass,
-  Layers,
-  Lightbulb,
-  Zap,
-} from "lucide-react";
+export type FeaturesBlockFeature = {
+  title: string;
+  description: string;
+  /** Small mono detail under the description, e.g. a limit or plan. */
+  meta?: string;
+};
 
-export default function FeaturesBlock() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+export type FeaturesBlockProps = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  /** Mono metadata shown in the label row above the grid. */
+  labels?: string[];
+  features?: FeaturesBlockFeature[];
+  /** Index of the cell drawn in the accent color. Pass -1 for none. */
+  highlightIndex?: number;
+} & ComponentProps<"section">;
 
-  const features = [
-    {
-      icon: <Layers className="h-6 w-6" />,
-      title: "Modular Components",
-      description:
-        "Build your application with reusable, modular components that can be easily customized.",
-    },
-    {
-      icon: <Zap className="h-6 w-6" />,
-      title: "Optimized Performance",
-      description:
-        "Our platform is optimized for speed and efficiency, ensuring your application runs smoothly.",
-    },
-    {
-      icon: <BarChart3 className="h-6 w-6" />,
-      title: "Advanced Analytics",
-      description:
-        "Gain insights into your application's performance with detailed analytics and reporting.",
-    },
-    {
-      icon: <Compass className="h-6 w-6" />,
-      title: "Intuitive Navigation",
-      description:
-        "User-friendly navigation makes it easy for users to find what they're looking for.",
-    },
-    {
-      icon: <Lightbulb className="h-6 w-6" />,
-      title: "Smart Suggestions",
-      description:
-        "AI-powered suggestions help users discover new features and content.",
-    },
-    {
-      icon: <Clock className="h-6 w-6" />,
-      title: "Real-time Updates",
-      description:
-        "Stay up-to-date with real-time notifications and updates on your application's status.",
-    },
-  ];
+const DEFAULT_FEATURES: FeaturesBlockFeature[] = [
+  {
+    title: "Branching databases",
+    description:
+      "Fork production into an isolated copy in about two seconds. Schema and data, copy-on-write, so a 400 GB branch costs what it changes.",
+    meta: "Up to 50 branches per project",
+  },
+  {
+    title: "Point-in-time restore",
+    description:
+      "Pick any second from the last 30 days and restore to a new branch. Your current database keeps serving traffic while you look.",
+    meta: "30-day window on Pro",
+  },
+  {
+    title: "Read replicas in four regions",
+    description:
+      "Frankfurt, Virginia, Singapore and São Paulo. Replication lag sits under 80 ms at the 95th percentile.",
+    meta: "p95 lag, Aug 2026",
+  },
+  {
+    title: "Query insights",
+    description:
+      "The ten slowest statements of the day, with plans, call counts and the deploy that introduced them.",
+  },
+  {
+    title: "Connection pooling",
+    description:
+      "A built-in pooler holds 10,000 client connections against 120 on the server. Serverless functions stop exhausting your limit.",
+    meta: "Transaction mode",
+  },
+  {
+    title: "Plain Postgres 17",
+    description:
+      "No forked engine, no proprietary SQL. pg_dump works, extensions work, and leaving takes one command.",
+    meta: "62 extensions enabled",
+  },
+];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
+const DEFAULTS = {
+  eyebrow: "(Features)",
+  title: "Postgres, with the parts you used to script yourself.",
+  description:
+    "Ferro runs standard Postgres and handles branching, backups, replicas and pooling around it. Six things you get on day one.",
+  labels: ["06 capabilities", "Ferro 3.2", "Updated 18 Sep 2026"],
+};
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 24,
-      },
-    },
-  };
+export default function FeaturesBlock({
+  eyebrow = DEFAULTS.eyebrow,
+  title = DEFAULTS.title,
+  description = DEFAULTS.description,
+  labels = DEFAULTS.labels,
+  features = DEFAULT_FEATURES,
+  highlightIndex = 0,
+  className,
+  ...props
+}: FeaturesBlockProps) {
+  const headingId = useId();
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-background" ref={ref}>
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="space-y-2"
-          >
-            <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
-              Features
-            </div>
-            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-              Everything you need to build modern applications
+    <section
+      data-slot="features-block"
+      aria-labelledby={headingId}
+      className={cn("w-full bg-background text-foreground", className)}
+      {...props}
+    >
+      <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <div className="grid gap-6 md:grid-cols-12 md:gap-10">
+          <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground md:col-span-4">
+            {eyebrow}
+          </p>
+          <div className="md:col-span-8">
+            <h2
+              id={headingId}
+              className="text-3xl font-semibold tracking-[-0.03em] text-balance sm:text-4xl md:text-5xl"
+            >
+              {title}
             </h2>
-            <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-              Our platform provides all the tools and features you need to
-              create powerful, scalable applications.
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
+              {description}
             </p>
-          </motion.div>
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8 pt-8"
-          >
-            {features.map((feature, i) => (
-              <motion.div
-                key={i}
-                variants={itemVariants}
-                className="flex flex-col items-center space-y-4 rounded-lg border p-6 transition-all hover:shadow-md"
+          </div>
+        </div>
+
+        {labels.length > 0 && (
+          <div className="mt-16 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t py-3 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+            {labels.map((label) => (
+              <span key={label}>{label}</span>
+            ))}
+          </div>
+        )}
+
+        <ul className="grid border-t border-l sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature, i) => {
+            const highlighted = i === highlightIndex;
+            return (
+              <li
+                key={feature.title}
+                className={cn(
+                  "flex min-h-64 flex-col border-r border-b p-6 md:p-8",
+                  highlighted && "bg-primary text-primary-foreground"
+                )}
               >
-                <div className="rounded-full border border-primary/20 bg-primary/10 p-3 text-primary">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-bold">{feature.title}</h3>
-                <p className="text-muted-foreground text-center">
+                <span
+                  className={cn(
+                    "font-mono text-xs tabular-nums",
+                    highlighted
+                      ? "text-primary-foreground/70"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-10 text-lg font-medium tracking-tight">
+                  {feature.title}
+                </h3>
+                <p
+                  className={cn(
+                    "mt-2 text-sm leading-relaxed",
+                    highlighted
+                      ? "text-primary-foreground/80"
+                      : "text-muted-foreground"
+                  )}
+                >
                   {feature.description}
                 </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+                {feature.meta && (
+                  <p
+                    className={cn(
+                      "mt-auto pt-6 font-mono text-[11px] uppercase tracking-wider",
+                      highlighted
+                        ? "text-primary-foreground/70"
+                        : "text-muted-foreground"
+                    )}
+                  >
+                    {feature.meta}
+                  </p>
+                )}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );

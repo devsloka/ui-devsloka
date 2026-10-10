@@ -1,162 +1,84 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+
+import Image from "next/image";
+import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
-export interface Image {
-  url: string;
+export type GalleryImage = {
+  src: string;
+  /** Describes the image itself. */
   alt: string;
-  width: string;
-  height: string;
-}
+  /** Optional caption shown over the image on hover (always shown on touch devices). */
+  caption?: React.ReactNode;
+  /** Intrinsic size. When omitted the image is shown in a 4:3 frame. */
+  width?: number;
+  height?: number;
+};
 
-interface ImageGalleryProps {
-  /** Animation duration in milliseconds */
-  duration?: number;
-  /** Animation delay between items in milliseconds */
-  stagger?: number;
-  /** CSS easing function for the animation */
-  easing?: string;
-  images: Image[];
-}
+const COLUMNS = {
+  2: { className: "sm:columns-2", sizes: "(min-width: 640px) 50vw, 100vw" },
+  3: { className: "sm:columns-2 lg:columns-3", sizes: "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" },
+  4: {
+    className: "sm:columns-2 lg:columns-3 xl:columns-4",
+    sizes: "(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw",
+  },
+} as const;
 
-export function ImageGallery({
-  duration = 800,
-  stagger = 100,
-  easing = "cubic-bezier(0.5, 1.5, 0.5, 1.5)",
-  images,
-}: ImageGalleryProps) {
-  const galleryRef = useRef<HTMLDivElement>(null);
+const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+export type ImageGalleryProps = React.ComponentProps<"div"> & {
+  images: GalleryImage[];
+  /** Columns at the widest breakpoint. Collapses responsively. @default 3 */
+  columns?: keyof typeof COLUMNS;
+};
 
-    const animate = (element: HTMLElement, index: number) => {
-      const delay = stagger * (index % 3);
-      element.style.setProperty("--delay", `${delay}ms`);
-      element.style.setProperty("--duration", `${duration}ms`);
-      element.style.setProperty("--easing", easing);
-      element.classList.add("animate-in");
-    };
-
-    if (prefersReducedMotion) {
-      galleryRef.current?.querySelectorAll(".gallery-item").forEach((el) => {
-        (el as HTMLElement).style.opacity = "1";
-      });
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry, index) => {
-          if (entry.isIntersecting) {
-            animate(entry.target as HTMLElement, index);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    galleryRef.current?.querySelectorAll(".gallery-item").forEach((item) => {
-      observer.observe(item);
-    });
-
-    return () => observer.disconnect();
-  }, [duration, stagger, easing]);
+/** Masonry image gallery whose items fade and rise in as they scroll into view. */
+export function ImageGallery({ images, columns = 3, className, ...props }: ImageGalleryProps) {
+  const reduceMotion = useReducedMotion();
+  const layout = COLUMNS[columns];
 
   return (
-    <div ref={galleryRef} className="container mx-auto px-4 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={cn(
-              "gallery-item",
-              "opacity-0",
-              "group relative overflow-hidden rounded-2xl shadow-xl",
-              "before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_var(--x)_var(--y),rgba(255,255,255,0.3)_0%,transparent_70%)] before:opacity-0 before:transition-opacity before:duration-300",
-              "hover:before:opacity-100 hover:shadow-2xl hover:z-10",
-              "motion-safe:animate-float"
-            )}
-            onMouseMove={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              e.currentTarget.style.setProperty(
-                "--x",
-                `${e.clientX - rect.left}px`
-              );
-              e.currentTarget.style.setProperty(
-                "--y",
-                `${e.clientY - rect.top}px`
-              );
-            }}
-          >
-            <noscript>
-              <style>{`.gallery-item { opacity: 1; }`}</style>
-            </noscript>
-
-            <div className="relative aspect-[3/2] overflow-hidden transform transition-transform duration-500 group-hover:scale-[1.03]">
-              <img
-                src={image.url}
+    <div
+      data-slot="animated-image-gallery"
+      className={cn("columns-1 gap-4", layout.className, className)}
+      {...props}
+    >
+      {images.map((image, index) => (
+        <motion.figure
+          key={image.src}
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: EASE_OUT, delay: (index % (columns * 2)) * 0.06 }}
+          className="group relative mb-4 break-inside-avoid overflow-hidden rounded-xl border bg-muted"
+        >
+          {image.width && image.height ? (
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={image.width}
+              height={image.height}
+              sizes={layout.sizes}
+              className="h-auto w-full transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            />
+          ) : (
+            <div className="relative aspect-[4/3]">
+              <Image
+                src={image.src}
                 alt={image.alt}
-                width={image.width}
-                height={image.height}
-                loading="lazy"
-                className="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
+                fill
+                sizes={layout.sizes}
+                className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
               />
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 p-6 flex items-end">
-                <p className="text-white text-lg font-medium translate-y-8 transition-transform duration-500 group-hover:translate-y-0">
-                  {image.alt}
-                </p>
-              </div>
             </div>
-
-            <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_var(--x)_var(--y),#7d7dff_0%,transparent_70%)] opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
-          </div>
-        ))}
-      </div>
-
-      <style jsx global>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0) rotate(-0.5deg);
-          }
-          50% {
-            transform: translateY(-12px) rotate(0.5deg);
-          }
-        }
-
-        @keyframes popIn {
-          0% {
-            opacity: 0;
-            transform: scale(0.8) rotateX(45deg) rotateY(-15deg) rotateZ(10deg);
-            filter: brightness(1.5) saturate(1.5);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1) rotateX(0) rotateY(0) rotateZ(0);
-            filter: none;
-          }
-        }
-
-        .gallery-item.animate-in {
-          animation: popIn var(--duration) var(--easing) forwards;
-          animation-delay: var(--delay);
-        }
-
-        .motion-safe\:animate-float {
-          animation: float 8s ease-in-out infinite;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .motion-safe\:animate-float {
-            animation: none;
-          }
-        }
-      `}</style>
+          )}
+          {image.caption && (
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 pt-10 text-sm font-medium text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 [@media(hover:none)]:opacity-100">
+              {image.caption}
+            </figcaption>
+          )}
+        </motion.figure>
+      ))}
     </div>
   );
 }

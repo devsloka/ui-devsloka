@@ -23,6 +23,9 @@
       }
     ],
     "paths": {
+      "@/components/ui/floating-dots": [
+        "./src/registry/ui/floating-dots"
+      ],
       "@/*": [
         "./src/*"
       ]

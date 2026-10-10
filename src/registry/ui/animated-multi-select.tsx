@@ -1,179 +1,250 @@
 "use client";
 
-import * as React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, Search, ChevronDown, Check } from "lucide-react";
+import { useRef, useState } from "react";
+import { Command as CommandPrimitive } from "cmdk";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { Check, ChevronDown, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+} from "@/components/ui/popover";
 
 export type Option = {
   value: string;
   label: string;
+  disabled?: boolean;
 };
 
-type AnimatedMultiSelectProps = {
+export type AnimatedMultiSelectProps = Omit<
+  React.ComponentProps<"div">,
+  "defaultValue" | "onChange" | "value"
+> & {
   options: Option[];
+  value?: string[];
+  defaultValue?: string[];
+  onValueChange?: (value: string[]) => void;
   placeholder?: string;
-  onChange?: (selectedOptions: Option[]) => void;
-  className?: string;
-  maxHeight?: number;
+  emptyText?: React.ReactNode;
+  /** Number of chips shown before collapsing the rest into a "+N" chip. */
+  maxCount?: number;
+  disabled?: boolean;
 };
 
 export function AnimatedMultiSelect({
   options,
+  value,
+  defaultValue,
+  onValueChange,
   placeholder = "Search...",
-  onChange,
+  emptyText = "No results found.",
+  maxCount,
+  disabled = false,
   className,
-  maxHeight = 300,
+  ...props
 }: AnimatedMultiSelectProps) {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [searchValue, setSearchValue] = React.useState("");
-  const [selectedOptions, setSelectedOptions] = React.useState<Option[]>([]);
-  const [filteredOptions, setFilteredOptions] =
-    React.useState<Option[]>(options);
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const reduceMotion = useReducedMotion();
+  const anchorRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const [uncontrolledValue, setUncontrolledValue] = useState<string[]>(
+    defaultValue ?? []
+  );
+  const selected = value ?? uncontrolledValue;
 
-  // Filter options based on search input
-  React.useEffect(() => {
-    const filtered = options.filter(
-      (option) =>
-        !selectedOptions.some((selected) => selected.value === option.value) &&
-        option.label.toLowerCase().includes(searchValue.toLowerCase())
+  const setSelected = (next: string[]) => {
+    if (value === undefined) setUncontrolledValue(next);
+    onValueChange?.(next);
+  };
+
+  const toggle = (optionValue: string) => {
+    setSelected(
+      selected.includes(optionValue)
+        ? selected.filter((v) => v !== optionValue)
+        : [...selected, optionValue]
     );
-    setFilteredOptions(filtered);
-  }, [searchValue, options, selectedOptions]);
+    setSearch("");
+  };
 
-  // Handle selection of an option
-  const handleSelect = (option: Option) => {
-    const newSelectedOptions = [...selectedOptions, option];
-    setSelectedOptions(newSelectedOptions);
-    setSearchValue("");
-    onChange?.(newSelectedOptions);
+  const remove = (optionValue: string) => {
+    setSelected(selected.filter((v) => v !== optionValue));
     inputRef.current?.focus();
   };
 
-  // Handle removal of a selected option
-  const handleRemove = (option: Option) => {
-    const newSelectedOptions = selectedOptions.filter(
-      (selected) => selected.value !== option.value
-    );
-    setSelectedOptions(newSelectedOptions);
-    onChange?.(newSelectedOptions);
-  };
+  const labelFor = (optionValue: string) =>
+    options.find((option) => option.value === optionValue)?.label ??
+    optionValue;
 
-  // Handle click outside to close dropdown
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
+  const visible =
+    maxCount === undefined ? selected : selected.slice(0, maxCount);
+  const hiddenCount = selected.length - visible.length;
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  const chipMotion = reduceMotion
+    ? { initial: false as const, exit: { opacity: 0, transition: { duration: 0 } } }
+    : {
+        initial: { opacity: 0, scale: 0.8 },
+        animate: { opacity: 1, scale: 1 },
+        exit: { opacity: 0, scale: 0.8 },
+        transition: { duration: 0.15 },
+      };
 
   return (
-    <div
-      ref={containerRef}
-      className={cn("relative w-full font-sans", className)}
+    <Command
+      data-slot="animated-multi-select"
+      loop
+      className={cn(
+        "h-auto w-full overflow-visible bg-transparent text-foreground",
+        className
+      )}
+      {...props}
     >
-      <motion.div
-        initial={{ borderRadius: 8 }}
-        animate={{
-          borderRadius: isOpen ? "8px 8px 0 0" : 8,
-          boxShadow: isOpen
-            ? "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)"
-            : "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
-        }}
-        className="flex flex-wrap items-center gap-2 p-2 border bg-background border-input rounded-lg overflow-hidden"
-      >
-        <div className="flex items-center text-muted-foreground">
-          <Search className="w-4 h-4 mr-2" />
-        </div>
-
-        <div className="flex flex-wrap gap-2 flex-1 min-w-[100px]">
-          <AnimatePresence>
-            {selectedOptions.map((option) => (
-              <motion.div
-                key={option.value}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
-                className="flex items-center gap-1 px-2 py-1 text-sm rounded-full bg-primary/10 text-primary"
-              >
-                <span>{option.label}</span>
-                <button
-                  type="button"
-                  onClick={() => handleRemove(option)}
-                  className="flex items-center justify-center w-4 h-4 rounded-full hover:bg-primary/20"
-                >
-                  <X className="w-3 h-3" />
-                </button>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-
-          <input
-            ref={inputRef}
-            type="text"
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            onFocus={() => setIsOpen(true)}
-            placeholder={selectedOptions.length === 0 ? placeholder : ""}
-            className="flex-1 min-w-[120px] bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground"
-          />
-        </div>
-
-        <motion.button
-          type="button"
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center justify-center w-6 h-6 rounded-full hover:bg-muted"
-        >
-          <ChevronDown className="w-4 h-4 text-muted-foreground" />
-        </motion.button>
-      </motion.div>
-
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="absolute z-10 w-full mt-1 overflow-hidden bg-background border border-input rounded-b-lg shadow-lg"
-            style={{ maxHeight: maxHeight }}
+      <Popover open={open && !disabled} onOpenChange={setOpen}>
+        <PopoverAnchor asChild>
+          <div
+            ref={anchorRef}
+            data-disabled={disabled || undefined}
+            onClick={() => {
+              if (disabled) return;
+              setOpen(true);
+              inputRef.current?.focus();
+            }}
+            className={cn(
+              "flex min-h-9 w-full flex-wrap items-center gap-1.5 rounded-md border border-input bg-background px-2 py-1.5 text-sm shadow-xs transition-[color,box-shadow]",
+              "focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50",
+              "data-disabled:cursor-not-allowed data-disabled:opacity-50"
+            )}
           >
-            <div className="overflow-y-auto" style={{ maxHeight }}>
-              {filteredOptions.length > 0 ? (
-                filteredOptions.map((option) => (
-                  <motion.div
-                    key={option.value}
-                    whileHover={{ backgroundColor: "rgba(0,0,0,0.05)" }}
-                    className="flex items-center justify-between px-4 py-2 cursor-pointer"
-                    onClick={() => handleSelect(option)}
+            <AnimatePresence initial={false} mode="popLayout">
+              {visible.map((optionValue) => {
+                const label = labelFor(optionValue);
+                return (
+                  <motion.span
+                    key={optionValue}
+                    layout={!reduceMotion}
+                    {...chipMotion}
+                    className="inline-flex items-center gap-1 rounded-md bg-secondary py-0.5 pr-1 pl-2 text-xs font-medium text-secondary-foreground"
                   >
-                    <span>{option.label}</span>
-                    {selectedOptions.some(
-                      (selected) => selected.value === option.value
-                    ) && <Check className="w-4 h-4 text-primary" />}
-                  </motion.div>
-                ))
-              ) : (
-                <div className="px-4 py-2 text-sm text-muted-foreground">
-                  No options found
-                </div>
+                    {label}
+                    <button
+                      type="button"
+                      aria-label={`Remove ${label}`}
+                      disabled={disabled}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        remove(optionValue);
+                      }}
+                      className="rounded-sm p-0.5 text-muted-foreground outline-none hover:bg-background hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      <X className="size-3" aria-hidden />
+                    </button>
+                  </motion.span>
+                );
+              })}
+              {hiddenCount > 0 && (
+                <motion.span
+                  key="overflow"
+                  layout={!reduceMotion}
+                  {...chipMotion}
+                  className="inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-medium text-muted-foreground"
+                >
+                  +{hiddenCount}
+                </motion.span>
               )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+            </AnimatePresence>
+
+            <CommandPrimitive.Input
+              ref={inputRef}
+              value={search}
+              onValueChange={(next) => {
+                setSearch(next);
+                setOpen(true);
+              }}
+              onFocus={() => setOpen(true)}
+              onKeyDown={(event) => {
+                if (
+                  event.key === "Backspace" &&
+                  search === "" &&
+                  selected.length > 0
+                ) {
+                  setSelected(selected.slice(0, -1));
+                }
+              }}
+              disabled={disabled}
+              aria-label={placeholder}
+              placeholder={selected.length === 0 ? placeholder : undefined}
+              className="min-w-24 flex-1 bg-transparent px-1 py-0.5 outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed"
+            />
+
+            <button
+              type="button"
+              aria-label={open ? "Hide options" : "Show options"}
+              disabled={disabled}
+              onClick={(event) => {
+                event.stopPropagation();
+                setOpen(!open);
+              }}
+              className="ml-auto rounded-sm p-0.5 text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <ChevronDown
+                aria-hidden
+                className={cn(
+                  "size-4 transition-transform motion-reduce:transition-none",
+                  open && "rotate-180"
+                )}
+              />
+            </button>
+          </div>
+        </PopoverAnchor>
+
+        <PopoverContent
+          align="start"
+          className="w-(--radix-popover-trigger-width) p-0"
+          // Keep focus in the search input so typing and arrow keys keep working.
+          onOpenAutoFocus={(event) => event.preventDefault()}
+          onInteractOutside={(event) => {
+            if (anchorRef.current?.contains(event.target as Node)) {
+              event.preventDefault();
+            }
+          }}
+        >
+          <CommandList>
+            <CommandEmpty>{emptyText}</CommandEmpty>
+            <CommandGroup>
+              {options.map((option) => {
+                const isSelected = selected.includes(option.value);
+                return (
+                  <CommandItem
+                    key={option.value}
+                    value={option.value}
+                    keywords={[option.label]}
+                    disabled={option.disabled}
+                    aria-checked={isSelected}
+                    onSelect={() => toggle(option.value)}
+                  >
+                    <span className="flex-1 truncate">{option.label}</span>
+                    <Check
+                      aria-hidden
+                      className={cn(
+                        "text-primary",
+                        isSelected ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                  </CommandItem>
+                );
+              })}
+            </CommandGroup>
+          </CommandList>
+        </PopoverContent>
+      </Popover>
+    </Command>
   );
 }

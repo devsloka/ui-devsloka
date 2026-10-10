@@ -1,134 +1,133 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Info } from "lucide-react";
-import { motion } from "framer-motion";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
-export interface CarouselItem {
-  name: string;
-  description: string;
-  [key: string]: unknown;
-}
+export type ContentCarouselItem = {
+  id: string;
+  title: React.ReactNode;
+  description?: React.ReactNode;
+};
 
-interface ContentCarouselProps {
-  items: CarouselItem[];
-  className?: string;
-  onItemChange?: (item: CarouselItem, index: number) => void;
-}
+export type ContentCarouselProps = Omit<
+  React.ComponentProps<"div">,
+  "onChange"
+> & {
+  items: ContentCarouselItem[];
+  index?: number;
+  defaultIndex?: number;
+  onIndexChange?: (index: number) => void;
+  /** Wrap from the last item to the first and back. */
+  loop?: boolean;
+};
 
-export const ContentCarousel = ({
+export function ContentCarousel({
   items,
-  className = "",
-  onItemChange,
-}: ContentCarouselProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  index,
+  defaultIndex = 0,
+  onIndexChange,
+  loop = true,
+  className,
+  ...props
+}: ContentCarouselProps) {
+  const reduceMotion = useReducedMotion();
+  const [uncontrolledIndex, setUncontrolledIndex] = useState(defaultIndex);
+  const count = items.length;
+  const current = Math.min(Math.max(index ?? uncontrolledIndex, 0), count - 1);
 
-  useEffect(() => {
-    if (items.length === 0) return;
-    const clampedIndex = Math.min(Math.max(currentIndex, 0), items.length - 1);
-    if (clampedIndex !== currentIndex) setCurrentIndex(clampedIndex);
-  }, [items.length]);
+  if (count === 0) return null;
 
-  const handleIndexChange = (newIndex: number) => {
-    const validIndex = Math.min(Math.max(newIndex, 0), items.length - 1);
-    setCurrentIndex(validIndex);
-    onItemChange?.(items[validIndex], validIndex);
+  const goTo = (next: number) => {
+    const target = loop
+      ? (next + count) % count
+      : Math.min(Math.max(next, 0), count - 1);
+    if (target === current) return;
+    if (index === undefined) setUncontrolledIndex(target);
+    onIndexChange?.(target);
   };
 
-  const handleSelectChange = (value: string) => {
-    const index = items.findIndex((item) => item.name === value);
-    if (index !== -1) handleIndexChange(index);
-  };
-
-  if (items.length === 0) return null;
+  const item = items[current];
+  const canGoPrev = loop || current > 0;
+  const canGoNext = loop || current < count - 1;
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4">
-        <div className="mb-8 text-center">
-          <motion.h1
-            className="text-4xl font-bold text-primary drop-shadow-md sm:text-5xl md:text-6xl"
-            initial={{ opacity: 0, y: -20 }}
+    <div
+      data-slot="content-carousel"
+      role="region"
+      aria-roledescription="carousel"
+      className={cn("flex flex-col items-center gap-8 px-4", className)}
+      {...props}
+    >
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        className="grid min-h-32 w-full max-w-2xl place-items-center text-center"
+      >
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={item.id}
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
+            transition={{ duration: reduceMotion ? 0.1 : 0.25, ease: "easeOut" }}
+            className="space-y-3"
           >
-            {items[currentIndex].name}
-          </motion.h1>
-
-          <motion.p
-            className="mt-4 text-lg text-muted-foreground sm:text-xl md:text-2xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            {items[currentIndex].description}
-          </motion.p>
-        </div>
-
-        <div className="bg-background/80 backdrop-blur-md rounded-full p-2 border border-primary/10 flex items-center gap-2">
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => handleIndexChange(currentIndex - 1)}
-              className="rounded-full"
-              disabled={currentIndex === 0}
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-
-            <Select
-              value={items[currentIndex].name}
-              onValueChange={handleSelectChange}
-            >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {items.map((item) => (
-                  <SelectItem key={item.name} value={item.name}>
-                    {item.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <Info className="h-4 w-4" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent side="top">
-                <p>{items[currentIndex].description}</p>
-              </TooltipContent>
-            </Tooltip>
-
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => handleIndexChange(currentIndex + 1)}
-              className="rounded-full"
-              disabled={currentIndex === items.length - 1}
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
+            <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              {item.title}
+            </h2>
+            {item.description && (
+              <div className="text-base text-muted-foreground sm:text-lg">
+                {item.description}
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
       </div>
+
+      <div className="flex items-center gap-3">
+        <Button
+          variant="outline"
+          size="icon"
+          aria-label="Previous item"
+          disabled={!canGoPrev}
+          onClick={() => goTo(current - 1)}
+        >
+          <ChevronLeft aria-hidden />
+        </Button>
+
+        <div className="flex items-center gap-1.5">
+          {items.map((dot, i) => (
+            <button
+              key={dot.id}
+              type="button"
+              aria-label={`Go to item ${i + 1}`}
+              aria-current={i === current ? "true" : undefined}
+              onClick={() => goTo(i)}
+              className={cn(
+                "h-2 rounded-full bg-muted-foreground/30 outline-none transition-all hover:bg-muted-foreground/60 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none",
+                i === current ? "w-6 bg-primary hover:bg-primary" : "w-2"
+              )}
+            />
+          ))}
+        </div>
+
+        <Button
+          variant="outline"
+          size="icon"
+          aria-label="Next item"
+          disabled={!canGoNext}
+          onClick={() => goTo(current + 1)}
+        >
+          <ChevronRight aria-hidden />
+        </Button>
+      </div>
+
+      <p className="text-sm tabular-nums text-muted-foreground">
+        {current + 1} / {count}
+      </p>
     </div>
   );
-};
+}

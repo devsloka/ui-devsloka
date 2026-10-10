@@ -1,176 +1,193 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 
-interface Dot {
-  x: number;
-  y: number;
-  radius: number;
-  speed: number;
-}
+type Dot = { x: number; y: number; radius: number; speed: number };
 
-export interface FloatingDotsProps {
-  /**
-   * Number of dots to render
-   * @default 50
-   */
+export type FloatingDotsProps = Omit<React.ComponentProps<"canvas">, "ref" | "children"> & {
+  /** Number of dots. @default 50 */
   count?: number;
-  /**
-   * Color of the dots
-   * @default "white"
-   */
+  /** Any CSS color. Defaults to the canvas' current text color (`currentColor`). */
   color?: string;
-  /**
-   * Minimum radius of dots in pixels
-   * @default 1
-   */
+  /** Minimum dot radius in CSS pixels. @default 1 */
   minRadius?: number;
-  /**
-   * Maximum radius of dots in pixels
-   * @default 3
-   */
+  /** Maximum dot radius in CSS pixels. @default 3 */
   maxRadius?: number;
-  /**
-   * Minimum speed of dots
-   * @default 0.5
-   */
+  /** Minimum upward speed in CSS pixels per frame (at 60fps). @default 0.5 */
   minSpeed?: number;
-  /**
-   * Maximum speed of dots
-   * @default 2
-   */
+  /** Maximum upward speed in CSS pixels per frame (at 60fps). @default 2 */
   maxSpeed?: number;
-  /**
-   * Additional CSS class name
-   */
-  className?: string;
-}
+};
 
+const TAU = Math.PI * 2;
+const FRAME_MS = 1000 / 60;
+
+/**
+ * Dots drifting upward on a canvas that fills its positioned parent.
+ * Pauses offscreen and draws a single static frame when reduced motion is preferred.
+ */
 export function FloatingDots({
   count = 50,
-  color = "white",
+  color,
   minRadius = 1,
   maxRadius = 3,
   minSpeed = 0.5,
   maxSpeed = 2,
-  className = "",
+  className,
+  ...props
 }: FloatingDotsProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const dotsRef = useRef<Dot[]>([]);
-  const animationRef = useRef<number | null>(null);
+  const fillRef = useRef("currentColor");
+  const redrawRef = useRef<() => void>(() => {});
 
-  // Initialize dots
-  const initDots = (width: number, height: number) => {
-    const dots: Dot[] = [];
-    for (let i = 0; i < count; i++) {
-      dots.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        radius: Math.random() * (maxRadius - minRadius) + minRadius,
-        speed: Math.random() * (maxSpeed - minSpeed) + minSpeed,
-      });
-    }
-    return dots;
-  };
-
-  // Draw dots on canvas
-  const drawDots = (
-    ctx: CanvasRenderingContext2D,
-    dots: Dot[],
-    width: number,
-    height: number
-  ) => {
-    ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = color;
-
-    dots.forEach((dot) => {
-      ctx.beginPath();
-      ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
-      ctx.fill();
-    });
-  };
-
-  // Update dots position
-  const updateDots = (dots: Dot[], width: number, height: number) => {
-    return dots.map((dot) => {
-      const y = dot.y - dot.speed;
-
-      // Reset position when dot goes off the top
-      if (y < -dot.radius * 2) {
-        return {
-          ...dot,
-          x: Math.random() * width,
-          y: height + dot.radius,
-        };
-      }
-
-      return {
-        ...dot,
-        y,
-      };
-    });
-  };
-
-  // Animation loop
-  const animate = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const width = canvas.width;
-    const height = canvas.height;
-
-    dotsRef.current = updateDots(dotsRef.current, width, height);
-    drawDots(ctx, dotsRef.current, width, height);
-
-    animationRef.current = requestAnimationFrame(animate);
-  };
-
-  // Handle resize
-  const handleResize = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const parent = canvas.parentElement;
-    if (!parent) return;
-
-    const { width, height } = parent.getBoundingClientRect();
-
-    canvas.width = width;
-    canvas.height = height;
-
-    // Reinitialize dots with new dimensions
-    dotsRef.current = initDots(width, height);
-  };
-
+  // Resolve the fill color. Without an explicit color, follow the inherited text color,
+  // re-reading it when the theme class/attributes on <html> change.
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Set initial size
-    handleResize();
-
-    // Start animation
-    animationRef.current = requestAnimationFrame(animate);
-
-    // Add resize listener
-    window.addEventListener("resize", handleResize);
-
-    // Cleanup
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-      window.removeEventListener("resize", handleResize);
+    const update = () => {
+      fillRef.current = color ?? getComputedStyle(canvas).color;
+      redrawRef.current();
     };
-  }, [count, color, minRadius, maxRadius, minSpeed, maxSpeed]);
+    update();
+    if (color) return;
+
+    const observer = new MutationObserver(update);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "style", "data-theme"],
+    });
+    return () => observer.disconnect();
+  }, [color]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const parent = canvas?.parentElement;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !parent || !ctx) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const dots: Dot[] = [];
+    let width = 0;
+    let height = 0;
+    let frame = 0;
+    let lastTime = 0;
+    let inView = true;
+
+    const between = (min: number, max: number) => min + Math.random() * (max - min);
+
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = fillRef.current;
+      ctx.beginPath();
+      for (const dot of dots) {
+        ctx.moveTo(dot.x + dot.radius, dot.y);
+        ctx.arc(dot.x, dot.y, dot.radius, 0, TAU);
+      }
+      ctx.fill();
+    };
+
+    const tick = (time: number) => {
+      const step = lastTime ? Math.min((time - lastTime) / FRAME_MS, 3) : 1;
+      lastTime = time;
+      for (const dot of dots) {
+        dot.y -= dot.speed * step;
+        if (dot.y < -dot.radius * 2) {
+          dot.x = Math.random() * width;
+          dot.y = height + dot.radius;
+        }
+      }
+      draw();
+      frame = requestAnimationFrame(tick);
+    };
+
+    const start = () => {
+      if (frame || !inView || reducedMotion.matches || !width || !height) return;
+      lastTime = 0;
+      frame = requestAnimationFrame(tick);
+    };
+
+    const stop = () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+    };
+
+    const resize = () => {
+      const nextWidth = parent.clientWidth;
+      const nextHeight = parent.clientHeight;
+      if (!nextWidth || !nextHeight) return;
+
+      if (dots.length === 0) {
+        for (let i = 0; i < count; i++) {
+          dots.push({
+            x: Math.random() * nextWidth,
+            y: Math.random() * nextHeight,
+            radius: between(minRadius, maxRadius),
+            speed: between(minSpeed, maxSpeed),
+          });
+        }
+      } else if (width && height) {
+        const scaleX = nextWidth / width;
+        const scaleY = nextHeight / height;
+        for (const dot of dots) {
+          dot.x *= scaleX;
+          dot.y *= scaleY;
+        }
+      }
+
+      width = nextWidth;
+      height = nextHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      draw();
+      start();
+    };
+
+    const onMotionPreferenceChange = () => {
+      if (reducedMotion.matches) {
+        stop();
+        draw();
+      } else {
+        start();
+      }
+    };
+
+    redrawRef.current = () => {
+      if (!frame) draw();
+    };
+
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(parent);
+
+    const intersectionObserver = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      if (inView) start();
+      else stop();
+    });
+    intersectionObserver.observe(canvas);
+
+    reducedMotion.addEventListener("change", onMotionPreferenceChange);
+
+    return () => {
+      stop();
+      resizeObserver.disconnect();
+      intersectionObserver.disconnect();
+      reducedMotion.removeEventListener("change", onMotionPreferenceChange);
+      redrawRef.current = () => {};
+    };
+  }, [count, minRadius, maxRadius, minSpeed, maxSpeed]);
 
   return (
     <canvas
       ref={canvasRef}
-      className={`absolute inset-0 pointer-events-none ${className}`}
+      aria-hidden
+      data-slot="floating-dots"
+      className={cn("pointer-events-none absolute inset-0 size-full", className)}
+      {...props}
     />
   );
 }

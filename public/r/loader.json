@@ -3,12 +3,12 @@
   "name": "loader",
   "type": "registry:ui",
   "title": "Loader",
-  "description": "Loader component with animated gradient dots for indicating loading state.",
+  "description": "Loader component with animated dots for indicating loading state.",
   "files": [
     {
       "path": "src/registry/ui/loader.tsx",
-      "content": "\"use client\";\r\nimport React from \"react\";\r\n\r\nconst Loader: React.FC = () => {\r\n  return (\r\n    <div className=\"flex flex-row items-center justify-center\">\r\n      <div className=\"w-5 h-5 rounded-full mr-4 animate-[pulse_1.2s_ease-in-out_infinite] bg-primary\" />\r\n      <div className=\"w-5 h-5 rounded-full mr-4 animate-[pulse_1.2s_ease-in-out_infinite] [animation-delay:0.2s] bg-primary\" />\r\n      <div className=\"w-5 h-5 rounded-full mr-4 animate-[pulse_1.2s_ease-in-out_infinite] [animation-delay:0.4s] bg-primary\" />\r\n      <div className=\"w-5 h-5 rounded-full mr-4 animate-[pulse_1.2s_ease-in-out_infinite] [animation-delay:0.6s] bg-primary\" />\r\n      <div className=\"w-5 h-5 rounded-full mr-4 animate-[pulse_1.2s_ease-in-out_infinite] [animation-delay:0.8s] bg-primary\" />\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default Loader;\r\n",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "content": "import { cn } from \"@/lib/utils\";\n\nconst SIZES = {\n  sm: { root: \"gap-1\", dot: \"size-1.5\" },\n  md: { root: \"gap-1.5\", dot: \"size-2.5\" },\n  lg: { root: \"gap-2\", dot: \"size-3.5\" },\n} as const;\n\nexport type LoaderProps = React.ComponentProps<\"div\"> & {\n  size?: keyof typeof SIZES;\n  /** Number of dots. */\n  dots?: number;\n  /** Announced to screen readers. */\n  label?: string;\n};\n\n/** Pulsing dots in the current text color. Set the color with a `text-*` class. */\nexport function Loader({\n  size = \"md\",\n  dots = 3,\n  label = \"Loading\",\n  className,\n  ...props\n}: LoaderProps) {\n  return (\n    <div\n      role=\"status\"\n      aria-label={label}\n      data-slot=\"loader\"\n      className={cn(\"inline-flex items-center\", SIZES[size].root, className)}\n      {...props}\n    >\n      {Array.from({ length: dots }, (_, i) => (\n        <span\n          key={i}\n          aria-hidden\n          className={cn(\n            \"animate-pulse rounded-full bg-current [animation-duration:1.2s] motion-reduce:animate-none motion-reduce:opacity-60\",\n            SIZES[size].dot\n          )}\n          style={{ animationDelay: `${i * 0.15}s` }}\n        />\n      ))}\n    </div>\n  );\n}\n"
     }
   ]
 }

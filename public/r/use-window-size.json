@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-window-size",
+  "type": "registry:hook",
+  "title": "useWindowSize",
+  "description": "Track the viewport's width and height as it resizes.",
+  "files": [
+    {
+      "path": "src/registry/hooks/use-window-size.ts",
+      "type": "registry:hook",
+      "content": "import { useSyncExternalStore } from \"react\";\n\nexport type WindowSize = { width: number; height: number };\n\nexport type UseWindowSizeOptions = {\n  /** Size reported on the server and during hydration. Defaults to 0 x 0. */\n  initialSize?: WindowSize;\n};\n\nfunction subscribe(callback: () => void) {\n  window.addEventListener(\"resize\", callback);\n  return () => window.removeEventListener(\"resize\", callback);\n}\n\nconst getSnapshot = () => `${window.innerWidth}x${window.innerHeight}`;\n\n/**\n * Track the viewport's inner width and height, updated on resize.\n * Prefer CSS media/container queries for pure layout; use this when JS needs the numbers.\n *\n * @example\n * const { width, height } = useWindowSize();\n */\nexport function useWindowSize({\n  initialSize = { width: 0, height: 0 },\n}: UseWindowSizeOptions = {}): WindowSize {\n  const serverSnapshot = `${initialSize.width}x${initialSize.height}`;\n  const snapshot = useSyncExternalStore(\n    subscribe,\n    getSnapshot,\n    () => serverSnapshot,\n  );\n  const [width, height] = snapshot.split(\"x\").map(Number);\n  return { width, height };\n}\n"
+    }
+  ]
+}
