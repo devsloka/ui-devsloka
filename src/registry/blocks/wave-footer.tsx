@@ -59,7 +59,7 @@ export function WaveFooter({
             {tagline}
           </p>
 
-          <nav aria-label="Site" className="md:col-span-3">
+          <nav aria-label="Site" className="md:col-span-2">
             <ul className="space-y-1.5 text-sm">
               {links.map((link) => (
                 <li key={link.label}>
@@ -83,8 +83,8 @@ export function WaveFooter({
             </ul>
           </nav>
 
-          <div className="text-sm md:col-span-2 md:text-right">
-            <a href={`mailto:${email}`} className={cn(linkClass, "break-all")}>
+          <div className="text-sm md:col-span-3 md:text-right">
+            <a href={`mailto:${email}`} className={linkClass}>
               {email}
             </a>
           </div>

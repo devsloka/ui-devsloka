@@ -1,154 +1,130 @@
-"use client";
-
-import { useTheme } from "next-themes";
-import { motion } from "motion/react";
+import { useId, type ComponentProps } from "react";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
-import { ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export default function HeroFloatingElements() {
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+type Action = { label: string; href: string };
+type Spec = { value: string; label: string };
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+export type HeroFloatingElementsProps = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  primaryAction?: Action;
+  secondaryAction?: Action;
+  specs?: Spec[];
+  /** Show the spec-sheet annotations around the headline and paragraph. */
+  annotations?: boolean;
+} & ComponentProps<"section">;
 
-  if (!mounted) return null;
+const DEFAULTS = {
+  eyebrow: "Sundial · Spec sheet, rev. 2",
+  title: "Your timesheet, already filled in.",
+  description:
+    "Sundial notices the files, tickets and calendar events you work on and drafts your week. On Friday you skim it, fix one line and send it.",
+  primaryAction: { label: "Try it for a week", href: "#" },
+  secondaryAction: { label: "How tracking works", href: "#" },
+  specs: [
+    { value: "4.2 h", label: "Saved per person, per month" },
+    { value: "6 min", label: "Rounding, or none at all" },
+    { value: "52 s", label: "Median Friday review" },
+  ],
+};
+
+/** A small mono label that sits on a frame edge, like a callout in a design file. */
+function Tag({ className, children }: { className?: string; children: React.ReactNode }) {
+  return (
+    <span
+      aria-hidden
+      className={cn(
+        "absolute hidden bg-background px-1.5 font-mono text-[10px] uppercase tracking-wider whitespace-nowrap text-primary md:block",
+        className
+      )}
+    >
+      {children}
+    </span>
+  );
+}
+
+export default function HeroFloatingElements({
+  eyebrow = DEFAULTS.eyebrow,
+  title = DEFAULTS.title,
+  description = DEFAULTS.description,
+  primaryAction = DEFAULTS.primaryAction,
+  secondaryAction = DEFAULTS.secondaryAction,
+  specs = DEFAULTS.specs,
+  annotations = true,
+  className,
+  ...props
+}: HeroFloatingElementsProps) {
+  const headingId = useId();
+  const frame = annotations ? "md:border md:border-dashed md:border-primary/50" : "";
 
   return (
-    <div className="relative w-full overflow-hidden bg-background">
-      {/* Background Elements */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-full h-full">
-          {Array.from({ length: 20 }).map((_, i) => (
-            <motion.div
-              key={i}
-              className={`absolute rounded-full ${
-                theme === "dark" ? "bg-purple-500/10" : "bg-indigo-500/10"
-              }`}
-              style={{
-                width: `${Math.random() * 200 + 50}px`,
-                height: `${Math.random() * 200 + 50}px`,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{
-                opacity: [0.1, 0.3, 0.1],
-                scale: [1, 1.2, 1],
-                x: [0, Math.random() * 40 - 20, 0],
-                y: [0, Math.random() * 40 - 20, 0],
-              }}
-              transition={{
-                duration: Math.random() * 10 + 10,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
+    <section
+      data-slot="hero-floating-elements"
+      aria-labelledby={headingId}
+      className={cn("w-full bg-background text-foreground", className)}
+      {...props}
+    >
+      <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <div className="flex items-baseline justify-between border-b pb-3 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+          <span>{eyebrow}</span>
+          <span>Fig. 1</span>
         </div>
-      </div>
 
-      {/* Content */}
-      <div className="container relative z-10 px-4 py-24 mx-auto sm:py-32 md:py-40 lg:py-48">
-        <div className="flex flex-col items-center max-w-5xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-4"
+        <div className={cn("relative mt-14 md:p-6", frame)}>
+          {annotations && (
+            <>
+              <Tag className="-top-2 left-4">H1 · 96 / 0.95 · −0.045em</Tag>
+              <Tag className="right-4 -bottom-2">Measure 14ch</Tag>
+            </>
+          )}
+          <h1
+            id={headingId}
+            className="max-w-[14ch] text-5xl font-semibold leading-[0.95] tracking-[-0.045em] sm:text-6xl md:text-8xl"
           >
-            <span className="inline-block px-4 py-1.5 text-sm font-medium rounded-full bg-primary/10 text-primary">
-              Introducing Our UI Library
-            </span>
-          </motion.div>
+            {title}
+          </h1>
+        </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl mb-6"
-          >
-            <span className="block">Elevate Your Design With</span>
-            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600 dark:from-primary dark:to-purple-400">
-              Floating Elements
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="max-w-2xl mb-10 text-xl text-muted-foreground"
-          >
-            Create stunning interfaces with our modern component library.
-            Designed for developers who want to build exceptional user
-            experiences.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-4"
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button size="lg" className="gap-2 text-lg">
-                Get Started <ArrowRight className="w-4 h-4" />
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button size="lg" variant="outline" className="text-lg">
-                View Components
-              </Button>
-            </motion.div>
-          </motion.div>
-
-          {/* Floating Cards */}
-          <div className="relative w-full max-w-4xl mt-16">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.8 }}
-              className="relative z-10"
+        <div className="mt-12 grid gap-10 md:grid-cols-12">
+          <div className={cn("relative md:col-span-6 md:p-4", frame)}>
+            {annotations && <Tag className="-top-2 left-3">Body · 16 / 26 · muted</Tag>}
+            <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+              {description}
+            </p>
+          </div>
+          <div className="flex flex-wrap items-start gap-x-6 gap-y-3 md:col-span-6 md:justify-end md:pt-4">
+            <Button asChild size="lg" className="rounded-none">
+              <a href={primaryAction.href}>{primaryAction.label}</a>
+            </Button>
+            <a
+              href={secondaryAction.href}
+              className="py-2 text-sm font-medium underline decoration-1 underline-offset-[6px] hover:text-muted-foreground"
             >
-              <div className="p-6 rounded-xl bg-card border shadow-lg">
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                  {[
-                    { title: "Components", value: "100+" },
-                    { title: "Animations", value: "50+" },
-                    { title: "Layouts", value: "25+" },
-                  ].map((item, index) => (
-                    <motion.div
-                      key={index}
-                      whileHover={{ y: -5 }}
-                      className="p-4 text-center rounded-lg bg-background/50 backdrop-blur-sm"
-                    >
-                      <h3 className="text-4xl font-bold">{item.value}</h3>
-                      <p className="mt-1 text-muted-foreground">{item.title}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Decorative elements */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 1 }}
-              className="absolute -top-6 -left-6 w-20 h-20 rounded-lg bg-primary/20 backdrop-blur-md -z-10"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 1.1 }}
-              className="absolute -bottom-6 -right-6 w-20 h-20 rounded-lg bg-purple-500/20 backdrop-blur-md -z-10"
-            />
+              {secondaryAction.label}
+            </a>
           </div>
         </div>
+
+        {specs.length > 0 && (
+          <dl className="mt-20 grid border-t sm:grid-cols-3">
+            {specs.map((spec, i) => (
+              <div
+                key={spec.label}
+                className={cn("border-b py-6 sm:border-b-0 sm:px-6", i > 0 && "sm:border-l", i === 0 && "sm:pl-0")}
+              >
+                <dt className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                  {String(i + 1).padStart(2, "0")} · {spec.label}
+                </dt>
+                <dd className="mt-3 text-4xl font-semibold tracking-[-0.03em] tabular-nums">
+                  {spec.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )}
       </div>
-    </div>
+    </section>
   );
 }
