@@ -6,6 +6,20 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
+const EASE_OUT = [0.23, 1, 0.32, 1] as const;
+
+// Slides travel with the navigation direction: 1 = forward, -1 = back.
+const slideVariants = {
+  enter: (direction: number) => ({ opacity: 0, x: direction * 24, filter: "blur(2px)" }),
+  center: { opacity: 1, x: 0, filter: "blur(0px)" },
+  exit: (direction: number) => ({ opacity: 0, x: direction * -24, filter: "blur(2px)" }),
+};
+const fadeVariants = {
+  enter: { opacity: 0 },
+  center: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
 export type ContentCarouselItem = {
   id: string;
   title: React.ReactNode;
@@ -35,6 +49,7 @@ export function ContentCarousel({
 }: ContentCarouselProps) {
   const reduceMotion = useReducedMotion();
   const [uncontrolledIndex, setUncontrolledIndex] = useState(defaultIndex);
+  const [direction, setDirection] = useState(1);
   const count = items.length;
   const current = Math.min(Math.max(index ?? uncontrolledIndex, 0), count - 1);
 
@@ -45,6 +60,8 @@ export function ContentCarousel({
       ? (next + count) % count
       : Math.min(Math.max(next, 0), count - 1);
     if (target === current) return;
+    // Use the requested step, not the wrapped target, so Next from the last item still moves forward.
+    setDirection(next > current ? 1 : -1);
     if (index === undefined) setUncontrolledIndex(target);
     onIndexChange?.(target);
   };
@@ -66,14 +83,17 @@ export function ContentCarousel({
         aria-atomic="true"
         className="grid min-h-32 w-full max-w-2xl place-items-center text-center"
       >
-        <AnimatePresence mode="wait" initial={false}>
+        {/* Outgoing and incoming items share one grid cell and overlap, so rapid clicks never queue. */}
+        <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={item.id}
-            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
-            transition={{ duration: reduceMotion ? 0.1 : 0.25, ease: "easeOut" }}
-            className="space-y-3"
+            custom={direction}
+            variants={reduceMotion ? fadeVariants : slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: reduceMotion ? 0.15 : 0.25, ease: EASE_OUT }}
+            className="space-y-3 [grid-area:1/1]"
           >
             <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               {item.title}
@@ -107,7 +127,7 @@ export function ContentCarousel({
               aria-current={i === current ? "true" : undefined}
               onClick={() => goTo(i)}
               className={cn(
-                "h-2 rounded-full bg-muted-foreground/30 outline-none transition-all hover:bg-muted-foreground/60 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none",
+                "h-2 rounded-full bg-muted-foreground/30 outline-none transition-[width,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-muted-foreground/60 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none",
                 i === current ? "w-6 bg-primary hover:bg-primary" : "w-2"
               )}
             />

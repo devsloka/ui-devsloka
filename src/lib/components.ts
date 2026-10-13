@@ -18,6 +18,27 @@ export const components: ComponentCardProps[] = [
     image: "/images/animated-smartwatch.png",
   },
   {
+    title: "Arc Scroll Steps",
+    href: "/components/arc-scroll-steps",
+    description:
+      "Scroll-driven stepper: numbered steps orbit a large arc and the active step's title swaps in as you scroll.",
+    image: "/images/arc-scroll-steps.png",
+  },
+  {
+    title: "Availability Card",
+    href: "/components/availability-card",
+    description:
+      "Hire-me card with a live availability pulse, local-time clock, tactile buttons and a copy-email confirmation.",
+    image: "/images/availability-card.png",
+  },
+  {
+    title: "Bento Grid",
+    href: "/components/bento-grid",
+    description:
+      "Animated bento feature grid: files flowing through an action, drifting category rows, a playable install and a copyable command.",
+    image: "/images/bento-grid.png",
+  },
+  {
     title: "Border Gradient Icon",
     href: "/components/border-gradient-icon",
     description:
@@ -39,11 +60,25 @@ export const components: ComponentCardProps[] = [
     image: "/images/card-radio.png",
   },
   {
+    title: "Case Study Carousel",
+    href: "/components/case-study-carousel",
+    description:
+      "Stacked case-study carousel: the active card leads while neighbours peek behind, with arrows, dots, swipe and keyboard.",
+    image: "/images/case-study-carousel.png",
+  },
+  {
     title: "Content Carousel",
     href: "/components/content-carousel",
     description:
       "Step through titled content with labelled previous/next controls, dot navigation and live-region announcements.",
     image: "/images/content-carousel.png",
+  },
+  {
+    title: "Dock Gallery",
+    href: "/components/dock-gallery",
+    description:
+      "Bottom-aligned project row that magnifies like a dock: the card nearest the pointer grows and its neighbours step down.",
+    image: "/images/dock-gallery.png",
   },
   {
     title: "Empty Result",
@@ -74,11 +109,25 @@ export const components: ComponentCardProps[] = [
     image: "/images/floating-dots.png",
   },
   {
+    title: "Fuzzy Mascot",
+    href: "/components/fuzzy-mascot",
+    description:
+      "Plush SVG mascots in 15 shapes whose eyes follow the cursor, with idle, working and sleeping states, five shadings, hats, glasses and fur length.",
+    image: "/images/fuzzy-mascot.png",
+  },
+  {
     title: "Gradient Text",
     href: "/components/gradient-text",
     description:
       "CSS-only animated gradient text using your theme colors. No client JavaScript.",
     image: "/images/gradient-text.png",
+  },
+  {
+    title: "Hover Expand Gallery",
+    href: "/components/hover-expand-gallery",
+    description:
+      "Row of image panels where the hovered one expands and reveals its label while the rest narrow; tap and arrow keys work too.",
+    image: "/images/hover-expand-gallery.png",
   },
   {
     title: "Icon Radio",
@@ -123,6 +172,13 @@ export const components: ComponentCardProps[] = [
     image: "/images/logo-cloud-carousel.png",
   },
   {
+    title: "Mission Bento",
+    href: "/components/mission-bento",
+    description:
+      "Stats bento with a masked heading reveal, staggered tiles, count-up numbers and a self-drawing trend arrow.",
+    image: "/images/mission-bento.png",
+  },
+  {
     title: "Morphing Card",
     href: "/components/morphing-card",
     description:
@@ -142,6 +198,13 @@ export const components: ComponentCardProps[] = [
     description:
       "Segmented navigation with a sliding active indicator. Renders links or a keyboard-navigable radio group.",
     image: "/images/morphing-nav.png",
+  },
+  {
+    title: "Now Playing Card",
+    href: "/components/now-playing-card",
+    description:
+      "Music widget whose album art spins as a vinyl disc and morphs into the full cover on hover, with a live progress clock.",
+    image: "/images/now-playing-card.png",
   },
   {
     title: "Pricing Card",
@@ -165,11 +228,39 @@ export const components: ComponentCardProps[] = [
     image: "/images/tour.png",
   },
   {
+    title: "Profile Card",
+    href: "/components/profile-card",
+    description:
+      "Social profile card with accent-tinted wave cover art, verified badge, follow toggle, stats and link.",
+    image: "/images/profile-card.png",
+  },
+  {
     title: "Range Slider with Histogram",
     href: "/components/range-slider-with-histogram",
     description:
       "Dual-thumb range slider over a histogram that highlights the selected range. Controlled or uncontrolled.",
     image: "/images/range-slider-with-histogram.png",
+  },
+  {
+    title: "Receipt Printer",
+    href: "/components/receipt-printer",
+    description:
+      "Order card that prints a torn-edge receipt line by line, with itemised totals, a pay-by-QR slot and tear-off reset.",
+    image: "/images/receipt-printer.png",
+  },
+  {
+    title: "Reminders Card",
+    href: "/components/reminders-card",
+    description:
+      "Widget-style checklist with a glowing accent header, live clock, animated checkboxes and inline add.",
+    image: "/images/reminders-card.png",
+  },
+  {
+    title: "Showcase Bento",
+    href: "/components/showcase-bento",
+    description:
+      "Animated showcase bento: hopping team portraits, a count-up stat, rotating testimonials and drifting framework and tech rows.",
+    image: "/images/showcase-bento.png",
   },
   {
     title: "Success Result",
@@ -184,6 +275,13 @@ export const components: ComponentCardProps[] = [
     description:
       "Feature tabs with descriptions and cross-fading panels, built on Radix Tabs.",
     image: "/images/tabs-switcher.png",
+  },
+  {
+    title: "Team Carousel",
+    href: "/components/team-carousel",
+    description:
+      "Infinite Embla carousel of team portraits that pauses on hover, lifts the hovered member and highlights their division.",
+    image: "/images/team-carousel.png",
   },
   {
     title: "Text Effect",

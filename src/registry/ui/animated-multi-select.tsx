@@ -89,12 +89,18 @@ export function AnimatedMultiSelect({
   const hiddenCount = selected.length - visible.length;
 
   const chipMotion = reduceMotion
-    ? { initial: false as const, exit: { opacity: 0, transition: { duration: 0 } } }
-    : {
-        initial: { opacity: 0, scale: 0.8 },
-        animate: { opacity: 1, scale: 1 },
-        exit: { opacity: 0, scale: 0.8 },
+    ? // Reduced motion drops the scale but keeps the fade, so changes still read.
+      {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
         transition: { duration: 0.15 },
+      }
+    : {
+        initial: { opacity: 0, scale: 0.95 },
+        animate: { opacity: 1, scale: 1 },
+        exit: { opacity: 0, scale: 0.95 },
+        transition: { duration: 0.15, ease: [0.23, 1, 0.32, 1] as const },
       };
 
   return (

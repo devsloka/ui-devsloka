@@ -67,6 +67,8 @@ type Measurement = {
 const GAP = 12;
 const MARGIN = 12;
 const SPOTLIGHT_PADDING = 6;
+// New step text fades in while the card glides. Opacity only, so reduced motion keeps it.
+const STEP_FADE = { duration: 0.15, ease: [0.23, 1, 0.32, 1] } as const;
 const OPPOSITE: Record<TourPlacement, TourPlacement> = {
   top: "bottom",
   bottom: "top",
@@ -323,7 +325,14 @@ export function Tour({
       : { type: "spring" as const, bounce: 0.1, duration: 0.4 };
 
   return createPortal(
-    <>
+    // Fades the whole tour in on open instead of cutting to it. Opacity only, so it stays under reduced motion.
+    // While fading it forms a stacking context, so it carries the tour's z-index itself.
+    <motion.div
+      className="relative z-50"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+    >
       {/* Blocks interaction with the page; keeps focus in the card on click. */}
       <div
         aria-hidden
@@ -335,9 +344,9 @@ export function Tour({
           aria-hidden
           className="pointer-events-none fixed top-0 left-0 z-50 rounded-lg shadow-[0_0_0_9999px_rgb(0_0_0/0.5)] ring-2 ring-ring"
           initial={false}
+          // A full transform string stays on the compositor; width/height still animate for the cutout.
           animate={{
-            x: target.left - SPOTLIGHT_PADDING,
-            y: target.top - SPOTLIGHT_PADDING,
+            transform: `translate(${target.left - SPOTLIGHT_PADDING}px, ${target.top - SPOTLIGHT_PADDING}px)`,
             width: target.width + SPOTLIGHT_PADDING * 2,
             height: target.height + SPOTLIGHT_PADDING * 2,
           }}
@@ -349,7 +358,7 @@ export function Tour({
         initial={false}
         animate={
           cardPosition
-            ? { x: cardPosition.x, y: cardPosition.y, opacity: 1 }
+            ? { transform: `translate(${cardPosition.x}px, ${cardPosition.y}px)`, opacity: 1 }
             : { opacity: 0 }
         }
         transition={transition}
@@ -371,9 +380,16 @@ export function Tour({
           {...props}
         >
           <div className="flex items-start justify-between gap-4">
-            <h2 id={titleId} className="text-base font-semibold">
+            <motion.h2
+              key={stepIndex}
+              id={titleId}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={STEP_FADE}
+              className="text-base font-semibold"
+            >
               {current.title}
-            </h2>
+            </motion.h2>
             <button
               type="button"
               aria-label={labels.close}
@@ -384,12 +400,16 @@ export function Tour({
             </button>
           </div>
           {current.description && (
-            <div
+            <motion.div
+              key={stepIndex}
               id={descriptionId}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={STEP_FADE}
               className="mt-1.5 text-sm text-muted-foreground"
             >
               {current.description}
-            </div>
+            </motion.div>
           )}
           <div className="mt-4 flex items-center gap-2">
             <span
@@ -416,7 +436,7 @@ export function Tour({
           </div>
         </div>
       </motion.div>
-    </>,
+    </motion.div>,
     document.body,
   );
 }

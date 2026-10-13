@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { FuzzyMascot } from "@/registry/ui/fuzzy-mascot";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
@@ -17,9 +17,9 @@ import { sidebarItems } from "@/utilities/sidebarItems";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { label: "Components", href: "/components" },
-  { label: "Blocks", href: "/blocks" },
-  { label: "Templates", href: "/templates" },
+  { label: "Components", href: "/components", isNew: true },
+  { label: "Blocks", href: "/blocks", isNew: true },
+  // { label: "Templates", href: "/templates" }, // Hidden for now.
   { label: "Docs", href: "/docs" },
   { label: "Changelog", href: "/changelog" },
 ];
@@ -34,20 +34,9 @@ function Wordmark() {
       className="flex items-center gap-2.5"
       aria-label="Devsloka UI home"
     >
-      <Image
-        src="/favicon-dark.png"
-        alt=""
-        width={22}
-        height={22}
-        className="hidden object-contain dark:block"
-      />
-      <Image
-        src="/favicon-light.png"
-        alt=""
-        width={22}
-        height={22}
-        className="object-contain dark:hidden"
-      />
+      {/* The Devsloka mascot as the logo; its eye follows the cursor around the page.
+          No click-to-spin here: it sits inside the home link. */}
+      <FuzzyMascot shape="devsloka" shading="smooth" size={30} spinOnClick={false} label="" className="-my-1" />
       <span className="text-[0.9375rem] font-medium tracking-[-0.02em]">
         Devsloka
       </span>
@@ -85,14 +74,23 @@ const Navbar = () => {
                     )}
                   >
                     {link.label}
+                    {"isNew" in link && link.isNew && (
+                      <span className="ml-1.5 inline-block bg-[#0A6EFF] px-1 py-px align-[1px] text-[0.5625rem] leading-3 text-white">
+                        New
+                      </span>
+                    )}
                   </Link>
                 </li>
               );
             })}
             <li>
               <Link
-                href="/#editions"
-                className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
+                href="/pro"
+                aria-current={isActivePath(pathname, "/pro") ? "page" : undefined}
+                className={cn(
+                  "flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider transition-colors",
+                  isActivePath(pathname, "/pro") ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                )}
               >
                 Pro
                 <span className="size-1.5 bg-[#0A6EFF]" aria-hidden />
@@ -132,7 +130,7 @@ function MobileMenu({ pathname }: { pathname: string }) {
         </div>
 
         <ul className="border-b border-border px-5 py-6">
-          {[...NAV_LINKS, { label: "Pro", href: "/#editions" }].map((link) => (
+          {[...NAV_LINKS, { label: "Pro", href: "/pro" }].map((link) => (
             <li key={link.href}>
               <SheetClose asChild>
                 <Link

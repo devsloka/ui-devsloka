@@ -1,6 +1,6 @@
 import registry from "../../registry.json";
 import { components } from "@/lib/components";
-import { templates } from "@/lib/templates";
+// import { templates } from "@/lib/templates"; // Templates hidden for now.
 import { backgrounds } from "@/utilities/backgrounds.utils";
 import { blocks } from "@/utilities/blocks.utils";
 import { utilities } from "@/utilities/hooks.utils";
@@ -22,7 +22,8 @@ export const CORE_PAGES = [
   { title: "Backgrounds", path: "/components/backgrounds", description: "Animated layers for React sections." },
   { title: "Hooks", path: "/utilities", description: "Reusable React hooks for browser state, events, data, and forms." },
   { title: "Blocks", path: "/blocks", description: "Page sections, authentication screens, and not-found layouts with multiple variants." },
-  { title: "Templates", path: "/templates", description: "Complete Next.js sites with live previews and separate source repositories." },
+  // { title: "Templates", path: "/templates", description: "Complete Next.js sites with live previews and separate source repositories." }, // Hidden for now.
+  { title: "Pro", path: "/pro", description: "Devsloka UI Pro, coming soon: more animated components, monthly drops and an AI customization skill, $199 one-time." },
   { title: "Changelog", path: "/changelog", description: "Dated releases from the May 21, 2025 launch onward." },
 ];
 
@@ -60,7 +61,7 @@ export const DOCUMENTATION: Record<string, DocumentationEntry[]> = {
 export const PUBLIC_PAGE_PATHS = [
   ...CORE_PAGES.map((page) => page.path),
   ...Object.values(DOCUMENTATION).flat().map((page) => page.path),
-  ...templates.map((template) => `/templates/${template.slug}`),
+  // ...templates.map((template) => `/templates/${template.slug}`), // Templates hidden for now.
 ];
 
 export function renderLlmsIndex(): string {
@@ -69,7 +70,7 @@ export function renderLlmsIndex(): string {
     `> ${SITE_DESCRIPTION}`,
     "Devsloka UI is a free, MIT-licensed source library for React 19 and Tailwind CSS v4 projects. Components use Motion and Radix UI where applicable. Install individual files with shadcn or copy their source; no Devsloka runtime package is required. Pro is coming soon.",
     "## Guides",
-    `- [Full Devsloka UI context](${siteUrl("llms-full.txt")}): Installation, customization, every published documentation entry, every registry variant, templates, and release history in Markdown.`,
+    `- [Full Devsloka UI context](${siteUrl("llms-full.txt")}): Installation, customization, every published documentation entry, every registry variant, and release history in Markdown.`,
     `- [Project README](${SITE_REPOSITORY}/raw/refs/heads/main/README.md): Project overview and contributor workflow.`,
     "## Website",
     ...CORE_PAGES.map((page) => `- [${page.title}](${siteUrl(page.path)}): ${page.description}`),
@@ -79,7 +80,7 @@ export function renderLlmsIndex(): string {
     `- [Text Effect registry JSON](${siteUrl("r/text-effect.json")}): Example of the installable JSON format, including source content.`,
     "## Optional",
     `- [Studio](https://www.devsloka.in): The team behind Devsloka UI.`,
-    `- [Contact](https://www.devsloka.in/contact-us): Questions and Pro updates.`,
+    `- [Contact](https://www.devsloka.in/contact): Questions and Pro updates.`,
     `- [Issues](${SITE_REPOSITORY}/issues): Bug reports and feature requests.`,
   ].join("\n\n") + "\n";
 }
@@ -90,11 +91,11 @@ export function renderLlmsFull(): string {
     `# ${SITE_NAME} — Full Context`,
     `> ${SITE_DESCRIPTION}`,
     "## Project",
-    `Website: ${siteUrl()}\nSource: ${SITE_REPOSITORY}\nLicense: MIT (${SITE_REPOSITORY}/blob/main/LICENSE)\nStudio: https://www.devsloka.in\nContact: https://www.devsloka.in/contact-us\nSocial: https://x.com/devsloka_ui`,
+    `Website: ${siteUrl()}\nSource: ${SITE_REPOSITORY}\nLicense: MIT (${SITE_REPOSITORY}/blob/main/LICENSE)\nStudio: https://www.devsloka.in\nContact: https://www.devsloka.in/contact\nSocial: https://x.com/devsloka_ui`,
     "Devsloka UI provides source files for animated interfaces. The documentation site is built with Next.js. The components target React 19 and Tailwind CSS v4, use TypeScript, follow shadcn conventions, and use Motion, Radix UI, and other per-item dependencies where needed. They can be adapted to other React applications; replace Next.js-specific image or navigation integrations when necessary.",
-    `The published library contains ${DOCUMENTATION.Components.length} components, ${DOCUMENTATION.Backgrounds.length} backgrounds, ${DOCUMENTATION.Hooks.length} hooks, ${DOCUMENTATION.Blocks.length} block categories, and ${templates.length} templates. There are ${registry.items.length} installable registry items, including ${registry.items.filter((item) => item.type === "registry:block").length} block variants. Templates have separate source repositories and are not registry components.`,
+    `The published library contains ${DOCUMENTATION.Components.length} components, ${DOCUMENTATION.Backgrounds.length} backgrounds, ${DOCUMENTATION.Hooks.length} hooks, ${DOCUMENTATION.Blocks.length} block categories. There are ${registry.items.length} installable registry items, including ${registry.items.filter((item) => item.type === "registry:block").length} block variants.`,
     "## Editions and ownership",
-    "The current library is free and MIT licensed for personal and commercial use. The source is copied into the consumer’s project and can be modified there. Pro is listed as coming soon; advanced components, full-page blocks, templates, early access, and priority support are planned Pro features, not a currently available paid release.",
+    "The current library is free and MIT licensed for personal and commercial use. The source is copied into the consumer’s project and can be modified there. Pro is listed as coming soon at a planned one-time price of $199 ($149 for the first 30 days after launch); more animated and complex components, monthly new components, an AI skill for customizing components, full-page blocks, templates, lifetime updates, and priority support are planned Pro features, not a currently available paid release.",
     "## Installation",
     "Start with a React 19 and Tailwind CSS v4 application. Configure shadcn’s component aliases, utilities, and theme tokens. If your project has not been initialized, run `npx shadcn@latest init` first.",
     "```bash\nnpx shadcn@latest add https://ui.devsloka.in/r/text-effect.json\n# Bun alternative\nbunx shadcn@latest add https://ui.devsloka.in/r/text-effect.json\n# Install a specific block variant\nnpx shadcn@latest add https://ui.devsloka.in/r/sign-in-split.json\n```",
@@ -130,10 +131,11 @@ export function renderLlmsFull(): string {
     );
   }
 
-  lines.push("## Templates");
-  for (const template of templates) {
-    lines.push(`### ${template.title}`, template.description, `Documentation: ${siteUrl(`templates/${template.slug}`)}\nCategory: ${template.category}\nEdition: ${template.isPro ? "Pro" : "Free"}\nLive preview: ${template.href}\nSource repository: ${template.github}`);
-  }
+  // Templates are hidden for now. Uncomment to list them again.
+  // lines.push("## Templates");
+  // for (const template of templates) {
+  //   lines.push(`### ${template.title}`, template.description, `Documentation: ${siteUrl(`templates/${template.slug}`)}\nCategory: ${template.category}\nEdition: ${template.isPro ? "Pro" : "Free"}\nLive preview: ${template.href}\nSource repository: ${template.github}`);
+  // }
 
   lines.push("## Release history");
   for (const release of CHANGELOG) {

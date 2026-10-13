@@ -22,9 +22,8 @@ export function WorkflowSection() {
   return (
     <section className="mt-40">
       <SectionHeading
-        index="04"
-        label="Workflow"
         title="Copy. Paste. Own it."
+        description="No package to update, no runtime to depend on. The source lands in your repo and becomes yours to change."
       />
       <ol className="mt-12 grid grid-cols-1 border-t border-l border-border md:grid-cols-3">
         {STEPS.map((step, i) => (

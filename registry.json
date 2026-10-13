@@ -213,8 +213,7 @@
         }
       ],
       "dependencies": [
-        "@radix-ui/react-radio-group",
-        "motion"
+        "@radix-ui/react-radio-group"
       ]
     },
     {
@@ -409,6 +408,222 @@
       "registryDependencies": [
         "badge",
         "button"
+      ]
+    },
+    {
+      "name": "profile-card",
+      "type": "registry:ui",
+      "title": "Profile Card",
+      "description": "A social profile card with accent-tinted cover art, verified badge, follow toggle, stats and link.",
+      "files": [
+        {
+          "path": "src/registry/ui/profile-card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "availability-card",
+      "type": "registry:ui",
+      "title": "Availability Card",
+      "description": "A hire-me card with availability status, live local time, tactile buttons and copy-email feedback.",
+      "files": [
+        {
+          "path": "src/registry/ui/availability-card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "receipt-printer",
+      "type": "registry:ui",
+      "title": "Receipt Printer",
+      "description": "An order card that prints a receipt line by line with totals, a QR payment slot and a tear-off reset.",
+      "files": [
+        {
+          "path": "src/registry/ui/receipt-printer.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ]
+    },
+    {
+      "name": "reminders-card",
+      "type": "registry:ui",
+      "title": "Reminders Card",
+      "description": "A widget-style checklist with an accent header, live clock, animated checkboxes and inline add.",
+      "files": [
+        {
+          "path": "src/registry/ui/reminders-card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "now-playing-card",
+      "type": "registry:ui",
+      "title": "Now Playing Card",
+      "description": "A music widget with spinning vinyl album art that morphs into the full cover on hover.",
+      "files": [
+        {
+          "path": "src/registry/ui/now-playing-card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "motion"
+      ]
+    },
+    {
+      "name": "arc-scroll-steps",
+      "type": "registry:ui",
+      "title": "Arc Scroll Steps",
+      "description": "A scroll-driven stepper whose numbered steps orbit an arc while the active title swaps in.",
+      "files": [
+        {
+          "path": "src/registry/ui/arc-scroll-steps.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "motion"
+      ]
+    },
+    {
+      "name": "team-carousel",
+      "type": "registry:ui",
+      "title": "Team Carousel",
+      "description": "An infinite Embla team carousel that pauses on hover and highlights the hovered member.",
+      "files": [
+        {
+          "path": "src/registry/ui/team-carousel.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "embla-carousel-auto-scroll",
+        "embla-carousel-react",
+        "motion"
+      ]
+    },
+    {
+      "name": "dock-gallery",
+      "type": "registry:ui",
+      "title": "Dock Gallery",
+      "description": "A dock-style magnifying gallery: the card nearest the pointer grows and neighbours step down.",
+      "files": [
+        {
+          "path": "src/registry/ui/dock-gallery.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "motion"
+      ]
+    },
+    {
+      "name": "bento-grid",
+      "type": "registry:ui",
+      "title": "Bento Grid",
+      "description": "An animated bento feature grid with flowing files, drifting categories, a playable install and a copyable command.",
+      "files": [
+        {
+          "path": "src/registry/ui/bento-grid.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://ui.devsloka.in/r/profile-card.json"
+      ]
+    },
+    {
+      "name": "showcase-bento",
+      "type": "registry:ui",
+      "title": "Showcase Bento",
+      "description": "An animated showcase bento with hopping team portraits, a count-up stat and rotating testimonials.",
+      "files": [
+        {
+          "path": "src/registry/ui/showcase-bento.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ]
+    },
+    {
+      "name": "mission-bento",
+      "type": "registry:ui",
+      "title": "Mission Bento",
+      "description": "A stats bento with a masked heading reveal, staggered tiles, count-up numbers and a self-drawing trend arrow.",
+      "files": [
+        {
+          "path": "src/registry/ui/mission-bento.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ]
+    },
+    {
+      "name": "hover-expand-gallery",
+      "type": "registry:ui",
+      "title": "Hover Expand Gallery",
+      "description": "A row of image panels where the hovered one expands and reveals its label.",
+      "files": [
+        {
+          "path": "src/registry/ui/hover-expand-gallery.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "case-study-carousel",
+      "type": "registry:ui",
+      "title": "Case Study Carousel",
+      "description": "A stacked case-study carousel with peeking neighbours, arrows, dots, swipe and keyboard support.",
+      "files": [
+        {
+          "path": "src/registry/ui/case-study-carousel.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ]
+    },
+    {
+      "name": "fuzzy-mascot",
+      "type": "registry:ui",
+      "title": "Fuzzy Mascot",
+      "description": "Plush SVG mascots in 15 shapes with cursor-tracking eyes, three states, five shadings and accessories.",
+      "files": [
+        {
+          "path": "src/registry/ui/fuzzy-mascot.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "motion"
       ]
     },
     {

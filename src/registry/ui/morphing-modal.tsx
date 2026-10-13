@@ -34,6 +34,8 @@ export type MorphingModalProps = Omit<React.ComponentProps<"button">, "title" | 
 };
 
 const spring = { type: "spring", bounce: 0.15, duration: 0.45 } as const;
+// Indicators move on every arrow key, so they settle fast with barely any overshoot.
+const INDICATOR_SPRING = { type: "spring", duration: 0.3, bounce: 0.1 } as const;
 
 export function MorphingModal({
   trigger,
@@ -174,7 +176,7 @@ export function MorphingModal({
                                 <motion.span
                                   aria-hidden
                                   layoutId={`${id}-tab-indicator`}
-                                  transition={reduceMotion ? { duration: 0 } : spring}
+                                  transition={reduceMotion ? { duration: 0 } : INDICATOR_SPRING}
                                   className="absolute inset-0 rounded-md border bg-background shadow-sm"
                                 />
                               )}

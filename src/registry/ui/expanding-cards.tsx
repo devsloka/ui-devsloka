@@ -59,7 +59,7 @@ export function ExpandingCards({
             data-active={isActive}
             className={cn(
               "group relative min-h-0 min-w-0 grow basis-0 overflow-hidden rounded-xl bg-muted",
-              "transition-[flex-grow] duration-500 ease-out motion-reduce:transition-none",
+              "transition-[flex-grow] duration-400 ease-[cubic-bezier(0.77,0,0.175,1)] motion-reduce:transition-none",
               "data-[active=true]:grow-[5]"
             )}
           >
@@ -104,7 +104,7 @@ export function ExpandingCards({
                   id={contentId}
                   inert={!isActive}
                   className={cn(
-                    "grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none",
+                    "grid transition-[grid-template-rows,opacity] duration-400 ease-[cubic-bezier(0.77,0,0.175,1)] motion-reduce:transition-none",
                     isActive
                       ? "pointer-events-auto grid-rows-[1fr] opacity-100"
                       : "grid-rows-[0fr] opacity-0"

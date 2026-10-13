@@ -5,6 +5,9 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
+// Indicators move on every arrow key, so they settle fast with barely any overshoot.
+const INDICATOR_SPRING = { type: "spring", duration: 0.3, bounce: 0.1 } as const;
+
 export type TabsSwitcherItem = {
   value: string;
   title: React.ReactNode;
@@ -95,9 +98,7 @@ export function TabsSwitcher({
                   aria-hidden
                   className="absolute inset-0 rounded-lg border bg-muted"
                   transition={
-                    reduceMotion
-                      ? { duration: 0 }
-                      : { type: "spring", bounce: 0.15, duration: 0.45 }
+                    reduceMotion ? { duration: 0 } : INDICATOR_SPRING
                   }
                 />
               )}
@@ -105,7 +106,7 @@ export function TabsSwitcher({
               {item.description && (
                 <span
                   className={cn(
-                    "relative grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none",
+                    "relative grid grid-rows-[0fr] transition-[grid-template-rows] duration-200 ease-[cubic-bezier(0.77,0,0.175,1)] motion-reduce:transition-none",
                     "group-data-[state=active]:grid-rows-[1fr]"
                   )}
                 >
@@ -121,7 +122,7 @@ export function TabsSwitcher({
         })}
       </TabsPrimitive.List>
 
-      {/* Panels share one grid cell so they cross-fade without layout shift. */}
+      {/* Panels share one grid cell so they cross-fade without layout shift; a light blur masks the overlap. */}
       <div className="grid">
         {items.map((item) => {
           const isActive = item.value === activeValue;
@@ -132,9 +133,9 @@ export function TabsSwitcher({
               forceMount
               inert={!isActive}
               className={cn(
-                "col-start-1 row-start-1 rounded-xl outline-none transition-opacity duration-300 motion-reduce:transition-none",
+                "col-start-1 row-start-1 rounded-xl outline-none transition-[opacity,filter] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-opacity",
                 "focus-visible:ring-2 focus-visible:ring-ring",
-                "data-[state=inactive]:pointer-events-none data-[state=inactive]:opacity-0",
+                "data-[state=inactive]:pointer-events-none data-[state=inactive]:opacity-0 data-[state=inactive]:blur-[2px] motion-reduce:data-[state=inactive]:blur-none",
                 panelClassName
               )}
             >
