@@ -7,8 +7,6 @@ export function BlocksSection() {
   return (
     <section id="blocks" className="mt-40 scroll-mt-24">
       <SectionHeading
-        index="03"
-        label="Blocks"
         title="Whole sections, ready to assemble."
         description="Heroes, pricing, FAQs, footers. Stack them into a page, then restyle them like any other component."
       />

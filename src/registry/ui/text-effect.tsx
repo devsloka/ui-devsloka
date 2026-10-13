@@ -19,9 +19,9 @@ const EFFECTS = {
     exit: { y: "-40%", opacity: 0, rotateX: -90, transition: { duration: 0.3, ease: EASE_OUT } },
   },
   fade: {
-    initial: { opacity: 0, scale: 0.96 },
-    animate: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: "easeOut" } },
-    exit: { opacity: 0, scale: 1.04, transition: { duration: 0.3, ease: "easeIn" } },
+    initial: { opacity: 0, scale: 0.96, filter: "blur(2px)" },
+    animate: { opacity: 1, scale: 1, filter: "blur(0px)", transition: { duration: 0.4, ease: EASE_OUT } },
+    exit: { opacity: 0, scale: 1.04, filter: "blur(2px)", transition: { duration: 0.3, ease: EASE_OUT } },
   },
   slide: {
     initial: { y: "100%", opacity: 0 },
@@ -29,19 +29,19 @@ const EFFECTS = {
     exit: { y: "-100%", opacity: 0, transition: { duration: 0.35, ease: EASE_OUT } },
   },
   scale: {
-    initial: { scale: 0, opacity: 0 },
+    initial: { scale: 0.9, opacity: 0 },
     animate: { scale: 1, opacity: 1, transition: { duration: 0.4, ease: EASE_BACK } },
-    exit: { scale: 0, opacity: 0, transition: { duration: 0.25, ease: "easeIn" } },
+    exit: { scale: 0.9, opacity: 0, transition: { duration: 0.25, ease: EASE_OUT } },
   },
   rotate: {
     initial: { rotate: -90, opacity: 0, scale: 0.6 },
     animate: { rotate: 0, opacity: 1, scale: 1, transition: { duration: 0.5, ease: EASE_BACK } },
-    exit: { rotate: 90, opacity: 0, scale: 0.6, transition: { duration: 0.3, ease: "easeIn" } },
+    exit: { rotate: 90, opacity: 0, scale: 0.6, transition: { duration: 0.3, ease: EASE_OUT } },
   },
   bounce: {
     initial: { y: "-60%", opacity: 0 },
     animate: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 400, damping: 15 } },
-    exit: { y: "60%", opacity: 0, transition: { duration: 0.2, ease: "easeIn" } },
+    exit: { y: "60%", opacity: 0, transition: { duration: 0.2, ease: EASE_OUT } },
   },
   morph: {
     initial: { opacity: 0, clipPath: "inset(0 0 100% 0)" },
@@ -55,7 +55,8 @@ const EFFECTS = {
   },
 } satisfies Record<string, Variants>;
 
-const NO_MOTION: Variants = { initial: { opacity: 1 }, animate: { opacity: 1 }, exit: { opacity: 0 } };
+// Reduced motion keeps a plain crossfade.
+const NO_MOTION: Variants = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } };
 
 const ALIGN = {
   start: "justify-items-start",

@@ -6,6 +6,8 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+const EASE_OUT = [0.23, 1, 0.32, 1] as const;
+
 const SelectedValueContext = createContext<string | undefined>(undefined);
 
 export type CardRadioGroupProps = React.ComponentProps<typeof RadioGroupPrimitive.Root>;
@@ -83,12 +85,10 @@ export function CardRadioItem({
             key="check"
             aria-hidden
             className="absolute top-3 right-3 flex size-5 items-center justify-center rounded-full bg-primary text-primary-foreground"
-            initial={reduceMotion ? { opacity: 0 } : { scale: 0, opacity: 0 }}
+            initial={reduceMotion ? { opacity: 0 } : { scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={reduceMotion ? { opacity: 0 } : { scale: 0, opacity: 0 }}
-            transition={
-              reduceMotion ? { duration: 0.15 } : { type: "spring", stiffness: 500, damping: 25 }
-            }
+            exit={reduceMotion ? { opacity: 0 } : { scale: 0.9, opacity: 0 }}
+            transition={{ duration: 0.15, ease: EASE_OUT }}
           >
             <Check className="size-3" strokeWidth={3} />
           </motion.span>

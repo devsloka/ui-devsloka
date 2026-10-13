@@ -39,4 +39,22 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-package-lock.json
+
+# local editor and assistant tooling
+.claude/
+.agents/
+skills-lock.json
+
+# local caches and temporary output
+/.cache/
+/.turbo/
+/tmp/
+/temp/
+/test-results/
+/playwright-report/
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*~

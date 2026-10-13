@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { isNewItem } from "@/lib/new-items";
+import { NewBadge } from "@/components/root/new-badge";
 import { sidebarItems } from "@/utilities/sidebarItems";
 
 const CompSidebar = () => {
@@ -39,6 +41,7 @@ const CompSidebar = () => {
             <ul className="space-y-px">
               {section.children.map((item) => {
                 const isActive = pathname === item.href;
+                const badge = item.badge ?? (isNewItem(item.href) ? "New" : undefined);
                 return (
                   <li key={item.href}>
                     <Link
@@ -67,14 +70,10 @@ const CompSidebar = () => {
                         )}
                       </span>
                       <span className="truncate">{item.title}</span>
-                      {item.badge && (
-                        <span
-                          className={cn(
-                            "ml-auto shrink-0 font-mono text-[0.625rem] uppercase tracking-wider",
-                            item.badge === "Pro" ? "text-[#0A6EFF]" : "text-muted-foreground"
-                          )}
-                        >
-                          {item.badge}
+                      {badge === "New" && <NewBadge className="ml-auto" />}
+                      {badge === "Pro" && (
+                        <span className="ml-auto shrink-0 font-mono text-[0.625rem] uppercase tracking-wider text-[#0A6EFF]">
+                          Pro
                         </span>
                       )}
                     </Link>

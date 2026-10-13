@@ -1,40 +1,23 @@
 import { cn } from "@/lib/utils";
 
 type SectionHeadingProps = {
-  index: string;
-  label: string;
   title: React.ReactNode;
-  description?: React.ReactNode;
+  description: React.ReactNode;
   className?: string;
 };
 
-export function SectionHeading({
-  index,
-  label,
-  title,
-  description,
-  className,
-}: SectionHeadingProps) {
+// Every landing section opens the same way: a title, then a sentence on what's in it.
+// Centred, and calmer than the hero's display type: a moderate size, natural spacing,
+// and the description right under the title.
+export function SectionHeading({ title, description, className }: SectionHeadingProps) {
   return (
-    <header
-      className={cn(
-        "grid grid-cols-1 gap-6 border-t border-border pt-4 md:grid-cols-12",
-        className
-      )}
-    >
-      <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground md:col-span-3">
-        ({index}) {label}
+    <header className={cn("border-t border-border pt-8 text-center", className)}>
+      <h2 className="mx-auto max-w-3xl text-3xl leading-[1.1] font-medium tracking-[-0.03em] text-balance md:text-5xl md:leading-[1.05]">
+        {title}
+      </h2>
+      <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-pretty text-foreground/70 md:mt-5 md:text-lg">
+        {description}
       </p>
-      <div className="md:col-span-9">
-        <h2 className="text-4xl font-medium leading-[0.95] tracking-[-0.04em] text-balance md:text-6xl">
-          {title}
-        </h2>
-        {description && (
-          <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
-            {description}
-          </p>
-        )}
-      </div>
     </header>
   );
 }

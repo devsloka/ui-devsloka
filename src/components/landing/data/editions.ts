@@ -1,40 +1,49 @@
 export type EditionPlan = {
   name: string;
+  /** One line under the price: who the plan is for. */
+  tagline: string;
   price: string;
-  priceNote: string;
+  /** Small text after the price, e.g. "forever" or "one-time". */
+  priceSuffix: string;
+  /** A launch offer shown in place of the full price, which is then struck through. */
+  offer?: { price: string; note: string };
   features: string[];
   cta: { label: string; href: string };
+  comingSoon?: boolean;
   highlighted?: boolean;
 };
 
-// Pro is not launched yet. Update price, features and CTA here when it is.
+// Pro is not launched yet. Update the offer, features and CTA here when it is.
 export const EDITIONS: EditionPlan[] = [
   {
     name: "Free",
-    price: "₹0",
-    priceNote: "Free forever. MIT licensed.",
+    tagline: "Everything in the library, free for personal and commercial work.",
+    price: "$0",
+    priceSuffix: "forever",
     features: [
       "Every component, background and hook in the index",
       "Section blocks for real pages",
       "Install with the shadcn CLI or copy the source",
-      "Personal and commercial projects",
+      "MIT licensed, for personal and commercial projects",
+      "Updates as the library grows",
     ],
     cta: { label: "Browse components", href: "/components" },
   },
   {
     name: "Pro",
-    price: "Soon",
-    priceNote: "One licence. Lifetime updates.",
+    tagline: "More motion, more depth, and new components every month. Pay once, keep it forever.",
+    price: "$199",
+    priceSuffix: "one-time",
+    offer: { price: "$149", note: "Launch price for the first 30 days" },
     features: [
-      "Advanced components with complex interactions",
+      "More animated and complex components",
+      "New, on-trend components every month",
+      "An AI skill that customizes components for your project",
       "Full-page blocks and complete templates",
-      "Early access to new releases",
-      "Priority support",
+      "Lifetime updates and priority support",
     ],
-    cta: {
-      label: "Get notified",
-      href: "https://www.devsloka.in/contact-us",
-    },
+    cta: { label: "Get the launch price", href: "/pro" },
+    comingSoon: true,
     highlighted: true,
   },
 ];

@@ -10,7 +10,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
     links: [
       { label: "Components", href: "/components" },
       { label: "Blocks", href: "/blocks" },
-      { label: "Templates", href: "/templates" },
+      // { label: "Templates", href: "/templates" }, // Hidden for now.
       { label: "Backgrounds", href: "/components/backgrounds" },
       { label: "Hooks", href: "/utilities" },
     ],
@@ -27,7 +27,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
   {
     title: "Studio",
     links: [
-      { label: "Contact", href: "https://www.devsloka.in/contact-us" },
+      { label: "Contact", href: "https://www.devsloka.in/contact" },
       { label: "X", href: "https://x.com/devsloka_ui" },
       { label: "Instagram", href: "https://www.instagram.com/devsloka.in" },
     ],

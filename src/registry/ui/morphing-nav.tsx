@@ -4,6 +4,9 @@ import { useId, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
+// Indicators move on every arrow key, so they settle fast with barely any overshoot.
+const INDICATOR_SPRING = { type: "spring", duration: 0.3, bounce: 0.1 } as const;
+
 export type MorphingNavItem = {
   value: string;
   label: React.ReactNode;
@@ -93,9 +96,7 @@ export function MorphingNav({
                   aria-hidden
                   className={cn("absolute inset-0 rounded-md bg-primary", indicatorClassName)}
                   transition={
-                    reduceMotion
-                      ? { duration: 0 }
-                      : { type: "spring", bounce: 0.2, duration: 0.5 }
+                    reduceMotion ? { duration: 0 } : INDICATOR_SPRING
                   }
                 />
               )}

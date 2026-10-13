@@ -71,8 +71,8 @@ const CROPPED_HEIGHT = 640;
 const ASPECT = 16 / 10;
 const PADDING = 48;
 
-// Floating widgets that would otherwise appear in every screenshot.
-const HIDE_OVERLAYS = `document.querySelectorAll(".fixed.bottom-6.right-6").forEach((el) => (el.style.display = "none"))`;
+// Floating widgets, plus the Next.js dev-tools badge, which only exists in development.
+const HIDE_OVERLAYS = `document.querySelectorAll("[data-slot=feedback-widget], .fixed.bottom-6.right-6, nextjs-portal").forEach((el) => (el.style.display = "none"))`;
 
 const clipExpression = (frameDialog, centerOn) => `(() => {
   const target = ${frameDialog}

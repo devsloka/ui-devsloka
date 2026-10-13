@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { isNewItem } from "@/lib/new-items";
+import { NewBadge } from "@/components/root/new-badge";
 
 export type SectionNavItem = { title: string; href: string };
 
@@ -102,6 +104,7 @@ export function SectionNav({ items, className, ...props }: SectionNavProps) {
                   )}
                 </span>
                 {item.title}
+                {isNewItem(item.href) && <NewBadge className="tracking-wider" />}
               </Link>
             </li>
           );

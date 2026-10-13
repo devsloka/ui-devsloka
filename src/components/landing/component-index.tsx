@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { isNewItem } from "@/lib/new-items";
+import { NewBadge } from "@/components/root/new-badge";
 import {
   CATALOG,
   CATALOG_CATEGORIES,
@@ -105,6 +107,9 @@ export function ComponentIndex() {
                 </span>
                 <span className="col-span-7 text-xl font-medium tracking-[-0.02em] transition-transform duration-300 group-hover:translate-x-2 md:col-span-6 md:text-2xl">
                   {entry.name}
+                  {isNewItem(entry.href) && (
+                    <NewBadge className="ml-3 align-middle" />
+                  )}
                 </span>
                 <span className="hidden font-mono text-xs uppercase tracking-wider text-muted-foreground md:col-span-3 md:block">
                   {entry.category}

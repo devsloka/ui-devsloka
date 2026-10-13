@@ -25,6 +25,20 @@ import AnimatedSmartwatchDemo from "@/components/devsloka-components/demo/animat
 import PricingCardDemo from "@/components/devsloka-components/demo/pricing-card-demo";
 import { ProductCardDemo } from "@/components/devsloka-components/demo/product-card-demo";
 import LoaderDemo from "@/components/devsloka-components/demo/loader-demo";
+import ProfileCardDemo from "@/components/devsloka-components/demo/profile-card-demo";
+import AvailabilityCardDemo from "@/components/devsloka-components/demo/availability-card-demo";
+import ReceiptPrinterDemo from "@/components/devsloka-components/demo/receipt-printer-demo";
+import RemindersCardDemo from "@/components/devsloka-components/demo/reminders-card-demo";
+import NowPlayingCardDemo from "@/components/devsloka-components/demo/now-playing-card-demo";
+import ArcScrollStepsDemo from "@/components/devsloka-components/demo/arc-scroll-steps-demo";
+import TeamCarouselDemo from "@/components/devsloka-components/demo/team-carousel-demo";
+import DockGalleryDemo from "@/components/devsloka-components/demo/dock-gallery-demo";
+import BentoGridDemo from "@/components/devsloka-components/demo/bento-grid-demo";
+import ShowcaseBentoDemo from "@/components/devsloka-components/demo/showcase-bento-demo";
+import MissionBentoDemo from "@/components/devsloka-components/demo/mission-bento-demo";
+import HoverExpandGalleryDemo from "@/components/devsloka-components/demo/hover-expand-gallery-demo";
+import CaseStudyCarouselDemo from "@/components/devsloka-components/demo/case-study-carousel-demo";
+import FuzzyMascotDemo from "@/components/devsloka-components/demo/fuzzy-mascot-demo";
 
 export type ComponentMeta = {
   component: React.FC;
@@ -390,6 +404,188 @@ export const components: Record<string, ComponentMeta> = {
       secondaryTitle: "Copy source code and paste it in components/ui folder",
       secondaryLanguage: "typescript",
       secondaryDescription: "components/ui/product-card.tsx",
+    },
+  },
+  "profile-card": {
+    component: ProfileCardDemo,
+    codeMetadata: {
+      title: "Profile Card",
+      description:
+        "Social profile card with accent-tinted wave cover art, verified badge, controllable follow toggle, stats and link.",
+      keywords: ["React", "Profile Card", "Social", "Follow Button", "Accessible"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/profile-card.tsx",
+    },
+  },
+  "availability-card": {
+    component: AvailabilityCardDemo,
+    codeMetadata: {
+      title: "Availability Card",
+      description:
+        "Hire-me card with a live availability pulse, local-time clock, tactile buttons and a copy-email confirmation.",
+      keywords: ["React", "Availability Card", "Portfolio", "Copy to Clipboard", "Accessible"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/availability-card.tsx",
+    },
+  },
+  "receipt-printer": {
+    component: ReceiptPrinterDemo,
+    codeMetadata: {
+      title: "Receipt Printer",
+      description:
+        "Order card that prints a torn-edge receipt line by line, with itemised totals, a pay-by-QR slot and tear-off reset.",
+      keywords: ["React", "Receipt", "Printer Animation", "Commerce UI", "Motion", "Accessible"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/receipt-printer.tsx",
+    },
+  },
+  "reminders-card": {
+    component: RemindersCardDemo,
+    codeMetadata: {
+      title: "Reminders Card",
+      description:
+        "Widget-style checklist with a glowing accent header, live clock, animated checkboxes and inline add.",
+      keywords: ["React", "Reminders", "Checklist", "Todo", "Widget", "Accessible"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/reminders-card.tsx",
+    },
+  },
+  "now-playing-card": {
+    component: NowPlayingCardDemo,
+    codeMetadata: {
+      title: "Now Playing Card",
+      description:
+        "Music widget whose album art spins as a vinyl disc and morphs into the full cover on hover, with a live progress clock.",
+      keywords: ["React", "Music Player", "Vinyl", "Morph", "Motion", "Accessible"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/now-playing-card.tsx",
+    },
+  },
+  "arc-scroll-steps": {
+    component: ArcScrollStepsDemo,
+    codeMetadata: {
+      title: "Arc Scroll Steps",
+      description:
+        "Scroll-driven stepper: numbered steps orbit a large arc and the active step's title swaps in as you scroll.",
+      keywords: ["React", "Scroll Animation", "Stepper", "Snap Scrolling", "Motion", "Accessible"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/arc-scroll-steps.tsx",
+    },
+  },
+  "team-carousel": {
+    component: TeamCarouselDemo,
+    codeMetadata: {
+      title: "Team Carousel",
+      description:
+        "Infinite Embla carousel of team portraits that pauses on hover, lifts the hovered member and highlights their division.",
+      keywords: ["React", "Embla Carousel", "Infinite Carousel", "Team Section", "Auto Scroll", "Accessible"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/team-carousel.tsx",
+    },
+  },
+  "dock-gallery": {
+    component: DockGalleryDemo,
+    codeMetadata: {
+      title: "Dock Gallery",
+      description:
+        "Bottom-aligned project row that magnifies like a dock: the card nearest the pointer grows and its neighbours step down.",
+      keywords: ["React", "Dock", "Magnification", "Gallery", "Motion", "Accessible"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/dock-gallery.tsx",
+    },
+  },
+  "bento-grid": {
+    component: BentoGridDemo,
+    codeMetadata: {
+      title: "Bento Grid",
+      description:
+        "Animated bento feature grid: files flowing through an action, drifting category rows, a playable install and a copyable command.",
+      keywords: ["React", "Bento Grid", "Features", "Marquee", "Tailwind", "Accessible"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/bento-grid.tsx",
+    },
+  },
+  "showcase-bento": {
+    component: ShowcaseBentoDemo,
+    codeMetadata: {
+      title: "Showcase Bento",
+      description:
+        "Animated showcase bento: hopping team portraits, a count-up stat, rotating testimonials and drifting framework and tech rows.",
+      keywords: ["React", "Bento Grid", "Testimonials", "Counter", "Marquee", "Accessible"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/showcase-bento.tsx",
+    },
+  },
+  "mission-bento": {
+    component: MissionBentoDemo,
+    codeMetadata: {
+      title: "Mission Bento",
+      description:
+        "Stats bento with a masked heading reveal, staggered tiles, count-up numbers and a self-drawing trend arrow.",
+      keywords: ["React", "Bento Grid", "Stats", "Counter", "Scroll Reveal", "Accessible"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/mission-bento.tsx",
+    },
+  },
+  "hover-expand-gallery": {
+    component: HoverExpandGalleryDemo,
+    codeMetadata: {
+      title: "Hover Expand Gallery",
+      description:
+        "Row of image panels where the hovered one expands and reveals its label while the rest narrow; tap and arrow keys work too.",
+      keywords: ["React", "Image Gallery", "Accordion", "Hover Effect", "Tailwind", "Accessible"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/hover-expand-gallery.tsx",
+    },
+  },
+  "case-study-carousel": {
+    component: CaseStudyCarouselDemo,
+    codeMetadata: {
+      title: "Case Study Carousel",
+      description:
+        "Stacked case-study carousel: the active card leads while neighbours peek behind, with arrows, dots, swipe and keyboard.",
+      keywords: ["React", "Carousel", "Case Studies", "Portfolio", "Motion", "Accessible"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/case-study-carousel.tsx",
+    },
+  },
+  "fuzzy-mascot": {
+    component: FuzzyMascotDemo,
+    codeMetadata: {
+      title: "Fuzzy Mascot",
+      description:
+        "Plush SVG mascots in 15 shapes whose eyes follow the cursor, with idle, working and sleeping states, five shadings, hats, glasses and fur length.",
+      keywords: ["React", "Mascot", "Character", "Eye Tracking", "SVG Filters", "Fuzzy"],
+      language: "tsx",
+      secondaryTitle: "Copy source code and paste it in components/ui folder",
+      secondaryLanguage: "typescript",
+      secondaryDescription: "components/ui/fuzzy-mascot.tsx",
     },
   },
 };

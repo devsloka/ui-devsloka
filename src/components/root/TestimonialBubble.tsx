@@ -35,6 +35,7 @@ export default function TestimonialBubble() {
   return (
     <div
       ref={rootRef}
+      data-slot="feedback-widget"
       className="fixed right-4 bottom-4 z-50 flex flex-col items-end gap-2 md:right-6 md:bottom-6"
     >
       <AnimatePresence>
