@@ -23,7 +23,8 @@ const xml = await (await get("/sitemap.xml")).text();
 const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, url]) => decode(url));
 assert(urls.length > 0, "Sitemap contains URLs");
 assert.equal(new Set(urls).size, urls.length, "Sitemap has no duplicate URLs");
-const expectedPaths = Object.keys(manifest.routes).filter((path) => !["/_not-found", "/_global-error", "/contact-us"].includes(path) && !path.endsWith(".txt") && !path.endsWith(".xml"));
+// /templates is hidden for now (it returns 404), so it is not expected in the sitemap.
+const expectedPaths = Object.keys(manifest.routes).filter((path) => !["/_not-found", "/_global-error", "/contact-us", "/templates"].includes(path) && !path.endsWith(".txt") && !path.endsWith(".xml"));
 assert.deepEqual(new Set(urls.map((url) => new URL(url).pathname)), new Set(expectedPaths), "Sitemap matches all published HTML routes");
 assert(!urls.some((url) => url.endsWith("/contact-us")), "Placeholder contact page is excluded");
 
