@@ -47,7 +47,8 @@ function Wordmark() {
   );
 }
 
-const Navbar = () => {
+// The GitHub link is rendered on the server (it fetches the star count) and passed in.
+const Navbar = ({ github }: { github?: React.ReactNode }) => {
   const pathname = usePathname();
 
   return (
@@ -103,6 +104,7 @@ const Navbar = () => {
           <div className="hidden lg:block">
             <SearchCommand />
           </div>
+          {github}
           <ModeToggle />
           <MobileMenu pathname={pathname} />
         </div>
