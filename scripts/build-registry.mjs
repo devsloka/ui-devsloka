@@ -1,7 +1,7 @@
 // Builds the shadcn registry served from public/r.
 // Each item's npm and registry dependencies are derived from its imports, so
 // registry.json can't drift from the source again.
-//   node scripts/build-registry.mjs          sync registry.json and write public/r/*.json
+//   node scripts/build-registry.mjs          sync registry.json and write public/r/*.json (plus the public/r/registry.json index)
 //   node scripts/build-registry.mjs --check  exit 1 if either is out of date
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 
@@ -79,6 +79,16 @@ for (const item of registry.items) {
     problems.push(`${outputPath} is stale`);
     if (!isCheck) writeFileSync(outputPath, serialized);
   }
+}
+
+// The registry index at /r/registry.json lists every item, without file contents,
+// as the shadcn registry directory requires.
+const indexPath = `${OUTPUT_DIR}/registry.json`;
+const indexSerialized = JSON.stringify(registry, null, 2) + "\n";
+const currentIndex = existsSync(indexPath) ? readFileSync(indexPath, "utf8") : "";
+if (currentIndex !== indexSerialized) {
+  problems.push(`${indexPath} is stale`);
+  if (!isCheck) writeFileSync(indexPath, indexSerialized);
 }
 
 if (isCheck) {
