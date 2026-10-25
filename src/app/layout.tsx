@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { geistMono, geistSans } from "@/lib/fonts";
 import Navbar from "@/components/root/Navbar";
+import { GitHubStars } from "@/components/root/github-stars";
 import { ThemeProvider } from "@/contexts/theme-provider";
 import Footer from "@/components/root/Footer";
 import TestimonialBubble from "@/components/root/TestimonialBubble";
@@ -37,7 +38,7 @@ export default function RootLayout({
         >
           <Analytics />
           <SpeedInsights />
-          <Navbar />
+          <Navbar github={<GitHubStars />} />
           <main className="mx-auto w-full max-w-[88rem] items-start px-4">
             {children}
           </main>
