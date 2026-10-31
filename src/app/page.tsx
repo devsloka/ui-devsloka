@@ -1,6 +1,7 @@
 import { BlocksSection } from "@/components/landing/sections/blocks-section";
 import { ClosingSection } from "@/components/landing/sections/closing-section";
 import { EditionsSection } from "@/components/landing/sections/editions-section";
+import { FeaturedSection } from "@/components/landing/sections/featured-section";
 import { HeroSection } from "@/components/landing/sections/hero-section";
 import { IndexSection } from "@/components/landing/sections/index-section";
 import { InstallSection } from "@/components/landing/sections/install-section";
@@ -21,6 +22,7 @@ export default function Home() {
       <PlaygroundSection />
       <BlocksSection />
       <WorkflowSection />
+      <FeaturedSection />
       <EditionsSection />
       <ClosingSection />
     </>
