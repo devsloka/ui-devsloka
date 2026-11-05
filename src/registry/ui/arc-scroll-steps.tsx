@@ -87,7 +87,7 @@ export function ArcScrollSteps({
         {
           "--arc-accent": accent,
           // The arc scales with the component; numbers sit just outside it.
-          "--arc-radius": "clamp(14rem, 42cqw, 26rem)",
+          "--arc-radius": "clamp(9rem, 42cqw, 26rem)",
           ...style,
         } as React.CSSProperties
       }
@@ -107,13 +107,13 @@ export function ArcScrollSteps({
         {/* Thin arc, centred off the left edge so only its right side shows. */}
         <div
           aria-hidden
-          className="absolute top-1/2 size-[calc(var(--arc-radius)*2)] -translate-y-1/2 rounded-full border border-foreground/15"
+          className="absolute top-[38%] size-[calc(var(--arc-radius)*2)] -translate-y-1/2 rounded-full border border-foreground/15 @md:top-1/2"
           style={{ left: "calc(36% - var(--arc-radius) * 2)" }}
         />
 
         {/* The wheel: a zero-size point at the arc's centre that the steps orbit. */}
         <motion.div
-          className="absolute top-1/2 size-0"
+          className="absolute top-[38%] size-0 @md:top-1/2"
           style={{ left: "calc(36% - var(--arc-radius))", transform: wheelTransform }}
         >
           {steps.map((item, index) => (
@@ -129,7 +129,14 @@ export function ArcScrollSteps({
           ))}
         </motion.div>
 
-        <div aria-live="polite" className="absolute top-1/2 right-6 left-[52%] -translate-y-1/2 sm:right-10">
+        {/* Narrow containers stack the step text under the arc; wider ones set it beside the arc. */}
+        <div
+          aria-live="polite"
+          className={cn(
+            "absolute inset-x-6 @md:inset-x-auto @md:top-1/2 @md:right-10 @md:bottom-auto @md:left-[52%] @md:-translate-y-1/2",
+            footer ? "bottom-20" : "bottom-8"
+          )}
+        >
           <AnimatePresence mode="popLayout" initial={false} custom={direction}>
             <motion.div
               key={active}
@@ -144,7 +151,7 @@ export function ArcScrollSteps({
               exit="exit"
               transition={{ duration: 0.35, ease: EASE_OUT }}
             >
-              <h3 className="text-4xl leading-none font-semibold tracking-[-0.04em] text-balance @2xl:text-6xl">
+              <h3 className="text-3xl leading-none font-semibold tracking-[-0.04em] text-balance @md:text-4xl @2xl:text-6xl">
                 {step?.title}
               </h3>
               {step?.description && (
@@ -179,10 +186,11 @@ function ArcStepMarker({
   onSelect: () => void;
   label: React.ReactNode;
 }) {
-  // 0 at the active slot, 1 once a full step away: drives size and emphasis.
-  const distance = useTransform(position, (value) => Math.min(Math.abs(value - index), 1));
-  const scale = useTransform(distance, [0, 1], [1, 0.62]);
-  const opacity = useTransform(distance, [0, 1], [1, 0.28]);
+  // 0 at the active slot, 1 once a full step away: drives size and emphasis. Steps two or more
+  // away fade out entirely, so on short or narrow stages they never sit behind the step text.
+  const distance = useTransform(position, (value) => Math.min(Math.abs(value - index), 2));
+  const scale = useTransform(distance, [0, 1, 2], [1, 0.62, 0.62]);
+  const opacity = useTransform(distance, [0, 1, 2], [1, 0.28, 0]);
   const numberTransform = useMotionTemplate`translateY(-50%) scale(${scale})`;
 
   return (
@@ -204,7 +212,7 @@ function ArcStepMarker({
         aria-current={active ? "step" : undefined}
         aria-label={typeof label === "string" ? `Step ${index + 1}: ${label}` : `Step ${index + 1}`}
         style={{ opacity, transform: numberTransform }}
-        className="absolute top-0 left-5 origin-left cursor-pointer rounded-md px-1 font-mono text-5xl leading-none font-semibold tracking-tight outline-none focus-visible:ring-2 focus-visible:ring-ring @2xl:left-7 @2xl:text-6xl"
+        className="absolute top-0 left-5 origin-left cursor-pointer rounded-md px-1 font-mono text-4xl leading-none font-semibold tracking-tight outline-none focus-visible:ring-2 focus-visible:ring-ring @md:text-5xl @2xl:left-7 @2xl:text-6xl"
       >
         {pad(index + 1)}
       </motion.button>

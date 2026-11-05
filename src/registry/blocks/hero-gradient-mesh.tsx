@@ -88,8 +88,8 @@ export default function HeroGradientMesh({
           {title}
         </h1>
 
-        <div className="mt-14 grid gap-10 md:grid-cols-12">
-          <div className="md:col-span-5">
+        <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-12">
+          <div className="min-w-0 md:col-span-5">
             <p className="max-w-md text-base leading-relaxed text-muted-foreground">
               {description}
             </p>
@@ -115,13 +115,13 @@ export default function HeroGradientMesh({
             </p>
             <a
               href={docsLink.href}
-              className="mt-5 inline-block text-sm font-medium underline decoration-1 underline-offset-[6px] hover:text-muted-foreground"
+              className="mt-3 inline-flex min-h-11 items-center text-sm font-medium underline decoration-1 underline-offset-[6px] hover:text-muted-foreground"
             >
               {docsLink.label}
             </a>
           </div>
 
-          <figure className="border bg-card md:col-span-7" aria-label="Example terminal session">
+          <figure className="min-w-0 border bg-card md:col-span-7" aria-label="Example terminal session">
             <div className="flex items-center gap-3 border-b px-4 py-2.5">
               <span aria-hidden className="flex gap-1.5">
                 <span className="size-2.5 border" />

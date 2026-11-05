@@ -71,7 +71,7 @@ export const blocks: Record<string, BlockMeta> = {
     block: PricingBlock,
     name: "pricing-block",
     title: "Pricing Section",
-    description: "Interactive pricing component with multiple plans",
+    description: "Plan columns with a monthly and yearly toggle, a highlighted plan and link calls to action",
     imageUrl: "https://yourwebsite.com/images/pricing-block.png",
     codeMetadata: {
       mainFile: {

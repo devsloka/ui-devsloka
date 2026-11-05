@@ -9,6 +9,8 @@
     "lint": "eslint .",
     "registry:build": "node scripts/build-registry.mjs",
     "registry:check": "node scripts/build-registry.mjs --check",
+    "skill:build": "node scripts/build-skill.mjs",
+    "skill:check": "node scripts/build-skill.mjs --check",
     "previews": "node scripts/capture-previews.mjs",
     "seo:check": "node scripts/check-seo.mjs"
   },

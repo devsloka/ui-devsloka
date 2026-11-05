@@ -20,6 +20,7 @@ const NAV_LINKS = [
   { label: "Components", href: "/components", isNew: true },
   { label: "Blocks", href: "/blocks", isNew: true },
   // { label: "Templates", href: "/templates" }, // Hidden for now.
+  { label: "Skill", href: "/skill", isNew: true },
   { label: "Docs", href: "/docs" },
   { label: "Changelog", href: "/changelog" },
 ];

@@ -10,6 +10,8 @@ export type WaveFooterProps = {
   links?: WaveFooterLink[];
   socialLinks?: WaveFooterLink[];
   email?: string;
+  /** Place line next to the year, e.g. a city. Pass an empty string to hide it. */
+  location?: string;
   year?: number;
 } & ComponentProps<"footer">;
 
@@ -39,6 +41,7 @@ export function WaveFooter({
   links = DEFAULT_LINKS,
   socialLinks = DEFAULT_SOCIAL,
   email = "studio@halden.example",
+  location = "Oslo — Bergen",
   year = 2026,
   className,
   ...props
@@ -92,7 +95,7 @@ export function WaveFooter({
 
         <div className="mt-14 flex items-center justify-between border-t pt-4 font-mono text-xs uppercase tracking-wider text-muted-foreground">
           <span className="tabular-nums">© {year}</span>
-          <span>Oslo — Bergen</span>
+          {location && <span>{location}</span>}
         </div>
       </div>
 

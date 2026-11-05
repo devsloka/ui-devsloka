@@ -153,13 +153,13 @@ export function CaseStudyCarousel({
             onClick={() => setActive(i)}
             aria-label={`Show ${item.title}`}
             aria-current={i === active ? "true" : undefined}
-            className="group flex h-4 cursor-pointer items-center outline-none"
+            className="group flex h-11 min-w-6 cursor-pointer items-center justify-center outline-none"
           >
             <span
               className={cn(
                 "block h-1.5 rounded-full transition-[width,background-color] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-focus-visible:ring-2 group-focus-visible:ring-[var(--case-accent)]",
                 i === active
-                  ? "w-8 bg-linear-to-r from-[color-mix(in_oklab,var(--case-accent)_45%,white)] via-[var(--case-accent)] to-[color-mix(in_oklab,var(--case-accent)_60%,#a855f7)]"
+                  ? "w-8 bg-[var(--case-accent)]"
                   : "w-1.5 bg-neutral-200 group-hover:bg-neutral-300"
               )}
             />

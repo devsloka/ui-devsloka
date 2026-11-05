@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { useRef, useSyncExternalStore } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { cn } from "@/lib/utils";
 
 const COLORS = {
@@ -10,6 +10,25 @@ const COLORS = {
 } as const;
 
 export type LaptopColor = keyof typeof COLORS;
+
+const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
+const subscribeToReducedMotion = (onChange: () => void) => {
+  const query = window.matchMedia(REDUCED_MOTION);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+};
+
+/**
+ * The server can't know the visitor's motion preference, so the first client render must
+ * match its HTML (animated). The real preference is applied right after hydration.
+ */
+function usePrefersReducedMotion() {
+  return useSyncExternalStore(
+    subscribeToReducedMotion,
+    () => window.matchMedia(REDUCED_MOTION).matches,
+    () => false
+  );
+}
 
 export type AnimatedMacBookProps = React.ComponentProps<"div"> & {
   /** Screen content, e.g. an image or a live UI. Fills a 16:10 screen. */
@@ -39,7 +58,7 @@ export function AnimatedMacBook({
   ...props
 }: AnimatedMacBookProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,

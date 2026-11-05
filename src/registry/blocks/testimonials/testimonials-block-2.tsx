@@ -16,7 +16,8 @@ export type WallQuote = {
 export type TestimonialsBlockTwoProps = {
   eyebrow?: string;
   title?: string;
-  rating?: { score: string; count: string };
+  /** Aggregate rating shown under the title. Pass null when you don't have real numbers. */
+  rating?: { score: string; count: string } | null;
   quotes?: WallQuote[];
   footnote?: string;
 } & ComponentProps<"section">;
