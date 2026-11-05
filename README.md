@@ -64,6 +64,16 @@ export default function Example() {
 
 Components support props for their content and behavior. The latest blocks also expose colour props so you can adapt the default Devsloka blue to your brand. Check each component’s source and live demo for its API.
 
+## Anti-Slop agent skill
+
+An agent skill that builds art-directed landing pages from Devsloka UI blocks and components, [Linework](https://linework.devsloka.in) illustrations and [ASCII](https://ascii.devsloka.in) particle art. It then screenshots every section and redesigns anything that reads as generic AI output. It includes seven art-direction presets, SEO and responsive rules, and two local scripts: a slop scanner and a screenshot audit.
+
+```bash
+npx skills add devsloka/ui-devsloka --skill devsloka-anti-slop
+```
+
+You can also [download the zip](https://ui.devsloka.in/skill/devsloka-anti-slop.zip) or copy [skills/devsloka-anti-slop](skills/devsloka-anti-slop) into `.claude/skills/`. The [skill guide](https://ui.devsloka.in/skill) covers usage, presets and the review loop.
+
 ## Components and blocks
 
 Explore the [component library](https://ui.devsloka.in/components) for morphing navigation, cards and modals, animated galleries, carousels, radio inputs, range sliders, text effects, loaders, and more.
@@ -137,6 +147,13 @@ npm run build
 ```
 
 The registry builder derives npm and registry dependencies from source imports and writes the installable JSON files to [public/r](public/r). Use `npm run lint` to check code style.
+
+The Anti-Slop skill documents every published component and block in [references/catalog.md](skills/devsloka-anti-slop/references/catalog.md). When you add, rename or remove a registry item, update the catalog. After any change to the skill, rebuild the download:
+
+```bash
+npm run skill:build   # writes public/skill/devsloka-anti-slop.zip
+npm run skill:check   # fails if the zip is stale or the catalog and registry.json disagree
+```
 
 For changes to a component’s appearance, regenerate its preview image against a running local site. In a second terminal:
 
