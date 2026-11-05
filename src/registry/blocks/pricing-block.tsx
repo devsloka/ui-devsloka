@@ -1,183 +1,226 @@
 "use client";
-import React, { useState } from "react";
+
+import { useId, useRef, useState, type ComponentProps, type CSSProperties, type KeyboardEvent } from "react";
 import { Check } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-type BillingCycle = "monthly" | "yearly";
+export type BillingCycle = "monthly" | "yearly";
 
-interface PricingPlan {
-  plan: string;
-  key: "Free" | "Standard" | "Pro";
-  isPopular?: boolean;
+export type PricingPlan = {
+  name: string;
+  /** One line on who the plan is for. */
+  description?: string;
+  /** Display prices per cycle, e.g. { monthly: "$18", yearly: "$15" }. */
+  price: Record<BillingCycle, string>;
+  /** Text after the price per cycle. Defaults to "per month" and "per month, billed yearly". */
+  period?: Partial<Record<BillingCycle, string>>;
   features: string[];
-}
+  cta: { label: string; href: string };
+  /** Marks the recommended plan with the accent colour. */
+  highlighted?: boolean;
+  /** Short label on the highlighted plan, e.g. "Most studios pick this". */
+  badge?: string;
+};
 
-const pricingPlans: PricingPlan[] = [
+export type PricingBlockProps = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  plans?: PricingPlan[];
+  defaultBilling?: BillingCycle;
+  /** Shown next to the yearly option, e.g. "2 months free". */
+  yearlyNote?: string;
+  footnote?: string;
+  /** Any CSS color for the highlighted plan and the active toggle. */
+  accent?: string;
+  /** Text color on the accent. */
+  accentForeground?: string;
+} & Omit<ComponentProps<"section">, "title">;
+
+const DEFAULT_PLANS: PricingPlan[] = [
   {
-    key: "Free",
-    plan: "Free Plan",
-    features: [
-      "Send up to 2 transfers per month",
-      "Basic transaction history",
-      "Email support",
-      "Limited currency support (USD, EUR, GBP)",
-      "Basic security features",
-    ],
+    name: "Solo",
+    description: "For one person sending a handful of invoices a month.",
+    price: { monthly: "$0", yearly: "$0" },
+    period: { monthly: "free for good", yearly: "free for good" },
+    features: ["5 invoices a month", "Card and bank payments", "Automatic reminders on day 7 and 14"],
+    cta: { label: "Start invoicing free", href: "#" },
   },
   {
-    key: "Standard",
-    plan: "Standard Plan",
-    isPopular: true,
+    name: "Studio",
+    description: "For small teams that bill by the project or the hour.",
+    price: { monthly: "$18", yearly: "$15" },
     features: [
-      "Unlimited transfers",
-      "Transaction history with export options",
-      "Priority email support",
-      "Expanded currency support",
-      "Advanced security features",
+      "Unlimited invoices and quotes",
+      "Time tracking that turns into line items",
+      "Up to 5 teammates",
+      "Exports for Xero and QuickBooks",
     ],
+    cta: { label: "Try Studio for 14 days", href: "#" },
+    highlighted: true,
+    badge: "Most studios pick this",
   },
   {
-    key: "Pro",
-    plan: "Pro Plan",
-    features: [
-      "Unlimited transfers with priority processing",
-      "Comprehensive transaction analytics",
-      "24/7 priority support",
-      "Full currency support",
-      "Enhanced security features",
-    ],
+    name: "Agency",
+    description: "For agencies with several clients and approval steps.",
+    price: { monthly: "$42", yearly: "$35" },
+    features: ["Everything in Studio", "Unlimited teammates", "Client approval before sending", "Priority support, replies within 4 hours"],
+    cta: { label: "Talk to us about Agency", href: "#" },
   },
 ];
 
-const pricingData = {
-  monthly: {
-    Free: "Free",
-    Standard: "$9.99",
-    Pro: "$19.99",
-  },
-  yearly: {
-    Free: "Free",
-    Standard: "$99.99",
-    Pro: "$199.99",
-  },
+const DEFAULTS = {
+  eyebrow: "(Pricing)",
+  title: "Pay for the invoices you send, not the seats you might need.",
+  description: "Every plan includes card and bank payments at the processor's rate. We don't add a percentage on top.",
+  yearlyNote: "2 months free",
+  footnote: "Prices in USD, excluding tax. Cancel any time; your invoices stay exportable.",
 };
 
-function PricingCard({
-  plan,
-  price,
-  features,
-  isPopular,
-  onClick,
-}: {
-  plan: string;
-  price: string;
-  features: string[];
-  isPopular?: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <div
-      className={`relative bg-card/20 backdrop-blur-2xl rounded-3xl p-8 flex flex-col h-full border shadow-2xl ${
-        isPopular ? "border-primary/20" : "border-border/5"
-      }`}
-    >
-      <div className="mb-8">
-        <p className="text-muted-foreground mb-2">{plan}</p>
-        <h2 className="text-4xl font-bold text-foreground flex items-end gap-2">
-          {price}
-          {price !== "Free" && (
-            <span className="text-xl text-muted-foreground">
-              /{price.includes("99.99") ? "yr" : "mo"}
-            </span>
-          )}
-        </h2>
-      </div>
+const CYCLES: { value: BillingCycle; label: string }[] = [
+  { value: "monthly", label: "Monthly" },
+  { value: "yearly", label: "Yearly" },
+];
 
-      <div className="flex-grow">
-        {features.map((feature, index) => (
-          <div key={index} className="flex items-center gap-3 mb-4">
-            <div className="bg-primary/10 rounded-full p-1">
-              <Check size={16} className="text-primary" />
-            </div>
-            <span className="text-muted-foreground text-sm">{feature}</span>
-          </div>
-        ))}
-      </div>
+/**
+ * Pricing section: a heading, a monthly/yearly toggle and plan columns separated by hairlines.
+ * The highlighted plan carries the accent; every plan's call to action is a link.
+ */
+export default function PricingBlock({
+  eyebrow = DEFAULTS.eyebrow,
+  title = DEFAULTS.title,
+  description = DEFAULTS.description,
+  plans = DEFAULT_PLANS,
+  defaultBilling = "yearly",
+  yearlyNote = DEFAULTS.yearlyNote,
+  footnote = DEFAULTS.footnote,
+  accent = "#0A6EFF",
+  accentForeground = "#FFFFFF",
+  className,
+  style,
+  ...props
+}: PricingBlockProps) {
+  const headingId = useId();
+  const [billing, setBilling] = useState<BillingCycle>(defaultBilling);
+  const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-      <button
-        onClick={onClick}
-        className={`mt-8 py-4 px-6 rounded-full text-sm font-medium transition-all cursor-pointer ${
-          isPopular
-            ? "bg-primary text-primary-foreground hover:bg-primary/90"
-            : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-        }`}
-      >
-        Get Started
-      </button>
-    </div>
-  );
-}
-
-function PricingBlock() {
-  const [billing, setBilling] = useState<BillingCycle>("yearly");
-
-  const handleGetStarted = (planKey: string) => {
-    console.log(`User selected: ${planKey} plan with ${billing} billing`);
-    // Example: router.push(`/checkout?plan=${planKey}&billing=${billing}`);
+  // Radio-group keyboard pattern: arrow keys move the selection and the focus together.
+  const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
+    event.preventDefault();
+    const next = (index + (event.key === "ArrowLeft" || event.key === "ArrowUp" ? -1 : 1) + CYCLES.length) % CYCLES.length;
+    setBilling(CYCLES[next].value);
+    optionRefs.current[next]?.focus();
   };
 
   return (
-    <div className="min-h-screen bg-background overflow-hidden relative p-8">
-      <div className="absolute inset-0 bg-gradient-radial from-muted/50 via-background to-background" />
+    <section
+      data-slot="pricing-block"
+      aria-labelledby={headingId}
+      style={{ "--block-accent": accent, "--block-accent-fg": accentForeground, ...style } as CSSProperties}
+      className={cn("w-full bg-background text-foreground", className)}
+      {...props}
+    >
+      <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <div className="grid gap-6 md:grid-cols-12 md:gap-10">
+          <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground md:col-span-4">{eyebrow}</p>
+          <div className="md:col-span-8">
+            <h2 id={headingId} className="text-3xl font-semibold tracking-[-0.03em] text-balance sm:text-4xl md:text-5xl">
+              {title}
+            </h2>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">{description}</p>
 
-      {/* Background Watermark */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none select-none">
-        <h1 className="text-[20rem] font-bold text-muted">Pricing</h1>
-      </div>
-
-      <div className="max-w-6xl mx-auto relative">
-        <div className="text-center mb-16">
-          <h1 className="text-8xl font-bold mb-4 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-            Pricing
-          </h1>
-          <div className="inline-flex items-center gap-2 bg-card/40 backdrop-blur-xl p-1 rounded-full border border-border/10">
-            <button
-              onClick={() => setBilling("yearly")}
-              className={`px-4 py-2 rounded-full text-sm cursor-pointer ${
-                billing === "yearly"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground"
-              }`}
-            >
-              Billed Yearly
-            </button>
-            <button
-              onClick={() => setBilling("monthly")}
-              className={`px-4 py-2 rounded-full text-sm cursor-pointer ${
-                billing === "monthly"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground"
-              }`}
-            >
-              Billed Monthly
-            </button>
+            <div role="radiogroup" aria-label="Billing period" className="mt-8 inline-flex border">
+              {CYCLES.map((cycle, index) => {
+                const checked = billing === cycle.value;
+                return (
+                  <button
+                    key={cycle.value}
+                    ref={(node) => {
+                      optionRefs.current[index] = node;
+                    }}
+                    type="button"
+                    role="radio"
+                    aria-checked={checked}
+                    tabIndex={checked ? 0 : -1}
+                    onClick={() => setBilling(cycle.value)}
+                    onKeyDown={(event) => onKeyDown(event, index)}
+                    className={cn(
+                      "min-h-11 cursor-pointer px-4 font-mono text-xs uppercase tracking-wider transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--block-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                      checked ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {cycle.label}
+                    {cycle.value === "yearly" && yearlyNote && (
+                      <span className={cn("ml-2 normal-case tracking-normal", checked ? "text-background/70" : "text-[var(--block-accent)]")}>
+                        {yearlyNote}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {pricingPlans.map((plan) => (
-            <PricingCard
-              key={plan.key}
-              plan={plan.plan}
-              price={pricingData[billing][plan.key]}
-              features={plan.features}
-              isPopular={plan.isPopular}
-              onClick={() => handleGetStarted(plan.key)}
-            />
-          ))}
-        </div>
+        <ul className={cn("mt-16 grid border-t", plans.length >= 3 ? "lg:grid-cols-3" : "md:grid-cols-2")}>
+          {plans.map((plan, i) => {
+            const period = plan.period?.[billing] ?? (billing === "yearly" ? "per month, billed yearly" : "per month");
+            return (
+              <li
+                key={plan.name}
+                className={cn(
+                  "relative flex flex-col border-b py-10 lg:border-b-0 lg:px-8 lg:first:pl-0 lg:last:pr-0",
+                  i > 0 && "lg:border-l"
+                )}
+              >
+                {plan.highlighted && (
+                  <span aria-hidden className="absolute -top-px right-0 left-0 h-0.5 bg-[var(--block-accent)] lg:left-8 lg:right-8" />
+                )}
+                <div className="flex flex-wrap items-baseline justify-between gap-3">
+                  <h3 className="text-lg font-medium tracking-[-0.01em]">{plan.name}</h3>
+                  {plan.highlighted && plan.badge && (
+                    <span className="bg-[var(--block-accent)] px-2 py-1 font-mono text-[0.625rem] uppercase tracking-wider text-[var(--block-accent-fg)]">
+                      {plan.badge}
+                    </span>
+                  )}
+                </div>
+                {plan.description && <p className="mt-2 max-w-[32ch] text-sm leading-relaxed text-muted-foreground">{plan.description}</p>}
+
+                <p className="mt-8 flex items-baseline gap-2">
+                  <span className="text-5xl font-semibold tracking-[-0.04em] tabular-nums">{plan.price[billing]}</span>
+                  <span className="text-sm text-muted-foreground">{period}</span>
+                </p>
+
+                <ul className="mt-8 mb-10 flex-1 space-y-3 text-sm">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex gap-3">
+                      <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-[var(--block-accent)]" strokeWidth={2} />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href={plan.cta.href}
+                  className={cn(
+                    "inline-flex min-h-11 items-center justify-center px-5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--block-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                    plan.highlighted
+                      ? "bg-[var(--block-accent)] text-[var(--block-accent-fg)] hover:opacity-90"
+                      : "border hover:bg-muted"
+                  )}
+                >
+                  {plan.cta.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+
+        {footnote && <p className="mt-10 border-t pt-4 text-xs leading-relaxed text-muted-foreground">{footnote}</p>}
       </div>
-    </div>
+    </section>
   );
 }
 
-export default PricingBlock;
+export { PricingBlock };

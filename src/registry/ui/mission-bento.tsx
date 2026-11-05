@@ -32,6 +32,18 @@ export type MissionBentoProps = Omit<React.ComponentProps<"section">, "title"> &
   highlight?: MissionStat;
   /** Any CSS color for the eyebrow and status accents. */
   accent?: string;
+  /** Section background. */
+  surface?: string;
+  /** Text color on the section and its small cards. */
+  foreground?: string;
+  /** Background of the small cards and the eyebrow pill. */
+  card?: string;
+  /** Background of the large highlight card. */
+  highlightSurface?: string;
+  /** Text color on the highlight card. */
+  highlightForeground?: string;
+  /** Color of the live status dot. */
+  statusColor?: string;
 };
 
 const TOOLS = [
@@ -90,6 +102,12 @@ export function MissionBento({
   stats = DEFAULT_STATS,
   highlight = DEFAULT_HIGHLIGHT,
   accent = "#0A6EFF",
+  surface = "#F4F4F3",
+  foreground = "#171717",
+  card = "rgb(255 255 255 / 0.7)",
+  highlightSurface = "#1C1C1C",
+  highlightForeground = "#FFFFFF",
+  statusColor = "#10B981",
   className,
   style,
   ...props
@@ -102,25 +120,36 @@ export function MissionBento({
   return (
     <section
       data-slot="mission-bento"
-      style={{ "--mission-accent": accent, ...style } as React.CSSProperties}
-      className={cn("@container w-full rounded-[2rem] bg-[#F4F4F3] px-6 py-10 text-neutral-900 sm:px-10 sm:py-12", className)}
+      style={
+        {
+          "--mission-accent": accent,
+          "--mission-surface": surface,
+          "--mission-fg": foreground,
+          "--mission-card": card,
+          "--mission-highlight": highlightSurface,
+          "--mission-highlight-fg": highlightForeground,
+          "--mission-status": statusColor,
+          ...style,
+        } as React.CSSProperties
+      }
+      className={cn("@container w-full rounded-[2rem] bg-[var(--mission-surface)] px-6 py-10 text-[var(--mission-fg)] sm:px-10 sm:py-12", className)}
       {...props}
     >
       <div ref={ref} className="mx-auto max-w-5xl">
-        <span className="inline-flex rounded-full border border-black/5 bg-white px-3 py-1 text-[0.625rem] font-semibold tracking-wider text-[var(--mission-accent)] uppercase shadow-sm">
+        <span className="inline-flex rounded-full border border-[var(--mission-fg)]/5 bg-[var(--mission-card)] px-3 py-1 text-[0.625rem] font-semibold tracking-wider text-[var(--mission-accent)] uppercase shadow-sm">
           {eyebrow}
         </span>
 
         <div className="mt-6 flex flex-col gap-6 @3xl:flex-row @3xl:items-end @3xl:justify-between">
           <h2 className="text-4xl leading-[1.05] font-medium tracking-[-0.04em] @3xl:text-5xl">
-            <RevealLine show={inView} reduce={reduceMotion} className="text-neutral-400">
+            <RevealLine show={inView} reduce={reduceMotion} className="text-[var(--mission-fg)]/40">
               {lead}
             </RevealLine>
             <RevealLine show={inView} reduce={reduceMotion} delay={0.08}>
               {title}
             </RevealLine>
           </h2>
-          <p className="max-w-xs text-sm leading-relaxed text-neutral-500">{description}</p>
+          <p className="max-w-xs text-sm leading-relaxed text-[var(--mission-fg)]/60">{description}</p>
         </div>
 
         {/* Container queries: the bento layout follows the component's width. In two columns
@@ -145,23 +174,23 @@ export function MissionBento({
 
           <motion.div {...tile} className={cn(cardClass, "flex min-h-14 items-center gap-2.5 px-4 text-[0.625rem] font-semibold tracking-wider uppercase @2xl:col-start-2 @2xl:row-start-1 @4xl:row-start-3")}>
             <span aria-hidden className="relative flex size-2.5">
-              <span className="absolute inset-0 animate-ping rounded-full bg-emerald-500/60 [animation-duration:2s] motion-reduce:hidden" />
-              <span className="relative size-2.5 rounded-full bg-emerald-500" />
+              <span className="absolute inset-0 animate-ping rounded-full bg-[var(--mission-status)]/60 [animation-duration:2s] motion-reduce:hidden" />
+              <span className="relative size-2.5 rounded-full bg-[var(--mission-status)]" />
             </span>
             {status}
           </motion.div>
 
           <motion.div
             {...tile}
-            className="relative isolate flex min-h-72 flex-col overflow-hidden rounded-2xl bg-[#1C1C1C] p-6 text-white shadow-2xl shadow-black/25 @2xl:col-span-2 @2xl:row-start-3 @4xl:col-span-1 @4xl:col-start-3 @4xl:row-span-3 @4xl:row-start-1 @4xl:min-h-0"
+            className="relative isolate flex min-h-72 flex-col overflow-hidden rounded-2xl bg-[var(--mission-highlight)] p-6 text-[var(--mission-highlight-fg)] shadow-2xl shadow-black/25 @2xl:col-span-2 @2xl:row-start-3 @4xl:col-span-1 @4xl:col-start-3 @4xl:row-span-3 @4xl:row-start-1 @4xl:min-h-0"
           >
             <TrendArrow show={inView} reduce={reduceMotion} />
-            <p className="max-w-xs text-sm leading-relaxed text-white/75">{highlight.text}</p>
+            <p className="max-w-xs text-sm leading-relaxed text-[var(--mission-highlight-fg)]/75">{highlight.text}</p>
             <div className="mt-auto flex items-end justify-between gap-4">
               <p className="text-6xl leading-none font-medium tracking-[-0.05em] @4xl:text-7xl">
                 <CountUp stat={highlight} show={inView} reduce={reduceMotion} />
               </p>
-              <p className="pb-1 text-[0.625rem] leading-snug font-semibold tracking-wider text-white/70 uppercase">
+              <p className="pb-1 text-[0.625rem] leading-snug font-semibold tracking-wider text-[var(--mission-highlight-fg)]/70 uppercase">
                 {highlight.label}
               </p>
             </div>
@@ -172,7 +201,7 @@ export function MissionBento({
   );
 }
 
-const cardClass = "rounded-2xl border border-black/5 bg-white/70 shadow-[0_1px_2px_rgb(0_0_0/0.04)]";
+const cardClass = "rounded-2xl border border-[var(--mission-fg)]/5 bg-[var(--mission-card)] shadow-[0_1px_2px_rgb(0_0_0/0.04)]";
 
 // A heading line that rises from behind its own mask.
 function RevealLine({
@@ -213,7 +242,7 @@ function StatBody({ stat, show, reduce }: { stat: MissionStat; show: boolean; re
       <p className="mt-auto pt-6 text-6xl leading-none font-medium tracking-[-0.05em] @4xl:text-7xl">
         <CountUp stat={stat} show={show} reduce={reduce} />
       </p>
-      <p className="mt-2 text-sm text-neutral-500">{stat.label}</p>
+      <p className="mt-2 text-sm text-[var(--mission-fg)]/60">{stat.label}</p>
     </>
   );
 }
@@ -255,7 +284,7 @@ function TrendArrow({ show, reduce }: { show: boolean; reduce: boolean }) {
     <svg
       aria-hidden
       viewBox="0 0 320 220"
-      className="absolute right-0 bottom-10 -z-10 h-[65%] w-auto max-w-[85%] text-white/[0.07]"
+      className="absolute right-0 bottom-10 -z-10 h-[65%] w-auto max-w-[85%] text-[var(--mission-highlight-fg)]/[0.07]"
       fill="none"
       stroke="currentColor"
       strokeWidth={22}
@@ -295,14 +324,14 @@ function ToolStack() {
               hidden: { opacity: 0, transform: "scale(0.9)" },
               shown: { opacity: 1, transform: "scale(1)", transition: { duration: 0.3, ease: EASE_OUT } },
             }}
-            className="flex size-8 items-center justify-center rounded-full bg-neutral-900 text-white ring-2 ring-white"
+            className="flex size-8 items-center justify-center rounded-full bg-[var(--mission-fg)] text-[var(--mission-surface)] ring-2 ring-[var(--mission-card)]"
           >
             <Icon aria-hidden className="size-3.5" />
             <span className="sr-only">{name}</span>
           </motion.li>
         ))}
       </motion.ul>
-      <p className="text-[0.625rem] font-semibold tracking-wider text-neutral-500 uppercase">5 core tools</p>
+      <p className="text-[0.625rem] font-semibold tracking-wider text-[var(--mission-fg)]/60 uppercase">5 core tools</p>
     </div>
   );
 }

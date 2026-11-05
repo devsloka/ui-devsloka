@@ -12,6 +12,8 @@ export type InteractiveFeature = {
   detail: string;
   points?: string[];
   stat?: { value: string; label: string };
+  /** Visual for the panel, e.g. a line illustration or a product UI fragment. Shown under the detail. */
+  figure?: React.ReactNode;
 };
 
 export type FeatureInteractiveCardsProps = {
@@ -192,6 +194,8 @@ export function FeatureInteractiveCards({
                 <p className="mt-4 max-w-prose text-base leading-relaxed text-muted-foreground">
                   {feature.detail}
                 </p>
+
+                {feature.figure && <div className="mt-8">{feature.figure}</div>}
 
                 {feature.points && feature.points.length > 0 && (
                   <ul className="mt-8 divide-y border-y text-sm">
