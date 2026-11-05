@@ -58,7 +58,7 @@ const items: CaseStudy[] = [
     image: { src: "/images/team-carousel.png", alt: "Team Carousel component preview" },
     stats: [
       { value: "1", label: "File to copy" },
-      { value: "∞", label: "Seamless loop" },
+      { value: "∞", label: "Loops with no visible cut" },
       { value: "A11y", label: "Pausable" },
     ],
   },

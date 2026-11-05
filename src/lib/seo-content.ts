@@ -5,6 +5,7 @@ import { backgrounds } from "@/utilities/backgrounds.utils";
 import { blocks } from "@/utilities/blocks.utils";
 import { utilities } from "@/utilities/hooks.utils";
 import { CHANGELOG } from "@/lib/changelog";
+import { SKILL, SKILL_PRESETS, SKILL_WORKFLOW } from "@/lib/skill";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_REPOSITORY, siteUrl } from "@/config/seo/seo.config";
 
 type DocumentationEntry = {
@@ -23,6 +24,7 @@ export const CORE_PAGES = [
   { title: "Hooks", path: "/utilities", description: "Reusable React hooks for browser state, events, data, and forms." },
   { title: "Blocks", path: "/blocks", description: "Page sections, authentication screens, and not-found layouts with multiple variants." },
   // { title: "Templates", path: "/templates", description: "Complete Next.js sites with live previews and separate source repositories." }, // Hidden for now.
+  { title: "Anti-Slop skill", path: "/skill", description: "Free agent skill that builds art-directed landing pages from Devsloka UI, Linework and ASCII and checks them with screenshots; install, usage, presets and FAQ." },
   { title: "Pro", path: "/pro", description: "Devsloka UI Pro, coming soon: more animated components, monthly drops and an AI customization skill, $199 one-time." },
   { title: "Changelog", path: "/changelog", description: "Dated releases from the May 21, 2025 launch onward." },
 ];
@@ -102,6 +104,10 @@ export function renderLlmsFull(): string {
     "Registry URLs end in `.json`. A documentation category can group multiple registry variants: `/blocks/sign-in` documents `sign-in-split` and `sign-in-minimal`. Install the exact variant name from the registry list below. The shadcn CLI reads each item’s dependencies and registryDependencies. For manual installation, copy the source, preserve its exports, install those dependencies, and adapt import aliases to your project.",
     "```tsx\n\"use client\";\n\nimport { TextEffect } from \"@/components/ui/text-effect\";\n\nexport default function Example() {\n  return <h1>Ship <TextEffect words={[\"faster\", \"calmer\", \"better\"]} effect=\"slide\" /></h1>;\n}\n```",
     "Interactive components need a client boundary in Next.js. A registry JSON response includes each source file’s content and therefore the current export names, prop types, defaults, and implementation. Consult those types for the selected variant rather than assuming that every block shares an API.",
+    "## Anti-Slop agent skill",
+    `${SKILL.summary} Guide: ${siteUrl("skill")}. Source: ${SKILL.source}. Download: ${siteUrl(SKILL.download)}.`,
+    `\`\`\`bash\n# Project install\n${SKILL.install}\n# Every project\n${SKILL.installGlobal}\n\`\`\``,
+    `It follows eight steps: ${SKILL_WORKFLOW.map((step) => step.title.toLowerCase()).join(", ")}. Presets: ${SKILL_PRESETS.map((preset) => `${preset.name} (${preset.quality.toLowerCase()})`).join("; ")}. Its scripts need Node.js 22+ and a local Chromium-based browser.`,
     "## Styling and behavior",
     "Components use Tailwind classes, CSS variables, and shadcn theme tokens such as background, foreground, muted, and border. The website has light/dark themes. The latest blocks default to Devsloka blue (#0A6EFF), white foregrounds, pale blue (#E8F0FF) panels, and near-black secondary artwork. Blocks expose colour props where supported. Customize the copied source or pass the documented props to fit another brand.",
     "Animations use Motion or CSS. Reduced-motion behavior is documented in each implementation; canvas backgrounds include visibility and motion handling. Preserve visible labels, focus states, keyboard interactions, and ARIA semantics when adapting controls. Authentication blocks provide form behavior and submission callbacks; connect callbacks to your own authentication service. Demo success states are not a backend authentication implementation.",
